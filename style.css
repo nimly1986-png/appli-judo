@@ -649,3 +649,12 @@ body.accueil .pied a { color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.9); }
 .filtres label { display: grid; gap: 4px; font-weight: 600; }
 .filtres select { width: 100%; padding: 12px; font: inherit; border: 2px solid var(--accent); border-radius: 12px; background: var(--fond-champ, #fff); color: var(--texte); }
 @media (min-width: 560px) { .filtres { grid-template-columns: 1fr 1fr; } }
+
+/* ----- Planning des cours : tableau jours / horaires / catégories ----- */
+.tableau-cours td, .tableau-cours th { text-align: left; vertical-align: top; padding: 10px 8px; }
+.tableau-cours td:first-child, .tableau-cours td:nth-child(2) { white-space: nowrap; font-weight: 600; }
+.tableau-cours .pastille-cat { display: inline-block; margin: 0 4px 4px 0; padding: 2px 8px; font-size: 13px; border: 1.5px solid var(--trait); border-radius: 999px; }
+.tableau-cours .pastille-cat.moi { background: var(--accent); color: #1a1208; border-color: var(--accent); font-weight: 700; }
+.tableau-cours small { display: block; font-size: 12px; opacity: .8; }
+.tableau-cours tr.pour-moi td { background: color-mix(in srgb, var(--accent) 22%, transparent); }
+.tableau-cours tr.pas-pour-moi td { opacity: .5; }
