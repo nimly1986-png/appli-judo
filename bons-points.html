@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Carnet de bons points</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body style="--accent: var(--blanc)">
+  <nav class="barre"><div class="barre-contenu"><a class="barre-accueil" href="accueil.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</a><a href="code-moral.html">‹ Code moral</a></div></nav>
+  <h1>Carnet de bons points</h1>
+  <p>Pour les Baby judo et les Mini-poussins. Quand le professeur donne une image, touchez la valeur correspondante pour la valider. Trois images valent un autocollant.</p>
+
+  <div id="zone-choix" class="formulaire" hidden>
+    <label>Judoka
+      <select id="choix"></select>
+    </label>
+  </div>
+  <p id="vide" class="message-vide" hidden>
+    Aucun judoka Baby judo ou Mini-poussin n'a de fiche pour le moment.<br>
+    Les fiches sont créées par l'administrateur du club.
+  </p>
+
+  <div id="carnet" hidden>
+    <h2 id="progression-titre">Prochain autocollant</h2>
+    <div id="progression" class="progression"></div>
+    <p id="progression-texte" class="resume"></p>
+
+    <h2>Mes autocollants</h2>
+    <div id="autocollants" class="autocollants"></div>
+
+    <h2>J'ai reçu une image</h2>
+    <div id="choix-images" class="choix-images"></div>
+    <button id="annuler-derniere" class="bouton secondaire" type="button">Annuler la dernière image</button>
+  </div>
+
+  <a class="bouton secondaire" href="code-moral.html">⬅ Retour au code moral</a>
+
+  <script src="judo-commun.js"></script>
+  <script src="valeurs.js"></script>
+  <script src="bons-points.js"></script>
+</body>
+</html>

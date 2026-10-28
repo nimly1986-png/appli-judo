@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Lexique</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body style="--accent: var(--bleu)">
+  <nav class="barre"><div class="barre-contenu"><a class="barre-accueil" href="accueil.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</a></div></nav>
+  <h1>Lexique</h1>
+  <p>Japonais et français : techniques, arbitrage, dojo.</p>
+  <p class="note-source">Les couleurs suivent les ceintures : on part des bases du dojo (blanc) et on avance jusqu'à l'arbitrage (noir).</p>
+
+  <div class="formulaire">
+    <label>Chercher un mot
+      <input id="recherche" type="search" placeholder="Ex. : ippon, fauchage, hanche" autocomplete="off">
+    </label>
+  </div>
+  <div id="categories" class="chips" aria-label="Catégories"></div>
+  <p id="compte-mots" class="resume"></p>
+  <div id="liste-mots"></div>
+
+  <p class="note-source">Traductions d'usage courant, rédigées par Claude pour l'appli et non relues par un professeur. Les termes de l'arbitrage suivent le règlement fédéral consulté (voir la page Règlement des compétitions).</p>
+  <a class="bouton secondaire" href="accueil.html">⬅ Retour à l'accueil</a>
+
+  <script src="lexique-data.js"></script>
+  <script src="lexique.js"></script>
+</body>
+</html>

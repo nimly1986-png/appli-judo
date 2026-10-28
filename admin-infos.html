@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Administrateur : infos</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body style="--accent: var(--violet)">
+  <nav class="barre"><div class="barre-contenu"><a class="barre-accueil" href="accueil.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</a></div></nav>
+  <h1>Infos du club</h1>
+  <p class="avertissement">
+    Espace administrateur. Version d'essai : pas encore de mot de passe, données enregistrées sur cet appareil.
+    Les infos ajoutées ici défilent sur la page d'accueil.
+  </p>
+
+  <form id="formulaire" class="formulaire">
+    <label>Type
+      <select id="type">
+        <option value="info">Info</option>
+        <option value="resultat">Résultat de compétition</option>
+        <option value="important">Important</option>
+      </select>
+    </label>
+    <label>Message (court, une ou deux phrases)
+      <input id="texte" type="text" maxlength="160" placeholder="Ex. : Pas d'entraînement jeudi, salle fermée" required>
+    </label>
+    <button class="bouton" type="submit">Ajouter au fil d'info</button>
+  </form>
+
+  <h2>Infos publiées</h2>
+  <div id="liste"></div>
+  <p id="vide" class="message-vide" hidden>Aucune info publiée.</p>
+
+  <button id="exemples" class="bouton secondaire" type="button">Ajouter des exemples (pour essayer)</button>
+  <a class="bouton secondaire" href="infos.html">Voir la page des infos</a>
+
+  <script src="infos-commun.js"></script>
+  <script src="admin-infos.js"></script>
+</body>
+</html>

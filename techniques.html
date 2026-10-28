@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Techniques</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body style="--accent: var(--vert)">
+  <nav class="barre"><div class="barre-contenu"><a class="barre-accueil" href="accueil.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</a></div></nav>
+  <h1>Techniques</h1>
+  <p>Choisissez une ceinture, puis touchez une technique pour ouvrir sa fiche.</p>
+
+  <div id="zone-choix" class="formulaire" hidden>
+    <label>Judoka
+      <select id="choix"></select>
+    </label>
+  </div>
+  <p id="conseil" class="resume"></p>
+
+  <div id="niveaux" class="chips" role="tablist" aria-label="Ceinture"></div>
+  <div class="formulaire">
+    <label>Famille
+      <select id="famille"><option value="">Toutes les familles</option></select>
+    </label>
+    <label class="case"><input type="checkbox" id="cumul"> Inclure aussi les ceintures précédentes</label>
+  </div>
+
+  <p id="compte-tech" class="resume"></p>
+  <div id="catalogue" class="catalogue"></div>
+
+  <p class="note-source" id="source"></p>
+  <a class="bouton" href="lexique.html">📖 Lexique japonais / français</a>
+  <a class="bouton secondaire" href="accueil.html">⬅ Retour à l'accueil</a>
+
+  <script src="judo-commun.js"></script>
+  <script src="techniques-data.js"></script>
+  <script src="techniques.js"></script>
+</body>
+</html>

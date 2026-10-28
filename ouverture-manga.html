@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#bfe3ff">
+<title>JCO Chandieu</title>
+<style>
+  /* =================================================================
+     OUVERTURE « MANGA » : proposition animée (n'est pas encore branchée à l'appli)
+     Chronologie : soleil (0 s) > judokas qui frappent (0,5 s) > choc (0,95 s)
+     > kanji écrit au pinceau (1,3 s) > nom du club (3 s) > attente.
+     ================================================================= */
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(to bottom, #bfe3ff, #e6f3ff 60%, #fff1d9);
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
+  .scene {
+    position: relative;
+    width: min(94vw, 64vh);
+    aspect-ratio: 1;
+    animation: secousse 0.4s 0.95s both, respire 3.2s 3.6s ease-in-out infinite;
+  }
+  .scene > * { position: absolute; }
+  .scene img { display: block; width: 100%; height: 100%; }
+
+  /* le soleil : un disque rouge avec lignes de vitesse et trame de points */
+  .disque {
+    left: 3%; top: 3.9%; width: 94%; height: 94%;
+    border-radius: 50%;
+    border: 0.9vmin solid #14141c;
+    background: #e41e24;
+    overflow: hidden;
+    animation: pop 0.55s cubic-bezier(0.3, 1.5, 0.5, 1) both;
+  }
+  .disque .lignes {
+    position: absolute; left: 50%; top: 50%;
+    width: 230%; height: 230%;
+    margin: -115% 0 0 -115%;
+    animation: tourne 60s linear infinite;
+  }
+  .lignes-boite { position: absolute; inset: 0; animation: eclat 0.5s 0.95s ease-out both; }
+  .trame {
+    position: absolute; inset: 0;
+    background: radial-gradient(circle, #96101a 32%, transparent 36%) 0 0 / 2.2% 2.2%;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 55%, #000 100%);
+            mask-image: linear-gradient(to bottom, transparent 55%, #000 100%);
+  }
+
+  .judokas { inset: 0; animation: frappe 0.45s 0.5s cubic-bezier(0.2, 0.9, 0.3, 1) both; }
+  .kanji-haut, .kanji-bas { inset: 0; }
+  .kanji-haut { animation: ecrit-haut 0.8s 1.3s ease-in-out both; }
+  .kanji-bas  { animation: ecrit-bas 0.9s 2.1s ease-in-out both; }
+  .texte { inset: 0; animation: claque 0.55s 3s cubic-bezier(0.3, 1.6, 0.5, 1) both; }
+
+  .anneau {
+    left: 46%; top: 52%; width: 40%; height: 40%;
+    margin: -20% 0 0 -20%;
+    border: 1.4vmin solid #fff;
+    border-radius: 50%;
+    animation: onde 0.6s 0.95s ease-out both;
+  }
+  .etoile { width: 5%; height: 5%; animation: etincelle 1.4s ease-in-out infinite both; opacity: 0; }
+  .e1 { left: 77.5%; top: 27.5%; width: 8%; height: 8%; animation-delay: 3.2s; }
+  .e2 { left: 14.5%; top: 59.5%; animation-delay: 3.5s; }
+  .e3 { left: 69.5%; top: 71.8%; width: 4.5%; height: 4.5%; animation-delay: 3.8s; }
+  .etoile svg { width: 100%; height: 100%; overflow: visible; }
+
+  .flash { position: fixed; inset: 0; background: #fff; opacity: 0; pointer-events: none; animation: flash 0.3s 0.95s ease-out both; }
+
+  .invite { position: fixed; bottom: calc(18px + env(safe-area-inset-bottom)); left: 0; right: 0; text-align: center;
+            font: 700 16px "Trebuchet MS", system-ui, sans-serif; color: #16284a; opacity: 0; animation: apparait 0.6s 4s both; }
+
+  @keyframes pop      { from { transform: scale(0); } 60% { transform: scale(1.08); } to { transform: none; } }
+  @keyframes tourne   { to { transform: rotate(360deg); } }
+  @keyframes eclat    { from { transform: scale(1.6); opacity: 0; } to { transform: none; opacity: 1; } }
+  @keyframes frappe   { from { opacity: 0; transform: translate(-55%, -45%) rotate(-25deg) scale(2.4); }
+                        to   { opacity: 1; transform: none; } }
+  @keyframes secousse { 0%,100% { transform: none; } 20% { transform: translate(-1.6%, 1%) rotate(-0.8deg); }
+                        40% { transform: translate(1.4%, -1.2%) rotate(0.8deg); } 60% { transform: translate(-0.8%, 0.6%); } 80% { transform: translate(0.5%, -0.4%); } }
+  @keyframes respire  { 0%,100% { transform: scale(1); } 50% { transform: scale(1.015); } }
+  @keyframes onde     { from { transform: scale(0.2); opacity: 0.95; } to { transform: scale(1.7); opacity: 0; } }
+  @keyframes flash    { 0% { opacity: 0; } 25% { opacity: 0.85; } 100% { opacity: 0; } }
+  @keyframes ecrit-haut { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 62% 0); } }
+  @keyframes ecrit-bas  { from { clip-path: inset(38% 0 62% 0); } to { clip-path: inset(38% 0 0 0); } }
+  @keyframes claque   { from { opacity: 0; transform: scale(2.2) rotate(-9deg); } to { opacity: 1; transform: none; } }
+  @keyframes etincelle { 0%,100% { opacity: 0; transform: scale(0.2) rotate(0); } 40%,60% { opacity: 1; transform: scale(1) rotate(25deg); } }
+  @keyframes apparait { to { opacity: 0.8; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scene, .scene * , .flash { animation-duration: 0.01s !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; }
+    .invite { animation: none; opacity: 0.8; }
+  }
+</style>
+</head>
+<body>
+  <div class="scene" aria-label="Logo du club JCO Chandieu">
+    <div class="disque">
+      <div class="lignes-boite"><img class="lignes" src="img/manga/lignes.png" alt=""></div>
+      <div class="trame"></div>
+    </div>
+    <div class="anneau"></div>
+    <img class="judokas" src="img/manga/judokas.png" alt="">
+    <img class="kanji-haut" src="img/manga/kanji.png" alt="">
+    <img class="kanji-bas" src="img/manga/kanji.png" alt="">
+    <img class="texte" src="img/manga/texte.png" alt="JCO Chandieu">
+    <div class="etoile e1"><svg viewBox="-50 -50 100 100"><polygon points="0,-50 11,-11 50,0 11,11 0,50 -11,11 -50,0 -11,-11" fill="#fff" stroke="#14141c" stroke-width="5"/></svg></div>
+    <div class="etoile e2"><svg viewBox="-50 -50 100 100"><polygon points="0,-50 11,-11 50,0 11,11 0,50 -11,11 -50,0 -11,-11" fill="#fff" stroke="#14141c" stroke-width="5"/></svg></div>
+    <div class="etoile e3"><svg viewBox="-50 -50 100 100"><polygon points="0,-50 11,-11 50,0 11,11 0,50 -11,11 -50,0 -11,-11" fill="#fff" stroke="#14141c" stroke-width="5"/></svg></div>
+  </div>
+  <div class="flash"></div>
+  <p class="invite">Touchez pour entrer</p>
+
+  <script>
+    // Où aller après l'ouverture
+    const PAGE_SUIVANTE = "accueil.html";
+    const DUREE_AVANT_ENTREE = 6.5;     // secondes (touchez l'écran pour passer plus vite)
+
+    // ?t=2.5 fige l'animation à 2,5 s (pratique pour les essais)
+    const figer = new URLSearchParams(location.search).get("t");
+    if (figer !== null) {
+      document.getAnimations().forEach(function (a) { a.pause(); a.currentTime = Number(figer) * 1000; });
+    } else {
+      const minuteur = setTimeout(entrer, DUREE_AVANT_ENTREE * 1000);
+      document.body.addEventListener("click", function () { clearTimeout(minuteur); entrer(); });
+    }
+    function entrer() { location.href = PAGE_SUIVANTE; }
+  </script>
+</body>
+</html>

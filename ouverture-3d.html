@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1030">
+<title>JCO Chandieu</title>
+<style>
+  /* =================================================================
+     OUVERTURE 3D (WebGL) : vraie scène en trois dimensions, sans aucune bibliothèque.
+     - Décor : aube sur des montagnes, soleil et rayons, tatami en perspective, brume.
+     - Logo : disque rouge avec épaisseur, judokas, kanji et nom du club, chacun à sa profondeur
+       et avec une tranche (épaisseur), qui arrivent en volant puis s'assemblent.
+     - Pétales de cerisier flottants (flou de profondeur), onde de choc et flash à l'impact.
+     - La caméra suit le doigt, la souris ou l'inclinaison du téléphone.
+     - Un toucher fait traverser le logo pour entrer. Si la 3D n'est pas disponible,
+       la version simple (ouverture-3d-simple.html) prend le relais.
+     Il faut ouvrir la page par Live Server (pas en double-cliquant sur le fichier).
+     ================================================================= */
+  html, body { height: 100%; margin: 0; background: #0b1030; overflow: hidden; touch-action: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+  .vignette { position: fixed; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(8, 10, 30, 0.45) 100%); }
+  .invite { position: fixed; bottom: calc(22px + env(safe-area-inset-bottom)); left: 0; right: 0; text-align: center; pointer-events: none;
+            font: 700 16px "Trebuchet MS", system-ui, sans-serif; letter-spacing: 0.04em; color: #fff; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+            opacity: 0; transition: opacity 0.8s; }
+  .invite.visible { opacity: 0.9; animation: pulse 2.2s ease-in-out infinite; }
+  @keyframes pulse { 50% { opacity: 0.45; } }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="vignette"></div>
+<p class="invite" id="invite">Touchez pour entrer</p>
+
+<script id="vs-quad" type="x-shader/x-vertex">#version 300 es
+in vec2 aPos; uniform mat4 uMVP; out vec2 vUv;
+void main() { vUv = aPos * 0.5 + 0.5; gl_Position = uMVP * vec4(aPos, 0.0, 1.0); }
+</script>
+
+<script id="fs-layer" type="x-shader/x-fragment">#version 300 es
+precision highp float;
+in vec2 vUv; uniform sampler2D uTex; uniform vec3 uTint; uniform float uAlpha, uWipe; out vec4 o;
+void main() {
+  if ((1.0 - vUv.y) > uWipe) discard;
+  vec4 c = texture(uTex, vec2(vUv.x, 1.0 - vUv.y));
+  if (c.a < 0.3) discard;
+  o = vec4(c.rgb * uTint, c.a * uAlpha);
+}
+</script>
+
+<script id="fs-disc" type="x-shader/x-fragment">#version 300 es
+precision highp float;
+in vec2 vUv; uniform sampler2D uTex; uniform float uTime, uAlpha; out vec4 o;
+void main() {
+  vec2 q = (vUv * 2.0 - 1.0) / 0.94;
+  float r = length(q);
+  if (r > 1.0) discard;
+  vec3 col = vec3(0.894, 0.118, 0.141);
+  float c = cos(uTime * 0.12), s = sin(uTime * 0.12);
+  vec4 L = texture(uTex, mat2(c, -s, s, c) * q * 0.4348 + 0.5);
+  col = mix(col, L.rgb, clamp(L.a * 1.7, 0.0, 1.0));
+  vec2 cell = fract(vUv * 46.0);
+  float dotm = smoothstep(0.36, 0.30, length(cell - 0.5)) * smoothstep(-0.1, 0.9, -q.y);
+  col = mix(col, vec3(0.588, 0.063, 0.102), dotm);
+  col *= 0.9 + 0.12 * (1.0 - r);
+  if (r > 0.955) col = vec3(0.08, 0.08, 0.11);
+  o = vec4(col, uAlpha);
+}
+</script>
+
+<script id="vs-solid" type="x-shader/x-vertex">#version 300 es
+in vec3 aPos; in vec3 aN; uniform mat4 uMVP; out vec3 vN;
+void main() { vN = aN; gl_Position = uMVP * vec4(aPos, 1.0); }
+</script>
+<script id="fs-solid" type="x-shader/x-fragment">#version 300 es
+precision highp float;
+in vec3 vN; uniform float uAlpha; out vec4 o;
+void main() {
+  float sh = max(0.0, dot(normalize(vN.xy + 0.0001), normalize(vec2(-0.5, 0.8))));
+  vec3 col = mix(vec3(0.07, 0.07, 0.10), vec3(0.62, 0.12, 0.13), sh * 0.75);
+  o = vec4(col, uAlpha);
+}
+</script>
+
+<script id="vs-full" type="x-shader/x-vertex">#version 300 es
+in vec2 aPos; void main() { gl_Position = vec4(aPos, 0.0, 1.0); }
+</script>
+
+<script id="fs-bg" type="x-shader/x-fragment">#version 300 es
+precision highp float;
+uniform vec2 uRes; uniform vec3 uCam; uniform mat3 uBasis; uniform float uTan, uTime, uIntro, uSunElev, uSunX, uFloorY, uLogoY;
+out vec4 o;
+float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+float noise(vec2 p) { vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);
+  return mix(mix(hash(i), hash(i + vec2(1, 0)), f.x), mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), f.x), f.y); }
+float fbm(vec2 p) { float v = 0.0, a = 0.5; for (int i = 0; i < 5; i++) { v += a * noise(p); p = p * 2.03 + 11.7; a *= 0.5; } return v; }
+
+vec3 tatami(vec2 q, float dist) {
+  vec2 m = q / vec2(0.9, 1.8);
+  if (mod(floor(m.x), 2.0) > 0.5) m.y += 0.5;
+  vec2 id = floor(m), f = fract(m);
+  float tone = 0.88 + 0.16 * hash(id);
+  vec3 col = vec3(0.46, 0.52, 0.30) * tone;
+  float fiber = 0.5 + 0.5 * sin(q.x * 240.0 + noise(q * 6.0) * 6.0);
+  col *= mix(1.0, 0.9 + 0.1 * fiber, exp(-dist * 0.06));
+  float heri = smoothstep(0.045, 0.03, f.x) + smoothstep(0.955, 0.97, f.x);
+  col = mix(col, vec3(0.09, 0.10, 0.13), clamp(heri, 0.0, 1.0));
+  float seam = smoothstep(0.018, 0.0, f.y) + smoothstep(0.982, 1.0, f.y);
+  col = mix(col, vec3(0.12, 0.12, 0.10), clamp(seam, 0.0, 1.0) * 0.9);
+  return col;
+}
+
+void main() {
+  vec2 p = (gl_FragCoord.xy * 2.0 - uRes) / uRes.y;
+  vec3 d = normalize(uBasis * vec3(p * uTan, 1.0));
+  float I = uIntro;
+  vec3 top = mix(vec3(0.015, 0.02, 0.07), vec3(0.10, 0.20, 0.46), I);
+  vec3 mid = mix(vec3(0.05, 0.05, 0.13), vec3(0.92, 0.50, 0.46), I);
+  vec3 hor = mix(vec3(0.07, 0.06, 0.12), vec3(1.0, 0.80, 0.58), I);
+  float h = clamp(d.y, 0.0, 1.0);
+  vec3 sky = mix(hor, mid, smoothstep(0.0, 0.22, h));
+  sky = mix(sky, top, smoothstep(0.12, 0.75, h));
+  // étoiles quand la nuit tombe
+  vec2 sp = d.xz / (d.y + 0.35) * 40.0;
+  float star = step(0.9965, hash(floor(sp))) * smoothstep(0.0, 0.2, d.y) * (1.0 - I);
+  sky += vec3(star) * (0.6 + 0.4 * sin(uTime * 3.0 + hash(floor(sp)) * 40.0));
+  // soleil, halo et rayons
+  vec3 sd = normalize(vec3(uSunX, uSunElev, -1.0));
+  float sdot = max(dot(d, sd), 0.0);
+  float disc = smoothstep(0.9988, 0.9994, sdot);
+  float glow = pow(sdot, 48.0) * 0.9 + pow(sdot, 7.0) * 0.28;
+  float ang = atan(d.x - sd.x, d.y - sd.y);
+  float rays = pow(sdot, 5.0) * (0.5 + 0.5 * sin(ang * 17.0 + uTime * 0.15) * sin(ang * 6.0 - uTime * 0.1)) * 0.30;
+  sky += vec3(1.0, 0.62, 0.30) * (glow + rays) * smoothstep(0.0, 0.8, I) + vec3(1.0, 0.93, 0.75) * disc * I;
+  // montagnes en couches (plus lointain = plus pâle, bouge moins)
+  float az = atan(d.x, -d.z);
+  float el = d.y / max(length(d.xz), 0.001);
+  vec3 col = sky;
+  for (int i = 0; i < 3; i++) {
+    float fi = float(i);
+    float shift = uCam.x * (0.010 + 0.016 * fi);
+    float ridge = 0.115 - fi * 0.034 + (0.075 - fi * 0.012) * fbm(vec2((az + shift) * (3.0 + fi * 2.4) + fi * 7.0, fi * 3.0));
+    float m = smoothstep(ridge + 0.003, ridge - 0.003, el);
+    vec3 far = vec3(0.80, 0.62, 0.72), near = vec3(0.30, 0.24, 0.42);
+    vec3 mc = mix(far, near, fi / 2.0);
+    mc = mix(mc * 0.18, mc, I);
+    mc = mix(mc, hor, (1.0 - fi / 2.5) * 0.55 * smoothstep(ridge, 0.0, el));
+    mc = mix(mc, hor, smoothstep(0.04, 0.0, el) * 0.85);
+    col = mix(col, mc, m);
+  }
+  // sol : tatami, brume, reflet du soleil, ombre du logo
+  if (d.y < -0.0005) {
+    float t = (uFloorY - uCam.y) / d.y;
+    vec3 hit = uCam + d * t;
+    vec3 fl = tatami(hit.xz, t) * mix(0.22, 1.0, I);
+    float refl = pow(max(dot(reflect(d, vec3(0.0, 1.0, 0.0)), sd), 0.0), 40.0);
+    fl += vec3(1.0, 0.6, 0.3) * refl * 0.55 * I;
+    vec2 e = hit.xz * vec2(1.0, 1.25);
+    float shadow = smoothstep(2.3, 0.3, length(e)) * (0.55 - 0.15 * (uLogoY - 0.0));
+    fl *= 1.0 - shadow;
+    float fog = 1.0 - exp(-t * 0.05);
+    col = mix(fl, hor, clamp(fog, 0.0, 1.0));
+  }
+  o = vec4(col, 1.0);
+}
+</script>
+
+<script id="vs-petal" type="x-shader/x-vertex">#version 300 es
+in vec4 aSeed; uniform mat4 uVP; uniform float uTime, uPx, uFocus; out float vCoc; out float vRot;
+void main() {
+  vec3 p = aSeed.xyz;
+  float w = aSeed.w;
+  p.y = mod(p.y - uTime * (0.30 + 0.45 * w), 10.0) - 4.4;
+  p.x = mod(p.x + uTime * (0.25 + 0.2 * w) + 9.0, 18.0) - 9.0 + sin(uTime * 0.6 + w * 20.0) * 0.6;
+  p.z += cos(uTime * 0.5 + w * 11.0) * 0.5;
+  gl_Position = uVP * vec4(p, 1.0);
+  float wc = max(gl_Position.w, 0.1);
+  vCoc = clamp(abs(wc - uFocus) / uFocus * 1.3, 0.0, 1.0);
+  vRot = uTime * (0.8 + w) + w * 6.28;
+  gl_PointSize = clamp((0.08 + 0.08 * w) * (1.0 + vCoc * 1.5) * uPx / wc, 1.0, 90.0);
+}
+</script>
+<script id="fs-petal" type="x-shader/x-fragment">#version 300 es
+precision highp float;
+in float vCoc; in float vRot; uniform float uAlpha; out vec4 o;
+void main() {
+  vec2 pc = gl_PointCoord * 2.0 - 1.0;
+  float c = cos(vRot), s = sin(vRot);
+  pc = mat2(c, -s, s, c) * pc;
+  float d = length(vec2(pc.x * 1.5, pc.y * 0.85 + 0.15 * pc.x * pc.x));
+  float a = smoothstep(1.0, 0.55 + vCoc * 0.4, d) * (1.0 - 0.5 * vCoc) * uAlpha;
+  if (a < 0.01) discard;
+  vec3 col = mix(vec3(1.0, 0.70, 0.78), vec3(1.0, 0.92, 0.95), pc.y * 0.5 + 0.5);
+  o = vec4(col, a * 0.9);
+}
+</script>
+
+<script id="fs-fx" type="x-shader/x-fragment">#version 300 es
+precision highp float;
+uniform vec2 uRes; uniform float uRing, uFlash, uWhite; out vec4 o;
+void main() {
+  vec2 p = (gl_FragCoord.xy * 2.0 - uRes) / uRes.y;
+  float r = length(p - vec2(0.0, 0.0));
+  float rr = uRing * 1.9;
+  float ring = smoothstep(0.07, 0.0, abs(r - rr)) * (1.0 - clamp(uRing, 0.0, 1.0)) * step(0.0, uRing);
+  float a = clamp(ring * 0.85 + uFlash * 0.55 + uWhite, 0.0, 1.0);
+  o = vec4(1.0, 0.97, 0.92, a);
+}
+</script>
+
+<script>
+(function () {
+  "use strict";
+  var PAGE_SUIVANTE = "accueil.html";
+  var SIMPLE = "ouverture-3d-simple.html";
+  var params = new URLSearchParams(location.search);
+  var figer = params.get("t");                       // ?t=3 : image figée (tests)
+  var calme = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var canvas = document.getElementById("c");
+  var gl = canvas.getContext("webgl2", { antialias: true, alpha: false });
+  if (!gl) { location.replace(SIMPLE); return; }
+
+  function shader(type, id) {
+    var s = gl.createShader(type); gl.shaderSource(s, document.getElementById(id).textContent.trim());
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { console.error(id, gl.getShaderInfoLog(s)); throw new Error(id); }
+    return s;
+  }
+  function program(vs, fs) {
+    var p = gl.createProgram(); gl.attachShader(p, shader(gl.VERTEX_SHADER, vs)); gl.attachShader(p, shader(gl.FRAGMENT_SHADER, fs));
+    gl.linkProgram(p); if (!gl.getProgramParameter(p, gl.LINK_STATUS)) { console.error(gl.getProgramInfoLog(p)); throw new Error("link"); }
+    var u = {}, n = gl.getProgramParameter(p, gl.ACTIVE_UNIFORMS);
+    for (var i = 0; i < n; i++) { var name = gl.getActiveUniform(p, i).name; u[name] = gl.getUniformLocation(p, name); }
+    return { p: p, u: u };
+  }
+  var P;
+  try {
+    P = { layer: program("vs-quad", "fs-layer"), disc: program("vs-quad", "fs-disc"), solid: program("vs-solid", "fs-solid"),
+          bg: program("vs-full", "fs-bg"), petal: program("vs-petal", "fs-petal"), fx: program("vs-full", "fs-fx") };
+  } catch (e) { location.replace(SIMPLE); return; }
+
+  // ---------- petites fonctions de matrices (colonnes d'abord) ----------
+  function mul(a, b) { var o = new Float32Array(16); for (var c = 0; c < 4; c++) for (var r = 0; r < 4; r++) { var s = 0; for (var k = 0; k < 4; k++) { s += a[k * 4 + r] * b[c * 4 + k]; } o[c * 4 + r] = s; } return o; }
+  function persp(f, a, n, fa) { var t = 1 / Math.tan(f / 2), nf = 1 / (n - fa); return new Float32Array([t / a, 0, 0, 0, 0, t, 0, 0, 0, 0, (fa + n) * nf, -1, 0, 0, 2 * fa * n * nf, 0]); }
+  function sub(a, b) { return [a[0] - b[0], a[1] - b[1], a[2] - b[2]]; }
+  function norm(a) { var l = Math.hypot(a[0], a[1], a[2]) || 1; return [a[0] / l, a[1] / l, a[2] / l]; }
+  function cross(a, b) { return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]; }
+  function dot(a, b) { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
+  function look(e, t) { var f = norm(sub(t, e)), s = norm(cross(f, [0, 1, 0])), v = cross(s, f);
+    return { m: new Float32Array([s[0], v[0], -f[0], 0, s[1], v[1], -f[1], 0, s[2], v[2], -f[2], 0, -dot(s, e), -dot(v, e), dot(f, e), 1]), f: f, s: s, v: v }; }
+  function trans(x, y, z) { return new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, x, y, z, 1]); }
+  function scl(x, y, z) { return new Float32Array([x, 0, 0, 0, 0, y, 0, 0, 0, 0, z, 0, 0, 0, 0, 1]); }
+  function rotY(a) { var c = Math.cos(a), s = Math.sin(a); return new Float32Array([c, 0, -s, 0, 0, 1, 0, 0, s, 0, c, 0, 0, 0, 0, 1]); }
+  function rotZ(a) { var c = Math.cos(a), s = Math.sin(a); return new Float32Array([c, s, 0, 0, -s, c, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]); }
+  function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
+  function easeOut(x) { return 1 - Math.pow(1 - x, 3); }
+  function easeInOut(x) { return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+  function easeBack(x) { var c1 = 1.9, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); }
+  function smooth(a, b, x) { var t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); }
+
+  // ---------- géométrie ----------
+  var quad = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, quad);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+  var R = 0.94, SEG = 96, THICK = 0.22, cyl = [];
+  for (var i = 0; i <= SEG; i++) { var a = i / SEG * Math.PI * 2, cx = Math.cos(a), cy = Math.sin(a);
+    cyl.push(cx * R, cy * R, 0, cx, cy, 0, cx * R, cy * R, -THICK, cx, cy, 0); }
+  var cylBuf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, cylBuf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(cyl), gl.STATIC_DRAW);
+  var back = [0, 0, -THICK, 0, 0, -1]; for (i = 0; i <= SEG; i++) { a = i / SEG * Math.PI * 2; back.push(Math.cos(a) * R, Math.sin(a) * R, -THICK, 0, 0, -1); }
+  var backBuf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, backBuf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(back), gl.STATIC_DRAW);
+  var NP = 420, seeds = new Float32Array(NP * 4);
+  for (i = 0; i < NP; i++) { seeds[i * 4] = Math.random() * 18 - 9; seeds[i * 4 + 1] = Math.random() * 10; seeds[i * 4 + 2] = Math.random() * 13 - 7; seeds[i * 4 + 3] = Math.random(); }
+  var petalBuf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, petalBuf); gl.bufferData(gl.ARRAY_BUFFER, seeds, gl.STATIC_DRAW);
+
+  // ---------- textures ----------
+  function charger(src, cb) {
+    var img = new Image(); img.onload = function () {
+      var t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+      gl.generateMipmap(gl.TEXTURE_2D);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      cb(t);
+    };
+    img.onerror = function () { location.replace(SIMPLE); };
+    img.src = src;
+  }
+  var tex = {}, attendues = 4;
+  function pret(nom) { return function (t) { tex[nom] = t; if (--attendues === 0) { depart = performance.now(); requestAnimationFrame(frame); } }; }
+  charger("img/manga/lignes.png", pret("lignes")); charger("img/manga/judokas.png", pret("judokas"));
+  charger("img/manga/kanji.png", pret("kanji")); charger("img/manga/texte.png", pret("texte"));
+
+  // ---------- entrées : doigt, souris, inclinaison ----------
+  var cibleYaw = 0, cibleP = 0, yaw = 0, pit = 0, dernierGeste = -9999, depart = 0, decalage = 0, entree = null;
+  function pointeur(e) { var p = e.touches ? e.touches[0] : e;
+    cibleYaw = ((p.clientX / innerWidth) - 0.5) * 0.7; cibleP = -((p.clientY / innerHeight) - 0.5) * 0.3; dernierGeste = performance.now(); }
+  addEventListener("pointermove", pointeur); addEventListener("touchmove", pointeur, { passive: true });
+  addEventListener("deviceorientation", function (e) { if (e.gamma == null) { return; }
+    cibleYaw = clamp(e.gamma, -25, 25) / 25 * 0.35; cibleP = clamp((e.beta || 45) - 45, -20, 20) / 20 * -0.15; dernierGeste = performance.now(); });
+  var FIN_INTRO = 3.7;
+  function entrer() {
+    var T = (performance.now() - depart) / 1000 + decalage;
+    if (entree !== null) { return; }
+    if (T < FIN_INTRO - 0.3 && figer === null && !calme) { decalage += FIN_INTRO - T; return; }   // 1er toucher : passer l'intro
+    entree = performance.now();
+  }
+  addEventListener("click", entrer);
+  addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { entrer(); } });
+
+  // ---------- dessin ----------
+  var S = 1.55, FOVY = 0.70, TANH = Math.tan(FOVY / 2), FLOOR = -1.78;
+  function dessinerCouche(texture, model, VP, opts) {
+    var pr = P.layer; gl.useProgram(pr.p);
+    gl.bindTexture(gl.TEXTURE_2D, texture); gl.uniform1i(pr.u.uTex, 0);
+    gl.uniform1f(pr.u.uAlpha, opts.alpha); gl.uniform1f(pr.u.uWipe, opts.wipe === undefined ? 1 : opts.wipe);
+    var n = opts.tranches;
+    for (var k = n - 1; k >= 0; k--) {
+      var z = -opts.epaisseur * k / (n - 1 || 1);
+      var t = k === 0 ? 1 : 0.16 + 0.10 * (1 - k / n);
+      gl.uniform3f(pr.u.uTint, t, t, t * 1.08);
+      gl.uniformMatrix4fv(pr.u.uMVP, false, mul(VP, mul(model, trans(0, 0, z))));
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    }
+  }
+  function frame(now) {
+    requestAnimationFrame(frame);
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var W = Math.round(innerWidth * dpr), H = Math.round(innerHeight * dpr);
+    if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
+    gl.viewport(0, 0, W, H);
+    var T = figer !== null ? parseFloat(figer) : (calme ? FIN_INTRO + 1 : (now - depart) / 1000 + decalage);
+    var aspect = W / H;
+
+    // distance de caméra : le logo occupe ~88 % de la largeur (portrait) ou ~62 % de la hauteur (paysage)
+    var D = Math.max((S / 0.88) / (aspect * TANH), (S * 0.95 / 0.62) / TANH);
+    var ti = clamp(T / FIN_INTRO, 0, 1), ei = easeOut(ti);
+    if (now - dernierGeste > 1800 && figer === null && !calme) { cibleYaw = Math.sin(now / 1700) * 0.16; cibleP = Math.cos(now / 2300) * 0.04; }
+    yaw += (cibleYaw - yaw) * 0.06; pit += (cibleP - pit) * 0.06;
+    var dist = D * (1.55 - 0.55 * ei), ya = yaw + (1 - ei) * -0.55, pi = 0.07 + pit + (1 - ei) * 0.22;
+    var pEntree = 0, blanc = 0;
+    if (entree !== null) { pEntree = clamp((now - entree) / 750, 0, 1); dist *= 1 - 0.9 * easeInOut(pEntree); blanc = smooth(0.4, 1, pEntree); if (pEntree >= 1) { location.href = PAGE_SUIVANTE; } }
+    var tgt = [0, 0.05, 0];
+    var shake = Math.exp(-Math.max(T - 1.6, 0) * 7) * (T > 1.6 ? 1 : 0) * 0.10 + Math.exp(-Math.max(T - 3.0, 0) * 9) * (T > 3.0 ? 1 : 0) * 0.04;
+    var eye = [tgt[0] + dist * Math.sin(ya) * Math.cos(pi) + Math.sin(T * 80) * shake, tgt[1] + dist * Math.sin(pi) + Math.cos(T * 70) * shake, tgt[2] + dist * Math.cos(ya) * Math.cos(pi)];
+    var V = look(eye, tgt), Pm = persp(FOVY, aspect, 0.3, 80), VP = mul(Pm, V.m);
+    var bob = Math.sin(T * 1.3) * 0.05 * smooth(2.0, 3.5, T);
+
+    // 1. décor
+    gl.disable(gl.DEPTH_TEST); gl.disable(gl.BLEND);
+    gl.clearColor(0, 0, 0, 1); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    var b = P.bg; gl.useProgram(b.p);
+    gl.bindBuffer(gl.ARRAY_BUFFER, quad); var loc = gl.getAttribLocation(b.p, "aPos"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    gl.uniform2f(b.u.uRes, W, H); gl.uniform3f(b.u.uCam, eye[0], eye[1], eye[2]);
+    gl.uniformMatrix3fv(b.u.uBasis, false, new Float32Array([V.s[0], V.s[1], V.s[2], V.v[0], V.v[1], V.v[2], V.f[0], V.f[1], V.f[2]]));
+    gl.uniform1f(b.u.uTan, TANH); gl.uniform1f(b.u.uTime, T);
+    var intro = smooth(0.0, 2.8, T); gl.uniform1f(b.u.uIntro, intro);
+    gl.uniform1f(b.u.uSunElev, -0.04 + 0.24 * easeOut(clamp(T / 3.4, 0, 1))); gl.uniform1f(b.u.uSunX, 0.13);
+    gl.uniform1f(b.u.uFloorY, FLOOR); gl.uniform1f(b.u.uLogoY, bob);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+    // 2. logo
+    gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LEQUAL); gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    gl.activeTexture(gl.TEXTURE0);
+    var base = trans(0, bob, 0);
+    // disque : arrive en tournant, avec rebond
+    var u = clamp((T - 0.3) / 0.9, 0, 1), sd = easeBack(u);
+    if (u > 0) {
+      var m = mul(base, mul(rotY((1 - easeOut(u)) * Math.PI * 3), scl(S * sd, S * sd, S * sd)));
+      var sol = P.solid; gl.useProgram(sol.p);
+      var mvp = mul(VP, m); gl.uniformMatrix4fv(sol.u.uMVP, false, mvp); gl.uniform1f(sol.u.uAlpha, 1);
+      var pa = gl.getAttribLocation(sol.p, "aPos"), pn = gl.getAttribLocation(sol.p, "aN"); gl.enableVertexAttribArray(pa); gl.enableVertexAttribArray(pn);
+      gl.bindBuffer(gl.ARRAY_BUFFER, cylBuf); gl.vertexAttribPointer(pa, 3, gl.FLOAT, false, 24, 0); gl.vertexAttribPointer(pn, 3, gl.FLOAT, false, 24, 12);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, (SEG + 1) * 2);
+      gl.bindBuffer(gl.ARRAY_BUFFER, backBuf); gl.vertexAttribPointer(pa, 3, gl.FLOAT, false, 24, 0); gl.vertexAttribPointer(pn, 3, gl.FLOAT, false, 24, 12);
+      gl.drawArrays(gl.TRIANGLE_FAN, 0, SEG + 2);
+      var d = P.disc; gl.useProgram(d.p);
+      gl.bindBuffer(gl.ARRAY_BUFFER, quad); loc = gl.getAttribLocation(d.p, "aPos"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+      gl.bindTexture(gl.TEXTURE_2D, tex.lignes); gl.uniform1i(d.u.uTex, 0); gl.uniform1f(d.u.uTime, T); gl.uniform1f(d.u.uAlpha, 1);
+      gl.uniformMatrix4fv(d.u.uMVP, false, mvp); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    }
+    var lp = P.layer; gl.useProgram(lp.p);
+    gl.bindBuffer(gl.ARRAY_BUFFER, quad); loc = gl.getAttribLocation(lp.p, "aPos"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    // judokas : arrivent de face, en vrille, et frappent
+    u = clamp((T - 1.0) / 0.6, 0, 1); var e = easeOut(u);
+    if (u > 0) dessinerCouche(tex.judokas, mul(base, mul(trans(-1.5 * (1 - e), 0.9 * (1 - e), 0.24 + 6 * (1 - e)), mul(rotZ(-0.45 * (1 - e)), scl(S * (1 + 1.2 * (1 - e)), S * (1 + 1.2 * (1 - e)), S)))), VP, { alpha: Math.min(u * 3, 1), tranches: 7, epaisseur: 0.12 });
+    // kanji : écrit de haut en bas
+    var w = easeInOut(clamp((T - 1.9) / 1.1, 0, 1));
+    if (w > 0) dessinerCouche(tex.kanji, mul(base, mul(trans(0, 0, 0.42), scl(S, S, S))), VP, { alpha: 1, wipe: w, tranches: 6, epaisseur: 0.09 });
+    // nom du club : claque
+    u = clamp((T - 3.0) / 0.55, 0, 1); e = easeBack(u);
+    if (u > 0) dessinerCouche(tex.texte, mul(base, mul(trans(0, 0, 0.62), mul(rotZ(-0.16 * (1 - e)), scl(S * (1 + 1.2 * (1 - e)), S * (1 + 1.2 * (1 - e)), S)))), VP, { alpha: Math.min(u * 4, 1), tranches: 8, epaisseur: 0.14 });
+
+    // 3. pétales (derrière / devant le logo grâce à la profondeur)
+    var pp = P.petal; gl.useProgram(pp.p); gl.depthMask(false);
+    gl.bindBuffer(gl.ARRAY_BUFFER, petalBuf); loc = gl.getAttribLocation(pp.p, "aSeed"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 4, gl.FLOAT, false, 0, 0);
+    gl.uniformMatrix4fv(pp.u.uVP, false, VP); gl.uniform1f(pp.u.uTime, T); gl.uniform1f(pp.u.uPx, H / (2 * TANH)); gl.uniform1f(pp.u.uFocus, dist);
+    gl.uniform1f(pp.u.uAlpha, smooth(0.6, 2.2, T));
+    gl.drawArrays(gl.POINTS, 0, NP); gl.depthMask(true);
+
+    // 4. onde de choc, flash et fondu blanc
+    gl.disable(gl.DEPTH_TEST);
+    var fx = P.fx; gl.useProgram(fx.p);
+    gl.bindBuffer(gl.ARRAY_BUFFER, quad); loc = gl.getAttribLocation(fx.p, "aPos"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    gl.uniform2f(fx.u.uRes, W, H);
+    gl.uniform1f(fx.u.uRing, T > 1.6 ? (T - 1.6) / 1.0 : -1);
+    gl.uniform1f(fx.u.uFlash, T > 1.6 ? Math.exp(-(T - 1.6) * 9) : 0);
+    gl.uniform1f(fx.u.uWhite, blanc);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+    if (T > FIN_INTRO + 0.2) { document.getElementById("invite").classList.add("visible"); }
+  }
+})();
+</script>
+</body>
+</html>

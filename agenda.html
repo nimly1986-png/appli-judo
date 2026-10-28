@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Agenda</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body style="--accent: var(--orange)">
+  <nav class="barre"><div class="barre-contenu"><a class="barre-accueil" href="accueil.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</a><a href="competitions.html">‹ Compétitions</a></div></nav>
+  <h1>📆 Mon agenda</h1>
+  <p id="bandeau-date" class="avertissement" hidden></p>
+
+  <div id="zone-choix" class="formulaire" hidden>
+    <label>Judoka
+      <select id="choix"></select>
+    </label>
+  </div>
+  <p id="resume" class="resume"></p>
+
+  <p id="vide" class="message-vide" hidden>
+    Aucune fiche pour le moment.<br>
+    L'agenda se remplit dès que l'administrateur a créé la fiche du judoka.
+  </p>
+
+  <div id="liste"></div>
+
+  <a class="bouton" href="competitions.html">🏆 Toutes les compétitions</a>
+  <a class="bouton secondaire" href="accueil.html">⬅ Retour à l'accueil</a>
+
+  <script src="judo-commun.js"></script>
+  <script src="competitions-data.js"></script>
+  <script src="competitions-commun.js"></script>
+  <script src="agenda.js"></script>
+</body>
+</html>

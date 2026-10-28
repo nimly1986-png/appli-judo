@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Compétitions</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body style="--accent: var(--orange)">
+  <nav class="barre"><div class="barre-contenu"><a class="barre-accueil" href="accueil.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</a></div></nav>
+  <h1>🏆 Compétitions</h1>
+  <p id="bandeau-date" class="avertissement" hidden></p>
+
+  <p id="sans-fiche" class="avertissement" hidden>
+    Aucune fiche judoka pour le moment : toutes les compétitions sont affichées.
+    Dès que l'administrateur aura rempli la fiche, seules celles de la catégorie du judoka apparaîtront.
+  </p>
+
+  <div id="zone-choix" class="formulaire" hidden>
+    <label>Judoka
+      <select id="choix"></select>
+    </label>
+  </div>
+
+  <div class="filtres"><div id="series"></div><div id="niveaux"></div></div>
+  <div class="chips" id="vues" aria-label="Affichage"></div>
+  <p id="resume" class="resume"></p>
+  <div class="options">
+    <label><input type="checkbox" id="toutes"> Voir toutes les catégories</label>
+    <label><input type="checkbox" id="aura"> Seulement la région (Auvergne-Rhône-Alpes)</label>
+  </div>
+  <div id="note-serie"></div>
+  <button type="button" id="export" class="bouton secondaire">📆 Ajouter ces compétitions à mon agenda (.ics)</button>
+  <div id="mois"></div>
+
+  <div id="liste"></div>
+
+  <a class="bouton" href="reglements.html">📖 Règlement des compétitions</a>
+  <a class="bouton" href="agenda.html">📆 Mon agenda et checklist</a>
+  <a class="bouton secondaire" href="accueil.html">⬅ Retour à l'accueil</a>
+
+  <script src="judo-commun.js"></script>
+  <script src="competitions-data.js"></script>
+  <script src="competitions-commun.js"></script>
+  <script src="competitions.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Espace administrateur</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body style="--accent: var(--violet)">
+  <nav class="barre"><div class="barre-contenu"><a class="barre-accueil" href="accueil.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</a></div></nav>
+  <h1>🔧 Espace administrateur</h1>
+  <p class="avertissement">
+    Version d'essai : utilisez uniquement de fausses données.
+    Cette page n'est pas encore protégée par un mot de passe.
+  </p>
+
+  <h2 id="titre-formulaire">Nouvelle fiche</h2>
+  <div class="formulaire">
+    <input id="prenom" placeholder="Prénom" autocomplete="off">
+    <input id="nom" placeholder="Nom" autocomplete="off">
+    <label>Date de naissance
+      <input id="naissance" type="date" min="1920-01-01">
+    </label>
+    <label>Ceinture
+      <select id="ceinture"></select>
+    </label>
+    <label>Numéro de licence
+      <input id="licence" inputmode="numeric" autocomplete="off" placeholder="Numéro de licence fédérale">
+    </label>
+    <label>Au club depuis (année d'inscription)
+      <input id="entree" type="number" inputmode="numeric" min="1960" max="2100" step="1" placeholder="ex : 2019">
+    </label>
+    <label>Poids (kg)
+      <input id="poids" type="number" min="0" max="200" step="0.1" inputmode="decimal">
+    </label>
+    <label>Photo (facultative)
+      <input id="photo" type="file" accept="image/*">
+    </label>
+    <button id="retirer-photo" class="bouton secondaire" type="button" hidden>Retirer la photo</button>
+    <label>Responsable légal / contacts
+      <textarea id="contacts" rows="3" placeholder="Nom et téléphone"></textarea>
+    </label>
+    <button id="enregistrer" class="bouton" type="button">Enregistrer la fiche</button>
+    <button id="annuler" class="bouton secondaire" type="button" hidden>Annuler la modification</button>
+  </div>
+
+  <h2>Aperçu de la fiche</h2>
+  <div id="apercu"></div>
+
+  <h2>Fiches enregistrées</h2>
+  <div class="tableau-conteneur">
+    <table id="tableau"></table>
+  </div>
+
+  <a class="bouton" href="admin-agenda.html">📋 Inscriptions et compétitions</a>
+  <a class="bouton" href="admin-resultats.html">🥇 Saisir les résultats</a>
+  <a class="bouton secondaire" href="accueil.html">⬅ Retour à l'accueil</a>
+
+  <script src="judo-commun.js"></script>
+  <script src="competitions-data.js"></script>
+  <script src="competitions-commun.js"></script>
+  <script src="admin-fiches.js"></script>
+</body>
+</html>

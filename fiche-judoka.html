@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fiche du judoka</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body style="--accent: var(--marron)">
+  <nav class="barre"><div class="barre-contenu"><a class="barre-accueil" href="accueil.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</a></div></nav>
+  <h1>🥋 Fiche du judoka</h1>
+
+  <!-- Menu de choix : affiché seulement s'il y a plusieurs fiches -->
+  <div id="zone-choix" class="formulaire" hidden>
+    <label>Judoka
+      <select id="choix"></select>
+    </label>
+  </div>
+
+  <!-- La fiche s'affiche ici -->
+  <div id="carte"></div>
+
+  <p id="vide" class="message-vide" hidden>
+    Aucune fiche pour le moment.<br>
+    Les fiches sont remplies par l'administrateur du club.
+  </p>
+
+  <a class="bouton" href="agenda.html">📆 Mon agenda et mes compétitions</a>
+  <a class="bouton secondaire" href="accueil.html">⬅ Retour à l'accueil</a>
+
+  <script src="judo-commun.js"></script>
+  <script src="competitions-data.js"></script>
+  <script src="competitions-commun.js"></script>
+  <script src="fiche-judoka.js"></script>
+</body>
+</html>

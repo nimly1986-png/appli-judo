@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Les infos du club</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body style="--accent: var(--soleil)">
+  <nav class="barre"><div class="barre-contenu"><a class="barre-accueil" href="accueil.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</a></div></nav>
+  <h1>Infos du club</h1>
+  <div id="liste"></div>
+  <p id="vide" class="message-vide" hidden>Aucune information pour le moment.</p>
+  <a class="bouton secondaire" href="accueil.html">Retour à l'accueil</a>
+  <script src="infos-commun.js"></script>
+  <script>
+    const zone = document.getElementById("liste");
+    const infos = infosTriees();
+    document.getElementById("vide").hidden = infos.length > 0;
+    infos.forEach(function (i) {
+      const t = TYPES_INFO[i.type] || TYPES_INFO.info;
+      const c = document.createElement("div"); c.className = "info-carte"; c.style.setProperty("--c", t.couleur);
+      c.appendChild(document.createElement("i"));
+      const d = document.createElement("div");
+      const q = document.createElement("span"); q.className = "quoi"; q.textContent = t.nom;
+      const p = document.createElement("p"); p.textContent = i.texte;
+      const s = document.createElement("small"); s.textContent = dateCourte(i.date);
+      d.appendChild(q); d.appendChild(p); d.appendChild(s); c.appendChild(d); zone.appendChild(c);
+    });
+  </script>
+</body>
+</html>

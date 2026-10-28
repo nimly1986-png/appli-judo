@@ -1,0 +1,1692 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//JCO Chandieu//Calendrier//FR
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Compétitions JCO Chandieu 2026-2027
+X-WR-TIMEZONE:Europe/Paris
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:20260920ChampionnatsdumondevtransSarajevoBosnieHerzgovine@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20260920
+DTEND;VALUE=DATE:20260925
+SUMMARY:🎖️ Championnats du monde vétérans
+LOCATION:Sarajevo (Bosnie-Herzégovine)
+DESCRIPTION:Calendrier France Judo Vétérans 2026-2027\, communiqué à titre prévisionnel : les dates peuvent changer selon la validation des salles.
+END:VEVENT
+BEGIN:VEVENT
+UID:20260926TournoiLabelACadetsLamballeBretagne@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20260926
+DTEND;VALUE=DATE:20260927
+SUMMARY:🥋 Tournoi Label A – Cadets
+LOCATION:Lamballe (Bretagne)
+DESCRIPTION:Tournoi labellisé. Ligue : Bretagne.
+END:VEVENT
+BEGIN:VEVENT
+UID:20260926TournoiLabelACadetsSaintMarcelBourgogneFrancheComt@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20260926
+DTEND;VALUE=DATE:20260927
+SUMMARY:🥋 Tournoi Label A – Cadets
+LOCATION:Saint-Marcel (Bourgogne-Franche-Comté)
+DESCRIPTION:Tournoi labellisé. Ligue : Bourgogne-Franche-Comté.
+END:VEVENT
+BEGIN:VEVENT
+UID:20260927TournoiLabelAJuniorsSaintMarcelBourgogneFrancheComt@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20260927
+DTEND;VALUE=DATE:20260928
+SUMMARY:🥋 Tournoi Label A – Juniors
+LOCATION:Saint-Marcel (Bourgogne-Franche-Comté)
+DESCRIPTION:Tournoi labellisé. Ligue : Bourgogne-Franche-Comté.
+END:VEVENT
+BEGIN:VEVENT
+UID:20260927TournoiLabelASeniorsLamballeBretagne@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20260927
+DTEND;VALUE=DATE:20260928
+SUMMARY:🥋 Tournoi Label A – Seniors
+LOCATION:Lamballe (Bretagne)
+DESCRIPTION:Tournoi labellisé. Ligue : Bretagne.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261003TournoiLabelExcellenceSeniorsNoisyleGrandledeFrance@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261003
+DTEND;VALUE=DATE:20261005
+SUMMARY:⭐ Tournoi Label Excellence – Seniors
+LOCATION:Noisy-le-Grand (Île-de-France)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Île-de-France.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261003TournoiLabelExcellenceSeniorsContrexevilleGrandEst@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261003
+DTEND;VALUE=DATE:20261004
+SUMMARY:⭐ Tournoi Label Excellence – Seniors
+LOCATION:Contrexeville (Grand Est)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Grand Est.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261004TournoiLabelACadetsContrexevilleGrandEst@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261004
+DTEND;VALUE=DATE:20261005
+SUMMARY:🥋 Tournoi Label A – Cadets
+LOCATION:Contrexeville (Grand Est)
+DESCRIPTION:Tournoi labellisé. Ligue : Grand Est.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261004TournoiLabelACadetsBressuireNouvelleAquitaine@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261004
+DTEND;VALUE=DATE:20261005
+SUMMARY:🥋 Tournoi Label A – Cadets
+LOCATION:Bressuire (Nouvelle-Aquitaine)
+DESCRIPTION:Tournoi labellisé. Ligue : Nouvelle-Aquitaine.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261004TournoiLabelACadetsToursCentreValdeLoire@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261004
+DTEND;VALUE=DATE:20261005
+SUMMARY:🥋 Tournoi Label A – Cadets
+LOCATION:Tours (Centre-Val de Loire)
+DESCRIPTION:Tournoi labellisé. Ligue : Centre-Val de Loire.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261010FormationarbitrageDistrictLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261010
+DTEND;VALUE=DATE:20261011
+SUMMARY:🟨 Formation arbitrage – District
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261010FormationcommissairesportifDistrictLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261010
+DTEND;VALUE=DATE:20261011
+SUMMARY:🟨 Formation commissaire sportif – District
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261010InterclubsEspaceJeanMonnetroutedeTernay69360SrzinduR@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261010
+DTEND;VALUE=DATE:20261011
+SUMMARY:🤼 Interclubs
+LOCATION:Espace Jean Monnet\, route de Ternay\, 69360 Sérézin-du-Rhône
+DESCRIPTION:Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h\, 11h\, 12h). Autres catégories : horaires à confirmer. Contact : Norbert Butin 07 82 70 63 03. Buvette\, buffet et tombola sur place.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261010InterclubsDojoRhneVivaraisadressedugymnaseconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261010
+DTEND;VALUE=DATE:20261011
+SUMMARY:🤼 Interclubs
+LOCATION:Dojo Rhône Vivarais (adresse du gymnase à confirmer)
+DESCRIPTION:Lieu et horaires à confirmer. Combats debout pour tous · horaires et adresse du gymnase à confirmer
+END:VEVENT
+BEGIN:VEVENT
+UID:20261010PassagedegradeUV41eret2edanengagementLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261010
+DTEND;VALUE=DATE:20261011
+SUMMARY:🥋 Passage de grade UV4 1er et 2e dan (engagement)
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Récapitulatif sportif du comité du Rhône (au 22/09/2026) : date de l'UV4 pour le 1er et 2e dan.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261010TournoiLabelACadetsLeLucProvenceAlpesCtedAzur@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261010
+DTEND;VALUE=DATE:20261012
+SUMMARY:🥋 Tournoi Label A – Cadets
+LOCATION:Le Luc (Provence-Alpes-Côte d'Azur)
+DESCRIPTION:Tournoi labellisé. Ligue : Provence-Alpes-Côte d'Azur.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261017TournoiLabelExcellenceJuniorsCeyratAuvergneRhneAlpes@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261017
+DTEND;VALUE=DATE:20261018
+SUMMARY:⭐ Tournoi Label Excellence – Juniors
+LOCATION:Ceyrat (Auvergne-Rhône-Alpes)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Auvergne-Rhône-Alpes.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261017TournoiLabelExcellenceJuniorsCormellesNormandie@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261017
+DTEND;VALUE=DATE:20261018
+SUMMARY:⭐ Tournoi Label Excellence – Juniors
+LOCATION:Cormelles (Normandie)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Normandie.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261018TournoiLabelExcellenceCadetsCeyratAuvergneRhneAlpes@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261018
+DTEND;VALUE=DATE:20261019
+SUMMARY:⭐ Tournoi Label Excellence – Cadets
+LOCATION:Ceyrat (Auvergne-Rhône-Alpes)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Auvergne-Rhône-Alpes.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261018TournoiLabelExcellenceCadetsCormellesNormandie@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261018
+DTEND;VALUE=DATE:20261019
+SUMMARY:⭐ Tournoi Label Excellence – Cadets
+LOCATION:Cormelles (Normandie)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Normandie.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261019StagesportifdpartementalBenjaminsMinimesCadetsLieuco@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261019
+DTEND;VALUE=DATE:20261021
+SUMMARY:🎓 Stage sportif départemental Benjamins-Minimes-Cadets
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026).
+END:VEVENT
+BEGIN:VEVENT
+UID:20261022ChampionnatsdEuropevtransPortimoPortugal@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261022
+DTEND;VALUE=DATE:20261026
+SUMMARY:🎖️ Championnats d'Europe vétérans
+LOCATION:Portimão (Portugal)
+DESCRIPTION:Calendrier France Judo Vétérans 2026-2027\, communiqué à titre prévisionnel : les dates peuvent changer selon la validation des salles.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261024TournoiLabelExcellenceSeniorsLormontNouvelleAquitain@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261024
+DTEND;VALUE=DATE:20261025
+SUMMARY:⭐ Tournoi Label Excellence – Seniors
+LOCATION:Lormont (Nouvelle-Aquitaine)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Nouvelle-Aquitaine.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261024TournoiLabelExcellenceSeniorsNantesPaysdelaLoire@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261024
+DTEND;VALUE=DATE:20261025
+SUMMARY:⭐ Tournoi Label Excellence – Seniors
+LOCATION:Nantes (Pays de la Loire)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Pays de la Loire.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261025TournoiLabelAMinimesTroyesGrandEst@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261025
+DTEND;VALUE=DATE:20261026
+SUMMARY:🥋 Tournoi Label A – Minimes
+LOCATION:Troyes (Grand Est)
+DESCRIPTION:Tournoi labellisé. Ligue : Grand Est.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261025TournoiLabelExcellenceCadetsLormontNouvelleAquitaine@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261025
+DTEND;VALUE=DATE:20261026
+SUMMARY:⭐ Tournoi Label Excellence – Cadets
+LOCATION:Lormont (Nouvelle-Aquitaine)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Nouvelle-Aquitaine.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261031TournoiLabelAMinimesBourgesCentreValdeLoire@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261031
+DTEND;VALUE=DATE:20261101
+SUMMARY:🥋 Tournoi Label A – Minimes
+LOCATION:Bourges (Centre-Val de Loire)
+DESCRIPTION:Tournoi labellisé. Ligue : Centre-Val de Loire.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261031TournoiLabelExcellenceCadetsSaintOuenledeFrance@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261031
+DTEND;VALUE=DATE:20261102
+SUMMARY:⭐ Tournoi Label Excellence – Cadets
+LOCATION:Saint-Ouen (Île-de-France)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Île-de-France.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261031TournoiLabelExcellenceJuniorsTergnierHautsdeFrance@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261031
+DTEND;VALUE=DATE:20261101
+SUMMARY:⭐ Tournoi Label Excellence – Juniors
+LOCATION:Tergnier (Hauts-de-France)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Hauts-de-France.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261101TournoiLabelASeniorsTroyesGrandEst@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261102
+SUMMARY:🥋 Tournoi Label A – Seniors
+LOCATION:Troyes (Grand Est)
+DESCRIPTION:Tournoi labellisé. Ligue : Grand Est.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261107InterclubsJCMuroisadressedugymnaseconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261107
+DTEND;VALUE=DATE:20261108
+SUMMARY:🤼 Interclubs
+LOCATION:JC Murois (adresse du gymnase à confirmer)
+DESCRIPTION:Lieu et horaires à confirmer. Combats debout pour tous · horaires et adresse du gymnase à confirmer
+END:VEVENT
+BEGIN:VEVENT
+UID:20261107TournoiLabelACadetsSaintGrgoireBretagne@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261107
+DTEND;VALUE=DATE:20261108
+SUMMARY:🥋 Tournoi Label A – Cadets
+LOCATION:Saint-Grégoire (Bretagne)
+DESCRIPTION:Tournoi labellisé. Ligue : Bretagne.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261107TournoiLabelAMinimesHarnesHautsdeFrance@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261107
+DTEND;VALUE=DATE:20261108
+SUMMARY:🥋 Tournoi Label A – Minimes
+LOCATION:Harnes (Hauts-de-France)
+DESCRIPTION:Tournoi labellisé. Ligue : Hauts-de-France.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261108TournoiLabelACadetsHarnesHautsdeFrance@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261108
+DTEND;VALUE=DATE:20261109
+SUMMARY:🥋 Tournoi Label A – Cadets
+LOCATION:Harnes (Hauts-de-France)
+DESCRIPTION:Tournoi labellisé. Ligue : Hauts-de-France.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261108TournoiLabelAJuniorsSaintGrgoireBretagne@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261108
+DTEND;VALUE=DATE:20261109
+SUMMARY:🥋 Tournoi Label A – Juniors
+LOCATION:Saint-Grégoire (Bretagne)
+DESCRIPTION:Tournoi labellisé. Ligue : Bretagne.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261108TournoiLabelAMinimesReimsGrandEst@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261108
+DTEND;VALUE=DATE:20261109
+SUMMARY:🥋 Tournoi Label A – Minimes
+LOCATION:Reims (Grand Est)
+DESCRIPTION:Tournoi labellisé. Ligue : Grand Est.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261108TournoiLabelAMinimesPontaultCombaultledeFrance@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261108
+DTEND;VALUE=DATE:20261109
+SUMMARY:🥋 Tournoi Label A – Minimes
+LOCATION:Pontault-Combault (Île-de-France)
+DESCRIPTION:Tournoi labellisé. Ligue : Île-de-France.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261108TournoiLabelExcellenceSeniorsBesanonBourgogneFranche@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261108
+DTEND;VALUE=DATE:20261109
+SUMMARY:⭐ Tournoi Label Excellence – Seniors
+LOCATION:Besançon (Bourgogne-Franche-Comté)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Bourgogne-Franche-Comté.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261108TournoiLabelExcellenceSeniorsNormandievilledterminer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261108
+DTEND;VALUE=DATE:20261109
+SUMMARY:⭐ Tournoi Label Excellence – Seniors
+LOCATION:Normandie\, ville à déterminer
+DESCRIPTION:Lieu et horaires à confirmer. Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Normandie.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261109JujitsuDistrictLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261109
+DTEND;VALUE=DATE:20261110
+SUMMARY:📅 Jujitsu – District
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261110KataDistrictLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261110
+DTEND;VALUE=DATE:20261111
+SUMMARY:📅 Kata – District
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261114InterclubsGymnasedesTaillisavenuedesTaillis69960Corb@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261114
+DTEND;VALUE=DATE:20261115
+SUMMARY:🤼 Interclubs
+LOCATION:Gymnase des Taillis\, avenue des Taillis\, 69960 Corbas (UJ Rhône)
+DESCRIPTION:Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h\, 11h\, 12h). Autres catégories : horaires à confirmer. Contact : Alain L'Herbette 06 82 58 16 24. Buvette\, buffet et tombola sur place.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261116VtransDistrictLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261116
+DTEND;VALUE=DATE:20261117
+SUMMARY:🎖️ Vétérans – District
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261121CoupejeunesarbitrescommissairessportifsCadetsDistric@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261121
+DTEND;VALUE=DATE:20261122
+SUMMARY:🟨 Coupe jeunes arbitres + commissaires sportifs Cadets – District
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20261121FormationarbitrageRhneLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261121
+DTEND;VALUE=DATE:20261122
+SUMMARY:🟨 Formation arbitrage – Rhône
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261121FormationcommissairesportifRhneLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261121
+DTEND;VALUE=DATE:20261122
+SUMMARY:🟨 Formation commissaire sportif – Rhône
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261121MinimesindividuelDistrictLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261121
+DTEND;VALUE=DATE:20261122
+SUMMARY:🏆 Minimes (individuel) – District
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20261121PassagedegradeUV42edanengagementLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261121
+DTEND;VALUE=DATE:20261122
+SUMMARY:🥋 Passage de grade UV4 2e dan (engagement)
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Récapitulatif sportif du comité du Rhône (au 22/09/2026) : date de l'UV4 pour le 2e dan.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261121TournoiLabelASeniorsfmininesVerquinHautsdeFrance@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261121
+DTEND;VALUE=DATE:20261122
+SUMMARY:🥋 Tournoi Label A – Seniors féminines
+LOCATION:Verquin (Hauts-de-France)
+DESCRIPTION:Tournoi labellisé. Ligue : Hauts-de-France.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261121TournoiLabelExcellenceJuniorsForgeslesEauxNormandie@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261121
+DTEND;VALUE=DATE:20261122
+SUMMARY:⭐ Tournoi Label Excellence – Juniors
+LOCATION:Forges-les-Eaux (Normandie)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Normandie.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261121TournoivtransdeFontaineGrenobleLabelExcellenceFontai@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261121
+DTEND;VALUE=DATE:20261122
+SUMMARY:🎖️ Tournoi vétérans de Fontaine (Grenoble) – Label Excellence
+LOCATION:Fontaine\, Grenoble (Auvergne-Rhône-Alpes)
+DESCRIPTION:Calendrier France Judo Vétérans 2026-2027\, communiqué à titre prévisionnel : les dates peuvent changer selon la validation des salles.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261121TournoivtransdeNantesLabelANantesPaysdelaLoire@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261121
+DTEND;VALUE=DATE:20261122
+SUMMARY:🎖️ Tournoi vétérans de Nantes – Label A
+LOCATION:Nantes (Pays de la Loire)
+DESCRIPTION:Calendrier France Judo Vétérans 2026-2027\, communiqué à titre prévisionnel : les dates peuvent changer selon la validation des salles.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261122Cadets1redivisionRhneLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261122
+DTEND;VALUE=DATE:20261123
+SUMMARY:🏆 Cadets 1ère division – Rhône
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20261122TournoiLabelExcellenceCadetsIstresProvenceAlpesCtedA@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261122
+DTEND;VALUE=DATE:20261123
+SUMMARY:⭐ Tournoi Label Excellence – Cadets
+LOCATION:Istres (Provence-Alpes-Côte d'Azur)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Provence-Alpes-Côte d'Azur.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261122TournoiLabelExcellenceCadetsNantesPaysdelaLoire@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261122
+DTEND;VALUE=DATE:20261123
+SUMMARY:⭐ Tournoi Label Excellence – Cadets
+LOCATION:Nantes (Pays de la Loire)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Pays de la Loire.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261122TournoiLabelExcellenceJuniorsPoitiersNouvelleAquitai@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261122
+DTEND;VALUE=DATE:20261123
+SUMMARY:⭐ Tournoi Label Excellence – Juniors
+LOCATION:Poitiers (Nouvelle-Aquitaine)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Nouvelle-Aquitaine.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261128PassagedegradeUV3shiaiHallesdessportsFabriceMarchiol@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261128
+DTEND;VALUE=DATE:20261129
+SUMMARY:🥋 Passage de grade UV3 (shiai)
+LOCATION:Halles des sports Fabrice Marchiol\, avenue des Plantations\, 38350 La Mure
+DESCRIPTION:Grades : ceinture marron à 2e dan. Samedi : marron juniors/seniors/vétérans 8h00 ; noire juniors/seniors/vétérans et cadets 3 10h00 ; marron cadets 13h30. Inscription sur l'extranet 1 mois avant (5 € pour certaines UV) ; judogi blanc sans dossard. Pour l'option 2 de l'UV3\, la partie B se passe le dimanche avec les UV1 et UV2.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261128Seniors1redivisionFranceLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261128
+DTEND;VALUE=DATE:20261130
+SUMMARY:🏆 Seniors 1ère division – France
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20261128TournoiLabelAJuniorsMontechOccitanie@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261128
+DTEND;VALUE=DATE:20261129
+SUMMARY:🥋 Tournoi Label A – Juniors
+LOCATION:Montech (Occitanie)
+DESCRIPTION:Tournoi labellisé. Ligue : Occitanie.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261129PassagedegradeUV1UV2katatechniqueHallesdessportsFabr@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261129
+DTEND;VALUE=DATE:20261130
+SUMMARY:🥋 Passage de grade UV1 + UV2 (kata + technique)
+LOCATION:Halles des sports Fabrice Marchiol\, avenue des Plantations\, 38350 La Mure
+DESCRIPTION:Grades : ceinture marron à 3e dan. Dimanche : marron cadets 9h00 ; marron juniors/seniors/vétérans 13h00 (9h00 si le kata est présenté avec un cadet) ; noire juniors/seniors/vétérans et cadets 14h00. Inscription sur l'extranet 1 mois avant (5 € pour certaines UV) ; judogi blanc sans dossard.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261129TournoiLabelAMinimesMontechOccitanie@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261129
+DTEND;VALUE=DATE:20261130
+SUMMARY:🥋 Tournoi Label A – Minimes
+LOCATION:Montech (Occitanie)
+DESCRIPTION:Tournoi labellisé. Ligue : Occitanie.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261205InterclubsGymnaseDeslyresrueduStade69780SaintPierred@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261205
+DTEND;VALUE=DATE:20261206
+SUMMARY:🤼 Interclubs
+LOCATION:Gymnase Deslyres\, rue du Stade\, 69780 Saint-Pierre-de-Chandieu (notre club)
+DESCRIPTION:Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h\, 11h\, 12h). Autres catégories : horaires à confirmer. Contact : Fabien Camuzet 06 74 94 41 98. Buvette\, buffet et tombola sur place.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261205TournoiLabelExcellenceCadetsNmesOccitanie@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261205
+DTEND;VALUE=DATE:20261206
+SUMMARY:⭐ Tournoi Label Excellence – Cadets
+LOCATION:Nîmes (Occitanie)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Occitanie.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261205TournoivtransdAngersLabelExcellenceAngersPaysdelaLoi@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261205
+DTEND;VALUE=DATE:20261206
+SUMMARY:🎖️ Tournoi vétérans d'Angers – Label Excellence
+LOCATION:Angers (Pays de la Loire)
+DESCRIPTION:Calendrier France Judo Vétérans 2026-2027\, communiqué à titre prévisionnel : les dates peuvent changer selon la validation des salles.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261205quipesBenjaminsRhneLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261205
+DTEND;VALUE=DATE:20261206
+SUMMARY:🏆 Équipes Benjamins – Rhône
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20261206CoupejeunesarbitrescommissairessportifsCadetsRhneLie@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261206
+DTEND;VALUE=DATE:20261207
+SUMMARY:🟨 Coupe jeunes arbitres + commissaires sportifs Cadets – Rhône
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20261206MinimesindividuelRhneLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261206
+DTEND;VALUE=DATE:20261207
+SUMMARY:🏆 Minimes (individuel) – Rhône
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20261206TournoiLabelAMinimesBrtignysurOrgeledeFrance@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261206
+DTEND;VALUE=DATE:20261207
+SUMMARY:🥋 Tournoi Label A – Minimes
+LOCATION:Brétigny-sur-Orge (Île-de-France)
+DESCRIPTION:Tournoi labellisé. Ligue : Île-de-France.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261206TournoiLabelAMinimesNmesOccitanie@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261206
+DTEND;VALUE=DATE:20261207
+SUMMARY:🥋 Tournoi Label A – Minimes
+LOCATION:Nîmes (Occitanie)
+DESCRIPTION:Tournoi labellisé. Ligue : Occitanie.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261212TournoiLabelAMinimesLambersartHautsdeFrance@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261212
+DTEND;VALUE=DATE:20261213
+SUMMARY:🥋 Tournoi Label A – Minimes
+LOCATION:Lambersart (Hauts-de-France)
+DESCRIPTION:Tournoi labellisé. Ligue : Hauts-de-France.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261212TournoiLabelSuperExcellenceCadetsLormontNouvelleAqui@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261212
+DTEND;VALUE=DATE:20261213
+SUMMARY:⭐ Tournoi Label Super Excellence – Cadets
+LOCATION:Lormont (Nouvelle-Aquitaine)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Nouvelle-Aquitaine.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261213TournoiLabelSuperExcellenceJuniorsLormontNouvelleAqu@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261213
+DTEND;VALUE=DATE:20261214
+SUMMARY:⭐ Tournoi Label Super Excellence – Juniors
+LOCATION:Lormont (Nouvelle-Aquitaine)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Nouvelle-Aquitaine.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261219TournoiLabelACadetsBeauneBourgogneFrancheComt@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261219
+DTEND;VALUE=DATE:20261220
+SUMMARY:🥋 Tournoi Label A – Cadets
+LOCATION:Beaune (Bourgogne-Franche-Comté)
+DESCRIPTION:Tournoi labellisé. Ligue : Bourgogne-Franche-Comté.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261219TournoiLabelAMinimesChartresCentreValdeLoire@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261219
+DTEND;VALUE=DATE:20261220
+SUMMARY:🥋 Tournoi Label A – Minimes
+LOCATION:Chartres (Centre-Val de Loire)
+DESCRIPTION:Tournoi labellisé. Ligue : Centre-Val de Loire.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261219TournoiLabelAMinimesToulouseOccitanie@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261219
+DTEND;VALUE=DATE:20261220
+SUMMARY:🥋 Tournoi Label A – Minimes
+LOCATION:Toulouse (Occitanie)
+DESCRIPTION:Tournoi labellisé. Ligue : Occitanie.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261220TournoiLabelACadetsChartresCentreValdeLoire@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261220
+DTEND;VALUE=DATE:20261221
+SUMMARY:🥋 Tournoi Label A – Cadets
+LOCATION:Chartres (Centre-Val de Loire)
+DESCRIPTION:Tournoi labellisé. Ligue : Centre-Val de Loire.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261220TournoiLabelACadetsespoirs1reanneToulouseOccitanie@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20261220
+DTEND;VALUE=DATE:20261221
+SUMMARY:🥋 Tournoi Label A – Cadets espoirs (1re année)
+LOCATION:Toulouse (Occitanie)
+DESCRIPTION:Tournoi labellisé. Ligue : Occitanie.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270109TournoiLabelAMinimesRomanssurIsreAuvergneRhneAlpes@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270109
+DTEND;VALUE=DATE:20270110
+SUMMARY:🥋 Tournoi Label A – Minimes
+LOCATION:Romans-sur-Isère (Auvergne-Rhône-Alpes)
+DESCRIPTION:Tournoi labellisé. Ligue : Auvergne-Rhône-Alpes. La date indiquée dans le PDF porte l'année 2026 : lue comme 2027 (saison 2026-2027)\, à confirmer.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270110TournoiLabelAJuniorsBelfortBourgogneFrancheComt@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270110
+DTEND;VALUE=DATE:20270111
+SUMMARY:🥋 Tournoi Label A – Juniors
+LOCATION:Belfort (Bourgogne-Franche-Comté)
+DESCRIPTION:Tournoi labellisé. Ligue : Bourgogne-Franche-Comté. La date indiquée dans le PDF porte l'année 2026 : lue comme 2027 (saison 2026-2027)\, à confirmer.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270111VtransRhneLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270111
+DTEND;VALUE=DATE:20270112
+SUMMARY:🎖️ Vétérans – Rhône
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270112KataRhneLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270112
+DTEND;VALUE=DATE:20270113
+SUMMARY:📅 Kata – Rhône
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270116TournoiLabelExcellenceJuniorsOrlansCentreValdeLoire@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270116
+DTEND;VALUE=DATE:20270117
+SUMMARY:⭐ Tournoi Label Excellence – Juniors
+LOCATION:Orléans (Centre-Val de Loire)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Centre-Val de Loire.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270117TournoiLabelAMinimesAmiensHautsdeFrance@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270117
+DTEND;VALUE=DATE:20270118
+SUMMARY:🥋 Tournoi Label A – Minimes
+LOCATION:Amiens (Hauts-de-France)
+DESCRIPTION:Tournoi labellisé. Ligue : Hauts-de-France.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270118JujitsuRhneLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270118
+DTEND;VALUE=DATE:20270119
+SUMMARY:📅 Jujitsu – Rhône
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270123BenjaminsindividuelDistrictLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270123
+DTEND;VALUE=DATE:20270124
+SUMMARY:🏆 Benjamins (individuel) – District
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270123CoupejeunesarbitrescommissairessportifsMinimesDistri@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270123
+DTEND;VALUE=DATE:20270124
+SUMMARY:🟨 Coupe jeunes arbitres + commissaires sportifs Minimes – District
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270123FormationarbitrageInterdpartementalLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270123
+DTEND;VALUE=DATE:20270124
+SUMMARY:🟨 Formation arbitrage – Inter-départemental
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270123FormationcommissairesportifInterdpartementalLieuconf@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270123
+DTEND;VALUE=DATE:20270124
+SUMMARY:🟨 Formation commissaire sportif – Inter-départemental
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270123PassagedegradeUV41eret2edanengagementLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270123
+DTEND;VALUE=DATE:20270124
+SUMMARY:🥋 Passage de grade UV4 1er et 2e dan (engagement)
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Récapitulatif sportif du comité du Rhône (au 22/09/2026) : date de l'UV4 pour le 1er et 2e dan.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270123TournoiLabelExcellenceCadetsBaillyRomainvillierslede@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270123
+DTEND;VALUE=DATE:20270125
+SUMMARY:⭐ Tournoi Label Excellence – Cadets
+LOCATION:Bailly-Romainvilliers (Île-de-France)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Île-de-France.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270123TournoivtransdeMouvauxLabelSuperExcellenceMouvauxHau@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270123
+DTEND;VALUE=DATE:20270125
+SUMMARY:🎖️ Tournoi vétérans de Mouvaux – Label Super Excellence
+LOCATION:Mouvaux (Hauts-de-France)
+DESCRIPTION:Calendrier France Judo Vétérans 2026-2027\, communiqué à titre prévisionnel : les dates peuvent changer selon la validation des salles.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270124CoupejeunesarbitrescommissairessportifsCadetsInterdp@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270124
+DTEND;VALUE=DATE:20270125
+SUMMARY:🟨 Coupe jeunes arbitres + commissaires sportifs Cadets – Inter-départemental
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270124InterclubsUSOLVaugnerayadressedugymnaseconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270124
+DTEND;VALUE=DATE:20270125
+SUMMARY:🤼 Interclubs
+LOCATION:USOL Vaugneray (adresse du gymnase à confirmer)
+DESCRIPTION:Lieu et horaires à confirmer. Combats debout pour tous · horaires et adresse du gymnase à confirmer
+END:VEVENT
+BEGIN:VEVENT
+UID:20270124Juniors1redivisionInterdpartementalLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270124
+DTEND;VALUE=DATE:20270125
+SUMMARY:🏆 Juniors 1ère division – Inter-départemental
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270124MinimesindividuelInterdpartementalLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270124
+DTEND;VALUE=DATE:20270125
+SUMMARY:🏆 Minimes (individuel) – Inter-départemental
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270124TournoiLabelExcellenceCadetsCessonSvignBretagne@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270124
+DTEND;VALUE=DATE:20270125
+SUMMARY:⭐ Tournoi Label Excellence – Cadets
+LOCATION:Cesson-Sévigné (Bretagne)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Bretagne.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270130Cadets1redivisionInterdpartementalLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270130
+DTEND;VALUE=DATE:20270131
+SUMMARY:🏆 Cadets 1ère division – Inter-départemental
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270130InterclubsDeltaSportBrignaisadressedugymnaseconfirme@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270130
+DTEND;VALUE=DATE:20270131
+SUMMARY:🤼 Interclubs
+LOCATION:Delta Sport Brignais (adresse du gymnase à confirmer)
+DESCRIPTION:Lieu et horaires à confirmer. Combats debout pour tous · horaires et adresse du gymnase à confirmer
+END:VEVENT
+BEGIN:VEVENT
+UID:20270131CircuitMinimesDeltaSportBrignais@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270131
+DTEND;VALUE=DATE:20270201
+SUMMARY:🏆 Circuit Minimes
+LOCATION:Delta Sport Brignais
+DESCRIPTION:Lieu et horaires à confirmer. Source : déclaration des manifestations clubs 2026-2027
+END:VEVENT
+BEGIN:VEVENT
+UID:20270206InterclubsComplexesportifrueJeanRigaud69130cully@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270206
+DTEND;VALUE=DATE:20270207
+SUMMARY:🤼 Interclubs
+LOCATION:Complexe sportif\, rue Jean Rigaud\, 69130 Écully
+DESCRIPTION:Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h\, 11h\, 12h). Autres catégories : horaires à confirmer. Contact : Salvatore Amico 06 85 60 13 51. Buvette\, buffet et tombola sur place.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270206InterclubsJCFeyzinadressedugymnaseconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270206
+DTEND;VALUE=DATE:20270207
+SUMMARY:🤼 Interclubs
+LOCATION:JC Feyzin (adresse du gymnase à confirmer)
+DESCRIPTION:Lieu et horaires à confirmer. Combats debout pour tous · horaires et adresse du gymnase à confirmer
+END:VEVENT
+BEGIN:VEVENT
+UID:20270213Cadets1redivisionLigueAURALieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270213
+DTEND;VALUE=DATE:20270214
+SUMMARY:🏆 Cadets 1ère division – Ligue AURA
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270213quipesmixtesSeniors2medivLigueAURALieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270213
+DTEND;VALUE=DATE:20270214
+SUMMARY:🏆 Équipes mixtes Seniors 2ème div. – Ligue AURA
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270214CoupejeunesarbitrescommissairessportifsCadetsLigueAU@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270214
+DTEND;VALUE=DATE:20270215
+SUMMARY:🟨 Coupe jeunes arbitres + commissaires sportifs Cadets – Ligue AURA
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270214MinimesindividuelLigueAURALieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270214
+DTEND;VALUE=DATE:20270215
+SUMMARY:🏆 Minimes (individuel) – Ligue AURA
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270214TournoiLabelAMinimesetcadetsMouilleronleCaptifPaysde@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270214
+DTEND;VALUE=DATE:20270215
+SUMMARY:🥋 Tournoi Label A – Minimes et cadets
+LOCATION:Mouilleron-le-Captif (Pays de la Loire)
+DESCRIPTION:Tournoi labellisé. Ligue : Pays de la Loire.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270214TournoiLabelExcellenceJuniorsAixenProvenceProvenceAl@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270214
+DTEND;VALUE=DATE:20270215
+SUMMARY:⭐ Tournoi Label Excellence – Juniors
+LOCATION:Aix-en-Provence (Provence-Alpes-Côte d'Azur)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Provence-Alpes-Côte d'Azur.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270216StagesportifdpartementalBenjaminsMinimesCadetsLieuco@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270216
+DTEND;VALUE=DATE:20270218
+SUMMARY:🎓 Stage sportif départemental Benjamins-Minimes-Cadets
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026).
+END:VEVENT
+BEGIN:VEVENT
+UID:20270220TournoiLabelACadetsespoirs1reanneOrlansCentreValdeLo@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270220
+DTEND;VALUE=DATE:20270221
+SUMMARY:🥋 Tournoi Label A – Cadets espoirs (1re année)
+LOCATION:Orléans (Centre-Val de Loire)
+DESCRIPTION:Tournoi labellisé. Ligue : Centre-Val de Loire.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270221TournoiLabelAMinimesOrlansCentreValdeLoire@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270221
+DTEND;VALUE=DATE:20270222
+SUMMARY:🥋 Tournoi Label A – Minimes
+LOCATION:Orléans (Centre-Val de Loire)
+DESCRIPTION:Tournoi labellisé. Ligue : Centre-Val de Loire.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270221TournoiLabelExcellenceJuniorsAmiensHautsdeFrance@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270221
+DTEND;VALUE=DATE:20270222
+SUMMARY:⭐ Tournoi Label Excellence – Juniors
+LOCATION:Amiens (Hauts-de-France)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Hauts-de-France.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270221TournoiLabelExcellenceSeniorsSaintGratienledeFrance@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270221
+DTEND;VALUE=DATE:20270222
+SUMMARY:⭐ Tournoi Label Excellence – Seniors
+LOCATION:Saint-Gratien (Île-de-France)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Île-de-France.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270221TournoiinternationalvtransBFCBesanonLabelExcellenceB@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270221
+DTEND;VALUE=DATE:20270222
+SUMMARY:🎖️ Tournoi international vétérans BFC\, Besançon – Label Excellence
+LOCATION:Besançon (Bourgogne-Franche-Comté)
+DESCRIPTION:Calendrier France Judo Vétérans 2026-2027\, communiqué à titre prévisionnel : les dates peuvent changer selon la validation des salles.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270221quipesdeclubsSeniorsgenres1redivLigueAURALieuconfirm@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270221
+DTEND;VALUE=DATE:20270222
+SUMMARY:🏆 Équipes de clubs Seniors genrées 1ère div. – Ligue AURA
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270227PassagedegradeUV3shiaiArtnium4parcdelArtire63122Ceyr@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270227
+DTEND;VALUE=DATE:20270228
+SUMMARY:🥋 Passage de grade UV3 (shiai)
+LOCATION:Arténium\, 4 parc de l'Artière\, 63122 Ceyrat
+DESCRIPTION:Grades : ceinture marron à 3e dan. Samedi : marron juniors/seniors/vétérans 8h00 ; noire juniors/seniors/vétérans et cadets 3 10h00 ; marron cadets 13h30. Inscription sur l'extranet 1 mois avant (5 € pour certaines UV) ; judogi blanc sans dossard. Pour l'option 2 de l'UV3\, la partie B se passe le dimanche avec les UV1 et UV2.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270227TournoivtransdElvenVannesLabelAElvenVannesBretagne@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270227
+DTEND;VALUE=DATE:20270228
+SUMMARY:🎖️ Tournoi vétérans d'Elven (Vannes) – Label A
+LOCATION:Elven\, Vannes (Bretagne)
+DESCRIPTION:Calendrier France Judo Vétérans 2026-2027\, communiqué à titre prévisionnel : les dates peuvent changer selon la validation des salles.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270301JujitsuInterdpartementalLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270301
+DTEND;VALUE=DATE:20270302
+SUMMARY:📅 Jujitsu – Inter-départemental
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270303TournoiLabelASeniorsquipesmixtesSainghinenMlantoisHa@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270303
+DTEND;VALUE=DATE:20270304
+SUMMARY:🥋 Tournoi Label A – Seniors équipes mixtes
+LOCATION:Sainghin-en-Mélantois (Hauts-de-France)
+DESCRIPTION:Tournoi labellisé. Ligue : Hauts-de-France.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270305Cadets1redivisionFranceLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270305
+DTEND;VALUE=DATE:20270307
+SUMMARY:🏆 Cadets 1ère division – France
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270306BenjaminsindividuelRhneLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270306
+DTEND;VALUE=DATE:20270307
+SUMMARY:🏆 Benjamins (individuel) – Rhône
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270306CoupejeunesarbitrescommissairessportifsMinimesRhneLi@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270306
+DTEND;VALUE=DATE:20270307
+SUMMARY:🟨 Coupe jeunes arbitres + commissaires sportifs Minimes – Rhône
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270307Cadets2me3medivisionRhneLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270307
+DTEND;VALUE=DATE:20270308
+SUMMARY:🏆 Cadets 2ème/3ème division – Rhône
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270308VtransInterdpartementalLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270308
+DTEND;VALUE=DATE:20270309
+SUMMARY:🎖️ Vétérans – Inter-départemental
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270309KataInterdpartementalLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270309
+DTEND;VALUE=DATE:20270310
+SUMMARY:📅 Kata – Inter-départemental
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270313CadetsEspoirsLigueAURALieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270313
+DTEND;VALUE=DATE:20270314
+SUMMARY:🏆 Cadets Espoirs – Ligue AURA
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270313InterclubsJCSaintPriestadressedugymnaseconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270313
+DTEND;VALUE=DATE:20270314
+SUMMARY:🤼 Interclubs
+LOCATION:JC Saint-Priest (adresse du gymnase à confirmer)
+DESCRIPTION:Lieu et horaires à confirmer. Combats debout pour tous · horaires et adresse du gymnase à confirmer
+END:VEVENT
+BEGIN:VEVENT
+UID:20270313TournoideFrancevtransparquipesmixtesOzoirlaFerrirele@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270313
+DTEND;VALUE=DATE:20270314
+SUMMARY:🎖️ Tournoi de France vétérans par équipes mixtes
+LOCATION:Ozoir-la-Ferrière (Île-de-France)
+DESCRIPTION:Calendrier France Judo Vétérans 2026-2027\, communiqué à titre prévisionnel : les dates peuvent changer selon la validation des salles.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270314Juniors1redivisionLigueAURALieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270314
+DTEND;VALUE=DATE:20270315
+SUMMARY:🏆 Juniors 1ère division – Ligue AURA
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270314TournoiLabelExcellenceSeniorsSaintRaphalProvenceAlpe@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270314
+DTEND;VALUE=DATE:20270315
+SUMMARY:⭐ Tournoi Label Excellence – Seniors
+LOCATION:Saint-Raphaël (Provence-Alpes-Côte d'Azur)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Provence-Alpes-Côte d'Azur.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270320CoupejeunesarbitrescommissairessportifsCadetsFranceL@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270320
+DTEND;VALUE=DATE:20270322
+SUMMARY:🟨 Coupe jeunes arbitres + commissaires sportifs Cadets – France
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270320InterclubsSallepolyvalentedelaPlaineroutedeMarennes6@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270320
+DTEND;VALUE=DATE:20270321
+SUMMARY:🤼 Interclubs
+LOCATION:Salle polyvalente de la Plaine\, route de Marennes\, 69360 Communay
+DESCRIPTION:Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h\, 11h\, 12h). Autres catégories : horaires à confirmer. Contact : Fabien Camuzet 06 74 94 41 98. Buvette\, buffet et tombola sur place.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270320InterclubsALCaluireadressedugymnaseconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270320
+DTEND;VALUE=DATE:20270321
+SUMMARY:🤼 Interclubs
+LOCATION:AL Caluire (adresse du gymnase à confirmer)
+DESCRIPTION:Lieu et horaires à confirmer. Combats debout pour tous · horaires et adresse du gymnase à confirmer
+END:VEVENT
+BEGIN:VEVENT
+UID:20270320MinimesindividuelFranceLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270320
+DTEND;VALUE=DATE:20270322
+SUMMARY:🏆 Minimes (individuel) – France
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270320PassagedegradeUV3shiaiDojoanglerueMolireetrueColette@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270320
+DTEND;VALUE=DATE:20270321
+SUMMARY:🥋 Passage de grade UV3 (shiai)
+LOCATION:Dojo\, angle rue Molière et rue Colette\, 42160 Andrézieux-Bouthéon
+DESCRIPTION:Grades : ceinture marron à 2e dan. Samedi : marron juniors/seniors/vétérans 8h00 ; noire juniors/seniors/vétérans et cadets 3 10h00 ; marron cadets 13h30. Inscription sur l'extranet 1 mois avant (5 € pour certaines UV) ; judogi blanc sans dossard. Pour l'option 2 de l'UV3\, la partie B se passe le dimanche avec les UV1 et UV2.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270321PassagedegradeUV1UV2katatechniqueDojoanglerueMoliree@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270321
+DTEND;VALUE=DATE:20270322
+SUMMARY:🥋 Passage de grade UV1 + UV2 (kata + technique)
+LOCATION:Dojo\, angle rue Molière et rue Colette\, 42160 Andrézieux-Bouthéon
+DESCRIPTION:Grades : ceinture marron à 3e dan. Dimanche : marron cadets 9h00 ; marron juniors/seniors/vétérans 13h00 (9h00 si le kata est présenté avec un cadet) ; noire juniors/seniors/vétérans et cadets 14h00. Inscription sur l'extranet 1 mois avant (5 € pour certaines UV) ; judogi blanc sans dossard.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270327Juniors1redivisionFranceLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270327
+DTEND;VALUE=DATE:20270329
+SUMMARY:🏆 Juniors 1ère division – France
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270327TournoiLabelASeniorsMarnavalGrandEst@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270327
+DTEND;VALUE=DATE:20270328
+SUMMARY:🥋 Tournoi Label A – Seniors
+LOCATION:Marnaval (Grand Est)
+DESCRIPTION:Tournoi labellisé. Ligue : Grand Est.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270328TournoivtransdeLormontMasterinternationaldesVignoble@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270328
+DTEND;VALUE=DATE:20270329
+SUMMARY:🎖️ Tournoi vétérans de Lormont (Master international des Vignobles du Médoc et du Bordelais) – Label Excellence
+LOCATION:Lormont (Nouvelle-Aquitaine)
+DESCRIPTION:Calendrier France Judo Vétérans 2026-2027\, communiqué à titre prévisionnel : les dates peuvent changer selon la validation des salles.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270403BenjaminsindividuelInterdpartementalLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270403
+DTEND;VALUE=DATE:20270404
+SUMMARY:🏆 Benjamins (individuel) – Inter-départemental
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270403CoupejeunesarbitrescommissairessportifsMinimesInterd@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270403
+DTEND;VALUE=DATE:20270404
+SUMMARY:🟨 Coupe jeunes arbitres + commissaires sportifs Minimes – Inter-départemental
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270403InterclubsALVaulxenVelinadressedugymnaseconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270403
+DTEND;VALUE=DATE:20270404
+SUMMARY:🤼 Interclubs
+LOCATION:AL Vaulx-en-Velin (adresse du gymnase à confirmer)
+DESCRIPTION:Lieu et horaires à confirmer. Combats debout pour tous · horaires et adresse du gymnase à confirmer
+END:VEVENT
+BEGIN:VEVENT
+UID:20270403InterclubsSallepolyvalenteboulevarddesAlles69420Ampu@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270403
+DTEND;VALUE=DATE:20270404
+SUMMARY:🤼 Interclubs
+LOCATION:Salle polyvalente\, boulevard des Allées\, 69420 Ampuis
+DESCRIPTION:Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h\, 11h\, 12h). Autres catégories : horaires à confirmer. Contact : Fabien Camuzet 06 74 94 41 98. Buvette\, buffet et tombola sur place.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270403TournoiLabelExcellenceSeniorsWasquehalHautsdeFrance@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270403
+DTEND;VALUE=DATE:20270404
+SUMMARY:⭐ Tournoi Label Excellence – Seniors
+LOCATION:Wasquehal (Hauts-de-France)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Hauts-de-France.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270403quipesdeclubsMinimesInterdpartementalLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270403
+DTEND;VALUE=DATE:20270404
+SUMMARY:🏆 Équipes de clubs Minimes – Inter-départemental
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270404InterclubsEJTMontagnyadressedugymnaseconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270404
+DTEND;VALUE=DATE:20270405
+SUMMARY:🤼 Interclubs
+LOCATION:EJT Montagny (adresse du gymnase à confirmer)
+DESCRIPTION:Lieu et horaires à confirmer. Combats debout pour tous · horaires et adresse du gymnase à confirmer
+END:VEVENT
+BEGIN:VEVENT
+UID:20270404TournoivtransdeSavoieLabelASavoieAuvergneRhneAlpes@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270404
+DTEND;VALUE=DATE:20270405
+SUMMARY:🎖️ Tournoi vétérans de Savoie – Label A
+LOCATION:Savoie (Auvergne-Rhône-Alpes)
+DESCRIPTION:Calendrier France Judo Vétérans 2026-2027\, communiqué à titre prévisionnel : les dates peuvent changer selon la validation des salles.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270404quipesdeclubsCadetsLigueAURALieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270404
+DTEND;VALUE=DATE:20270405
+SUMMARY:🏆 Équipes de clubs Cadets – Ligue AURA
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270404quipesmixtesSeniors2medivFranceLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270404
+DTEND;VALUE=DATE:20270405
+SUMMARY:🏆 Équipes mixtes Seniors 2ème div. – France
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270410quipesdeclubsJuniorsLigueAURALieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270410
+DTEND;VALUE=DATE:20270411
+SUMMARY:🏆 Équipes de clubs Juniors – Ligue AURA
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270411Seniors2medivisionRhneLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270411
+DTEND;VALUE=DATE:20270412
+SUMMARY:🏆 Seniors 2ème division – Rhône
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270411Seniors3medivisionRhneLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270411
+DTEND;VALUE=DATE:20270412
+SUMMARY:🏆 Seniors 3ème division – Rhône
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270411TournoiLabelExcellenceCadetsLeMansPaysdelaLoire@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270411
+DTEND;VALUE=DATE:20270412
+SUMMARY:⭐ Tournoi Label Excellence – Cadets
+LOCATION:Le Mans (Pays de la Loire)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Pays de la Loire.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270412StagesportifdpartementalBenjaminsMinimesCadetsLieuco@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270412
+DTEND;VALUE=DATE:20270415
+SUMMARY:🎓 Stage sportif départemental Benjamins-Minimes-Cadets
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026).
+END:VEVENT
+BEGIN:VEVENT
+UID:20270417MasterdeToursvtransLabelExcellenceToursCentreValdeLo@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270417
+DTEND;VALUE=DATE:20270418
+SUMMARY:🎖️ Master de Tours vétérans – Label Excellence
+LOCATION:Tours (Centre-Val de Loire)
+DESCRIPTION:Calendrier France Judo Vétérans 2026-2027\, communiqué à titre prévisionnel : les dates peuvent changer selon la validation des salles.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270417quipesdedpartementsMinimesFranceLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270417
+DTEND;VALUE=DATE:20270419
+SUMMARY:🏆 Équipes de départements Minimes – France
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270418TournoiLabelAMinimesMaubeugeHautsdeFrance@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270418
+DTEND;VALUE=DATE:20270419
+SUMMARY:🥋 Tournoi Label A – Minimes
+LOCATION:Maubeuge (Hauts-de-France)
+DESCRIPTION:Tournoi labellisé. Ligue : Hauts-de-France.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270419TournoiLabelACadetsMaubeugeHautsdeFrance@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270419
+DTEND;VALUE=DATE:20270420
+SUMMARY:🥋 Tournoi Label A – Cadets
+LOCATION:Maubeuge (Hauts-de-France)
+DESCRIPTION:Tournoi labellisé. Ligue : Hauts-de-France.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270425Seniors2medivisionLigueAURALieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270425
+DTEND;VALUE=DATE:20270426
+SUMMARY:🏆 Seniors 2ème division – Ligue AURA
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270425Seniors3medivisionLigueAURALieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270425
+DTEND;VALUE=DATE:20270426
+SUMMARY:🏆 Seniors 3ème division – Ligue AURA
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270425TournoiLabelACadetsespoirs1reanneBrtignysurOrgeledeF@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270425
+DTEND;VALUE=DATE:20270426
+SUMMARY:🥋 Tournoi Label A – Cadets espoirs (1re année)
+LOCATION:Brétigny-sur-Orge (Île-de-France)
+DESCRIPTION:Tournoi labellisé. Ligue : Île-de-France. La date indiquée dans le PDF porte l'année 2026 : lue comme 2027 (saison 2026-2027)\, à confirmer.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270501TournoivtransdeGrardmerLabelExcellenceGrardmerGrandE@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270501
+DTEND;VALUE=DATE:20270502
+SUMMARY:🎖️ Tournoi vétérans de Gérardmer – Label Excellence
+LOCATION:Gérardmer (Grand Est)
+DESCRIPTION:Calendrier France Judo Vétérans 2026-2027\, communiqué à titre prévisionnel : les dates peuvent changer selon la validation des salles.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270501quipesdeclubsCadetsFranceLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270501
+DTEND;VALUE=DATE:20270502
+SUMMARY:🏆 Équipes de clubs Cadets – France
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270502quipesdeclubsSeniorsgenres1redivFranceLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270502
+DTEND;VALUE=DATE:20270503
+SUMMARY:🏆 Équipes de clubs Seniors genrées 1ère div. – France
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270508MasterdArtagnanvtransAuchLabelExcellenceAuchOccitani@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270508
+DTEND;VALUE=DATE:20270509
+SUMMARY:🎖️ Master d'Artagnan vétérans\, Auch – Label Excellence
+LOCATION:Auch (Occitanie)
+DESCRIPTION:Calendrier France Judo Vétérans 2026-2027\, communiqué à titre prévisionnel : les dates peuvent changer selon la validation des salles.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270508TournoiLabelExcellenceJuniorsLaRochesurYonPaysdelaLo@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270508
+DTEND;VALUE=DATE:20270509
+SUMMARY:⭐ Tournoi Label Excellence – Juniors
+LOCATION:La Roche-sur-Yon (Pays de la Loire)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Pays de la Loire.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270515Cadets2me3medivisionLigueAURALieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270515
+DTEND;VALUE=DATE:20270516
+SUMMARY:🏆 Cadets 2ème/3ème division – Ligue AURA
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270515InterclubsALChaponostadressedugymnaseconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270515
+DTEND;VALUE=DATE:20270516
+SUMMARY:🤼 Interclubs
+LOCATION:AL Chaponost (adresse du gymnase à confirmer)
+DESCRIPTION:Lieu et horaires à confirmer. Combats debout pour tous · horaires et adresse du gymnase à confirmer
+END:VEVENT
+BEGIN:VEVENT
+UID:20270515TournoivtransdeProvenceLabelExcellenceProvenceProven@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270515
+DTEND;VALUE=DATE:20270516
+SUMMARY:🎖️ Tournoi vétérans de Provence – Label Excellence
+LOCATION:Provence (Provence-Alpes-Côte d'Azur)
+DESCRIPTION:Lieu et horaires à confirmer. Calendrier France Judo Vétérans 2026-2027\, communiqué à titre prévisionnel : les dates peuvent changer selon la validation des salles. Date à confirmer.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270515quipesdeclubsMinimesLigueAURALieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270515
+DTEND;VALUE=DATE:20270516
+SUMMARY:🏆 Équipes de clubs Minimes – Ligue AURA
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270515quipesmixtesSeniors1redivProLeagueFranceLieuconfirme@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270515
+DTEND;VALUE=DATE:20270516
+SUMMARY:🏆 Équipes mixtes Seniors 1ère div. Pro League – France
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270516TournoiLabelExcellenceCadetsComit92HautsdeSeineville@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270516
+DTEND;VALUE=DATE:20270517
+SUMMARY:⭐ Tournoi Label Excellence – Cadets
+LOCATION:Comité 92 (Hauts-de-Seine)\, ville à déterminer
+DESCRIPTION:Lieu et horaires à confirmer. Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Île-de-France.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270516TournoiLabelExcellenceSeniorsTergnierHautsdeFrance@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270516
+DTEND;VALUE=DATE:20270517
+SUMMARY:⭐ Tournoi Label Excellence – Seniors
+LOCATION:Tergnier (Hauts-de-France)
+DESCRIPTION:Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Hauts-de-France.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270522quipesdeclubsJuniorsFranceLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270522
+DTEND;VALUE=DATE:20270523
+SUMMARY:🏆 Équipes de clubs Juniors – France
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270523BenjaminsindividuelLigueAURALieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270523
+DTEND;VALUE=DATE:20270524
+SUMMARY:🏆 Benjamins (individuel) – Ligue AURA
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270523CoupejeunesarbitrescommissairessportifsMinimesLigueA@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270523
+DTEND;VALUE=DATE:20270524
+SUMMARY:🟨 Coupe jeunes arbitres + commissaires sportifs Minimes – Ligue AURA
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270523Seniors3medivisionFranceLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270523
+DTEND;VALUE=DATE:20270524
+SUMMARY:🏆 Seniors 3ème division – France
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270529Cadets2me3medivisionFranceLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270529
+DTEND;VALUE=DATE:20270531
+SUMMARY:🏆 Cadets 2ème/3ème division – France
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270529TournoidesVikingsvtransGonfrevillelOrcherLeHavreLabe@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270529
+DTEND;VALUE=DATE:20270530
+SUMMARY:🎖️ Tournoi des Vikings vétérans\, Gonfreville-l'Orcher (Le Havre) – Label A
+LOCATION:Gonfreville-l'Orcher\, Le Havre (Normandie)
+DESCRIPTION:Calendrier France Judo Vétérans 2026-2027\, communiqué à titre prévisionnel : les dates peuvent changer selon la validation des salles.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270530CadetsEspoirsFranceLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270530
+DTEND;VALUE=DATE:20270531
+SUMMARY:🏆 Cadets Espoirs – France
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270531JujitsuLigueAURALieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270531
+DTEND;VALUE=DATE:20270601
+SUMMARY:📅 Jujitsu – Ligue AURA
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270601KataLigueAURALieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270601
+DTEND;VALUE=DATE:20270602
+SUMMARY:📅 Kata – Ligue AURA
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270605Seniors2medivisionFranceLieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270605
+DTEND;VALUE=DATE:20270607
+SUMMARY:🏆 Seniors 2ème division – France
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
+END:VEVENT
+BEGIN:VEVENT
+UID:20270607VtransLigueAURALieuconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270607
+DTEND;VALUE=DATE:20270608
+SUMMARY:🎖️ Vétérans – Ligue AURA
+LOCATION:Lieu à confirmer
+DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270612ChampionnatsdeFrancevtransVillebonsurYvetteledeFranc@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270612
+DTEND;VALUE=DATE:20270614
+SUMMARY:🎖️ Championnats de France vétérans
+LOCATION:Villebon-sur-Yvette (Île-de-France)
+DESCRIPTION:Calendrier France Judo Vétérans 2026-2027\, communiqué à titre prévisionnel : les dates peuvent changer selon la validation des salles.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270612InterclubsACLAMMornantadressedugymnaseconfirmer@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270612
+DTEND;VALUE=DATE:20270613
+SUMMARY:🤼 Interclubs
+LOCATION:ACLAM Mornant (adresse du gymnase à confirmer)
+DESCRIPTION:Lieu et horaires à confirmer. Combats debout pour tous · horaires et adresse du gymnase à confirmer
+END:VEVENT
+BEGIN:VEVENT
+UID:20270619PassagedegradeUV3shiaiGymnaseintercommunal1060routed@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270619
+DTEND;VALUE=DATE:20270620
+SUMMARY:🥋 Passage de grade UV3 (shiai)
+LOCATION:Gymnase intercommunal\, 1060 route de Charlemagne\, 01380 Bâgé-Dommartin
+DESCRIPTION:Grades : ceinture marron à 2e dan. Samedi : marron juniors/seniors/vétérans 8h00 ; noire juniors/seniors/vétérans et cadets 3 10h00 ; marron cadets 13h30. Inscription sur l'extranet 1 mois avant (5 € pour certaines UV) ; judogi blanc sans dossard. Pour l'option 2 de l'UV3\, la partie B se passe le dimanche avec les UV1 et UV2.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270620PassagedegradeUV1UV2katatechniqueGymnaseintercommuna@jco-chandieu
+DTSTAMP:20261028T080000Z
+DTSTART;VALUE=DATE:20270620
+DTEND;VALUE=DATE:20270621
+SUMMARY:🥋 Passage de grade UV1 + UV2 (kata + technique)
+LOCATION:Gymnase intercommunal\, 1060 route de Charlemagne\, 01380 Bâgé-Dommartin
+DESCRIPTION:Grades : ceinture marron à 3e dan. Dimanche : marron cadets 9h00 ; marron juniors/seniors/vétérans 13h00 (9h00 si le kata est présenté avec un cadet) ; noire juniors/seniors/vétérans et cadets 14h00. Inscription sur l'extranet 1 mois avant (5 € pour certaines UV) ; judogi blanc sans dossard.
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,121 @@
+// =====================================================================
+//  LEXIQUE JAPONAIS / FRANÇAIS
+//  Chaque entrée : [terme japonais (en caractères latins), traduction, note facultative].
+//  Les traductions sont des usages courants du judo, rédigés pour l'appli : à faire relire.
+//  Pour ajouter un mot, ajoutez une ligne [ "mot", "traduction", "note" ] dans la bonne catégorie.
+// =====================================================================
+const LEXIQUE = [
+  { cat: "Arbitrage : commandements", mots: [
+    ["Hajime", "Commencez", "Lancé par l'arbitre au début du combat."],
+    ["Mate", "Attendez, stop", "Arrête le combat (écrit aussi « matte »). Les combattants restent en place."],
+    ["Sore-made", "C'est fini", "Annonce la fin du combat."],
+    ["Sono-mama", "Ne bougez plus", "Les combattants se figent."],
+    ["Yoshi", "Continuez, reprenez", "Reprise après sono-mama."],
+    ["Rei", "Salut", ""],
+    ["Hantei", "Décision", "Quand le temps est écoulé sans vainqueur, les arbitres décident."],
+    ["Maitte", "J'abandonne", "Le judoka tape deux fois (sur le tatami ou sur l'adversaire) ou le dit à voix haute."]
+  ]},
+  { cat: "Arbitrage : scores et sanctions", mots: [
+    ["Ippon", "Un point : victoire immédiate", ""],
+    ["Waza-ari", "Presque ippon", "Technique presque complète ; on gagne avec un waza-ari d'avance."],
+    ["Yuko", "Avantage inférieur au waza-ari", "Ancien score, supprimé du règlement international en 2017."],
+    ["Koka", "Petit avantage", "Ancien score, supprimé depuis longtemps."],
+    ["Kinza", "Avantage (règlement jeunes)", "Terme utilisé dans le règlement fédéral des jeunes, pas un mot du judo classique."],
+    ["Osaekomi", "Début de l'immobilisation", "Annoncé quand l'adversaire est tenu sur le dos."],
+    ["Toketa", "Fin de l'immobilisation", "L'adversaire s'est échappé."],
+    ["Shido", "Pénalité (avertissement)", "Judo négatif, fuite, saisie interdite."],
+    ["Hansoku-make", "Défaite par disqualification", "Faute grave ou dangereuse."],
+    ["Hikiwake", "Match nul", ""],
+    ["Fusen-gachi", "Victoire par forfait", "L'adversaire ne se présente pas."],
+    ["Kiken-gachi", "Victoire par abandon", "L'adversaire abandonne ou est blessé."],
+    ["Golden score", "Prolongation", "Mot anglais : le premier à marquer gagne."]
+  ]},
+  { cat: "Le dojo et les personnes", mots: [
+    ["Dojo", "Salle d'entraînement", "Littéralement « lieu où l'on étudie la voie »."],
+    ["Sensei", "Professeur", ""],
+    ["Judoka", "Pratiquant de judo", ""],
+    ["Judogi", "Tenue de judo", "Aussi appelée kimono en français."],
+    ["Obi", "Ceinture", ""],
+    ["Tatami", "Tapis du dojo", ""],
+    ["Tori", "Celui qui fait la technique", ""],
+    ["Uke", "Celui qui la reçoit", "Il attaque ou se laisse projeter pour que tori s'entraîne."],
+    ["Kyu", "Grade de ceinture de couleur", "Du blanc au marron."],
+    ["Dan", "Grade de ceinture noire", "1er dan, 2e dan, etc."],
+    ["Mudansha", "Judoka sans grade dan", ""],
+    ["Yudansha", "Judoka ceinture noire", ""]
+  ]},
+  { cat: "Entraînement et notions", mots: [
+    ["Randori", "Combat d'entraînement libre", ""],
+    ["Shiai", "Compétition", ""],
+    ["Kata", "Forme : enchaînement codifié", "Attention : « kata » est aussi l'épaule, selon le contexte."],
+    ["Uchi-komi", "Répétition d'une entrée de technique", "Sans projeter."],
+    ["Nage-komi", "Répétition avec projection", ""],
+    ["Kakari-geiko", "Attaques en série", "Entraînement : l'un attaque, l'autre se défend."],
+    ["Yaku-soku-geiko", "Entraînement convenu", "Les attaques sont annoncées entre partenaires."],
+    ["Ukemi", "Chutes", "Savoir tomber sans se blesser."],
+    ["Kumi-kata", "Saisie", "La façon de tenir le kimono de l'adversaire."],
+    ["Kuzushi", "Déséquilibre", "Premier temps de toute projection."],
+    ["Tsukuri", "Entrée, préparation", "Deuxième temps."],
+    ["Kake", "Réalisation, finition", "Troisième temps : la technique est faite."],
+    ["Tokui-waza", "Technique favorite", ""],
+    ["Atemi-waza", "Techniques de frappe", "Réservées aux katas et à la self-défense."]
+  ]},
+  { cat: "Familles de techniques", mots: [
+    ["Waza", "Technique", ""],
+    ["Nage-waza", "Techniques de projection", ""],
+    ["Tachi-waza", "Techniques debout", ""],
+    ["Ne-waza", "Techniques au sol", ""],
+    ["Katame-waza", "Techniques de contrôle", "Immobilisations, étranglements et clés."],
+    ["Te-waza", "Techniques de bras", ""],
+    ["Koshi-waza", "Techniques de hanche", ""],
+    ["Ashi-waza", "Techniques de jambe", ""],
+    ["Sutemi-waza", "Techniques de sacrifice", "On tombe avec l'adversaire."],
+    ["Osaekomi-waza", "Immobilisations", ""],
+    ["Shime-waza", "Étranglements", ""],
+    ["Kansetsu-waza", "Clés d'articulation (bras)", ""]
+  ]},
+  { cat: "Mots qu'on retrouve dans les noms de techniques", mots: [
+    ["Nage", "Projection", "Ippon-seoi-nage."],
+    ["Gari", "Fauchage", "Ko-uchi-gari."],
+    ["Barai / Harai", "Balayage", "De-ashi-barai, harai-goshi."],
+    ["Otoshi", "Chute (faire tomber)", "Tai-otoshi."],
+    ["Gaeshi", "Retournement, contre", "Tsubame-gaeshi."],
+    ["Guruma", "Roue", "Ashi-guruma, kata-guruma."],
+    ["Goshi", "Hanche", "O-goshi, uki-goshi."],
+    ["Makikomi", "Enroulement", "Soto-makikomi."],
+    ["Seoi", "Porter sur le dos", "Ippon-seoi-nage."],
+    ["Tsuri / Tsurikomi", "Soulever", "Tsurikomi-goshi."],
+    ["Gatame", "Blocage, immobilisation ou clé", "Hon-gesa-gatame."],
+    ["Jime", "Étranglement", "Hadaka-jime."],
+    ["Hishigi", "Clé (écraser, tordre)", "Ude-hishigi-juji-gatame."],
+    ["Garami", "Enroulement", "Ude-garami."],
+    ["Okuri", "Accompagné, glissé", "Okuri-ashi-barai."],
+    ["Kuzure", "Variante, dérivé", "Kuzure-kami-shiho-gatame."]
+  ]},
+  { cat: "Corps, directions et tailles", mots: [
+    ["Ashi", "Jambe, pied", ""],
+    ["Te", "Main", ""],
+    ["Ude", "Bras", ""],
+    ["Koshi", "Hanche, bassin", ""],
+    ["Kubi", "Cou", ""],
+    ["Eri", "Col", ""],
+    ["Sode", "Manche", ""],
+    ["Hiza", "Genou", ""],
+    ["Hara", "Ventre", ""],
+    ["Mata", "Cuisse", ""],
+    ["Kata (épaule)", "Épaule", "À ne pas confondre avec kata « forme »."],
+    ["Soto", "Extérieur", ""],
+    ["Uchi", "Intérieur", ""],
+    ["Ushiro", "Arrière", ""],
+    ["Yoko", "Côté", ""],
+    ["Kami", "Haut", ""],
+    ["Tate", "Longitudinal, à cheval", ""],
+    ["Gyaku", "Inversé", ""],
+    ["O", "Grand", "O-goshi, o-soto-gari."],
+    ["Ko", "Petit", "Ko-uchi-gari."]
+  ]},
+  { cat: "Nombres", mots: [
+    ["Ichi", "1", ""], ["Ni", "2", ""], ["San", "3", ""], ["Shi / Yon", "4", ""], ["Go", "5", ""],
+    ["Roku", "6", ""], ["Shichi / Nana", "7", ""], ["Hachi", "8", ""], ["Ku / Kyu", "9", ""], ["Ju", "10", ""]
+  ]}
+];

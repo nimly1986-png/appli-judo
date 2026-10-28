@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Pédibus</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body style="--accent: var(--bleu)">
+  <nav class="barre"><div class="barre-contenu"><a class="barre-accueil" href="accueil.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</a></div></nav>
+  <h1>🚸 Pédibus</h1>
+
+  <h2>Ajouter une annonce</h2>
+  <div class="formulaire">
+    <select id="type">
+      <option value="besoin">Besoin : je ne peux pas emmener mon enfant</option>
+      <option value="dispo">Disponibilité : je peux emmener des enfants</option>
+    </select>
+    <select id="jour">
+      <option>Lundi</option>
+      <option>Mardi</option>
+      <option>Mercredi</option>
+      <option>Jeudi</option>
+      <option>Vendredi</option>
+      <option>Samedi</option>
+    </select>
+    <input id="prenom" placeholder="Votre prénom">
+    <input id="nombre" type="number" min="1" value="1">
+    <button id="ajouter" class="bouton">Ajouter</button>
+  </div>
+  <p>Le nombre indique les enfants à emmener (besoin) ou les places disponibles.</p>
+
+  <h2>Besoins</h2>
+  <ul id="liste-besoins"></ul>
+
+  <h2>Disponibilités</h2>
+  <ul id="liste-dispos"></ul>
+
+  <a class="bouton" href="accueil.html">⬅ Retour à l'Accueil</a>
+
+  <script src="pedibus.js"></script>
+</body>
+</html>

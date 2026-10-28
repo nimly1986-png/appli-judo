@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Administrateur : inscriptions</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body style="--accent: var(--violet)">
+  <nav class="barre"><div class="barre-contenu"><a class="barre-accueil" href="accueil.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</a></div></nav>
+  <h1>📋 Inscriptions et compétitions</h1>
+  <p class="avertissement">
+    Espace administrateur, réservé au club. Version d'essai : cette page n'est pas encore protégée par un mot de passe,
+    et les données restent sur cet appareil.
+  </p>
+
+  <h2>Valider les inscriptions</h2>
+  <div class="formulaire">
+    <label>Judoka
+      <select id="choix"></select>
+    </label>
+  </div>
+  <p id="vide" class="message-vide" hidden>Aucune fiche : créez d'abord un judoka dans l'espace administrateur.</p>
+  <div id="liste-inscriptions"></div>
+
+  <h2>Ajouter une compétition</h2>
+  <p>Pour une compétition absente du calendrier (par exemple un tournoi vétérans).</p>
+  <div class="formulaire">
+    <input id="c-nom" placeholder="Nom (ex : Tournoi vétérans)" autocomplete="off">
+    <label>Date de début <input id="c-debut" type="date"></label>
+    <label>Date de fin (si plusieurs jours) <input id="c-fin" type="date"></label>
+    <input id="c-lieu" placeholder="Lieu (ville / département)" autocomplete="off">
+    <label>Pour quelles catégories ?
+      <span id="c-categories" class="cases-categories"></span>
+    </label>
+    <button id="c-ajouter" class="bouton" type="button">Ajouter la compétition</button>
+  </div>
+
+  <h2>Compétitions ajoutées</h2>
+  <div id="liste-ajoutees"></div>
+
+  <a class="bouton" href="admin-resultats.html">🥇 Saisir les résultats</a>
+  <a class="bouton secondaire" href="admin-fiches.html">👤 Fiches des judokas</a>
+  <a class="bouton secondaire" href="accueil.html">⬅ Retour à l'accueil</a>
+
+  <script src="judo-commun.js"></script>
+  <script src="competitions-data.js"></script>
+  <script src="competitions-commun.js"></script>
+  <script src="admin-agenda.js"></script>
+</body>
+</html>
