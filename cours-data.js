@@ -14,3 +14,17 @@ const COURS = [
   { jour: "Jeudi", debut: "18h", fin: "19h", nom: "Cours enfants", categories: ["Mini-Poussin", "Poussin", "Benjamin", "Minime", "Cadet"] },
   { jour: "Jeudi", debut: "19h", fin: "20h30", nom: "Cours adultes", categories: ["Junior", "Senior", "Vétéran"] }
 ];
+
+// =====================================================================
+//  TARIFS DES COURS (à compléter par le club : "montant: null" s'affiche "À confirmer")
+//  Chaque ligne : nom, categories concernées, montant (en euros par saison, ou null), details.
+//  Ne mettez que des montants officiels du club : cette page est publique.
+// =====================================================================
+const SAISON_TARIFS = "2026-2027";
+const TARIFS = [
+  { nom: "Baby judo", categories: ["Baby judo"], montant: null, details: "" },
+  { nom: "Enfants", categories: ["Mini-Poussin", "Poussin", "Benjamin", "Minime", "Cadet"], montant: null, details: "" },
+  { nom: "Adultes", categories: ["Junior", "Senior", "Vétéran"], montant: null, details: "" }
+];
+// Ce que le tarif comprend (licence, assurance...) et facilités de paiement : à renseigner par le club.
+const TARIFS_INFOS = [];

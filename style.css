@@ -658,3 +658,31 @@ body.accueil .pied a { color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.9); }
 .tableau-cours small { display: block; font-size: 12px; opacity: .8; }
 .tableau-cours tr.pour-moi td { background: color-mix(in srgb, var(--accent) 22%, transparent); }
 .tableau-cours tr.pas-pour-moi td { opacity: .5; }
+
+/* ----- Cours : tableau avec les jours en colonnes ----- */
+.tableau-grille td.heure { white-space: nowrap; font-weight: 700; }
+.tableau-grille td.cellule { padding: 6px; }
+.tableau-grille .cours-bloc { padding: 6px; border-radius: 10px; }
+.tableau-grille .cours-bloc strong { display: block; margin-bottom: 4px; }
+.tableau-grille .cours-bloc.pour-moi { background: color-mix(in srgb, var(--accent) 24%, transparent); }
+.tableau-grille .cours-bloc.pas-pour-moi { opacity: .45; }
+.tableau-grille td:first-child, .tableau-grille td:nth-child(2) { font-weight: inherit; }
+.tableau-grille td.heure { font-weight: 700; }
+.legende-cours { margin-top: 10px; }
+.tableau-grille td { white-space: normal; }
+.tableau-grille td.heure { white-space: nowrap; }
+.tableau-grille .pastille-cat { font-size: 12px; padding: 1px 6px; margin: 0 3px 3px 0; }
+.tableau-cours.tableau-grille td.cellule { white-space: normal; padding: 6px; }
+/* équipement : cases à cocher et boutons des demandes */
+.options input[type="radio"], .options input[type="checkbox"] { width: auto; flex: none; margin-right: 8px; }
+.options label { display: flex; align-items: center; font-weight: 500; }
+.demande { display: grid; gap: 6px; padding: 12px; margin: 8px 0; border: 1.5px solid var(--trait); border-radius: 12px; background: var(--surface); }
+.demande .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.demande .bouton-annuler { margin: 0; padding: 6px 14px; border-radius: 999px; }
+.formulaire .options { border: 0; padding: 0; margin: 4px 0; }
+.formulaire .options legend { font-weight: 700; margin-bottom: 6px; }
+.formulaire .options label { display: flex; flex-direction: row; align-items: center; gap: 10px; text-align: left; font-weight: 500; padding: 4px 0; }
+.formulaire .options input[type="radio"] { width: 22px; height: 22px; margin: 0; flex: none; }
+.tableau-cours.tableau-tarifs td { white-space: normal; }
+.tableau-tarifs td:first-child { white-space: nowrap; font-weight: 700; }
+.tableau-tarifs td:last-child { white-space: nowrap; font-weight: 700; }

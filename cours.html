@@ -4,22 +4,24 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
-  <title>Planning des cours</title>
+  <title>Cours : horaires et tarifs</title>
   <link rel="stylesheet" href="style.css">
   <script src="theme.js"></script>
 </head>
 <body style="--accent: var(--jaune)">
   <nav class="barre"><div class="barre-contenu"><a class="barre-accueil" href="accueil.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</a></div></nav>
-  <h1>Planning des cours</h1>
+  <h1>Cours : horaires et tarifs</h1>
   <div class="formulaire">
     <label>Voir les cours pour
       <select id="choix"></select>
     </label>
   </div>
+  <div id="onglets" class="chips" aria-label="Horaires ou tarifs"></div>
   <p id="resume" class="resume" aria-live="polite"></p>
   <div id="tableau"></div>
   <p class="avertissement">Les catégories d'âge de chaque cours sont à confirmer par le professeur. Horaires de la saison en cours.</p>
-  <a class="bouton" href="accueil.html">⬅ Retour à l'Accueil</a>
+  <a class="bouton" href="equipement.html">🥋 Kimono et équipement : pré-réservation</a>
+  <a class="bouton secondaire" href="accueil.html">⬅ Retour à l'Accueil</a>
 
   <script src="judo-commun.js"></script>
   <script src="competitions-data.js"></script>

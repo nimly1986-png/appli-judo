@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Équipement : kimono</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body style="--accent: var(--vert)">
+  <nav class="barre"><div class="barre-contenu"><a class="barre-accueil" href="accueil.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</a></div></nav>
+  <h1>🥋 Kimono et équipement</h1>
+  <p>Dites-nous si votre enfant aura besoin d'un kimono pour la saison <strong id="saison"></strong>. Le club pourra ainsi grouper les commandes et étaler les dépenses sur l'année.</p>
+  <p id="limite" class="avertissement" hidden></p>
+  <p class="avertissement">Ceci est une <strong>pré-réservation</strong> : elle ne vaut ni commande ni paiement. Le club vous confirme le prix et le moment du règlement.</p>
+
+  <form id="formulaire" class="formulaire">
+    <label id="zone-judoka" hidden>Judoka
+      <select id="judoka"></select>
+    </label>
+    <label id="zone-prenom">Prénom du judoka
+      <input id="prenom" type="text" maxlength="40" autocomplete="off" required>
+    </label>
+    <label>Taille actuelle (en cm)
+      <input id="taille" type="number" inputmode="numeric" min="70" max="210" placeholder="Ex. : 128" required>
+    </label>
+    <p id="conseil" class="petit" aria-live="polite"></p>
+    <fieldset class="options">
+      <legend>Besoin d'un kimono pour la saison suivante ?</legend>
+      <label><input type="radio" name="besoin" value="oui" required> Oui, je pré-réserve un kimono</label>
+      <label><input type="radio" name="besoin" value="peut-etre"> Peut-être, je ne sais pas encore</label>
+      <label><input type="radio" name="besoin" value="non"> Non, mon enfant en a déjà un</label>
+    </fieldset>
+    <label>Remarque (facultatif)
+      <input id="remarque" type="text" maxlength="120" placeholder="Ex. : kimono actuel trop petit">
+    </label>
+    <button class="bouton" type="submit">Enregistrer ma demande</button>
+  </form>
+
+  <div id="envoi" hidden>
+    <h2>Envoyer au club</h2>
+    <p id="envoi-texte"></p>
+    <a id="mail" class="bouton" href="#">✉️ Envoyer ma demande par e-mail</a>
+    <button id="copier" class="bouton secondaire" type="button">📋 Copier le message</button>
+    <p id="copie-etat" class="petit"></p>
+  </div>
+
+  <h2>Mes demandes sur cet appareil</h2>
+  <div id="liste"></div>
+  <p id="vide" class="message-vide">Aucune demande pour l'instant.</p>
+
+  <a class="bouton secondaire" href="cours.html">🕒 Horaires et tarifs</a>
+  <a class="bouton secondaire" href="accueil.html">⬅ Retour à l'accueil</a>
+
+  <script src="judo-commun.js"></script>
+  <script src="equipement-data.js"></script>
+  <script src="equipement.js"></script>
+</body>
+</html>
