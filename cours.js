@@ -4,7 +4,6 @@
 // =====================================================================
 const fiches = lireFiches();
 const zone = document.getElementById("tableau");
-const choix = document.getElementById("choix");
 const resume = document.getElementById("resume");
 let onglet = "horaires";
 
@@ -15,30 +14,15 @@ function anneesDe(nom) {
   return c.de <= 1900 ? "nés en " + c.a + " et avant" : (c.de === c.a ? "nés en " + c.a : "nés en " + c.de + "-" + c.a);
 }
 
-// options du menu : tous les cours, un judoka (s'il y a des fiches), ou une catégorie
-choix.appendChild(new Option("Tous les cours", "tous"));
-fiches.forEach(function (f) {
-  choix.appendChild(new Option(f.prenom + " " + f.nom + " (" + categoriesDuJudoka(f).join(" + ") + ")", "f" + f.id));
-});
-categories.map(function (c) { return c.nom; }).concat(["Vétéran"]).forEach(function (n) {
-  choix.appendChild(new Option("Catégorie : " + n + " (" + anneesDe(n) + ")", "c" + n));
-});
-let enCours = "tous";
-try {
-  const memo = Number(localStorage.getItem("judokaChoisi"));
-  if (fiches.some(function (f) { return f.id === memo; })) { enCours = "f" + memo; }
-} catch (e) {}
-if (enCours === "tous" && fiches.length > 0) { enCours = "f" + fiches[0].id; }   // sans choix mémorisé : le premier judoka
-choix.value = enCours;
-
+// Plus de menu : tous les cours sont affichés. Si une fiche judoka existe, ses cours sont mis en avant.
+function judokaCourant() {
+  let id = 0;
+  try { id = Number(localStorage.getItem("judokaChoisi")); } catch (e) {}
+  return fiches.find(function (f) { return f.id === id; }) || fiches[0] || null;
+}
 function categoriesChoisies() {
-  const v = choix.value;
-  if (v.charAt(0) === "f") {
-    const f = fiches.find(function (x) { return "f" + x.id === v; });
-    return f ? categoriesDuJudoka(f) : [];
-  }
-  if (v.charAt(0) === "c") { return [v.slice(1)]; }
-  return [];
+  const f = judokaCourant();
+  return f ? categoriesDuJudoka(f) : [];
 }
 function concerneCours(c, mes) { return c.categories.some(function (x) { return mes.includes(x); }); }
 
@@ -94,9 +78,9 @@ function dessinerHoraires(mes) {
   });
   zone.appendChild(leg);
 
-  if (!filtre) { resume.textContent = "Choisissez un judoka ou une catégorie pour voir ses cours."; }
+  if (!filtre) { resume.textContent = ""; }
   else if (miens.length === 0) { resume.textContent = "Aucun cours prévu pour cette catégorie : voir le professeur."; }
-  else { resume.textContent = "Cours concernés : " + miens.join(" · "); }
+  else { resume.textContent = judokaCourant().prenom + " : " + miens.join(" · "); }
 }
 
 // ---------- Onglet Tarifs ----------
@@ -146,9 +130,9 @@ function dessinerTarifs(mes) {
   if (TARIFS.every(function (t) { return t.montant === null || t.montant === undefined; })) {
     zone.appendChild(creer("p", "avertissement", "Les tarifs de la saison seront publiés prochainement par le club."));
   }
-  if (!filtre) { resume.textContent = "Choisissez un judoka ou une catégorie pour voir son tarif."; }
+  if (!filtre) { resume.textContent = ""; }
   else if (!monTarif) { resume.textContent = "Aucun tarif défini pour cette catégorie : voir le club."; }
-  else { resume.textContent = "Tarif concerné : " + monTarif.nom + " — " + (monTarif.montant === null || monTarif.montant === undefined ? "à confirmer" : monTarif.montant + " €"); }
+  else { resume.textContent = judokaCourant().prenom + " : tarif " + monTarif.nom + " — " + (monTarif.montant === null || monTarif.montant === undefined ? "à confirmer" : monTarif.montant + " €"); }
 }
 
 function dessinerOnglets() {
@@ -167,8 +151,4 @@ function afficher() {
   const mes = categoriesChoisies();
   if (onglet === "horaires") { dessinerHoraires(mes); } else { dessinerTarifs(mes); }
 }
-choix.addEventListener("change", function () {
-  if (choix.value.charAt(0) === "f") { try { localStorage.setItem("judokaChoisi", choix.value.slice(1)); } catch (e) {} }
-  afficher();
-});
 afficher();

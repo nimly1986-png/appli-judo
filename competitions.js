@@ -18,8 +18,8 @@ let serie = "tous";
 try { serie = localStorage.getItem("serieCompetitions") || "tous"; } catch (e) {}
 if (serie !== "tous" && !SERIES.some(function (s) { return s.cle === serie; })) { serie = "tous"; }
 
-let niveau = "tous", vue = "liste", moisAffiche = aujourdhuiISO().slice(0, 7), jourChoisi = null;
-try { niveau = localStorage.getItem("niveauCompetitions") || "tous"; vue = localStorage.getItem("vueCompetitions") || "liste"; } catch (e) {}
+let niveau = "tous", vue = "mois", moisAffiche = aujourdhuiISO().slice(0, 7), jourChoisi = null;
+try { niveau = localStorage.getItem("niveauCompetitions") || "tous"; } catch (e) {}
 if (niveau !== "tous" && !NIVEAUX.some(function (n) { return n.cle === niveau; })) { niveau = "tous"; }
 
 function visible(c, fiche, voirTout, ignorerNiveau) {
@@ -76,16 +76,6 @@ function dessinerNiveaux(fiche, voirTout) {
     afficher();
   });
 }
-function dessinerVues() {
-  const zone = document.getElementById("vues");
-  zone.innerHTML = "";
-  [["liste", "📋 Liste"], ["mois", "🗓️ Calendrier"]].forEach(function (v) {
-    const b = creer("button", "chip" + (v[0] === vue ? " actif" : ""), v[1]);
-    b.type = "button"; b.style.setProperty("--c", "var(--texte)");
-    b.addEventListener("click", function () { vue = v[0]; try { localStorage.setItem("vueCompetitions", vue); } catch (e) {} afficher(); });
-    zone.appendChild(b);
-  });
-}
 function jouerDansEvenement(c, iso) { return c.debut <= iso && iso <= (c.fin || c.debut); }
 function dessinerMois(liste, fiche) {
   const zone = document.getElementById("mois");
@@ -119,7 +109,8 @@ function dessinerMois(liste, fiche) {
   }
   zone.appendChild(grille);
   const du = jourChoisi ? liste.filter(function (c) { return jouerDansEvenement(c, jourChoisi); })
-    : liste.filter(function (c) { return c.debut.slice(0, 7) === moisAffiche || (c.fin && c.fin.slice(0, 7) === moisAffiche); });
+    : liste.filter(function (c) { return c.debut.slice(0, 7) === moisAffiche || (c.fin && c.fin.slice(0, 7) === moisAffiche); })
+        .filter(function (c) { return moisAffiche !== aujourdhuiISO().slice(0, 7) || !estPassee(c); });   // mois en cours : seulement ce qui reste à venir
   zone.appendChild(creer("h2", "titre-passees", jourChoisi ? texteDate({ debut: jourChoisi }) : "Ce mois-ci"));
   if (du.length === 0) { zone.appendChild(creer("p", "message-vide", "Rien ce mois-ci avec ces filtres.")); }
   else { const ul = creer("ul"); du.forEach(function (c) { ul.appendChild(creerCarteCompetition(c, fiche, false)); }); zone.appendChild(ul); }
@@ -131,7 +122,6 @@ function afficher() {
   const voirTout = caseToutes.checked || !fiche;
   dessinerSeries(fiche, voirTout);
   dessinerNiveaux(fiche, voirTout);
-  dessinerVues();
   const info = SERIES.find(function (s) { return s.cle === serie; });
   const zoneNote = document.getElementById("note-serie");
   zoneNote.innerHTML = "";
