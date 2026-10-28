@@ -177,7 +177,7 @@ const competitions = [
     "debut": "2026-10-10",
     "fin": null,
     "lieu": "Espace Jean Monnet, route de Ternay, 69360 Sérézin-du-Rhône",
-    "infos": "Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h, 11h, 12h). Autres catégories : horaires à confirmer. Contact : Norbert Butin 07 82 70 63 03. Buvette, buffet et tombola sur place.",
+    "infos": "Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h, 11h, 12h). Autres catégories : horaires à confirmer. Contact : Norbert Butin (coordonnées sur le flyer du comité). Buvette, buffet et tombola sur place.",
     "categories": [
       "Mini-Poussin",
       "Poussin",
@@ -589,7 +589,7 @@ const competitions = [
     "debut": "2026-11-14",
     "fin": null,
     "lieu": "Gymnase des Taillis, avenue des Taillis, 69960 Corbas (UJ Rhône)",
-    "infos": "Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h, 11h, 12h). Autres catégories : horaires à confirmer. Contact : Alain L'Herbette 06 82 58 16 24. Buvette, buffet et tombola sur place.",
+    "infos": "Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h, 11h, 12h). Autres catégories : horaires à confirmer. Contact : Alain L'Herbette (coordonnées sur le flyer du comité). Buvette, buffet et tombola sur place.",
     "categories": [
       "Mini-Poussin",
       "Poussin",
@@ -869,7 +869,7 @@ const competitions = [
     "debut": "2026-12-05",
     "fin": null,
     "lieu": "Gymnase Deslyres, rue du Stade, 69780 Saint-Pierre-de-Chandieu (notre club)",
-    "infos": "Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h, 11h, 12h). Autres catégories : horaires à confirmer. Contact : Fabien Camuzet 06 74 94 41 98. Buvette, buffet et tombola sur place.",
+    "infos": "Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h, 11h, 12h). Autres catégories : horaires à confirmer. Contact : Fabien Camuzet (coordonnées sur le flyer du comité). Buvette, buffet et tombola sur place.",
     "categories": [
       "Baby judo",
       "Mini-Poussin",
@@ -1391,7 +1391,7 @@ const competitions = [
     "debut": "2027-02-06",
     "fin": null,
     "lieu": "Complexe sportif, rue Jean Rigaud, 69130 Écully",
-    "infos": "Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h, 11h, 12h). Autres catégories : horaires à confirmer. Contact : Salvatore Amico 06 85 60 13 51. Buvette, buffet et tombola sur place.",
+    "infos": "Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h, 11h, 12h). Autres catégories : horaires à confirmer. Contact : Salvatore Amico (coordonnées sur le flyer du comité). Buvette, buffet et tombola sur place.",
     "categories": [
       "Mini-Poussin",
       "Poussin",
@@ -1827,7 +1827,7 @@ const competitions = [
     "debut": "2027-03-20",
     "fin": null,
     "lieu": "Salle polyvalente de la Plaine, route de Marennes, 69360 Communay",
-    "infos": "Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h, 11h, 12h). Autres catégories : horaires à confirmer. Contact : Fabien Camuzet 06 74 94 41 98. Buvette, buffet et tombola sur place.",
+    "infos": "Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h, 11h, 12h). Autres catégories : horaires à confirmer. Contact : Fabien Camuzet (coordonnées sur le flyer du comité). Buvette, buffet et tombola sur place.",
     "categories": [
       "Baby judo",
       "Mini-Poussin",
@@ -1991,7 +1991,7 @@ const competitions = [
     "debut": "2027-04-03",
     "fin": null,
     "lieu": "Salle polyvalente, boulevard des Allées, 69420 Ampuis",
-    "infos": "Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h, 11h, 12h). Autres catégories : horaires à confirmer. Contact : Fabien Camuzet 06 74 94 41 98. Buvette, buffet et tombola sur place.",
+    "infos": "Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h, 11h, 12h). Autres catégories : horaires à confirmer. Contact : Fabien Camuzet (coordonnées sur le flyer du comité). Buvette, buffet et tombola sur place.",
     "categories": [
       "Baby judo",
       "Mini-Poussin",
