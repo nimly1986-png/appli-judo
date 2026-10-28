@@ -12,7 +12,14 @@
   <h1>🥋 Kimono et équipement</h1>
   <p>Dites-nous si votre enfant aura besoin d'un kimono pour la saison <strong id="saison"></strong>. Le club pourra ainsi grouper les commandes et étaler les dépenses sur l'année.</p>
   <p id="limite" class="avertissement" hidden></p>
-  <p class="avertissement">Ceci est une <strong>pré-réservation</strong> : elle ne vaut ni commande ni paiement. Le club vous confirme le prix et le moment du règlement.</p>
+  <p class="avertissement">Ceci est une <strong>pré-réservation</strong> : elle ne vaut ni commande ni paiement. Le club vous confirme le prix et le moment du règlement. Prix des kimonos : voir <a href="cours.html">Horaires et tarifs</a>.</p>
+
+  <h2>Survêtements du club</h2>
+  <p>Il y a quelques années, nous avons fait des survêtements avec le logo du club. Il nous reste quelques tailles, à ces tarifs :</p>
+  <div class="tableau-conteneur"><table class="tableau-cours tableau-tarifs"><thead><tr><th>Taille</th><th>Public</th><th>Tarif</th></tr></thead><tbody id="survetements"></tbody></table></div>
+  <p class="petit">Stock limité : la pré-réservation ne garantit pas la disponibilité de la taille.</p>
+
+  <h2>Ma demande</h2>
 
   <form id="formulaire" class="formulaire">
     <label id="zone-judoka" hidden>Judoka
@@ -31,6 +38,9 @@
       <label><input type="radio" name="besoin" value="peut-etre"> Peut-être, je ne sais pas encore</label>
       <label><input type="radio" name="besoin" value="non"> Non, mon enfant en a déjà un</label>
     </fieldset>
+    <label>Survêtement du club (facultatif)
+      <select id="survetement"><option value="">Pas de survêtement</option></select>
+    </label>
     <label>Remarque (facultatif)
       <input id="remarque" type="text" maxlength="120" placeholder="Ex. : kimono actuel trop petit">
     </label>

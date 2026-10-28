@@ -686,3 +686,8 @@ body.accueil .pied a { color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.9); }
 .tableau-cours.tableau-tarifs td { white-space: normal; }
 .tableau-tarifs td:first-child { white-space: nowrap; font-weight: 700; }
 .tableau-tarifs td:last-child { white-space: nowrap; font-weight: 700; }
+.tableau-tarifs td:nth-child(3) { white-space: nowrap; }
+.tableau-tarifs td:nth-child(2) { white-space: normal; font-weight: 500; }
+.tableau-kimonos { font-size: 13px; }
+.tableau-kimonos th, .tableau-kimonos td { padding: 8px 5px; }
+.tableau-kimonos td:nth-child(3), .tableau-kimonos td:last-child { white-space: nowrap; }

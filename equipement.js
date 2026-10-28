@@ -21,6 +21,17 @@ function lire() { try { return JSON.parse(localStorage.getItem("equipement")) ||
 function ecrire(l) { try { localStorage.setItem("equipement", JSON.stringify(l)); } catch (e) {} }
 const LIBELLES = { oui: "Oui, kimono à pré-réserver", "peut-etre": "Peut-être", non: "Non" };
 
+// tableau et choix des survêtements
+SURVETEMENTS.forEach(function (s) {
+  const tr = creer("tr");
+  tr.appendChild(creer("td", "", s.taille)); tr.appendChild(creer("td", "", s.public)); tr.appendChild(creer("td", "", s.prix + " €"));
+  document.getElementById("survetements").appendChild(tr);
+});
+TAILLES_SURVETEMENT.forEach(function (t) {
+  const adulte = ["M", "L", "XL", "XXL"].includes(t);
+  document.getElementById("survetement").appendChild(new Option(t + " (" + (adulte ? 25 : 15) + " €)", t));
+});
+
 // choix d'un judoka existant (fiches) ou saisie libre du prénom
 const menu = document.getElementById("judoka");
 if (fiches.length > 0) {
@@ -59,7 +70,7 @@ function message(d) {
   return "Pré-réservation kimono " + SAISON_SUIVANTE + "\n" +
     "Prénom : " + d.prenom + "\n" +
     "Taille actuelle : " + d.taille + " cm (taille indicative : " + (conseil(d.taille).match(/: (\d+)/) || [, "?"])[1] + ")\n" +
-    "Besoin : " + LIBELLES[d.besoin] + (d.remarque ? "\nRemarque : " + d.remarque : "") + "\n" +
+    "Besoin : " + LIBELLES[d.besoin] + (d.survetement ? "\nSurvêtement : taille " + d.survetement : "") + (d.remarque ? "\nRemarque : " + d.remarque : "") + "\n" +
     "Envoyé depuis l'application du JCO Chandieu";
 }
 
@@ -89,7 +100,7 @@ function afficher() {
   document.getElementById("vide").hidden = l.length > 0;
   l.forEach(function (d) {
     const c = creer("div", "demande");
-    c.appendChild(creer("p", "", d.prenom + " · " + d.taille + " cm · " + LIBELLES[d.besoin] + " (saison " + d.saison + ")"));
+    c.appendChild(creer("p", "", d.prenom + " · " + d.taille + " cm · " + LIBELLES[d.besoin] + (d.survetement ? " · survêtement " + d.survetement : "") + " (saison " + d.saison + ")"));
     if (d.remarque) { c.appendChild(creer("small", "", d.remarque)); }
     const renvoi = creer("button", "bouton-annuler", "Envoyer");
     renvoi.type = "button";
@@ -114,7 +125,7 @@ formulaire.addEventListener("submit", function (e) {
   const taille = Number(document.getElementById("taille").value);
   const besoin = (formulaire.querySelector('input[name="besoin"]:checked') || {}).value;
   if (!prenom || !taille || !besoin) { return; }
-  const d = { id: Date.now(), prenom: prenom, taille: taille, besoin: besoin, remarque: document.getElementById("remarque").value.trim(), saison: SAISON_SUIVANTE };
+  const d = { id: Date.now(), prenom: prenom, taille: taille, besoin: besoin, survetement: document.getElementById("survetement").value, remarque: document.getElementById("remarque").value.trim(), saison: SAISON_SUIVANTE };
   const l = lire();
   l.push(d);
   ecrire(l);
