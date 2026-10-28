@@ -54,7 +54,7 @@ function dessinerHoraires() {
       b.style.top = ((enMinutes(c.debut) - debut) / 60 * HAUTEUR + 1) + "px";
       b.style.height = ((enMinutes(c.fin) - enMinutes(c.debut)) / 60 * HAUTEUR - 2) + "px";
       b.style.background = couleurDe(c.nom, noms);
-      b.appendChild(creer("strong", "", nomCourt(c.nom)));
+      b.appendChild(creer("strong", "", c.court || nomCourt(c.nom)));
       b.appendChild(creer("small", "", c.debut + "–" + c.fin));
       b.title = c.nom + " " + c.jour + " " + c.debut + "–" + c.fin;
       col.appendChild(b);
@@ -76,27 +76,23 @@ function dessinerHoraires() {
     const quand = [];
     lignes.forEach(function (c) { quand.push(c.jour + " " + c.debut + "–" + c.fin); });
     t.appendChild(creer("p", "petit", quand.join(" · ")));
-    t.appendChild(creer("p", "petit", lignes[0].categories.map(function (n) { return n + " (" + anneesDe(n) + ")"; }).join(", ")));
+    t.appendChild(creer("p", "petit", lignes[0].public));
     p.appendChild(t);
     leg.appendChild(p);
   });
   zone.appendChild(leg);
-  zone.appendChild(creer("p", "avertissement", "Les catégories d'âge de chaque cours sont à confirmer par le professeur. Horaires de la saison en cours."));
 }
 
 // ---------- Onglet Tarifs ----------
 function dessinerTarifs() {
   const table = creer("table", "tableau-cours tableau-tarifs");
   const tete = creer("tr");
-  ["Cours", "Catégories", "Tarif " + SAISON_TARIFS].forEach(function (t) { tete.appendChild(creer("th", "", t)); });
+  ["Cours", "Tarif " + SAISON_TARIFS].forEach(function (t) { tete.appendChild(creer("th", "", t)); });
   table.appendChild(creer("thead")).appendChild(tete);
   const corps = creer("tbody");
   TARIFS.forEach(function (t) {
     const tr = creer("tr");
-    tr.appendChild(creer("td", "", t.nom));
-    const tdc = creer("td", "pour-qui");
-    t.categories.forEach(function (n) { tdc.appendChild(creer("span", "pastille-cat", n)); });
-    tr.appendChild(tdc);
+    const tdn = creer("td", "", t.nom); tdn.appendChild(creer("small", "", t.public)); tr.appendChild(tdn);
     const tdm = creer("td", "", t.montant === null || t.montant === undefined ? "À confirmer" : t.montant + " €");
     if (t.details) { tdm.appendChild(creer("small", "", t.details)); }
     tr.appendChild(tdm);

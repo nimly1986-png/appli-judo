@@ -708,3 +708,7 @@ body.accueil .pied a { color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.9); }
 .legende-ligne { display: flex; gap: 10px; align-items: flex-start; margin: 10px 0; }
 .legende-ligne p { margin: 2px 0; }
 .legende-point { flex: none; width: 14px; height: 14px; margin-top: 3px; border-radius: 50%; }
+/* tarifs des cours : 2 colonnes (cours + prix), le premier texte peut passer à la ligne */
+.tableau-cours.tableau-tarifs:not(.tableau-kimonos) td:first-child { white-space: normal; }
+.tableau-cours.tableau-tarifs:not(.tableau-kimonos) td:last-child { white-space: nowrap; text-align: right; }
+.tableau-cours.tableau-tarifs:not(.tableau-kimonos) th:last-child { text-align: right; }
