@@ -8,8 +8,14 @@ const TYPES_INFO = {
   resultat: { nom: "Résultat", couleur: "var(--vert)" },
   important: { nom: "Important", couleur: "var(--orange)" }
 };
-function lireInfos() {
+// Infos locales : essais saisis sur CET appareil seulement (page "Gérer les infos").
+function lireInfosLocales() {
   try { return JSON.parse(localStorage.getItem("infos")) || []; } catch (e) { return []; }
+}
+// Infos du club (fichier infos-data.js, identiques pour tous) + essais locaux de cet appareil.
+function lireInfos() {
+  const club = typeof INFOS_CLUB !== "undefined" ? INFOS_CLUB : [];
+  return club.concat(lireInfosLocales());
 }
 function enregistrerInfos(liste) { localStorage.setItem("infos", JSON.stringify(liste)); }
 // les plus récentes d'abord

@@ -11,8 +11,9 @@
   <nav class="barre"><div class="barre-contenu"><a class="barre-accueil" href="accueil.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</a></div></nav>
   <h1>Infos du club</h1>
   <p class="avertissement">
-    Espace administrateur. Version d'essai : pas encore de mot de passe, données enregistrées sur cet appareil.
-    Les infos ajoutées ici défilent sur la page d'accueil.
+    Espace administrateur (version d'essai : pas encore de mot de passe).
+    Une info ajoutée ici n'apparaît que sur cet appareil. Pour que TOUS les parents la voient,
+    copiez la ligne proposée après l'ajout dans le fichier infos-data.js sur GitHub.
   </p>
 
   <form id="formulaire" class="formulaire">
@@ -26,8 +27,16 @@
     <label>Message (court, une ou deux phrases)
       <input id="texte" type="text" maxlength="160" placeholder="Ex. : Pas d'entraînement jeudi, salle fermée" required>
     </label>
-    <button class="bouton" type="submit">Ajouter au fil d'info</button>
+    <button class="bouton" type="submit">Préparer l'info</button>
   </form>
+
+  <div id="publier" class="formulaire" hidden>
+    <label>Ligne à copier dans infos-data.js (pour tous les parents)
+      <textarea id="ligne" rows="3" readonly></textarea>
+    </label>
+    <button id="copier" class="bouton secondaire" type="button">📋 Copier la ligne</button>
+    <p class="petit" id="copie-etat"></p>
+  </div>
 
   <h2>Infos publiées</h2>
   <div id="liste"></div>
@@ -36,6 +45,7 @@
   <button id="exemples" class="bouton secondaire" type="button">Ajouter des exemples (pour essayer)</button>
   <a class="bouton secondaire" href="infos.html">Voir la page des infos</a>
 
+  <script src="infos-data.js"></script>
   <script src="infos-commun.js"></script>
   <script src="admin-infos.js"></script>
 </body>

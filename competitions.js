@@ -182,3 +182,21 @@ if (fiches.length === 0) {
 caseToutes.addEventListener("change", afficher);
 caseAura.addEventListener("change", afficher);
 afficher();
+
+// ----- Abonnement à l'agenda : le fichier competitions.ics est publié avec le site -----
+(function () {
+  const adresse = new URL("competitions.ics", location.href).href;
+  const webcal = adresse.replace(/^https?:/, "webcal:");
+  const enLocal = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || location.protocol === "file:";
+  document.getElementById("abo-local").hidden = !enLocal;
+  document.getElementById("abo-liens").hidden = enLocal;
+  document.getElementById("abo-google").href = "https://calendar.google.com/calendar/r?cid=" + webcal;
+  document.getElementById("abo-apple").href = webcal;
+  document.getElementById("abo-copie").addEventListener("click", function () {
+    const etat = document.getElementById("abo-etat");
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(adresse).then(function () { etat.textContent = "Lien copié."; },
+        function () { etat.textContent = "Copie impossible : " + adresse; });
+    } else { etat.textContent = "Copiez ce lien : " + adresse; }
+  });
+})();
