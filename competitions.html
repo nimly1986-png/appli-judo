@@ -12,32 +12,17 @@
   <h1>🏆 Compétitions</h1>
   <p id="bandeau-date" class="avertissement" hidden></p>
 
-  <p id="sans-fiche" class="avertissement" hidden>
-    Aucune fiche judoka pour le moment : toutes les compétitions sont affichées.
-    Dès que l'administrateur aura rempli la fiche, seules celles de la catégorie du judoka apparaîtront.
-  </p>
-
-  <div id="zone-choix" class="formulaire" hidden>
-    <label>Judoka
-      <select id="choix"></select>
-    </label>
-  </div>
-
-  <div class="filtres"><div id="series"></div><div id="niveaux"></div></div>
+  <div class="filtres"><div id="qui"></div><div id="series"></div><div id="niveaux"></div></div>
   <p id="resume" class="resume"></p>
-  <div class="options">
-    <label><input type="checkbox" id="toutes"> Voir toutes les catégories</label>
-    <label><input type="checkbox" id="aura"> Seulement la région (Auvergne-Rhône-Alpes)</label>
-  </div>
   <div id="note-serie"></div>
-  <button type="button" id="export" class="bouton secondaire">📆 Ajouter ces compétitions à mon agenda (.ics)</button>
   <div id="mois"></div>
 
   <div id="liste"></div>
 
   <details class="accordeon" id="abonnement">
     <summary>📲 Recevoir ces dates dans mon agenda</summary>
-    <p>Un abonnement garde votre agenda à jour tout seul quand le club change une date.</p>
+    <p>Abonnez-vous pour recevoir <strong>toutes</strong> les compétitions et événements du club, mis à jour automatiquement quand une date change.</p>
+    <p class="petit">Pour n'ajouter que certaines compétitions : choisissez une catégorie ou un judoka dans les menus, puis touchez « Ajouter à mon agenda » sur chaque compétition.</p>
     <p id="abo-local" class="avertissement" hidden>Disponible une fois le site en ligne (pas sur cet ordinateur en test).</p>
     <div id="abo-liens">
       <a class="bouton secondaire" id="abo-google" href="#" target="_blank" rel="noopener">Google Agenda</a>

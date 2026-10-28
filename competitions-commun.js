@@ -163,7 +163,7 @@ function enregistrerCases(fiche, cases) {
 }
 
 // ----- Une carte de compétition -----
-function creerCarteCompetition(c, fiche, avecChecklist) {
+function creerCarteCompetition(c, fiche, avecChecklist, avecAgenda) {
   const li = creer("li", "competition" + (estPassee(c) ? " passee" : ""));
   const jours = enJours(c.debut);
   const badge = creer("div", "date-badge");
@@ -189,7 +189,7 @@ function creerCarteCompetition(c, fiche, avecChecklist) {
   } else {
     corps.appendChild(creer("p", "compte" + (jours <= 14 ? " urgent" : ""), "Dans " + jours + (jours > 1 ? " jours" : " jour")));
   }
-  if (!estPassee(c)) {
+  if ((fiche || avecAgenda) && !estPassee(c)) {      // sur la page Compétitions : seulement si une catégorie ou une fiche est choisie
     const bAgenda = creer("button", "bouton-resultats", "📆 Ajouter à mon agenda");
     bAgenda.type = "button";
     bAgenda.addEventListener("click", function () { telechargerICS([c], "competition-" + c.debut + ".ics"); });

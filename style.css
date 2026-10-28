@@ -691,3 +691,20 @@ body.accueil .pied a { color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.9); }
 .tableau-kimonos { font-size: 13px; }
 .tableau-kimonos th, .tableau-kimonos td { padding: 8px 5px; }
 .tableau-kimonos td:nth-child(3), .tableau-kimonos td:last-child { white-space: nowrap; }
+
+/* ----- Calendrier de la semaine (page Cours) ----- */
+.semaine { border: 1px solid var(--trait); border-radius: 14px; background: var(--surface); overflow: hidden; }
+.semaine-tete { display: grid; grid-template-columns: 34px repeat(7, 1fr); border-bottom: 1px solid var(--trait); }
+.semaine-tete span { padding: 8px 0; text-align: center; font-size: 12px; font-weight: 700; color: var(--accent); font-family: var(--police-titre); }
+.semaine-corps { position: relative; display: grid; grid-template-columns: 34px repeat(7, 1fr); }
+.semaine-heures { position: relative; }
+.semaine-heures span { position: absolute; right: 4px; transform: translateY(-50%); font-size: 11px; opacity: .65; }
+.semaine-heures span:first-child { transform: none; }
+.semaine-jour { position: relative; border-left: 1px solid color-mix(in srgb, var(--texte) 12%, transparent); }
+.semaine-jour i { position: absolute; left: 0; right: 0; border-top: 1px solid color-mix(in srgb, var(--texte) 10%, transparent); }
+.semaine-cours { position: absolute; left: 2px; right: 2px; padding: 3px 2px; border-radius: 8px; color: #fff; overflow: hidden; text-align: center; line-height: 1.2; box-shadow: 0 1px 0 rgba(0,0,0,.25); }
+.semaine-cours strong { display: block; font-size: 11px; }
+.semaine-cours small { display: block; font-size: 10px; opacity: .95; }
+.legende-ligne { display: flex; gap: 10px; align-items: flex-start; margin: 10px 0; }
+.legende-ligne p { margin: 2px 0; }
+.legende-point { flex: none; width: 14px; height: 14px; margin-top: 3px; border-radius: 50%; }

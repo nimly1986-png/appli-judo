@@ -1,10 +1,11 @@
 // =====================================================================
-//  PAGE "COMPÉTITIONS" : seules les compétitions de la catégorie du judoka.
+//  PAGE "COMPÉTITIONS" : calendrier mensuel, filtres en menus déroulants.
+//  Le choix du type, du niveau et de la catégorie (ou d'une fiche judoka) est mémorisé sur cet appareil.
+//  Le bouton "Ajouter à mon agenda" d'une compétition n'apparaît que si une catégorie ou une fiche est choisie.
 // =====================================================================
 const fiches = lireFiches();
 const liste = document.getElementById("liste");
 const resume = document.getElementById("resume");
-const caseToutes = document.getElementById("toutes");
 
 if (dateSimulee) {
   const b = document.getElementById("bandeau-date");
@@ -12,24 +13,33 @@ if (dateSimulee) {
   b.textContent = "Date simulée : " + texteDate({ debut: aujourdhuiISO() });
 }
 
-// ----- Les boutons de série (Interclubs, Label A, Shiai...) : le choix est mémorisé sur cet appareil -----
-const caseAura = document.getElementById("aura");
-let serie = "tous";
-try { serie = localStorage.getItem("serieCompetitions") || "tous"; } catch (e) {}
+function lireMemo(cle, defaut) { try { return localStorage.getItem(cle) || defaut; } catch (e) { return defaut; } }
+function ecrireMemo(cle, valeur) { try { localStorage.setItem(cle, valeur); } catch (e) {} }
+
+let serie = lireMemo("serieCompetitions", "tous");
 if (serie !== "tous" && !SERIES.some(function (s) { return s.cle === serie; })) { serie = "tous"; }
-
-let niveau = "tous", vue = "mois", moisAffiche = aujourdhuiISO().slice(0, 7), jourChoisi = null;
-try { niveau = localStorage.getItem("niveauCompetitions") || "tous"; } catch (e) {}
+let niveau = lireMemo("niveauCompetitions", "tous");
 if (niveau !== "tous" && !NIVEAUX.some(function (n) { return n.cle === niveau; })) { niveau = "tous"; }
+const TOUTES_CATEGORIES = categories.map(function (c) { return c.nom; }).concat(["Vétéran"]);
+let qui = lireMemo("quiCompetitions", "tous");          // "tous", "f<id d'une fiche>" ou "c<catégorie>"
+if (qui.charAt(0) === "f" && !fiches.some(function (f) { return "f" + f.id === qui; })) { qui = "tous"; }
+if (qui.charAt(0) === "c" && !TOUTES_CATEGORIES.includes(qui.slice(1))) { qui = "tous"; }
+let moisAffiche = aujourdhuiISO().slice(0, 7), jourChoisi = null;
 
-function visible(c, fiche, voirTout, ignorerNiveau) {
+function ficheChoisie() { return qui.charAt(0) === "f" ? fiches.find(function (f) { return "f" + f.id === qui; }) || null : null; }
+function categoriesChoisies() {
+  const f = ficheChoisie();
+  if (f) { return categoriesDuJudoka(f); }
+  return qui.charAt(0) === "c" ? [qui.slice(1)] : [];
+}
+
+function visible(c, mes, ignorerNiveau) {
   if (serie !== "tous" && c.serie !== serie) { return false; }
   if (!ignorerNiveau && niveau !== "tous" && niveauCompetition(c) !== niveau) { return false; }
-  if (caseAura.checked && c.region && c.region !== "AURA") { return false; }
-  if (voirTout) { return true; }
-  if (serie === "interclub") { return true; }              // onglet Interclubs : tous les interclubs, quelle que soit la catégorie
-  if (c.categories.length === 0) { return true; }          // public non précisé dans la source : on l'affiche toujours
-  return concerne(c, fiche);
+  if (mes.length === 0) { return true; }
+  if (serie === "interclub") { return true; }              // type Interclubs : tous les interclubs, quelle que soit la catégorie
+  if (c.categories.length === 0) { return true; }         // public non précisé dans la source : on l'affiche toujours
+  return c.categories.some(function (x) { return mes.includes(x); });
 }
 
 function creerMenu(zone, titre, options, valeur, siChange) {
@@ -46,38 +56,33 @@ function creerMenu(zone, titre, options, valeur, siChange) {
   label.appendChild(sel);
   zone.appendChild(label);
 }
-function dessinerSeries(fiche, voirTout) {
-  const options = [{ cle: "tous", nom: "Tous les types" }].concat(SERIES).map(function (s) {
+function visibleSansFiltres(c, mes) {
+  if (mes.length === 0 || c.serie === "interclub" || c.categories.length === 0) { return true; }
+  return c.categories.some(function (x) { return mes.includes(x); });
+}
+function dessinerMenus(mes) {
+  const types = [{ cle: "tous", nom: "Tous les types" }].concat(SERIES).map(function (s) {
     const n = toutesLesCompetitions().filter(function (c) {
-      return !estPassee(c) && (s.cle === "tous" || c.serie === s.cle) &&
-        (niveau === "tous" || niveauCompetition(c) === niveau) &&
-        (!caseAura.checked || !c.region || c.region === "AURA") &&
-        (voirTout || s.cle === "interclub" || c.categories.length === 0 || concerne(c, fiche));
+      return !estPassee(c) && (s.cle === "tous" || c.serie === s.cle) && (niveau === "tous" || niveauCompetition(c) === niveau) && visibleSansFiltres(c, mes);
     }).length;
     return { cle: s.cle, texte: (s.icone ? s.icone + " " : "") + s.nom + " (" + n + ")" };
   });
-  creerMenu(document.getElementById("series"), "Type de compétition", options, serie, function (v) {
-    serie = v;
-    try { localStorage.setItem("serieCompetitions", serie); } catch (e) {}
-    afficher();
-  });
-}
-
-function dessinerNiveaux(fiche, voirTout) {
-  const options = [{ cle: "tous", nom: "Tous niveaux" }].concat(NIVEAUX).map(function (n) {
+  creerMenu(document.getElementById("series"), "Type de compétition", types, serie, function (v) { serie = v; ecrireMemo("serieCompetitions", v); afficher(); });
+  const niveaux = [{ cle: "tous", nom: "Tous niveaux" }].concat(NIVEAUX).map(function (n) {
     const nb = toutesLesCompetitions().filter(function (c) {
-      return !estPassee(c) && visible(c, fiche, voirTout, true) && (n.cle === "tous" || niveauCompetition(c) === n.cle);
+      return !estPassee(c) && (serie === "tous" || c.serie === serie) && (n.cle === "tous" || niveauCompetition(c) === n.cle) && visibleSansFiltres(c, mes);
     }).length;
     return { cle: n.cle, texte: n.nom + " (" + nb + ")" };
   });
-  creerMenu(document.getElementById("niveaux"), "Niveau", options, niveau, function (v) {
-    niveau = v;
-    try { localStorage.setItem("niveauCompetitions", niveau); } catch (e) {}
-    afficher();
-  });
+  creerMenu(document.getElementById("niveaux"), "Niveau", niveaux, niveau, function (v) { niveau = v; ecrireMemo("niveauCompetitions", v); afficher(); });
+  const quis = [{ cle: "tous", texte: "Toutes les catégories" }];
+  fiches.forEach(function (f) { quis.push({ cle: "f" + f.id, texte: "Judoka : " + f.prenom + " (" + categoriesDuJudoka(f).join(" + ") + ")" }); });
+  TOUTES_CATEGORIES.forEach(function (n) { quis.push({ cle: "c" + n, texte: "Catégorie : " + n }); });
+  creerMenu(document.getElementById("qui"), "Catégorie ou judoka", quis, qui, function (v) { qui = v; ecrireMemo("quiCompetitions", v); jourChoisi = null; afficher(); });
 }
+
 function jouerDansEvenement(c, iso) { return c.debut <= iso && iso <= (c.fin || c.debut); }
-function dessinerMois(liste, fiche) {
+function dessinerMois(liste, fiche, avecAgenda) {
   const zone = document.getElementById("mois");
   zone.innerHTML = "";
   const an = Number(moisAffiche.slice(0, 4)), m = Number(moisAffiche.slice(5, 7)) - 1;
@@ -113,64 +118,25 @@ function dessinerMois(liste, fiche) {
         .filter(function (c) { return moisAffiche !== aujourdhuiISO().slice(0, 7) || !estPassee(c); });   // mois en cours : seulement ce qui reste à venir
   zone.appendChild(creer("h2", "titre-passees", jourChoisi ? texteDate({ debut: jourChoisi }) : "Ce mois-ci"));
   if (du.length === 0) { zone.appendChild(creer("p", "message-vide", "Rien ce mois-ci avec ces filtres.")); }
-  else { const ul = creer("ul"); du.forEach(function (c) { ul.appendChild(creerCarteCompetition(c, fiche, false)); }); zone.appendChild(ul); }
+  else { const ul = creer("ul"); du.forEach(function (c) { ul.appendChild(creerCarteCompetition(c, fiche, false, avecAgenda)); }); zone.appendChild(ul); }
 }
 
 function afficher() {
-  liste.innerHTML = "";
-  const fiche = fiches[Number(document.getElementById("choix").value)];
-  const voirTout = caseToutes.checked || !fiche;
-  dessinerSeries(fiche, voirTout);
-  dessinerNiveaux(fiche, voirTout);
+  const fiche = ficheChoisie();
+  const mes = categoriesChoisies();
+  dessinerMenus(mes);
   const info = SERIES.find(function (s) { return s.cle === serie; });
   const zoneNote = document.getElementById("note-serie");
   zoneNote.innerHTML = "";
   if (info && info.note) { zoneNote.appendChild(creer("p", "avertissement", info.note)); }
-  const concernees = toutesLesCompetitions().filter(function (c) { return visible(c, fiche, voirTout); });
-  const aVenir = concernees.filter(function (c) { return !estPassee(c); })
-    .sort(function (a, b) { return (rangNiveau(a) - rangNiveau(b)) || (a.debut < b.debut ? -1 : a.debut > b.debut ? 1 : 0); });   // les plus proches d'abord, puis par date
-  const btnExport = document.getElementById("export");
-  btnExport.hidden = aVenir.length === 0;
-  btnExport.onclick = function () { telechargerICS(aVenir, "competitions-jco-chandieu.ics"); };
-  btnExport.textContent = (aVenir.length > 1 ? "📆 Ajouter ces " + aVenir.length + " compétitions à mon agenda (.ics)" : "📆 Ajouter cette compétition à mon agenda (.ics)");
-  document.getElementById("mois").hidden = vue !== "mois";
-  if (vue === "mois") { dessinerMois(concernees.slice().sort(function (a, b) { return a.debut < b.debut ? -1 : 1; }), fiche); liste.hidden = true; return; }
-  liste.hidden = false;
-  document.getElementById("mois").innerHTML = "";
-  const passees = concernees.filter(estPassee).reverse();     // la plus récente en premier
-  resume.textContent = voirTout
-    ? "Toutes catégories · saison " + SAISON
-    : fiche.prenom + " · catégorie " + categoriesDuJudoka(fiche).join(" + ") + " · saison " + SAISON;
-  if (aVenir.length === 0) {
-    liste.appendChild(creer("p", "message-vide", "Aucune compétition à venir pour le moment."));
-  } else {
-    let dernier = -1, ul = null;
-    aVenir.forEach(function (c) {
-      const r = rangNiveau(c);
-      if (r !== dernier) {
-        dernier = r;
-        const n = NIVEAUX[r];
-        liste.appendChild(creer("h2", "titre-passees", n.nom + " · " + n.note));
-        ul = creer("ul"); liste.appendChild(ul);
-      }
-      ul.appendChild(creerCarteCompetition(c, fiche, false));
-    });
-  }
-  if (passees.length > 0) {
-    liste.appendChild(creer("h2", "titre-passees", "Terminées"));
-    const ul2 = creer("ul");
-    passees.forEach(function (c) { ul2.appendChild(creerCarteCompetition(c, fiche, false)); });
-    liste.appendChild(ul2);
-  }
+  resume.textContent = fiche ? fiche.prenom + " · catégorie " + mes.join(" + ") + " · saison " + SAISON
+    : mes.length ? "Catégorie " + mes[0] + " · saison " + SAISON : "Toutes catégories · saison " + SAISON;
+  const concernees = toutesLesCompetitions().filter(function (c) { return visible(c, mes); })
+    .sort(function (a, b) { return a.debut < b.debut ? -1 : a.debut > b.debut ? 1 : 0; });
+  liste.hidden = true;
+  dessinerMois(concernees, fiche, mes.length > 0);
 }
 
-if (fiches.length === 0) {
-  document.getElementById("sans-fiche").hidden = false;
-} else {
-  choisirJudoka(fiches, document.getElementById("zone-choix"), document.getElementById("choix"), afficher);
-}
-caseToutes.addEventListener("change", afficher);
-caseAura.addEventListener("change", afficher);
 afficher();
 
 // ----- Abonnement à l'agenda : le fichier competitions.ics est publié avec le site -----
