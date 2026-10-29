@@ -722,3 +722,15 @@ body.accueil .pied a { color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.9); }
 .prix-kimonos .choix-kimono:has(input:checked) { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); }
 .formulaire .prix-kimonos label.choix-kimono { flex-direction: row; align-items: center; text-align: left; font-weight: 500; }
 .formulaire .prix-kimonos label.choix-kimono b { flex: none; }
+
+/* synthèse administrateur */
+.tableau-synthese td:last-child, .tableau-synthese th:last-child { text-align: right; white-space: nowrap; }
+.tableau-synthese th { font-weight: 700; }
+.tableau-synthese tr.positif td, .tableau-synthese tr.positif th { color: #15803d; font-weight: 800; }
+.tableau-synthese tr.negatif td, .tableau-synthese tr.negatif th { color: #b91c1c; font-weight: 800; }
+.reduction { display: flex; flex-direction: column; gap: 6px; margin: 12px 0; font-weight: 700; }
+.reduction input { width: 6em; }
+.tableau-cours.tableau-synthese { font-size: 13px; }
+.tableau-cours.tableau-synthese th, .tableau-cours.tableau-synthese td { padding: 8px 5px; white-space: normal; }
+.tableau-cours.tableau-synthese td:first-child, .tableau-cours.tableau-synthese td:nth-child(2) { white-space: normal; font-weight: 600; }
+.tableau-cours.tableau-synthese th:last-child, .tableau-cours.tableau-synthese td:last-child { white-space: nowrap; text-align: right; }
