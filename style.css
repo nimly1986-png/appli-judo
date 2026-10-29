@@ -693,9 +693,9 @@ body.accueil .pied a { color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.9); }
 
 /* ----- Calendrier de la semaine (page Cours) ----- */
 .semaine { border: 1px solid var(--trait); border-radius: 14px; background: var(--surface); overflow: hidden; }
-.semaine-tete { display: grid; grid-template-columns: 34px repeat(7, 1fr); border-bottom: 1px solid var(--trait); }
+.semaine-tete { display: grid; grid-template-columns: 34px repeat(5, 1fr); border-bottom: 1px solid var(--trait); }
 .semaine-tete span { padding: 8px 0; text-align: center; font-size: 12px; font-weight: 700; color: var(--accent); font-family: var(--police-titre); }
-.semaine-corps { position: relative; display: grid; grid-template-columns: 34px repeat(7, 1fr); }
+.semaine-corps { position: relative; display: grid; grid-template-columns: 34px repeat(5, 1fr); }
 .semaine-heures { position: relative; }
 .semaine-heures span { position: absolute; right: 4px; transform: translateY(-50%); font-size: 11px; opacity: .65; }
 .semaine-heures span:first-child { transform: none; }

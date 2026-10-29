@@ -5,7 +5,7 @@
 //  Benjamin, Minime, Cadet, Junior, Senior, et "Vétéran" (30 ans et plus).
 //  Horaires et tarifs : d'après le formulaire d'inscription officiel du club.
 // =====================================================================
-const JOURS_COURS = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
+const JOURS_COURS = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"];
 const COURS = [
   { jour: "Mardi", debut: "17h", fin: "18h", nom: "Baby judo", public: "Enfants nés en 2023 (avant le 30/06), 2022, et 2021 débutants", categories: ["Baby judo"] },
   { jour: "Jeudi", debut: "17h", fin: "18h", nom: "Mini-Poussins", court: "Mini-P.", public: "Enfants nés en 2021 non débutants, 2020 et 2019", categories: ["Mini-Poussin"] },
