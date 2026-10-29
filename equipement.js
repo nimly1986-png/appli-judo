@@ -55,21 +55,36 @@ function prenomChoisi() {
   return document.getElementById("prenom").value.trim();
 }
 
-// taille de kimono indicative : par pas de 10 cm, à confirmer à l'essayage
-function conseil(cm) {
-  const n = Number(cm);
-  if (!n) { return ""; }
-  const plus_proche = TAILLES_KIMONO.reduce(function (a, b) { return Math.abs(b - n) < Math.abs(a - n) ? b : a; });
-  return "Taille de kimono indicative : " + plus_proche + " (à confirmer à l'essayage ; un enfant qui grandit vite peut avoir besoin de la taille au-dessus).";
+// choix de la taille : les modèles disponibles dans cette taille s'affichent avec leur prix
+const tailleMenu = document.getElementById("taille");
+TAILLES_KIMONO.forEach(function (t) { tailleMenu.appendChild(new Option(t + " cm", t)); });
+function modelesPour(cm) { return KIMONOS.filter(function (k) { return cm >= k.de && cm <= k.a; }); }
+function prixTexte(cm) {
+  const l = modelesPour(cm);
+  if (!l.length) { return ""; }
+  return l.map(function (k) { return k.modele + " " + k.public.toLowerCase() + (k.note ? " (" + k.note + ")" : "") + " : " + k.prix + " €"; }).join(" · ");
 }
-document.getElementById("taille").addEventListener("input", function (e) {
-  document.getElementById("conseil").textContent = conseil(e.target.value);
+tailleMenu.addEventListener("change", function () {
+  const z = document.getElementById("prix-taille");
+  z.innerHTML = "";
+  const cm = Number(tailleMenu.value);
+  if (!cm) { return; }
+  const l = modelesPour(cm);
+  const boite = creer("div", "prix-kimonos");
+  boite.appendChild(creer("strong", "", "Kimonos du club en " + cm + " cm"));
+  l.forEach(function (k) {
+    const ligne = creer("p", "");
+    ligne.appendChild(creer("span", "", k.modele + " · " + k.public + (k.note ? " (" + k.note + ")" : "")));
+    ligne.appendChild(creer("b", "", k.prix + " €"));
+    boite.appendChild(ligne);
+  });
+  z.appendChild(boite);
 });
 
 function message(d) {
   return "Pré-réservation kimono " + SAISON_SUIVANTE + "\n" +
     "Prénom : " + d.prenom + "\n" +
-    "Taille actuelle : " + d.taille + " cm (taille indicative : " + (conseil(d.taille).match(/: (\d+)/) || [, "?"])[1] + ")\n" +
+    "Taille du kimono : " + d.taille + " cm" + (prixTexte(d.taille) ? " (" + prixTexte(d.taille) + ")" : "") + "\n" +
     "Besoin : " + LIBELLES[d.besoin] + (d.survetement ? "\nSurvêtement : taille " + d.survetement : "") + (d.remarque ? "\nRemarque : " + d.remarque : "") + "\n" +
     "Envoyé depuis l'application du JCO Chandieu";
 }
@@ -131,7 +146,7 @@ formulaire.addEventListener("submit", function (e) {
   ecrire(l);
   montrerEnvoi(d);
   formulaire.reset();
-  document.getElementById("conseil").textContent = "";
+  document.getElementById("prix-taille").innerHTML = "";
   afficher();
 });
 afficher();

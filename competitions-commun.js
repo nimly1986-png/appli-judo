@@ -189,7 +189,7 @@ function creerCarteCompetition(c, fiche, avecChecklist, avecAgenda) {
   } else {
     corps.appendChild(creer("p", "compte" + (jours <= 14 ? " urgent" : ""), "Dans " + jours + (jours > 1 ? " jours" : " jour")));
   }
-  if ((fiche || avecAgenda) && !estPassee(c)) {      // sur la page Compétitions : seulement si une catégorie ou une fiche est choisie
+  if (!estPassee(c)) {      // compétition à venir : lien pour l'ajouter à son agenda (fichier .ics)
     const bAgenda = creer("button", "bouton-resultats", "📆 Ajouter à mon agenda");
     bAgenda.type = "button";
     bAgenda.addEventListener("click", function () { telechargerICS([c], "competition-" + c.debut + ".ics"); });

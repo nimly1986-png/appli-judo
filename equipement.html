@@ -12,7 +12,7 @@
   <h1>🥋 Kimono et équipement</h1>
   <p>Dites-nous si votre enfant aura besoin d'un kimono pour la saison <strong id="saison"></strong>. Le club pourra ainsi grouper les commandes et étaler les dépenses sur l'année.</p>
   <p id="limite" class="avertissement" hidden></p>
-  <p class="avertissement">Ceci est une <strong>pré-réservation</strong> : elle ne vaut ni commande ni paiement. Le club vous confirme le prix et le moment du règlement. Prix des kimonos : voir <a href="cours.html">Horaires et tarifs</a>.</p>
+  <p class="avertissement">Ceci est une <strong>pré-réservation</strong> : elle ne vaut ni commande ni paiement. Le club vous confirme le prix et le moment du règlement.</p>
 
   <h2>Survêtements du club</h2>
   <p>Il y a quelques années, nous avons fait des survêtements avec le logo du club. Il nous reste quelques tailles, à ces tarifs :</p>
@@ -28,10 +28,11 @@
     <label id="zone-prenom">Prénom du judoka
       <input id="prenom" type="text" maxlength="40" autocomplete="off" required>
     </label>
-    <label>Taille actuelle (en cm)
-      <input id="taille" type="number" inputmode="numeric" min="70" max="210" placeholder="Ex. : 128" required>
+    <label>Taille du kimono (en cm)
+      <select id="taille" required><option value="">Choisir une taille</option></select>
     </label>
-    <p id="conseil" class="petit" aria-live="polite"></p>
+    <div id="prix-taille" aria-live="polite"></div>
+    <p id="conseil" class="petit" aria-live="polite">Pas sûr de la taille ? Prenez la taille de votre enfant en cm, arrondie à la dizaine la plus proche. Elle sera confirmée à l'essayage.</p>
     <fieldset class="options">
       <legend>Besoin d'un kimono pour la saison suivante ?</legend>
       <label><input type="radio" name="besoin" value="oui" required> Oui, je pré-réserve un kimono</label>

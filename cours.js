@@ -104,25 +104,6 @@ function dessinerTarifs() {
   if (TARIFS.every(function (t) { return t.montant === null || t.montant === undefined; })) {
     zone.appendChild(creer("p", "avertissement", "Les tarifs de la saison seront publiés prochainement par le club."));
   }
-
-  // kimonos Mizuno en vente au club
-  zone.appendChild(creer("h2", "", "Kimonos en vente au club"));
-  zone.appendChild(creer("p", "", "Ces kimonos Mizuno sont à la vente avec les tarifs ci-dessous :"));
-  const tk = creer("table", "tableau-cours tableau-tarifs tableau-kimonos");
-  const hk = creer("tr");
-  ["Modèle", "Junior / Adulte", "Taille", "Prix de vente"].forEach(function (t) { hk.appendChild(creer("th", "", t)); });
-  tk.appendChild(creer("thead")).appendChild(hk);
-  const bk = creer("tbody");
-  KIMONOS.forEach(function (k) {
-    const tr = creer("tr");
-    tr.appendChild(creer("td", "", k.modele));
-    tr.appendChild(creer("td", "", k.public));
-    tr.appendChild(creer("td", "", k.taille));
-    tr.appendChild(creer("td", "", k.prix + " €"));
-    bk.appendChild(tr);
-  });
-  tk.appendChild(bk);
-  zone.appendChild(creer("div", "tableau-conteneur")).appendChild(tk);
 }
 
 function dessinerOnglets() {

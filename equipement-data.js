@@ -8,7 +8,18 @@
 const CLUB_EMAIL = "";
 const DATE_LIMITE = "";
 const SAISON_SUIVANTE = "2027-2028";
-const TAILLES_KIMONO = [100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200];
+const TAILLES_KIMONO = [90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200];
+
+// Kimonos Mizuno en vente au club : modèle, public, plage de tailles (cm), prix de vente en euros.
+const KIMONOS = [
+  { modele: "SHIRO PLUS", public: "Junior", de: 90, a: 150, prix: 30 },
+  { modele: "KODOMO PLUS", public: "Junior", de: 110, a: 150, prix: 38 },
+  { modele: "KODOMO PLUS", public: "Adulte", de: 160, a: 200, prix: 45 },
+  { modele: "HAYATO", public: "Junior", de: 130, a: 160, prix: 55 },
+  { modele: "HAYATO", public: "Adulte", de: 170, a: 200, prix: 70 },
+  { modele: "KEIKO", public: "Adulte", de: 170, a: 200, prix: 90 },
+  { modele: "YUSHO", public: "Adulte", de: 170, a: 200, prix: 140, note: "tailles japonaises" }
+];
 
 // Survêtements du club (anciens, avec le logo) : stock limité, tailles restantes et prix en euros.
 const SURVETEMENTS = [

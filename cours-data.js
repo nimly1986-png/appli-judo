@@ -29,16 +29,3 @@ const TARIFS = [
 ];
 // Ce que le tarif comprend (licence, assurance...) et facilités de paiement : à renseigner par le club.
 const TARIFS_INFOS = ["Réduction famille (parent, enfant, fratrie, conjoint) : 40 € par adhérent à partir du 2ème adhérent."];
-
-// =====================================================================
-//  KIMONOS EN VENTE AU CLUB (Mizuno) : modèle, public, tailles (en cm), prix de vente en euros.
-// =====================================================================
-const KIMONOS = [
-  { modele: "SHIRO PLUS", public: "Junior", taille: "90 à 150", prix: 30 },
-  { modele: "KODOMO PLUS", public: "Junior", taille: "110 à 150", prix: 38 },
-  { modele: "KODOMO PLUS", public: "Adulte", taille: "160 à 200", prix: 45 },
-  { modele: "HAYATO", public: "Junior", taille: "130 à 160", prix: 55 },
-  { modele: "HAYATO", public: "Adulte", taille: "170 à 200", prix: 70 },
-  { modele: "KEIKO", public: "Adulte", taille: "170 à 200", prix: 90 },
-  { modele: "YUSHO", public: "Adulte", taille: "tailles japonaises", prix: 140 }
-];
