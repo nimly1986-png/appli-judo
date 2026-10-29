@@ -30,6 +30,7 @@ function dessinerHoraires() {
 
   const cal = creer("div", "semaine");
   cal.style.setProperty("--haut", HAUTEUR + "px");
+  cal.style.setProperty("--nb-jours", JOURS_COURS.length);
   const tete = creer("div", "semaine-tete");
   tete.appendChild(creer("span", ""));
   JOURS_COURS.forEach(function (j) { tete.appendChild(creer("span", "", j.slice(0, 3))); });
