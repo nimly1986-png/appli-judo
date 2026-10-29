@@ -241,7 +241,6 @@ td button, .bouton-annuler {
 
 .tuiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
 @media (min-width: 560px) { .tuiles { grid-template-columns: repeat(3, 1fr); } }
-.tuile:last-child:nth-child(odd) { grid-column: 1 / -1; aspect-ratio: auto; min-height: 96px; }
 
 .tuile {
   --ombre: color-mix(in srgb, var(--c) 58%, black);
