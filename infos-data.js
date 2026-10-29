@@ -13,6 +13,6 @@
 //  Ne mettez ici ni nom d'enfant ni numéro de téléphone : ce fichier est public.
 // =====================================================================
 const INFOS_CLUB = [
-  id: 1, type: "info", texte: "Bienvenue sur l'application du JCO Chandieu : calendrier des compétitions, techniques et règlements.", date: "2026-10-28" }
+  { id: 1, type: "info", texte: "Bienvenue sur l'application du JCO Chandieu : calendrier des compétitions, techniques et règlements.", date: "2026-10-28" },
   { id: 2, type: "info", texte: "Version essai", date: "2026-10-28" }
 ];
