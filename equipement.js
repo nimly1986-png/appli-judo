@@ -71,12 +71,15 @@ tailleMenu.addEventListener("change", function () {
   if (!cm) { return; }
   const l = modelesPour(cm);
   const boite = creer("div", "prix-kimonos");
-  boite.appendChild(creer("strong", "", "Kimonos du club en " + cm + " cm"));
+  boite.appendChild(creer("strong", "", "Kimonos du club en " + cm + " cm : cochez le ou les modèles souhaités"));
   l.forEach(function (k) {
-    const ligne = creer("p", "");
-    ligne.appendChild(creer("span", "", k.modele + " · " + k.public + (k.note ? " (" + k.note + ")" : "")));
-    ligne.appendChild(creer("b", "", k.prix + " €"));
-    boite.appendChild(ligne);
+    const label = creer("label", "choix-kimono");
+    const c = document.createElement("input");
+    c.type = "checkbox"; c.name = "modele"; c.value = k.modele + " " + k.public.toLowerCase() + " : " + k.prix + " €";
+    label.appendChild(c);
+    label.appendChild(creer("span", "", k.modele + " · " + k.public + (k.note ? " (" + k.note + ")" : "")));
+    label.appendChild(creer("b", "", k.prix + " €"));
+    boite.appendChild(label);
   });
   z.appendChild(boite);
 });
@@ -84,7 +87,7 @@ tailleMenu.addEventListener("change", function () {
 function message(d) {
   return "Pré-réservation kimono " + SAISON_SUIVANTE + "\n" +
     "Prénom : " + d.prenom + "\n" +
-    "Taille du kimono : " + d.taille + " cm" + (prixTexte(d.taille) ? " (" + prixTexte(d.taille) + ")" : "") + "\n" +
+    "Taille du kimono : " + d.taille + " cm" + (d.modeles && d.modeles.length ? "\nModèle(s) souhaité(s) : " + d.modeles.join(" ; ") : "") + "\n" +
     "Besoin : " + LIBELLES[d.besoin] + (d.survetement ? "\nSurvêtement : taille " + d.survetement : "") + (d.remarque ? "\nRemarque : " + d.remarque : "") + "\n" +
     "Envoyé depuis l'application du JCO Chandieu";
 }
@@ -115,7 +118,7 @@ function afficher() {
   document.getElementById("vide").hidden = l.length > 0;
   l.forEach(function (d) {
     const c = creer("div", "demande");
-    c.appendChild(creer("p", "", d.prenom + " · " + d.taille + " cm · " + LIBELLES[d.besoin] + (d.survetement ? " · survêtement " + d.survetement : "") + " (saison " + d.saison + ")"));
+    c.appendChild(creer("p", "", d.prenom + " · " + d.taille + " cm" + (d.modeles && d.modeles.length ? " · " + d.modeles.join(", ") : "") + " · " + LIBELLES[d.besoin] + (d.survetement ? " · survêtement " + d.survetement : "") + " (saison " + d.saison + ")"));
     if (d.remarque) { c.appendChild(creer("small", "", d.remarque)); }
     const renvoi = creer("button", "bouton-annuler", "Envoyer");
     renvoi.type = "button";
@@ -140,7 +143,8 @@ formulaire.addEventListener("submit", function (e) {
   const taille = Number(document.getElementById("taille").value);
   const besoin = (formulaire.querySelector('input[name="besoin"]:checked') || {}).value;
   if (!prenom || !taille || !besoin) { return; }
-  const d = { id: Date.now(), prenom: prenom, taille: taille, besoin: besoin, survetement: document.getElementById("survetement").value, remarque: document.getElementById("remarque").value.trim(), saison: SAISON_SUIVANTE };
+  const modeles = Array.prototype.map.call(formulaire.querySelectorAll("input[name=modele]:checked"), function (x) { return x.value; });
+  const d = { id: Date.now(), prenom: prenom, taille: taille, modeles: modeles, besoin: besoin, survetement: document.getElementById("survetement").value, remarque: document.getElementById("remarque").value.trim(), saison: SAISON_SUIVANTE };
   const l = lire();
   l.push(d);
   ecrire(l);

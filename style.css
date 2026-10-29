@@ -715,3 +715,10 @@ body.accueil .pied a { color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.9); }
 
 .prix-kimonos { margin: 4px 0 10px; padding: 10px 12px; border: 1.5px solid var(--trait); border-radius: 12px; background: var(--surface); }
 .prix-kimonos p { display: flex; justify-content: space-between; gap: 10px; margin: 6px 0 0; font-size: 14px; }
+
+.prix-kimonos .choix-kimono { display: flex; align-items: center; gap: 10px; margin: 8px 0 0; padding: 8px 10px; border: 1.5px solid var(--trait); border-radius: 10px; font-size: 14px; font-weight: 500; cursor: pointer; }
+.prix-kimonos .choix-kimono span { flex: 1; }
+.prix-kimonos .choix-kimono input { width: 20px; height: 20px; flex: none; accent-color: var(--accent); }
+.prix-kimonos .choix-kimono:has(input:checked) { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.formulaire .prix-kimonos label.choix-kimono { flex-direction: row; align-items: center; text-align: left; font-weight: 500; }
+.formulaire .prix-kimonos label.choix-kimono b { flex: none; }
