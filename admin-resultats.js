@@ -13,14 +13,27 @@ if (dateSimulee) {
   b.textContent = "Date simulée : " + texteDate({ debut: aujourdhuiISO() });
 }
 
-// compétitions déjà commencées (les plus récentes en premier)
-const commencees = toutesLesCompetitions().filter(function (c) { return enJours(c.debut) <= 0; }).reverse();
-commencees.forEach(function (c, i) {
+// toutes les compétitions du calendrier, rangées par mois (celles pas encore commencées sont marquées « à venir »)
+const toutes = toutesLesCompetitions();
+const commencees = toutes;
+const MOIS_NOMS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+let groupe = null, derniereCommencee = 0, moisCourant = "";
+toutes.forEach(function (c, i) {
+  const mois = c.debut.slice(0, 7);
+  if (mois !== moisCourant) {
+    moisCourant = mois;
+    groupe = document.createElement("optgroup");
+    groupe.label = MOIS_NOMS[Number(mois.slice(5, 7)) - 1].replace(/^./, function (x) { return x.toUpperCase(); }) + " " + mois.slice(0, 4);
+    menu.appendChild(groupe);
+  }
   const o = document.createElement("option");
   o.value = i;
-  o.textContent = dateCourte(c.debut) + " · " + c.nom + " · " + c.lieu;
-  menu.appendChild(o);
+  const avenir = enJours(c.debut) > 0;
+  o.textContent = dateCourte(c.debut) + " · " + c.nom + " · " + c.lieu + (avenir ? " (à venir)" : "");
+  groupe.appendChild(o);
+  if (!avenir) { derniereCommencee = i; }
 });
+menu.value = String(derniereCommencee);
 
 function compteur(libelle, valeur, quandChange) {
   const boite = creer("div", "compteur");
@@ -39,7 +52,8 @@ function afficher() {
   const vide = document.getElementById("vide");
   vide.hidden = true;
   const c = commencees[Number(menu.value)];
-  if (!c) { vide.hidden = false; vide.textContent = "Aucune compétition n'a encore commencé : les résultats se saisissent après la date."; return; }
+  if (!c) { vide.hidden = false; vide.textContent = "Aucune compétition sélectionnée."; return; }
+  if (enJours(c.debut) > 0) { vide.hidden = false; vide.textContent = "Cette compétition n'a pas encore eu lieu : les résultats se saisissent après la date."; return; }
   const liste = fiches.filter(function (f) { return caseTous.checked || concerne(c, f); });
   if (liste.length === 0) { vide.hidden = false; vide.textContent = "Aucun judoka concerné par cette compétition."; return; }
 
