@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Financier</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body style="--accent: var(--violet)">
+  <nav class="barre"><div class="barre-contenu"><a class="barre-accueil" href="admin.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Espace administrateur</a></div></nav>
+  <h1>💶 Financier</h1>
+  <nav class="tuiles">
+    <a class="tuile" style="--c: var(--vert); --i: 0" href="admin-synthese.html?v=bilan">
+      <span class="icone"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 40V10M8 40h34M14 32l8-8 6 5 10-14"/></svg></span>
+      <span class="libelle">Bilan<span class="detail">Entrées, sorties et solde</span></span>
+    </a>
+    <a class="tuile" style="--c: var(--jaune); --i: 1" href="admin-synthese.html?v=inscrits">
+      <span class="icone"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="10" width="32" height="30" rx="4"/><path d="M8 19h32M16 27h16M16 33h10"/></svg></span>
+      <span class="libelle">Inscrits et cotisations<span class="detail">Par cours et par âge</span></span>
+    </a>
+    <a class="tuile" style="--c: var(--marron); --i: 2" href="admin-synthese.html?v=commandes">
+      <span class="icone"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M17 6l7 6 7-6 11 9-5 7-5-3v24H16V19l-5 3-5-7z"/></svg></span>
+      <span class="libelle">Commandes<span class="detail">Kimonos et survêtements</span></span>
+    </a>
+    <a class="tuile" style="--c: var(--bleu); --i: 3" href="admin-synthese.html?v=financements">
+      <span class="icone"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 20h36M10 20v6M38 20v6M24 6l-16 8h32zM12 42V28M36 42V28M24 42V28"/></svg></span>
+      <span class="libelle">Financements<span class="detail">Mairie, sponsors…</span></span>
+    </a>
+  </nav>
+  <a class="bouton secondaire" href="admin.html">⬅ Espace administrateur</a>
+</body>
+</html>

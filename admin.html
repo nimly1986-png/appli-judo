@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Espace administrateur</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body style="--accent: var(--violet)">
+  <nav class="barre"><div class="barre-contenu"><a class="barre-accueil" href="accueil.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</a></div></nav>
+  <h1>🔧 Espace administrateur</h1>
+  <p class="avertissement">Version d'essai : utilisez uniquement de fausses données. Ces pages ne sont pas encore protégées par un mot de passe.</p>
+  <nav class="tuiles">
+    <a class="tuile" style="--c: var(--violet); --i: 0" href="admin-fiches.html">
+      <span class="icone"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="14" r="7"/><path d="M10 42c0-9 6-15 14-15s14 6 14 15"/></svg></span>
+      <span class="libelle">Inscription judoka<span class="detail">Créer et modifier les fiches</span></span>
+    </a>
+    <a class="tuile" style="--c: var(--orange); --i: 1" href="admin-agenda.html">
+      <span class="icone"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M15 8h18v10a9 9 0 0 1-18 0zM15 12H8v3a7 7 0 0 0 7 7M33 12h7v3a7 7 0 0 1-7 7M24 27v8M19 35h10v6H19z"/></svg></span>
+      <span class="libelle">Inscription compétitions<span class="detail">Inscrire les judokas</span></span>
+    </a>
+    <a class="tuile" style="--c: var(--vert); --i: 2" href="admin-financier.html">
+      <span class="icone"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="17"/><path d="M31 17a9 9 0 1 0 0 14M14 21h14M14 27h14"/></svg></span>
+      <span class="libelle">Financier<span class="detail">Bilan, cotisations, financements</span></span>
+    </a>
+    <a class="tuile" style="--c: var(--bleu); --i: 3" href="admin-sportif.html">
+      <span class="icone"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 40V24M20 40V12M32 40V20M44 40H4"/></svg></span>
+      <span class="libelle">Sportif<span class="detail">Résultats des compétitions</span></span>
+    </a>
+  </nav>
+  <p class="pied"><a href="admin-resultats.html">Saisir les résultats</a> · <a href="admin-infos.html">Gérer les infos</a></p>
+  <a class="bouton secondaire" href="accueil.html">⬅ Retour à l'accueil</a>
+</body>
+</html>

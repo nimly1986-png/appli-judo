@@ -201,3 +201,13 @@ document.getElementById("f-ajouter").addEventListener("click", function () {
 });
 
 dessinerInscrits(); dessinerCommandes(); dessinerBilan(); dessinerFinancements();
+
+// ----- une seule rubrique à la fois, choisie dans la page Financier (?v=bilan, inscrits, commandes, financements) -----
+(function () {
+  const v = new URLSearchParams(location.search).get("v");
+  const titres = { bilan: "📈 Bilan", inscrits: "👥 Inscrits et cotisations", commandes: "🥋 Commandes", financements: "🏛️ Financements" };
+  if (!titres[v]) { return; }
+  ["bilan", "inscrits", "commandes", "financements"].forEach(function (s) { document.getElementById("s-" + s).hidden = s !== v; });
+  document.getElementById("titre").textContent = titres[v];
+  document.querySelectorAll("section h2").forEach(function (h) { h.hidden = true; });
+})();

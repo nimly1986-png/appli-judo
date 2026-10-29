@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sportif</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body style="--accent: var(--violet)">
+  <nav class="barre"><div class="barre-contenu"><a class="barre-accueil" href="admin.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Espace administrateur</a></div></nav>
+  <h1>📈 Sportif</h1>
+  <p class="avertissement">Les résultats viennent de ceux saisis sur cet appareil dans « Saisir les résultats ».</p>
+
+  <h2>Par judoka</h2>
+  <div id="par-judoka"></div>
+
+  <h2>Par compétition</h2>
+  <div id="par-competition"></div>
+
+  <a class="bouton" href="admin-resultats.html">🥇 Saisir les résultats</a>
+  <a class="bouton secondaire" href="admin.html">⬅ Espace administrateur</a>
+
+  <script src="judo-commun.js"></script>
+  <script src="competitions-data.js"></script>
+  <script src="competitions-commun.js"></script>
+  <script src="admin-sportif.js"></script>
+</body>
+</html>
