@@ -156,10 +156,17 @@ const competitions = [
     "fin": null,
     "lieu": "Lieu à confirmer",
     "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.",
-    "categories": [],
+    "categories": [
+      "Cadet",
+      "Junior",
+      "Senior",
+      "Vétéran"
+    ],
     "type": "championnat",
     "serie": "officiels",
-    "aConfirmer": true
+    "aConfirmer": true,
+    "ceintureMin": "Marron",
+    "neMaxAnnee": 2011
   },
   {
     "nom": "Formation commissaire sportif – District",
@@ -167,10 +174,17 @@ const competitions = [
     "fin": null,
     "lieu": "Lieu à confirmer",
     "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.",
-    "categories": [],
+    "categories": [
+      "Cadet",
+      "Junior",
+      "Senior",
+      "Vétéran"
+    ],
     "type": "championnat",
     "serie": "officiels",
-    "aConfirmer": true
+    "aConfirmer": true,
+    "ceintureMin": "Marron",
+    "neMaxAnnee": 2011
   },
   {
     "nom": "Interclubs",
@@ -552,8 +566,8 @@ const competitions = [
     "nom": "Tournoi Label Excellence – Seniors",
     "debut": "2026-11-08",
     "fin": null,
-    "lieu": "Normandie, ville à déterminer",
-    "infos": "Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Normandie.",
+    "lieu": "Dojo départemental de Forges-les-Eaux (Seine-Maritime)",
+    "infos": "Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Normandie. Lieu d'après le calendrier du comité du Rhône (30/10/2026), qui indique le 7 novembre pour ce tournoi : date à confirmer.",
     "categories": [
       "Senior"
     ],
@@ -563,26 +577,32 @@ const competitions = [
     "aConfirmer": true
   },
   {
-    "nom": "Jujitsu – District",
+    "nom": "Stage jujitsu",
     "debut": "2026-11-09",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.",
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
     "categories": [],
-    "type": "championnat",
-    "serie": "autres",
-    "aConfirmer": true
+    "type": "stage",
+    "serie": "stage",
+    "aConfirmer": false
   },
   {
-    "nom": "Kata – District",
+    "nom": "Stage kata (préparation aux grades)",
     "debut": "2026-11-10",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.",
-    "categories": [],
-    "type": "championnat",
-    "serie": "autres",
-    "aConfirmer": true
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
+    "categories": [
+      "Cadet",
+      "Junior",
+      "Senior",
+      "Vétéran"
+    ],
+    "type": "stage",
+    "serie": "stage",
+    "aConfirmer": false,
+    "ceintureMin": "Noire"
   },
   {
     "nom": "Interclubs",
@@ -604,72 +624,69 @@ const competitions = [
     "serie": "interclub"
   },
   {
-    "nom": "Vétérans – District",
+    "nom": "Stage vétérans",
     "debut": "2026-11-16",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.",
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
     "categories": [
       "Vétéran"
     ],
-    "type": "championnat",
-    "serie": "veterans",
-    "aConfirmer": true
-  },
-  {
-    "nom": "Coupe jeunes arbitres + commissaires sportifs Cadets – District",
-    "debut": "2026-11-21",
-    "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
-    "categories": [
-      "Cadet"
-    ],
-    "type": "championnat",
-    "aConfirmer": true,
-    "serie": "officiels"
-  },
-  {
-    "nom": "Formation arbitrage – Rhône",
-    "debut": "2026-11-21",
-    "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.",
-    "categories": [],
-    "type": "championnat",
-    "serie": "officiels",
-    "aConfirmer": true
-  },
-  {
-    "nom": "Formation commissaire sportif – Rhône",
-    "debut": "2026-11-21",
-    "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.",
-    "categories": [],
-    "type": "championnat",
-    "serie": "officiels",
-    "aConfirmer": true
+    "type": "stage",
+    "serie": "stage",
+    "aConfirmer": false
   },
   {
     "nom": "Minimes (individuel) – District",
     "debut": "2026-11-21",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
     "categories": [
       "Minime"
     ],
     "type": "championnat",
-    "aConfirmer": true,
+    "aConfirmer": false,
     "serie": "championnat"
   },
   {
-    "nom": "Passage de grade UV4 2e dan (engagement)",
+    "nom": "Sélection Coupe jeunes arbitres Cadets – District",
     "debut": "2026-11-21",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Récapitulatif sportif du comité du Rhône (au 22/09/2026) : date de l'UV4 pour le 2e dan.",
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Ceinture verte minimum (règle indicative d'un comité voisin), à confirmer auprès du comité du Rhône. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité. Ceinture verte minimum (règle indicative d'un comité voisin), à confirmer auprès du comité du Rhône.",
+    "categories": [
+      "Cadet"
+    ],
+    "type": "championnat",
+    "aConfirmer": false,
+    "serie": "officiels",
+    "ceintureMin": "Verte"
+  },
+  {
+    "nom": "Stage départemental arbitres + commissaires sportifs",
+    "debut": "2026-11-21",
+    "fin": null,
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité. Conditions indicatives (modèle d'un comité voisin, saison 2023-24) : ceinture marron minimum, né en 2011 ou avant. À confirmer auprès du comité du Rhône.",
+    "categories": [
+      "Cadet",
+      "Junior",
+      "Senior",
+      "Vétéran"
+    ],
+    "type": "championnat",
+    "serie": "officiels",
+    "aConfirmer": false,
+    "ceintureMin": "Marron",
+    "neMaxAnnee": 2011
+  },
+  {
+    "nom": "Stage UV4 du 2e dan",
+    "debut": "2026-11-21",
+    "fin": null,
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Récapitulatif sportif du comité du Rhône (au 22/09/2026) : date de l'UV4 pour le 2e dan. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
     "categories": [
       "Cadet",
       "Junior",
@@ -678,7 +695,7 @@ const competitions = [
     ],
     "type": "grade",
     "serie": "grade",
-    "aConfirmer": true
+    "aConfirmer": false
   },
   {
     "nom": "Tournoi Label A – Seniors féminines",
@@ -740,14 +757,28 @@ const competitions = [
     "nom": "Cadets 1ère division – Rhône",
     "debut": "2026-11-22",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
     "categories": [
       "Cadet"
     ],
     "type": "championnat",
-    "aConfirmer": true,
+    "aConfirmer": false,
     "serie": "championnat"
+  },
+  {
+    "nom": "Coupe départementale jeunes arbitres Juniors",
+    "debut": "2026-11-22",
+    "fin": null,
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité. Ceinture verte minimum (règle indicative d'un comité voisin), à confirmer auprès du comité du Rhône.",
+    "categories": [
+      "Junior"
+    ],
+    "type": "officiels",
+    "aConfirmer": false,
+    "serie": "officiels",
+    "ceintureMin": "Verte"
   },
   {
     "nom": "Tournoi Label Excellence – Cadets",
@@ -865,6 +896,19 @@ const competitions = [
     "aConfirmer": false
   },
   {
+    "nom": "Équipes Benjamins – Rhône",
+    "debut": "2026-12-05",
+    "fin": null,
+    "lieu": "Lieu à confirmer",
+    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "categories": [
+      "Benjamin"
+    ],
+    "type": "championnat",
+    "aConfirmer": true,
+    "serie": "championnat"
+  },
+  {
     "nom": "Interclubs",
     "debut": "2026-12-05",
     "fin": null,
@@ -913,30 +957,18 @@ const competitions = [
     "aConfirmer": false
   },
   {
-    "nom": "Équipes Benjamins – Rhône",
-    "debut": "2026-12-05",
-    "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
-    "categories": [
-      "Benjamin"
-    ],
-    "type": "championnat",
-    "aConfirmer": true,
-    "serie": "championnat"
-  },
-  {
-    "nom": "Coupe jeunes arbitres + commissaires sportifs Cadets – Rhône",
+    "nom": "Coupe départementale jeunes commissaires sportifs Cadets",
     "debut": "2026-12-06",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Ceinture verte minimum (règle indicative d'un comité voisin), à confirmer auprès du comité du Rhône. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité. Ceinture verte minimum (règle indicative d'un comité voisin), à confirmer auprès du comité du Rhône.",
     "categories": [
       "Cadet"
     ],
     "type": "championnat",
-    "aConfirmer": true,
-    "serie": "officiels"
+    "aConfirmer": false,
+    "serie": "officiels",
+    "ceintureMin": "Verte"
   },
   {
     "nom": "Minimes (individuel) – Rhône",
@@ -1092,6 +1124,21 @@ const competitions = [
     "aConfirmer": false
   },
   {
+    "nom": "Stage sportif départemental Benjamins-Minimes-Cadets",
+    "debut": "2026-12-21",
+    "fin": null,
+    "lieu": "Maison des Sports (ville non précisée)",
+    "infos": "Lieu d'après le calendrier du comité du Rhône (30/10/2026). Horaires à confirmer.",
+    "categories": [
+      "Benjamin",
+      "Minime",
+      "Cadet"
+    ],
+    "type": "stage",
+    "aConfirmer": false,
+    "serie": "stage"
+  },
+  {
     "nom": "Tournoi Label A – Minimes",
     "debut": "2027-01-09",
     "fin": null,
@@ -1120,28 +1167,34 @@ const competitions = [
     "aConfirmer": false
   },
   {
-    "nom": "Vétérans – Rhône",
+    "nom": "Stage vétérans",
     "debut": "2027-01-11",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.",
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
     "categories": [
       "Vétéran"
     ],
-    "type": "championnat",
-    "serie": "veterans",
-    "aConfirmer": true
+    "type": "stage",
+    "serie": "stage",
+    "aConfirmer": false
   },
   {
-    "nom": "Kata – Rhône",
+    "nom": "Stage kata (préparation aux grades)",
     "debut": "2027-01-12",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.",
-    "categories": [],
-    "type": "championnat",
-    "serie": "autres",
-    "aConfirmer": true
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
+    "categories": [
+      "Cadet",
+      "Junior",
+      "Senior",
+      "Vétéran"
+    ],
+    "type": "stage",
+    "serie": "stage",
+    "aConfirmer": false,
+    "ceintureMin": "Noire"
   },
   {
     "nom": "Tournoi Label Excellence – Juniors",
@@ -1172,27 +1225,27 @@ const competitions = [
     "aConfirmer": false
   },
   {
-    "nom": "Jujitsu – Rhône",
+    "nom": "Stage jujitsu",
     "debut": "2027-01-18",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.",
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
     "categories": [],
-    "type": "championnat",
-    "serie": "autres",
-    "aConfirmer": true
+    "type": "stage",
+    "serie": "stage",
+    "aConfirmer": false
   },
   {
     "nom": "Benjamins (individuel) – District",
     "debut": "2027-01-23",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
     "categories": [
       "Benjamin"
     ],
     "type": "championnat",
-    "aConfirmer": true,
+    "aConfirmer": false,
     "serie": "championnat"
   },
   {
@@ -1200,42 +1253,39 @@ const competitions = [
     "debut": "2027-01-23",
     "fin": null,
     "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "infos": "Ceinture verte minimum (règle indicative d'un comité voisin), à confirmer auprès du comité du Rhône.",
     "categories": [
       "Minime"
     ],
     "type": "championnat",
     "aConfirmer": true,
-    "serie": "officiels"
+    "serie": "officiels",
+    "ceintureMin": "Verte"
   },
   {
-    "nom": "Formation arbitrage – Inter-départemental",
+    "nom": "Stage départemental arbitres + commissaires sportifs",
     "debut": "2027-01-23",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.",
-    "categories": [],
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité. Conditions indicatives (modèle d'un comité voisin, saison 2023-24) : ceinture marron minimum, né en 2011 ou avant. À confirmer auprès du comité du Rhône.",
+    "categories": [
+      "Cadet",
+      "Junior",
+      "Senior",
+      "Vétéran"
+    ],
     "type": "championnat",
     "serie": "officiels",
-    "aConfirmer": true
+    "aConfirmer": false,
+    "ceintureMin": "Marron",
+    "neMaxAnnee": 2011
   },
   {
-    "nom": "Formation commissaire sportif – Inter-départemental",
+    "nom": "Stage UV4 du 1er et 2e dan",
     "debut": "2027-01-23",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.",
-    "categories": [],
-    "type": "championnat",
-    "serie": "officiels",
-    "aConfirmer": true
-  },
-  {
-    "nom": "Passage de grade UV4 1er et 2e dan (engagement)",
-    "debut": "2027-01-23",
-    "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Récapitulatif sportif du comité du Rhône (au 22/09/2026) : date de l'UV4 pour le 1er et 2e dan.",
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Récapitulatif sportif du comité du Rhône (au 22/09/2026) : date de l'UV4 pour le 1er et 2e dan. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
     "categories": [
       "Cadet",
       "Junior",
@@ -1244,7 +1294,7 @@ const competitions = [
     ],
     "type": "grade",
     "serie": "grade",
-    "aConfirmer": true
+    "aConfirmer": false
   },
   {
     "nom": "Tournoi Label Excellence – Cadets",
@@ -1279,13 +1329,14 @@ const competitions = [
     "debut": "2027-01-24",
     "fin": null,
     "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "infos": "Ceinture verte minimum (règle indicative d'un comité voisin), à confirmer auprès du comité du Rhône.",
     "categories": [
       "Cadet"
     ],
     "type": "championnat",
     "aConfirmer": true,
-    "serie": "officiels"
+    "serie": "officiels",
+    "ceintureMin": "Verte"
   },
   {
     "nom": "Interclubs",
@@ -1442,8 +1493,8 @@ const competitions = [
     "nom": "Équipes mixtes Seniors 2ème div. – Ligue AURA",
     "debut": "2027-02-13",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "lieu": "Palais des Sports Mendès France (ville non précisée)",
+    "infos": "Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
     "categories": [
       "Senior"
     ],
@@ -1456,13 +1507,14 @@ const competitions = [
     "debut": "2027-02-14",
     "fin": null,
     "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "infos": "Ceinture verte minimum (règle indicative d'un comité voisin), à confirmer auprès du comité du Rhône.",
     "categories": [
       "Cadet"
     ],
     "type": "championnat",
     "aConfirmer": true,
-    "serie": "officiels"
+    "serie": "officiels",
+    "ceintureMin": "Verte"
   },
   {
     "nom": "Minimes (individuel) – Ligue AURA",
@@ -1536,6 +1588,33 @@ const competitions = [
     "aConfirmer": false
   },
   {
+    "nom": "Équipes de clubs Seniors genrées 1ère div. – Ligue AURA",
+    "debut": "2027-02-21",
+    "fin": null,
+    "lieu": "Lieu à confirmer",
+    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "categories": [
+      "Senior"
+    ],
+    "type": "championnat",
+    "aConfirmer": true,
+    "serie": "championnat"
+  },
+  {
+    "nom": "Tournoi international vétérans BFC, Besançon – Label Excellence",
+    "debut": "2027-02-21",
+    "fin": null,
+    "lieu": "Besançon (Bourgogne-Franche-Comté)",
+    "infos": "Calendrier France Judo Vétérans 2026-2027, communiqué à titre prévisionnel : les dates peuvent changer selon la validation des salles.",
+    "categories": [
+      "Vétéran"
+    ],
+    "type": "championnat",
+    "serie": "veterans",
+    "region": "BFC",
+    "aConfirmer": false
+  },
+  {
     "nom": "Tournoi Label A – Minimes",
     "debut": "2027-02-21",
     "fin": null,
@@ -1578,33 +1657,6 @@ const competitions = [
     "aConfirmer": false
   },
   {
-    "nom": "Tournoi international vétérans BFC, Besançon – Label Excellence",
-    "debut": "2027-02-21",
-    "fin": null,
-    "lieu": "Besançon (Bourgogne-Franche-Comté)",
-    "infos": "Calendrier France Judo Vétérans 2026-2027, communiqué à titre prévisionnel : les dates peuvent changer selon la validation des salles.",
-    "categories": [
-      "Vétéran"
-    ],
-    "type": "championnat",
-    "serie": "veterans",
-    "region": "BFC",
-    "aConfirmer": false
-  },
-  {
-    "nom": "Équipes de clubs Seniors genrées 1ère div. – Ligue AURA",
-    "debut": "2027-02-21",
-    "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
-    "categories": [
-      "Senior"
-    ],
-    "type": "championnat",
-    "aConfirmer": true,
-    "serie": "championnat"
-  },
-  {
     "nom": "Passage de grade UV3 (shiai)",
     "debut": "2027-02-27",
     "fin": null,
@@ -1635,15 +1687,15 @@ const competitions = [
     "aConfirmer": false
   },
   {
-    "nom": "Jujitsu – Inter-départemental",
+    "nom": "Stage jujitsu",
     "debut": "2027-03-01",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.",
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
     "categories": [],
-    "type": "championnat",
-    "serie": "autres",
-    "aConfirmer": true
+    "type": "stage",
+    "serie": "stage",
+    "aConfirmer": false
   },
   {
     "nom": "Tournoi Label A – Seniors équipes mixtes",
@@ -1676,13 +1728,13 @@ const competitions = [
     "nom": "Benjamins (individuel) – Rhône",
     "debut": "2027-03-06",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
     "categories": [
       "Benjamin"
     ],
     "type": "championnat",
-    "aConfirmer": true,
+    "aConfirmer": false,
     "serie": "championnat"
   },
   {
@@ -1690,50 +1742,57 @@ const competitions = [
     "debut": "2027-03-06",
     "fin": null,
     "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "infos": "Ceinture verte minimum (règle indicative d'un comité voisin), à confirmer auprès du comité du Rhône.",
     "categories": [
       "Minime"
     ],
     "type": "championnat",
     "aConfirmer": true,
-    "serie": "officiels"
+    "serie": "officiels",
+    "ceintureMin": "Verte"
   },
   {
     "nom": "Cadets 2ème/3ème division – Rhône",
     "debut": "2027-03-07",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
     "categories": [
       "Cadet"
     ],
     "type": "championnat",
-    "aConfirmer": true,
+    "aConfirmer": false,
     "serie": "championnat"
   },
   {
-    "nom": "Vétérans – Inter-départemental",
+    "nom": "Stage vétérans",
     "debut": "2027-03-08",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.",
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
     "categories": [
       "Vétéran"
     ],
-    "type": "championnat",
-    "serie": "veterans",
-    "aConfirmer": true
+    "type": "stage",
+    "serie": "stage",
+    "aConfirmer": false
   },
   {
-    "nom": "Kata – Inter-départemental",
+    "nom": "Stage kata (préparation aux grades)",
     "debut": "2027-03-09",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.",
-    "categories": [],
-    "type": "championnat",
-    "serie": "autres",
-    "aConfirmer": true
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
+    "categories": [
+      "Cadet",
+      "Junior",
+      "Senior",
+      "Vétéran"
+    ],
+    "type": "stage",
+    "serie": "stage",
+    "aConfirmer": false,
+    "ceintureMin": "Noire"
   },
   {
     "nom": "Cadets Espoirs – Ligue AURA",
@@ -1814,13 +1873,14 @@ const competitions = [
     "debut": "2027-03-20",
     "fin": "2027-03-21",
     "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "infos": "Ceinture verte minimum (règle indicative d'un comité voisin), à confirmer auprès du comité du Rhône.",
     "categories": [
       "Cadet"
     ],
     "type": "championnat",
     "aConfirmer": true,
-    "serie": "officiels"
+    "serie": "officiels",
+    "ceintureMin": "Verte"
   },
   {
     "nom": "Interclubs",
@@ -1962,13 +2022,27 @@ const competitions = [
     "debut": "2027-04-03",
     "fin": null,
     "lieu": "Lieu à confirmer",
+    "infos": "Ceinture verte minimum (règle indicative d'un comité voisin), à confirmer auprès du comité du Rhône.",
+    "categories": [
+      "Minime"
+    ],
+    "type": "championnat",
+    "aConfirmer": true,
+    "serie": "officiels",
+    "ceintureMin": "Verte"
+  },
+  {
+    "nom": "Équipes de clubs Minimes – Inter-départemental",
+    "debut": "2027-04-03",
+    "fin": null,
+    "lieu": "Lieu à confirmer",
     "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
     "categories": [
       "Minime"
     ],
     "type": "championnat",
     "aConfirmer": true,
-    "serie": "officiels"
+    "serie": "championnat"
   },
   {
     "nom": "Interclubs",
@@ -2021,13 +2095,26 @@ const competitions = [
     "aConfirmer": false
   },
   {
-    "nom": "Équipes de clubs Minimes – Inter-départemental",
-    "debut": "2027-04-03",
+    "nom": "Équipes de clubs Cadets – Ligue AURA",
+    "debut": "2027-04-04",
     "fin": null,
     "lieu": "Lieu à confirmer",
     "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
     "categories": [
-      "Minime"
+      "Cadet"
+    ],
+    "type": "championnat",
+    "aConfirmer": true,
+    "serie": "championnat"
+  },
+  {
+    "nom": "Équipes mixtes Seniors 2ème div. – France",
+    "debut": "2027-04-04",
+    "fin": null,
+    "lieu": "Lieu à confirmer",
+    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "categories": [
+      "Senior"
     ],
     "type": "championnat",
     "aConfirmer": true,
@@ -2062,37 +2149,11 @@ const competitions = [
     "aConfirmer": false
   },
   {
-    "nom": "Équipes de clubs Cadets – Ligue AURA",
-    "debut": "2027-04-04",
-    "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
-    "categories": [
-      "Cadet"
-    ],
-    "type": "championnat",
-    "aConfirmer": true,
-    "serie": "championnat"
-  },
-  {
-    "nom": "Équipes mixtes Seniors 2ème div. – France",
-    "debut": "2027-04-04",
-    "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
-    "categories": [
-      "Senior"
-    ],
-    "type": "championnat",
-    "aConfirmer": true,
-    "serie": "championnat"
-  },
-  {
     "nom": "Équipes de clubs Juniors – Ligue AURA",
     "debut": "2027-04-10",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "lieu": "Arténium (Ceyrat)",
+    "infos": "Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
     "categories": [
       "Junior"
     ],
@@ -2104,26 +2165,26 @@ const competitions = [
     "nom": "Seniors 2ème division – Rhône",
     "debut": "2027-04-11",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
     "categories": [
       "Senior"
     ],
     "type": "championnat",
-    "aConfirmer": true,
+    "aConfirmer": false,
     "serie": "championnat"
   },
   {
     "nom": "Seniors 3ème division – Rhône",
     "debut": "2027-04-11",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
     "categories": [
       "Senior"
     ],
     "type": "championnat",
-    "aConfirmer": true,
+    "aConfirmer": false,
     "serie": "championnat"
   },
   {
@@ -2156,6 +2217,19 @@ const competitions = [
     "aConfirmer": true
   },
   {
+    "nom": "Équipes de départements Minimes – France",
+    "debut": "2027-04-17",
+    "fin": "2027-04-18",
+    "lieu": "Lieu à confirmer",
+    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "categories": [
+      "Minime"
+    ],
+    "type": "championnat",
+    "aConfirmer": true,
+    "serie": "championnat"
+  },
+  {
     "nom": "Master de Tours vétérans – Label Excellence",
     "debut": "2027-04-17",
     "fin": null,
@@ -2168,19 +2242,6 @@ const competitions = [
     "serie": "veterans",
     "region": "CVL",
     "aConfirmer": false
-  },
-  {
-    "nom": "Équipes de départements Minimes – France",
-    "debut": "2027-04-17",
-    "fin": "2027-04-18",
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
-    "categories": [
-      "Minime"
-    ],
-    "type": "championnat",
-    "aConfirmer": true,
-    "serie": "championnat"
   },
   {
     "nom": "Tournoi Label A – Minimes",
@@ -2251,6 +2312,19 @@ const competitions = [
     "aConfirmer": false
   },
   {
+    "nom": "Équipes de clubs Cadets – France",
+    "debut": "2027-05-01",
+    "fin": null,
+    "lieu": "Lieu à confirmer",
+    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "categories": [
+      "Cadet"
+    ],
+    "type": "championnat",
+    "aConfirmer": true,
+    "serie": "championnat"
+  },
+  {
     "nom": "Tournoi vétérans de Gérardmer – Label Excellence",
     "debut": "2027-05-01",
     "fin": null,
@@ -2263,19 +2337,6 @@ const competitions = [
     "serie": "veterans",
     "region": "GRE",
     "aConfirmer": false
-  },
-  {
-    "nom": "Équipes de clubs Cadets – France",
-    "debut": "2027-05-01",
-    "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
-    "categories": [
-      "Cadet"
-    ],
-    "type": "championnat",
-    "aConfirmer": true,
-    "serie": "championnat"
   },
   {
     "nom": "Équipes de clubs Seniors genrées 1ère div. – France",
@@ -2332,6 +2393,32 @@ const competitions = [
     "serie": "championnat"
   },
   {
+    "nom": "Équipes de clubs Minimes – Ligue AURA",
+    "debut": "2027-05-15",
+    "fin": null,
+    "lieu": "Lieu à confirmer",
+    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "categories": [
+      "Minime"
+    ],
+    "type": "championnat",
+    "aConfirmer": true,
+    "serie": "championnat"
+  },
+  {
+    "nom": "Équipes mixtes Seniors 1ère div. Pro League – France",
+    "debut": "2027-05-15",
+    "fin": null,
+    "lieu": "Lieu à confirmer",
+    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "categories": [
+      "Senior"
+    ],
+    "type": "championnat",
+    "aConfirmer": true,
+    "serie": "championnat"
+  },
+  {
     "nom": "Interclubs",
     "debut": "2027-05-15",
     "fin": null,
@@ -2359,32 +2446,6 @@ const competitions = [
     "serie": "veterans",
     "region": "PACA",
     "aConfirmer": true
-  },
-  {
-    "nom": "Équipes de clubs Minimes – Ligue AURA",
-    "debut": "2027-05-15",
-    "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
-    "categories": [
-      "Minime"
-    ],
-    "type": "championnat",
-    "aConfirmer": true,
-    "serie": "championnat"
-  },
-  {
-    "nom": "Équipes mixtes Seniors 1ère div. Pro League – France",
-    "debut": "2027-05-15",
-    "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
-    "categories": [
-      "Senior"
-    ],
-    "type": "championnat",
-    "aConfirmer": true,
-    "serie": "championnat"
   },
   {
     "nom": "Tournoi Label Excellence – Cadets",
@@ -2445,13 +2506,14 @@ const competitions = [
     "debut": "2027-05-23",
     "fin": null,
     "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)",
+    "infos": "Ceinture verte minimum (règle indicative d'un comité voisin), à confirmer auprès du comité du Rhône.",
     "categories": [
       "Minime"
     ],
     "type": "championnat",
     "aConfirmer": true,
-    "serie": "officiels"
+    "serie": "officiels",
+    "ceintureMin": "Verte"
   },
   {
     "nom": "Seniors 3ème division – France",
@@ -2507,26 +2569,32 @@ const competitions = [
     "serie": "championnat"
   },
   {
-    "nom": "Jujitsu – Ligue AURA",
+    "nom": "Stage jujitsu",
     "debut": "2027-05-31",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.",
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
     "categories": [],
-    "type": "championnat",
-    "serie": "autres",
-    "aConfirmer": true
+    "type": "stage",
+    "serie": "stage",
+    "aConfirmer": false
   },
   {
-    "nom": "Kata – Ligue AURA",
+    "nom": "Stage kata (préparation aux grades)",
     "debut": "2027-06-01",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.",
-    "categories": [],
-    "type": "championnat",
-    "serie": "autres",
-    "aConfirmer": true
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
+    "categories": [
+      "Cadet",
+      "Junior",
+      "Senior",
+      "Vétéran"
+    ],
+    "type": "stage",
+    "serie": "stage",
+    "aConfirmer": false,
+    "ceintureMin": "Noire"
   },
   {
     "nom": "Seniors 2ème division – France",
@@ -2542,17 +2610,17 @@ const competitions = [
     "serie": "championnat"
   },
   {
-    "nom": "Vétérans – Ligue AURA",
+    "nom": "Stage vétérans",
     "debut": "2027-06-07",
     "fin": null,
-    "lieu": "Lieu à confirmer",
-    "infos": "Source : récapitulatif sportif du comité du Rhône (au 22/09/2026). Public concerné non précisé : voir le comité.",
+    "lieu": "Maison du judo (Lyon)",
+    "infos": "Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
     "categories": [
       "Vétéran"
     ],
-    "type": "championnat",
-    "serie": "veterans",
-    "aConfirmer": true
+    "type": "stage",
+    "serie": "stage",
+    "aConfirmer": false
   },
   {
     "nom": "Championnats de France vétérans",

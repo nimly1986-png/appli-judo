@@ -36,6 +36,7 @@ function categoriesChoisies() {
 function visible(c, mes, ignorerNiveau) {
   if (serie !== "tous" && c.serie !== serie) { return false; }
   if (!ignorerNiveau && niveau !== "tous" && niveauCompetition(c) !== niveau) { return false; }
+  if (!autorise(c, ficheChoisie())) { return false; }
   if (mes.length === 0) { return true; }
   if (serie === "interclub") { return true; }              // type Interclubs : tous les interclubs, quelle que soit la catégorie
   if (c.categories.length === 0) { return true; }         // public non précisé dans la source : on l'affiche toujours
@@ -57,6 +58,7 @@ function creerMenu(zone, titre, options, valeur, siChange) {
   zone.appendChild(label);
 }
 function visibleSansFiltres(c, mes) {
+  if (!autorise(c, ficheChoisie())) { return false; }
   if (mes.length === 0 || c.serie === "interclub" || c.categories.length === 0) { return true; }
   return c.categories.some(function (x) { return mes.includes(x); });
 }

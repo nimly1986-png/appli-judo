@@ -102,7 +102,27 @@ function categoriesDuJudoka(fiche) {
   if (calculerAge(fiche.naissance) >= 30) { liste.push("Vétéran"); }
   return liste;
 }
+// Conditions d'accès propres à certains événements : ceinture minimale et année de naissance maximale
+function autorise(c, fiche) {
+  if (!fiche) { return true; }
+  if (c.ceintureMin) {
+    const noms = ceintures.map(function (x) { return x.nom; });
+    const rang = noms.indexOf(fiche.ceinture);
+    if (rang < noms.indexOf(c.ceintureMin)) { return false; }
+  }
+  if (c.neMaxAnnee && fiche.naissance) {
+    if (Number(String(fiche.naissance).slice(0, 4)) > c.neMaxAnnee) { return false; }
+  }
+  return true;
+}
+function texteConditions(c) {
+  const t = [];
+  if (c.ceintureMin) { t.push(c.ceintureMin === "Noire" ? "ceinture noire (1er dan et plus)" : "ceinture " + c.ceintureMin.toLowerCase() + " minimum"); }
+  if (c.neMaxAnnee) { t.push("né en " + c.neMaxAnnee + " ou avant"); }
+  return t.length ? "Réservé : " + t.join(", ") : "";
+}
 function concerne(c, fiche) {
+  if (!autorise(c, fiche)) { return false; }
   const mesCategories = categoriesDuJudoka(fiche);
   return c.categories.some(function (cat) { return mesCategories.includes(cat); });
 }
@@ -204,6 +224,7 @@ function creerCarteCompetition(c, fiche, avecChecklist, avecAgenda) {
   corps.appendChild(creer("p", "", texteDate(c)));
   corps.appendChild(creer("p", "", "📍 " + c.lieu));
   if (c.aConfirmer && !estPassee(c)) { corps.appendChild(creer("p", "petit", "⚠️ Lieu et horaires à confirmer")); }
+  if (texteConditions(c)) { corps.appendChild(creer("p", "", "🥋 " + texteConditions(c))); }
   if (c.infos) { corps.appendChild(creer("p", "petit", c.infos)); }
   const niv = NIVEAUX[rangNiveau(c)];
   corps.appendChild(creer("p", "petit", "Niveau : " + niv.nom));
