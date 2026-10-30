@@ -34,8 +34,8 @@ const REDUCTION_FAMILLE = { montant: 40, titre: "Réduction famille : −40 € 
 
 // =====================================================================
 //  INSCRIPTION : formulaire en ligne et documents à fournir.
-//  Les fichiers sont ceux du site du club. SITE_CLUB = adresse du site (à vérifier : si un lien ne s'ouvre pas,
-//  corrigez cette ligne). Chaque chemin commence par "/uploads/...".
+//  Les fichiers sont ceux du site du club. SITE_CLUB = adresse du site (confirmée par les liens complets du club ;
+//  si elle change, corrigez cette ligne). Chaque chemin commence par "/uploads/...".
 // =====================================================================
 const SITE_CLUB = "https://judo-club-olympique-chandieu.ffjudo.com";
 const FORMULAIRE_INSCRIPTION = "https://forms.gle/NNohjfwFr4mU3gLQ7";
