@@ -103,6 +103,14 @@ function categoriesDuJudoka(fiche) {
   return liste;
 }
 // Conditions d'accès propres à certains événements : ceinture minimale et année de naissance maximale
+// Liens officiels du comité du Rhône pour les interclubs (relevés le 30/10/2026 sur rhone-judo.ffjudo.com)
+const LIENS_INTERCLUB = [
+  { texte: "Page Compétitions du comité du Rhône (tous les documents)", url: "https://rhone-judo.ffjudo.com/competitions-et-stages" },
+  { texte: "Calendrier du comité du Rhône", url: "https://rhone-judo.ffjudo.com/calendrier-5" },
+  { texte: "Fiche bilan des tournois interclubs 2026-2027 (PDF)", url: "https://rhone-judo.ffjudo.com/uploads/sites/rhone-judo/userfiles/fichier/2026%202027/16%20%20Fiche%20bilan%20Tournois%20interclubs%202026%202027.pdf" },
+  { texte: "Répartition des districts A / B / C (PDF)", url: "https://rhone-judo.ffjudo.com/uploads/sites/rhone-judo/userfiles/fichier/2026%202027/33%20District%203%20Zones%202026%202027%281%29.pdf" },
+  { texte: "Catégories âge / poids / temps de combat (PDF)", url: "https://rhone-judo.ffjudo.com/uploads/sites/rhone-judo/userfiles/fichier/2026%202027/07%20%20Les%20cat%C3%A9gories%20age%20poids%20temps%202026%202027.pdf" }
+];
 function autorise(c, fiche) {
   if (!fiche) { return true; }
   if (c.ceintureMin) {
@@ -226,6 +234,16 @@ function creerCarteCompetition(c, fiche, avecChecklist, avecAgenda) {
   if (c.aConfirmer && !estPassee(c)) { corps.appendChild(creer("p", "petit", "⚠️ Lieu et horaires à confirmer")); }
   if (texteConditions(c)) { corps.appendChild(creer("p", "", "🥋 " + texteConditions(c))); }
   if (c.infos) { corps.appendChild(creer("p", "petit", c.infos)); }
+  if (c.serie === "interclub") {
+    const boite = creer("div", "liens-infos");
+    boite.appendChild(creer("p", "petit", "Toutes les infos sur les interclubs :"));
+    LIENS_INTERCLUB.forEach(function (l) {
+      const a = creer("a", "lien-info", "🔗 " + l.texte);
+      a.href = l.url; a.target = "_blank"; a.rel = "noopener";
+      boite.appendChild(a);
+    });
+    corps.appendChild(boite);
+  }
   const niv = NIVEAUX[rangNiveau(c)];
   corps.appendChild(creer("p", "petit", "Niveau : " + niv.nom));
   if (estPassee(c)) {

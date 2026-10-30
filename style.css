@@ -755,3 +755,7 @@ li.competition { position: relative; }
 @media (prefers-reduced-motion: reduce) { .favori.pop svg { animation: none; } }
 li.competition .competition-corps { padding-right: 40px; }
 #inscription h3 { margin: 18px 0 8px; } #inscription .bouton { margin-bottom: 8px; }
+
+.liens-infos { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+.liens-infos p { margin: 0; }
+.lien-info { display: block; padding: 8px 10px; border-radius: 10px; background: rgba(120,120,120,.12); color: inherit; font-size: .85rem; text-decoration: none; }
