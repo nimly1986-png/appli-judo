@@ -102,6 +102,13 @@ function dessinerTarifs() {
   table.appendChild(corps);
   zone.appendChild(creer("div", "tableau-conteneur")).appendChild(table);
   TARIFS_INFOS.forEach(function (i) { zone.appendChild(creer("p", "petit", i)); });
+  const rf = creer("div", "reduction-famille");
+  rf.appendChild(creer("span", "reduction-icone", "👨‍👩‍👧‍👦"));
+  const rt = creer("div");
+  rt.appendChild(creer("strong", "", REDUCTION_FAMILLE.titre));
+  rt.appendChild(creer("p", "", REDUCTION_FAMILLE.texte));
+  rf.appendChild(rt);
+  zone.appendChild(rf);
   if (TARIFS.every(function (t) { return t.montant === null || t.montant === undefined; })) {
     zone.appendChild(creer("p", "avertissement", "Les tarifs de la saison seront publiés prochainement par le club."));
   }
@@ -122,4 +129,22 @@ function afficher() {
   dessinerOnglets();
   if (onglet === "horaires") { dessinerHoraires(); } else { dessinerTarifs(); }
 }
+// ---------- Inscription : formulaire et documents ----------
+function dessinerInscription() {
+  const z = document.getElementById("inscription");
+  z.appendChild(creer("p", "", "Pour inscrire votre enfant (ou vous inscrire) : remplissez le formulaire en ligne, puis fournissez les documents ci-dessous."));
+  const f = creer("a", "bouton", "📋 Formulaire d'inscription en ligne");
+  f.href = FORMULAIRE_INSCRIPTION; f.target = "_blank"; f.rel = "noopener";
+  z.appendChild(f);
+  DOCUMENTS_INSCRIPTION.forEach(function (g) {
+    z.appendChild(creer("h3", "", g.groupe));
+    g.liens.forEach(function (l) {
+      const a = creer("a", "bouton secondaire lien-document", "📄 " + l.texte);
+      a.href = SITE_CLUB + l.chemin; a.target = "_blank"; a.rel = "noopener";
+      z.appendChild(a);
+    });
+  });
+  z.appendChild(creer("p", "petit", "Ces documents sont ceux du site du club ; ils s'ouvrent dans un nouvel onglet."));
+}
+dessinerInscription();
 afficher();

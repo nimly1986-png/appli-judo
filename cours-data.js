@@ -28,4 +28,26 @@ const TARIFS = [
   { nom: "Ados / Adultes", court: "Ados Adultes", public: "Mardi et jeudi 19h-20h30 · nés en 2014 et avant", categories: ["Minime", "Cadet", "Junior", "Senior", "Vétéran"], montant: 230, details: "cotisation 184 € + licence 46 €" }
 ];
 // Ce que le tarif comprend (licence, assurance...) et facilités de paiement : à renseigner par le club.
-const TARIFS_INFOS = ["Réduction famille (parent, enfant, fratrie, conjoint) : 40 € par adhérent à partir du 2ème adhérent."];
+const TARIFS_INFOS = [];
+// Réduction mise en avant sous le tableau des tarifs.
+const REDUCTION_FAMILLE = { montant: 40, titre: "Réduction famille : −40 € par adhérent", texte: "Parent, enfant, frère, sœur ou conjoint : 40 € de moins pour chaque adhérent à partir du 2ème de la famille." };
+
+// =====================================================================
+//  INSCRIPTION : formulaire en ligne et documents à fournir.
+//  Les fichiers sont ceux du site du club. SITE_CLUB = adresse du site (à vérifier : si un lien ne s'ouvre pas,
+//  corrigez cette ligne). Chaque chemin commence par "/uploads/...".
+// =====================================================================
+const SITE_CLUB = "https://judo-club-olympique-chandieu.ffjudo.com";
+const FORMULAIRE_INSCRIPTION = "https://forms.gle/NNohjfwFr4mU3gLQ7";
+const DOCUMENTS_INSCRIPTION = [
+  { groupe: "Règlement", liens: [
+    { texte: "Règlement intérieur", chemin: "/uploads/sites/judo-club-olympique-chandieu/userfiles/fichier/JCOC_R%C3%A8glement%20int%C3%A9rieur%20-%20Google%C2%A0Docs.pdf" } ] },
+  { groupe: "Santé : mineurs", liens: [
+    { texte: "Questionnaire de santé (mineurs)", chemin: "/uploads/sites/judo-club-olympique-chandieu/userfiles/fichier/QUESTIONNAIRE_SANTE_MINEURS.pdf" },
+    { texte: "Attestation du questionnaire (mineurs)", chemin: "/uploads/sites/judo-club-olympique-chandieu/userfiles/fichier/ATTESTATION_QUESTIONNAIRE_SANTE_MINEURS.pdf" } ] },
+  { groupe: "Santé : majeurs", liens: [
+    { texte: "Questionnaire médical (majeurs)", chemin: "/uploads/sites/judo-club-olympique-chandieu/userfiles/fichier/QUESTIONNAIRE_MEDICAL_MAJEURS.pdf" },
+    { texte: "Attestation du questionnaire (majeurs)", chemin: "/uploads/sites/judo-club-olympique-chandieu/userfiles/fichier/ATTESTATION_QUESTIONNAIRE_MEDICAL_MAJEURS.pdf" } ] },
+  { groupe: "Paiement", liens: [
+    { texte: "RIB du club", chemin: "/uploads/sites/judo-club-olympique-chandieu/userfiles/fichier/RIB%20JCO%20Chandieu.pdf" } ] }
+];

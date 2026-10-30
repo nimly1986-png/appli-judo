@@ -150,10 +150,38 @@ function prochaineEcheance(fiche) {
 }
 
 // ----- La checklist de chaque judoka (cases cochées, par compétition) -----
-const ETAPES = [
-  { cle: "papiers", texte: "Passeport à jour (timbre de licence)" },
-  { cle: "trajet", texte: "Trajet organisé" }
-];
+const ETAPES = [];            // plus de cases passeport / trajet : l'agenda sert maintenant aux favoris
+
+// ----- Favoris : compétitions marquées par la famille (enregistrées sur cet appareil) -----
+function lireFavoris() { try { return JSON.parse(localStorage.getItem("favoris")) || []; } catch (e) { return []; } }
+function ecrireFavoris(l) { try { localStorage.setItem("favoris", JSON.stringify(l)); } catch (e) {} }
+function estFavori(c) { return lireFavoris().indexOf(cleCompetition(c)) !== -1; }
+function basculerFavori(c) {
+  const l = lireFavoris(), cle = cleCompetition(c), i = l.indexOf(cle);
+  if (i === -1) { l.push(cle); } else { l.splice(i, 1); }
+  ecrireFavoris(l);
+  document.dispatchEvent(new Event("favoris"));
+  return i === -1;
+}
+function boutonFavori(c) {
+  const b = creer("button", "favori" + (estFavori(c) ? " actif" : ""));
+  b.type = "button";
+  b.innerHTML = '<svg viewBox="0 0 48 48" aria-hidden="true"><path class="kimono" d="M17 6l7 6 7-6 11 9-5 7-5-3v24H16V19l-5 3-5-7z"/><path class="ceinture" d="M16 30h16"/></svg>';
+  const maj = function () {
+    const on = estFavori(c);
+    b.classList.toggle("actif", on);
+    b.setAttribute("aria-pressed", on ? "true" : "false");
+    b.setAttribute("aria-label", on ? "Retirer des favoris : " + c.nom : "Ajouter aux favoris : " + c.nom);
+    b.title = on ? "Retirer des favoris" : "Mettre en favori";
+  };
+  maj();
+  b.addEventListener("click", function () {
+    const on = basculerFavori(c);
+    maj();
+    if (on) { b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop"); }
+  });
+  return b;
+}
 const cleCompetition = (c) => c.debut + "|" + c.nom + "|" + c.lieu;
 function lireCases(fiche) {
   try { return JSON.parse(localStorage.getItem("agenda-" + fiche.id)) || {}; } catch (e) { return {}; }
@@ -223,6 +251,7 @@ function creerCarteCompetition(c, fiche, avecChecklist, avecAgenda) {
     li.classList.toggle("fait", ETAPES.every(function (x) { return cases[cle] && cases[cle][x.cle]; }));
   }
   li.appendChild(corps);
+  li.appendChild(boutonFavori(c));
   return li;
 }
 

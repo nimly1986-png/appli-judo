@@ -26,7 +26,7 @@ function afficher() {
   const j = enJours(prochaine.debut);
   zone.appendChild(creer("h2", "", "⏭ Prochaine échéance"));
   const u1 = creer("ul");
-  u1.appendChild(creerCarteCompetition(prochaine, fiche, true));
+  u1.appendChild(creerCarteCompetition(prochaine, fiche, false));
   zone.appendChild(u1);
 
   // le reste, regroupé par mois
@@ -40,9 +40,24 @@ function afficher() {
       ul = creer("ul");
       zone.appendChild(ul);
     }
-    ul.appendChild(creerCarteCompetition(c, fiche, true));
+    ul.appendChild(creerCarteCompetition(c, fiche, false));
   });
 }
+
+// ----- Mes favoris (toutes les compétitions marquées, avec ou sans fiche) -----
+function afficherFavoris() {
+  const z = document.getElementById("favoris");
+  z.innerHTML = "";
+  const cles = lireFavoris();
+  const favs = toutesLesCompetitions().filter(function (c) { return cles.indexOf(cleCompetition(c)) !== -1; });
+  z.appendChild(creer("h2", "", "⭐ Mes favoris"));
+  if (!favs.length) { z.appendChild(creer("p", "message-vide", "Touchez le petit kimono d'une compétition pour la retrouver ici.")); return; }
+  const ul = creer("ul");
+  favs.forEach(function (c) { ul.appendChild(creerCarteCompetition(c, null, false, false)); });
+  z.appendChild(ul);
+}
+afficherFavoris();
+document.addEventListener("favoris", afficherFavoris);
 
 if (fiches.length === 0) {
   document.getElementById("vide").hidden = false;

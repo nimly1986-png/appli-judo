@@ -733,3 +733,25 @@ body.accueil .pied a { color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.9); }
 .tableau-cours.tableau-synthese th, .tableau-cours.tableau-synthese td { padding: 8px 5px; white-space: normal; }
 .tableau-cours.tableau-synthese td:first-child, .tableau-cours.tableau-synthese td:nth-child(2) { white-space: normal; font-weight: 600; }
 .tableau-cours.tableau-synthese th:last-child, .tableau-cours.tableau-synthese td:last-child { white-space: nowrap; text-align: right; }
+
+/* ----- cours : titres de parties, réduction famille, documents ----- */
+.titre-partie { margin: 22px 0 10px; padding-bottom: 6px; border-bottom: 3px solid var(--accent); }
+.reduction-famille { display: flex; gap: 14px; align-items: center; margin: 16px 0; padding: 14px 16px; border-radius: 16px; border: 2px solid var(--accent); background: color-mix(in srgb, var(--accent) 20%, transparent); box-shadow: 0 4px 0 color-mix(in srgb, var(--accent) 55%, black); }
+.reduction-famille .reduction-icone { font-size: 34px; line-height: 1; flex: none; }
+.reduction-famille strong { display: block; font-size: 19px; font-weight: 800; }
+.reduction-famille p { margin: 4px 0 0; font-size: 15px; }
+.lien-document { text-align: left; }
+
+/* ----- favoris : petit kimono ----- */
+li.competition { position: relative; }
+.favori { position: absolute; top: 8px; right: 8px; width: 44px; height: 44px; padding: 6px; border: 0; border-radius: 12px; background: transparent; cursor: pointer; color: var(--muet); }
+.favori svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; transition: transform .15s; }
+.favori:hover svg { transform: scale(1.08); }
+.favori.actif { color: var(--accent); }
+.favori.actif .kimono { fill: currentColor; fill-opacity: .9; }
+.favori.actif .ceinture { stroke: #1a1208; stroke-width: 4; }
+.favori.pop svg { animation: favori-pop .6s ease-out; }
+@keyframes favori-pop { 0% { transform: scale(.6) rotate(-14deg); } 40% { transform: scale(1.35) rotate(10deg); } 70% { transform: scale(.95) rotate(-5deg); } 100% { transform: scale(1) rotate(0); } }
+@media (prefers-reduced-motion: reduce) { .favori.pop svg { animation: none; } }
+li.competition .competition-corps { padding-right: 40px; }
+#inscription h3 { margin: 18px 0 8px; } #inscription .bouton { margin-bottom: 8px; }
