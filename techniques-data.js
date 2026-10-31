@@ -8,7 +8,7 @@
 //  le professeur. Une technique sans "cles" n'a pas encore de fiche détaillée.
 //  Pour modifier un niveau, changez simplement la valeur de "niveau" ci-dessous.
 // =====================================================================
-const SOURCE_NIVEAUX = "Niveaux jaune à marron : fiches « Progression française de l'enseignement du judo » de la FFJudo (programme de chaque passage de ceinture). Les techniques marquées « hors fiches FFJudo » viennent d'un livret de club (Canéjan) et ne sont pas dans ces fiches. Niveaux dan : référentiel technique CSDGE 2024-2025 (FFJudo).";
+const SOURCE_NIVEAUX = "Niveaux jaune à marron : fiches « Progression française de l'enseignement du judo » de la FFJudo (programme de chaque passage de ceinture). Les techniques marquées « hors fiches FFJudo » viennent d'un livret de club (Canéjan) et ne sont pas dans ces fiches. Niveaux dan : annexe 1 « Programme technique judo pour l\'UV2 du 1er au 3e dan » (FFJudo) : chaque technique y est rattachée au grade où elle est demandée à l\'examen.";
 
 const NIVEAUX = [
   { cle: "jaune", nom: "Jaune", couleur: "#f1c40f" },
@@ -50,9 +50,9 @@ const TECHNIQUES = [
     ["Une main à la manche, l'autre bras glissé sous l'aisselle d'uke.", "On tire uke en avant et on monte son poids sur ses pointes de pieds.", "Pivot rapide, dos contre sa poitrine, genoux fléchis ; on se redresse en tirant la manche vers le bas.", "Se pencher en avant sans plier les genoux : on tire alors uke sur soi au lieu de le charger."]),
   t("o-goshi", "O-goshi", "grande hanche", "Koshi-waza", "jaune",
     ["Une main à la manche, l'autre bras enroulé autour de la taille d'uke.", "On rapproche uke de soi, son poids vers l'avant.", "Pivot, hanches plus basses que celles d'uke, dos contre son ventre ; on se redresse pour le faire basculer sur la hanche.", "Rester trop haut : les hanches doivent passer sous celles d'uke."]),
-  t("kuzure-yoko-shiho-gatame", "Kuzure-yoko-shiho-gatame", "immobilisation latérale, variante", "Osaekomi-waza", "jaune",
+  t("kuzure-yoko-shiho-gatame", "Kuzure-yoko-shiho-gatame", "immobilisation latérale, variante", "Osaekomi-waza", "dan2",
     ["Perpendiculaire à uke, un bras passé sous sa nuque ou sa tête.", "—", "Poitrine posée sur son buste, genoux écartés pour la stabilité, on suit ses mouvements.", "Laisser les hanches se soulever : le poids doit rester collé sur uke."]),
-  t("kuzure-tate-shiho-gatame", "Kuzure-tate-shiho-gatame", "immobilisation à cheval, variante", "Osaekomi-waza", "jaune",
+  t("kuzure-tate-shiho-gatame", "Kuzure-tate-shiho-gatame", "immobilisation à cheval, variante", "Osaekomi-waza", "dan2",
     ["À cheval sur uke, tête d'uke bloquée contre soi.", "—", "Poids posé sur la poitrine d'uke, jambes écartées et genoux en appui pour ne pas être renversé.", "Se tenir trop haut : on se fait retourner par un pont."]),
   t("kuzure-kami-shiho-gatame", "Kuzure-kami-shiho-gatame", "immobilisation par le haut, variante", "Osaekomi-waza", "orange",
     ["Placé derrière la tête d'uke, bras passés sous ses épaules.", "—", "Poitrine contre sa tête et ses épaules, jambes écartées pour s'adapter à ses mouvements.", "Se laisser attirer sur le côté quand uke tourne."]),
@@ -63,7 +63,7 @@ const TECHNIQUES = [
     ["Main au revers, coude de l'autre bras qui entre sous l'aisselle d'uke.", "Uke est tiré en avant, sur la pointe des pieds.", "Pivot, genoux fléchis, dos contre uke : on se redresse et on bascule.", "Baisser la tête sans charger uke."]),
   t("harai-goshi", "Harai-goshi", "hanche de fauchage", "Koshi-waza", "orange",
     ["Revers et manche, uke rapproché.", "Uke est tiré en avant, son poids sur ses pointes.", "Pivot, hanche contre sa cuisse, la jambe balaie sa jambe tendue ; le haut du corps entraîne.", "Poser la jambe d'appui trop loin : on perd l'équilibre avec uke."]),
-  t("eri-seoi-nage", "Eri-seoi-nage", "projection d'épaule en tenant le col", "Te-waza", "orange",
+  t("eri-seoi-nage", "Eri-seoi-nage", "projection d'épaule en tenant le col", "Te-waza", "dan2",
     ["Une main à la manche, l'autre main tient le col d'uke, coude sous son aisselle.", "Uke tiré en avant.", "Pivot et flexion des jambes, le bras passe sous l'aisselle, on se redresse.", "Lâcher le col pendant le pivot."]),
   t("kubi-nage", "Kubi-nage", "projection par le cou", "Te-waza", "verte",
     ["Un bras passe autour du cou d'uke, l'autre tient sa manche.", "Uke est déséquilibré vers l'avant.", "Rotation du buste, le cou est contrôlé sans tirer dessus ; on bascule uke sur la hanche.", "Tirer sur le cou : à travailler lentement, sous contrôle du professeur."]),
@@ -119,17 +119,17 @@ const TECHNIQUES = [
     ["Les jambes encadrent la tête et le buste d'uke, son bras est coincé entre nos cuisses.", "—", "Les hanches montent, pouce de uke vers le haut, le bras est tendu.", "Écarter les genoux : le bras s'échappe."]),
   // ---------- MARRON ----------
   t("harai-tsurikomi-ashi", "Harai-tsurikomi-ashi", "balayage du pied d'appui, en soulevant", "Ashi-waza", "bleue"),
-  t("uki-waza", "Uki-waza", "technique flottante", "Sutemi-waza", "marron"),
-  t("yoko-wakare", "Yoko-wakare", "séparation latérale", "Sutemi-waza", "marron"),
+  t("uki-waza", "Uki-waza", "technique flottante", "Sutemi-waza", "dan2"),
+  t("yoko-wakare", "Yoko-wakare", "séparation latérale", "Sutemi-waza", "dan3"),
   t("kuchiki-taoshi", "Kuchiki-taoshi", "arbre pourri qui tombe", "Te-waza", "marron"),
-  t("morote-gari", "Morote-gari", "fauchage à deux mains", "Te-waza", "marron"),
+  t("morote-gari", "Morote-gari", "fauchage à deux mains", "Te-waza", "dan2"),
   t("ura-nage", "Ura-nage", "projection arrière", "Sutemi-waza", "marron"),
   t("o-soto-otoshi", "O-soto-otoshi", "grande chute extérieure", "Ashi-waza", "jaune"),
-  t("hara-gatame", "Ude-hishigi-hara-gatame", "clé de bras sur le ventre", "Kansetsu-waza", "marron"),
+  t("hara-gatame", "Ude-hishigi-hara-gatame", "clé de bras sur le ventre", "Kansetsu-waza", "dan3"),
   t("ude-gatame", "Ude-hishigi-ude-gatame", "clé de bras droite", "Kansetsu-waza", "bleue"),
-  t("sode-guruma-jime", "Sode-guruma-jime", "étranglement avec la manche, en roue", "Shime-waza", "marron"),
+  t("sode-guruma-jime", "Sode-guruma-jime", "étranglement avec la manche, en roue", "Shime-waza", "dan2"),
   t("sankaku-jime", "Sankaku-jime", "étranglement en triangle", "Shime-waza", "bleue"),
-  t("ashi-gatame-jime", "Ashi-gatame-jime", "étranglement avec la jambe", "Shime-waza", "marron"),
+  t("ashi-gatame-jime", "Ashi-gatame-jime", "étranglement avec la jambe", "Shime-waza", "dan3"),
   // ---------- 1er DAN : liste du référentiel (fiches à compléter) ----------
   t("o-soto-gari", "O-soto-gari", "grand fauchage extérieur", "Ashi-waza", "orange"),
   t("o-uchi-gari", "O-uchi-gari", "grand fauchage intérieur", "Ashi-waza", "jaune"),
@@ -163,10 +163,38 @@ const TECHNIQUES = [
   t("ude-hishigi-sankaku-gatame", "Ude-hishigi-sankaku-gatame", "luxation du coude par contrôle en triangle", "Kansetsu-waza", "bleue"),
   t("uki-gatame", "Uki-gatame", "contrôle flottant", "Osaekomi-waza", "bleue"),
   t("kibisu-gaeshi", "Kibisu-gaeshi", "renversement par le talon", "Ashi-waza", "marron"),
-  t("ude-hishigi-ashi-gatame", "Ude-hishigi-ashi-gatame", "luxation du coude par contrôle de la jambe", "Kansetsu-waza", "marron")
+  t("ude-hishigi-ashi-gatame", "Ude-hishigi-ashi-gatame", "luxation du coude par contrôle de la jambe", "Kansetsu-waza", "marron"),
+  t("tsuri-goshi", "Tsuri-goshi", "hanche en soulevant, prise à la ceinture", "Koshi-waza", "dan2"),
+  t("yoko-gake", "Yoko-gake", "crochetage latéral", "Sutemi-waza", "dan2"),
+  t("sumi-otoshi", "Sumi-otoshi", "chute dans l'angle", "Te-waza", "dan3"),
+  t("uchi-mata-sukashi", "Uchi-mata-sukashi", "esquive de l'uchi-mata (contre)", "Ashi-waza", "dan3"),
+  t("o-soto-guruma", "O-soto-guruma", "grande roue extérieure", "Ashi-waza", "dan3"),
+  t("o-soto-gaeshi", "O-soto-gaeshi", "contre du grand fauchage extérieur", "Ashi-waza", "dan3"),
+  t("harai-makikomi", "Harai-makikomi", "balayage en enroulant", "Sutemi-waza", "dan3"),
+  t("yoko-otoshi", "Yoko-otoshi", "chute sur le côté", "Sutemi-waza", "dan3"),
+  t("daki-wakare", "Daki-wakare", "séparation en enlaçant", "Sutemi-waza", "dan3"),
+  t("morote-jime", "Morote-jime", "étranglement à deux mains", "Shime-waza", "dan3"),
+  t("tsukkomi-jime", "Tsukkomi-jime", "étranglement en poussant", "Shime-waza", "dan3"),
+  t("ryo-te-jime", "Ryo-te-jime", "étranglement avec les deux mains", "Shime-waza", "dan3")
 ];
 
 // Techniques citées dans les fiches « Progression française » de la FFJudo (jaune à marron).
 // Les autres techniques jaune-marron viennent du livret de club et ne figurent pas dans les fiches officielles.
 const OFFICIELLES = ["ashi-guruma", "de-ashi-barai", "gyaku-juji-jime", "hadaka-jime", "hane-goshi", "harai-goshi", "harai-tsurikomi-ashi", "hiza-guruma", "hon-gesa-gatame", "ippon-seoi-nage", "kami-shiho-gatame", "kata-gatame", "kata-guruma", "kata-ha-jime", "kata-juji-jime", "kata-te-jime", "kibisu-gaeshi", "ko-soto-gari", "ko-uchi-gari", "ko-uchi-makikomi", "koshi-guruma", "kubi-nage", "kuchiki-taoshi", "kuzure-kami-shiho-gatame", "kuzure-kesa-gatame", "makura-gesa-gatame", "morote-seoi-nage", "nami-juji-jime", "o-goshi", "o-soto-gari", "o-soto-otoshi", "o-uchi-gari", "okuri-ashi-barai", "okuri-eri-jime", "sankaku-jime", "sasae-tsurikomi-ashi", "seoi-otoshi", "sode-tsurikomi-goshi", "soto-makikomi", "sumi-gaeshi", "tai-otoshi", "tani-otoshi", "tate-shiho-gatame", "te-guruma", "tomoe-nage", "tsurikomi-goshi", "uchi-mata", "ude-garami", "ude-gatame", "ude-hishigi-ashi-gatame", "ude-hishigi-hiza-gatame", "ude-hishigi-juji-gatame", "ude-hishigi-sankaku-gatame", "uki-gatame", "uki-goshi", "uki-otoshi", "ura-gatame", "ura-nage", "ushiro-gesa-gatame", "ushiro-goshi", "yoko-guruma", "yoko-shiho-gatame", "yoko-tomoe-nage"];
 TECHNIQUES.forEach(function (x) { x.officiel = OFFICIELLES.indexOf(x.id) >= 0; });
+
+// Annexe 1 « Programme technique judo pour l'UV2 du 1er au 3e dan » : techniques à présenter à l'examen de chaque grade.
+// "niveau" reste la ceinture où la technique est découverte ; "dan" = grade de l'annexe (1, 2 ou 3).
+const ANNEXE_DAN = {"1": ["harai-goshi", "kubi-nage", "koshi-guruma", "o-goshi", "tsurikomi-goshi", "uchi-mata", "uki-goshi", "ippon-seoi-nage", "kata-guruma", "uki-otoshi", "tai-otoshi", "morote-seoi-nage", "de-ashi-barai", "hiza-guruma", "sasae-tsurikomi-ashi", "ko-soto-gari", "ko-uchi-gari", "okuri-ashi-barai", "o-soto-gari", "o-uchi-gari", "sumi-gaeshi", "tomoe-nage", "hon-gesa-gatame", "kami-shiho-gatame", "yoko-shiho-gatame", "tate-shiho-gatame", "ushiro-gesa-gatame", "gyaku-juji-jime", "hadaka-jime", "kata-juji-jime", "nami-juji-jime", "okuri-eri-jime", "ude-hishigi-juji-gatame", "ude-gatame", "ude-garami"], "2": ["hane-goshi", "sode-tsurikomi-goshi", "tsuri-goshi", "eri-seoi-nage", "te-guruma", "morote-gari", "kuchiki-taoshi", "o-guruma", "ashi-guruma", "ko-soto-gake", "o-soto-otoshi", "tsubame-gaeshi", "ura-nage", "tani-otoshi", "yoko-guruma", "yoko-gake", "ko-uchi-makikomi", "yoko-tomoe-nage", "uki-waza", "kuzure-kami-shiho-gatame", "kuzure-kesa-gatame", "kuzure-tate-shiho-gatame", "kuzure-yoko-shiho-gatame", "sankaku-jime", "kata-ha-jime", "kata-te-jime", "sode-guruma-jime", "ude-hishigi-hiza-gatame", "ude-hishigi-waki-gatame"], "3": ["utsuri-goshi", "ushiro-goshi", "sumi-otoshi", "kibisu-gaeshi", "uchi-mata-sukashi", "sukui-nage", "yama-arashi", "seoi-otoshi", "harai-tsurikomi-ashi", "o-soto-guruma", "o-soto-gaeshi", "soto-makikomi", "harai-makikomi", "yoko-wakare", "yoko-otoshi", "tawara-gaeshi", "daki-wakare", "makura-gesa-gatame", "kata-gatame", "morote-jime", "tsukkomi-jime", "ashi-gatame-jime", "ryo-te-jime", "ude-hishigi-ashi-gatame", "ude-hishigi-sankaku-gatame", "hara-gatame"]};
+TECHNIQUES.forEach(function (x) {
+  Object.keys(ANNEXE_DAN).forEach(function (g) { if (ANNEXE_DAN[g].indexOf(x.id) >= 0) { x.dan = Number(g); } });
+});
+// Techniques du niveau choisi. Sans cumul : ceinture = fiche de cette ceinture ; dan = annexe UV2 de ce grade.
+// Avec cumul : tout ce qui est étudié jusqu'à ce niveau.
+function techniquesDuNiveau(cle, cumul) {
+  const ordre = NIVEAUX.map(function (n) { return n.cle; }), idx = ordre.indexOf(cle);
+  return TECHNIQUES.filter(function (x) {
+    if (cumul) { return ordre.indexOf(x.niveau) <= idx; }
+    return /^dan/.test(cle) ? x.dan === Number(cle.slice(3)) : x.niveau === cle;
+  });
+}

@@ -15,8 +15,7 @@ function nomNiveau(cle) { return NIVEAUX.find(function (n) { return n.cle === cl
 
 // Techniques : celles des fiches FFJudo (jaune à marron) et du référentiel dan, jusqu'à la ceinture choisie
 function poolTech() {
-  const idx = ORDRE.indexOf(niveau);
-  return TECHNIQUES.filter(function (t) { return ORDRE.indexOf(t.niveau) <= idx && (t.officiel || /^dan/.test(t.niveau)); });
+  return techniquesDuNiveau(niveau, true).filter(function (t) { return t.officiel || /^dan/.test(t.niveau); });
 }
 function ficheDe(t) { return PROGRAMMES[t.niveau] ? PROGRAMMES[t.niveau].fiche : null; }
 // Lexique : mots cités dans les fiches jusqu'à la ceinture choisie
@@ -65,7 +64,8 @@ function fabriquer() {
   const mode = selMode.value;
   const T = poolTech(), L = poolLex(), Q = [];
   const genT = [
-    function (t) { const f = ficheDe(t); if (!f) { return genT[1](t); } return question("Dans quelle fiche de la progression FFJudo travaille-t-on " + t.nom + " ?", f, distracteurs(f, Object.keys(PROGRAMMES).map(function (n) { return PROGRAMMES[n].fiche; })), t.nom + " (" + t.trad + ") est au programme « " + f + " ».", "technique.html?id=" + encodeURIComponent(t.id)); },
+    function (t) { if (!t.dan || !/^dan/.test(niveau)) { return genT[2](t); } const g = t.dan === 1 ? "1er dan" : t.dan + "e dan"; return question("À l'examen de quel grade (UV2) trouve-t-on " + t.nom + " ?", g, ["1er dan", "2e dan", "3e dan"].filter(function (x) { return x !== g; }), t.nom + " est demandé à l'UV2 du " + g + " (annexe 1).", "technique.html?id=" + encodeURIComponent(t.id)); },
+    function (t) { const f = ficheDe(t); if (!f) { return genT[2](t); } return question("Dans quelle fiche de la progression FFJudo travaille-t-on " + t.nom + " ?", f, distracteurs(f, Object.keys(PROGRAMMES).map(function (n) { return PROGRAMMES[n].fiche; })), t.nom + " (" + t.trad + ") est au programme « " + f + " ».", "technique.html?id=" + encodeURIComponent(t.id)); },
     function (t) { return question("Que signifie « " + t.nom + " » ?", t.trad, distracteurs(t.trad, T.map(function (x) { return x.trad; })), t.nom + " : " + t.trad + " (" + t.famille + ").", "technique.html?id=" + encodeURIComponent(t.id)); },
     function (t) { return question("Quelle technique correspond à « " + t.trad + " » ?", t.nom, distracteurs(t.nom, T.map(function (x) { return x.nom; })), t.nom + " : " + t.trad + ".", "technique.html?id=" + encodeURIComponent(t.id)); },
     function (t) { return question("À quelle famille appartient " + t.nom + " ?", t.famille, distracteurs(t.famille, Object.keys(FAMILLES)), t.nom + " fait partie des " + t.famille + " (" + FAMILLES[t.famille].sens + ").", "technique.html?id=" + encodeURIComponent(t.id)); }

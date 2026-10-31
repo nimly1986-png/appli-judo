@@ -23,7 +23,7 @@ const PROGRAMMES = {
     culture: "1882 : naissance du judo et création du premier Kodokan. Jigoro Kano (1860-1938), fondateur du judo. 1935 : premier club de judo français, fondé par Kawaishi Mikinosuke." },
   dan1:   { fiche: "Marron → Noire", but: "Perfectionnement individualisé", seances: "", valeurs: "Réalisation de soi et responsabilité", rythme: "6 à 8 compétitions par an",
     entrainement: "J'utilise tous les procédés d'entraînement.",
-    regles: "", plus: "Pas de nouvelle technique : j'utilise enchaînements, combinaisons et confusions autour de mon tokui waza, jusque dans le ne waza ; j'étudie le Nage no kata ou le Kodokan goshin jitsu. Examen shodan (dominante technique ou compétition) : UV1 kata, UV2 technique, UV3 efficacité, UV4 engagement personnel.",
+    regles: "", plus: "Pas de nouvelle technique dans la fiche (les techniques de l'examen sont dans l'annexe 1, UV2) : j'utilise enchaînements, combinaisons et confusions autour de mon tokui waza, jusque dans le ne waza ; j'étudie le Nage no kata ou le Kodokan goshin jitsu. Examen shodan (dominante technique ou compétition) : UV1 kata, UV2 technique, UV3 efficacité, UV4 engagement personnel.",
     culture: "Champions français : Shozo Awazu (1923-2016), grand maître du judo français." }
 };
 

@@ -88,10 +88,7 @@ function afficher() {
   const cumul = document.getElementById("cumul").checked;
   const fam = selFamille.value;
   const idx = ORDRE.indexOf(niveau);
-  const liste = TECHNIQUES.filter(function (t) {
-    const i = ORDRE.indexOf(t.niveau);
-    return (cumul ? i <= idx : i === idx) && (!fam || t.famille === fam);
-  });
+  const liste = techniquesDuNiveau(niveau, cumul).filter(function (t) { return !fam || t.famille === fam; });
   document.body.style.setProperty("--accent", COULEUR[niveau]);
   document.getElementById("compte-tech").textContent = liste.length + " technique" + (liste.length > 1 ? "s" : "") + " — " + nomNiveau(niveau);
   const zone = document.getElementById("catalogue");
@@ -99,7 +96,7 @@ function afficher() {
   if (liste.length === 0) {
     const p = document.createElement("p");
     p.className = "message-vide";
-    p.textContent = niveau === "dan1" ? "Aucune nouvelle technique : la fiche Marron → Noire demande de maîtriser tout le programme précédent (voir le programme ci-dessus). Coche « Inclure aussi les ceintures précédentes » pour tout voir." : "Aucune technique pour ce choix.";
+    p.textContent = "Aucune technique pour ce choix.";
     zone.appendChild(p);
   }
   liste.forEach(function (t) {
@@ -112,7 +109,7 @@ function afficher() {
     const trad = document.createElement("span");
     trad.textContent = t.trad;
     const fa = document.createElement("em");
-    fa.textContent = t.famille + (t.officiel || /^dan/.test(t.niveau) ? "" : " · hors fiches FFJudo (livret de club)") + (t.prise ? "" : " · fiche à compléter");
+    fa.textContent = t.famille + (t.dan && !/^dan/.test(t.niveau) ? " · UV2 " + (t.dan === 1 ? "1er" : t.dan + "e") + " dan" : "") + (t.prise ? "" : " · fiche à compléter");
     a.appendChild(nom); a.appendChild(trad); a.appendChild(fa);
     zone.appendChild(a);
   });
