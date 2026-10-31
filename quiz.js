@@ -13,8 +13,40 @@ const selMode = document.getElementById("mode");
 function melanger(t) { const a = t.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
 function nomNiveau(cle) { return NIVEAUX.find(function (n) { return n.cle === cle; }).nom; }
 
-function poolTech() { const idx = ORDRE.indexOf(niveau); return TECHNIQUES.filter(function (t) { return ORDRE.indexOf(t.niveau) <= idx; }); }
-function poolLex() { const l = []; LEXIQUE.forEach(function (k) { k.mots.forEach(function (m) { l.push({ jp: m[0], fr: m[1] }); }); }); return l; }
+// Techniques : celles des fiches FFJudo (jaune à marron) et du référentiel dan, jusqu'à la ceinture choisie
+function poolTech() {
+  const idx = ORDRE.indexOf(niveau);
+  return TECHNIQUES.filter(function (t) { return ORDRE.indexOf(t.niveau) <= idx && (t.officiel || /^dan/.test(t.niveau)); });
+}
+function ficheDe(t) { return PROGRAMMES[t.niveau] ? PROGRAMMES[t.niveau].fiche : null; }
+// Lexique : mots cités dans les fiches jusqu'à la ceinture choisie
+function poolLex() {
+  const idx = ORDRE.indexOf(niveau), niveaux = {};
+  Object.keys(NIVEAU_LEXIQUE).forEach(function (n) { if (ORDRE.indexOf(n) <= idx) { NIVEAU_LEXIQUE[n].forEach(function (k) { niveaux[k] = n; }); } });
+  const l = [];
+  LEXIQUE.forEach(function (k) { k.mots.forEach(function (m) { if (niveaux[cleLexique(m[0])]) { l.push({ jp: m[0], fr: m[1], niveau: niveaux[cleLexique(m[0])] }); } }); });
+  return l;
+}
+// Valeurs et culture citées dans les fiches, jusqu'à la ceinture choisie
+function questionsCulture() {
+  const idx = ORDRE.indexOf(niveau), Q = [];
+  const progs = Object.keys(PROGRAMMES).filter(function (n) { return ORDRE.indexOf(n) <= idx; });
+  const valeurs = Object.keys(PROGRAMMES).map(function (n) { return PROGRAMMES[n].valeurs; });
+  progs.forEach(function (n) {
+    const p = PROGRAMMES[n];
+    Q.push(question("Quelles valeurs sont associées au passage de ceinture « " + p.fiche + " » ?", p.valeurs, distracteurs(p.valeurs, valeurs), "Fiche FFJudo « " + p.fiche + " » : " + p.valeurs + "."));
+  });
+  if (idx >= ORDRE.indexOf("marron")) {
+    Q.push(question("En quelle année a été créé le premier Kodokan ?", "1882", ["1860", "1935", "1923"], "Le premier Kodokan a été créé en 1882 (fiche « Bleue → Marron »)."));
+    Q.push(question("Qui a fondé le premier club de judo français, en 1935 ?", "Kawaishi Mikinosuke", ["Jigoro Kano", "Shozo Awazu", "Kyuzo Mifune"], "Le premier club de judo français a été fondé en 1935 par Kawaishi Mikinosuke (fiche « Bleue → Marron »)."));
+    Q.push(question("Qui est le fondateur du judo ?", "Jigoro Kano", ["Kawaishi Mikinosuke", "Shozo Awazu", "Kyuzo Mifune"], "Jigoro Kano (1860-1938) est le fondateur du judo (fiche « Bleue → Marron »)."));
+  }
+  if (idx >= ORDRE.indexOf("dan1")) {
+    Q.push(question("À l'examen shodan, que valide l'UV2 ?", "La technique", ["Le kata", "L'efficacité", "L'engagement personnel"], "Examen shodan : UV1 kata, UV2 technique, UV3 efficacité, UV4 engagement personnel."));
+    Q.push(question("À l'examen shodan, que valide l'UV1 ?", "Le kata", ["La technique", "L'efficacité", "L'engagement personnel"], "Examen shodan : UV1 kata, UV2 technique, UV3 efficacité, UV4 engagement personnel."));
+  }
+  return Q;
+}
 
 // 3 mauvaises réponses différentes de la bonne (comparaison en minuscules)
 function distracteurs(bonne, source, extra) {
@@ -33,6 +65,7 @@ function fabriquer() {
   const mode = selMode.value;
   const T = poolTech(), L = poolLex(), Q = [];
   const genT = [
+    function (t) { const f = ficheDe(t); if (!f) { return genT[1](t); } return question("Dans quelle fiche de la progression FFJudo travaille-t-on " + t.nom + " ?", f, distracteurs(f, Object.keys(PROGRAMMES).map(function (n) { return PROGRAMMES[n].fiche; })), t.nom + " (" + t.trad + ") est au programme « " + f + " ».", "technique.html?id=" + encodeURIComponent(t.id)); },
     function (t) { return question("Que signifie « " + t.nom + " » ?", t.trad, distracteurs(t.trad, T.map(function (x) { return x.trad; })), t.nom + " : " + t.trad + " (" + t.famille + ").", "technique.html?id=" + encodeURIComponent(t.id)); },
     function (t) { return question("Quelle technique correspond à « " + t.trad + " » ?", t.nom, distracteurs(t.nom, T.map(function (x) { return x.nom; })), t.nom + " : " + t.trad + ".", "technique.html?id=" + encodeURIComponent(t.id)); },
     function (t) { return question("À quelle famille appartient " + t.nom + " ?", t.famille, distracteurs(t.famille, Object.keys(FAMILLES)), t.nom + " fait partie des " + t.famille + " (" + FAMILLES[t.famille].sens + ").", "technique.html?id=" + encodeURIComponent(t.id)); }
@@ -41,13 +74,16 @@ function fabriquer() {
     function (m) { return question("Que signifie « " + m.jp + " » ?", m.fr, distracteurs(m.fr, L.map(function (x) { return x.fr; })), m.jp + " : " + m.fr + "."); },
     function (m) { return question("Comment dit-on « " + m.fr + " » en japonais ?", m.jp, distracteurs(m.jp, L.map(function (x) { return x.jp; })), m.fr + " se dit « " + m.jp + " »."); }
   ];
-  const nT = mode === "tech" ? NB_QUESTIONS : mode === "lex" ? 0 : Math.ceil(NB_QUESTIONS / 2);
-  const nL = NB_QUESTIONS - nT;
+  const C = mode === "mix" ? melanger(questionsCulture()) : [];
+  const nC = Math.min(C.length, 2);
+  const nT = mode === "tech" ? NB_QUESTIONS : mode === "lex" ? 0 : Math.ceil((NB_QUESTIONS - nC) / 2);
+  const nL = NB_QUESTIONS - nT - nC;
   // techniques : on privilégie celles du niveau choisi (poids double)
   const lourdes = []; T.forEach(function (t) { lourdes.push(t); if (t.niveau === niveau) { lourdes.push(t); } });
   const tires = [];
   melanger(lourdes).forEach(function (t) { if (tires.length < nT && tires.indexOf(t) < 0) { tires.push(t); } });
   tires.forEach(function (t) { Q.push(genT[Math.floor(Math.random() * genT.length)](t)); });
+  C.slice(0, nC).forEach(function (q) { Q.push(q); });
   melanger(L).slice(0, nL).forEach(function (m) { Q.push(genL[Math.floor(Math.random() * genL.length)](m)); });
   return melanger(Q);
 }
@@ -68,7 +104,8 @@ function demarrer() {
   dessinerNiveaux();
   document.body.style.setProperty("--accent", COULEUR[niveau]);
   const nb = poolTech().length;
-  document.getElementById("info-niveau").textContent = "Programme « " + nomNiveau(niveau) + " » : " + nb + " techniques en réserve (ceintures précédentes comprises).";
+  const prog = PROGRAMMES[niveau];
+  document.getElementById("info-niveau").textContent = "Fiche FFJudo « " + (prog ? prog.fiche : nomNiveau(niveau)) + " » : " + nb + " techniques et " + poolLex().length + " mots de lexique en réserve (ceintures précédentes comprises).";
   questions = fabriquer(); rang = 0; score = 0;
   afficher();
 }

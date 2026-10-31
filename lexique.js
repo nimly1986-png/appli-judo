@@ -8,6 +8,7 @@ const PARCOURS = [
   ["Entraînement et notions", "var(--vert)", "ceinture verte"],
   ["Familles de techniques", "var(--bleu)", "ceinture bleue"],
   ["Mots qu'on retrouve dans les noms de techniques", "var(--marron)", "ceinture marron"],
+  ["Progression française (fiches FFJudo)", "var(--accent)", "vocabulaire des fiches FFJudo"],
   ["Arbitrage : commandements", "var(--noire)", "ceinture noire"],
   ["Arbitrage : scores et sanctions", "var(--rouge)", "grades les plus hauts (rouge)"]
 ];

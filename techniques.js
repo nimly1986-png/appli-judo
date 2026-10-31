@@ -47,6 +47,25 @@ function dessinerFicheFFJudo() {
     z.appendChild(a);
   });
 }
+function dessinerProgramme() {
+  const z = document.getElementById("programme");
+  z.innerHTML = "";
+  const p = PROGRAMMES[niveau];
+  if (!p) { return; }
+  const d = document.createElement("details");
+  const sm = document.createElement("summary");
+  sm.textContent = "Programme officiel FFJudo : " + p.fiche;
+  d.appendChild(sm);
+  [["Objectif", p.but], ["Séances", p.seances], ["Valeurs", p.valeurs], ["Rythme", p.rythme], ["Entraînement", p.entrainement],
+   ["Règles du jeu", p.regles], ["À savoir faire", p.plus], ["Culture", p.culture]].forEach(function (l) {
+    if (!l[1]) { return; }
+    const li = document.createElement("p");
+    const b = document.createElement("strong"); b.textContent = l[0] + " : ";
+    li.appendChild(b); li.appendChild(document.createTextNode(l[1]));
+    d.appendChild(li);
+  });
+  z.appendChild(d);
+}
 function nomNiveau(cle) { return NIVEAUX.find(function (n) { return n.cle === cle; }).nom; }
 
 function dessinerNiveaux() {
@@ -65,6 +84,7 @@ function dessinerNiveaux() {
 function afficher() {
   dessinerNiveaux();
   dessinerFicheFFJudo();
+  dessinerProgramme();
   const cumul = document.getElementById("cumul").checked;
   const fam = selFamille.value;
   const idx = ORDRE.indexOf(niveau);
@@ -79,7 +99,7 @@ function afficher() {
   if (liste.length === 0) {
     const p = document.createElement("p");
     p.className = "message-vide";
-    p.textContent = "Aucune technique pour ce choix.";
+    p.textContent = niveau === "dan1" ? "Aucune nouvelle technique : la fiche Marron → Noire demande de maîtriser tout le programme précédent (voir le programme ci-dessus). Coche « Inclure aussi les ceintures précédentes » pour tout voir." : "Aucune technique pour ce choix.";
     zone.appendChild(p);
   }
   liste.forEach(function (t) {
@@ -92,7 +112,7 @@ function afficher() {
     const trad = document.createElement("span");
     trad.textContent = t.trad;
     const fa = document.createElement("em");
-    fa.textContent = t.famille + (t.prise ? "" : " · fiche à compléter");
+    fa.textContent = t.famille + (t.officiel || /^dan/.test(t.niveau) ? "" : " · hors fiches FFJudo (livret de club)") + (t.prise ? "" : " · fiche à compléter");
     a.appendChild(nom); a.appendChild(trad); a.appendChild(fa);
     zone.appendChild(a);
   });

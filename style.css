@@ -770,3 +770,6 @@ li.competition .competition-corps { padding-right: 40px; }
 .quiz-retour { display: flex; flex-direction: column; gap: 10px; }
 .quiz-score { font-size: 1.6rem; font-weight: 700; }
 .fiches-ffjudo { display: flex; flex-direction: column; gap: 6px; margin: 10px 0; }
+.programme details { border: 2px solid var(--accent); border-radius: 12px; padding: 10px 12px; margin: 8px 0; }
+.programme summary { font-weight: 700; cursor: pointer; }
+.programme p { margin: 8px 0 0; font-size: .9rem; }

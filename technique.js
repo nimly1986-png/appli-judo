@@ -55,5 +55,6 @@ if (!tech) {
   if (tech.famille === "Shime-waza" || tech.famille === "Kansetsu-waza") {
     zone.appendChild(el("p", "avertissement", "Sécurité : étranglements et clés se travaillent lentement, avec un partenaire et sous le contrôle du professeur. Dès que uke tape deux fois (maitte), on lâche immédiatement. Ils ne sont pas autorisés en compétition chez les jeunes."));
   }
+  if (!tech.officiel && !/^dan/.test(tech.niveau)) { zone.appendChild(el("p", "avertissement", "Cette technique ne figure pas dans les fiches « Progression française » de la FFJudo : son niveau vient d'un livret de club.")); }
   zone.appendChild(el("p", "note-source", "Textes rédigés pour l'appli, à faire relire par le professeur. Niveau d'après : " + SOURCE_NIVEAUX));
 }
