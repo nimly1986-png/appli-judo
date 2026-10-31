@@ -27,6 +27,26 @@ function choisirJudoka() {
       f.prenom + " a la ceinture " + f.ceinture.toLowerCase() + " : le programme à préparer est « " + nomNiveau(niveau) + " ».";
   }
 }
+// Fiches officielles « Progression française » de la FFJudo (page https://www.ffjudo.com/progression-francaise)
+const FICHES_FFJUDO = {
+  jaune:  { titre: "Blanche → Jaune",  page: "https://www.ffjudo.com/progression-francaise-blanc-jaune",   pdf: "https://www.ffjudo.com/resource-file/document/1768579262_179e7d7720f0afcc22ca.pdf" },
+  orange: { titre: "Jaune → Orange",   page: "https://www.ffjudo.com/progression-francaise-jaune-orange",  pdf: "https://www.ffjudo.com/resource-file/document/1768579276_edc4084a6f434a24738c.pdf" },
+  verte:  { titre: "Orange → Verte",   page: "https://www.ffjudo.com/progression-francaise-orange-vert",   pdf: "https://www.ffjudo.com/resource-file/document/1768579286_514712d27e2dc8c1e008.pdf" },
+  bleue:  { titre: "Verte → Bleue",    page: "https://www.ffjudo.com/progression-francaise-vert-bleu",     pdf: "https://www.ffjudo.com/resource-file/document/1768579296_7f7eeb7afebc8589d64b.pdf" },
+  marron: { titre: "Bleue → Marron",   page: "https://www.ffjudo.com/progression-francaise-bleu-marron",   pdf: "https://www.ffjudo.com/resource-file/document/1768579307_fcc6b485765287b2e45e.pdf" },
+  dan1:   { titre: "Marron → Noire",   page: "https://www.ffjudo.com/progression-francaise-marron-noir",   pdf: "https://www.ffjudo.com/resource-file/document/1768579322_b0de139ff940953d0d12.pdf" }
+};
+function dessinerFicheFFJudo() {
+  const z = document.getElementById("fiche-ffjudo");
+  z.innerHTML = "";
+  const f = FICHES_FFJUDO[niveau];
+  if (!f) { return; }
+  [["📄 Fiche officielle FFJudo (PDF) : " + f.titre, f.pdf], ["🌐 Page de présentation : " + f.titre, f.page]].forEach(function (l) {
+    const a = document.createElement("a");
+    a.className = "bouton secondaire"; a.href = l[1]; a.target = "_blank"; a.rel = "noopener"; a.textContent = l[0];
+    z.appendChild(a);
+  });
+}
 function nomNiveau(cle) { return NIVEAUX.find(function (n) { return n.cle === cle; }).nom; }
 
 function dessinerNiveaux() {
@@ -44,6 +64,7 @@ function dessinerNiveaux() {
 
 function afficher() {
   dessinerNiveaux();
+  dessinerFicheFFJudo();
   const cumul = document.getElementById("cumul").checked;
   const fam = selFamille.value;
   const idx = ORDRE.indexOf(niveau);

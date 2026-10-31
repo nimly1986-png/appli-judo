@@ -759,3 +759,14 @@ li.competition .competition-corps { padding-right: 40px; }
 .liens-infos { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
 .liens-infos p { margin: 0; }
 .lien-info { display: block; padding: 8px 10px; border-radius: 10px; background: rgba(120,120,120,.12); color: inherit; font-size: .85rem; text-decoration: none; }
+
+/* Quiz */
+.quiz { display: flex; flex-direction: column; gap: 10px; margin: 12px 0; }
+.quiz h2 { margin: 4px 0 8px; font-size: 1.1rem; }
+.quiz-choix { text-align: left; padding: 12px 14px; border-radius: 12px; border: 2px solid rgba(120,120,120,.35); background: transparent; color: inherit; font: inherit; cursor: pointer; }
+.quiz-choix:disabled { cursor: default; }
+.quiz-choix.juste { border-color: #27ae60; background: rgba(39,174,96,.18); }
+.quiz-choix.faux { border-color: #c0392b; background: rgba(192,57,43,.18); }
+.quiz-retour { display: flex; flex-direction: column; gap: 10px; }
+.quiz-score { font-size: 1.6rem; font-weight: 700; }
+.fiches-ffjudo { display: flex; flex-direction: column; gap: 6px; margin: 10px 0; }
