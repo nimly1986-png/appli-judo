@@ -158,10 +158,12 @@ function creerCarte(fiche) {
     carte.appendChild(infos);
   }
 
-  if (fiche.contacts) {
+  if (fiche.contacts || fiche.email || fiche.telephone) {
     const contacts = creer("div", "carte-contacts");
     contacts.appendChild(creer("strong", "", "Responsable légal / contacts"));
-    contacts.appendChild(creer("p", "", fiche.contacts));
+    if (fiche.contacts) { contacts.appendChild(creer("p", "", fiche.contacts)); }
+    if (fiche.telephone) { contacts.appendChild(creer("p", "", "📞 " + fiche.telephone)); }
+    if (fiche.email) { contacts.appendChild(creer("p", "", "✉️ " + fiche.email)); }
     carte.appendChild(contacts);
   }
 

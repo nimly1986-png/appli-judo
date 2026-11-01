@@ -3,7 +3,7 @@
 //  Information ouverte à tous : elle ne dépend d'aucune fiche judoka.
 // =====================================================================
 const zone = document.getElementById("tableau");
-let onglet = "horaires";
+let onglet = "planning";
 
 function anneesDe(nom) {
   if (nom === "Vétéran") { return "30 ans et plus"; }
@@ -77,7 +77,6 @@ function dessinerHoraires() {
     const quand = [];
     lignes.forEach(function (c) { quand.push(c.jour + " " + c.debut + "–" + c.fin); });
     t.appendChild(creer("p", "petit", quand.join(" · ")));
-    t.appendChild(creer("p", "petit", lignes[0].public));
     p.appendChild(t);
     leg.appendChild(p);
   });
@@ -101,7 +100,6 @@ function dessinerTarifs() {
   });
   table.appendChild(corps);
   zone.appendChild(creer("div", "tableau-conteneur")).appendChild(table);
-  TARIFS_INFOS.forEach(function (i) { zone.appendChild(creer("p", "petit", i)); });
   const rf = creer("div", "reduction-famille");
   rf.appendChild(creer("span", "reduction-icone", "👨‍👩‍👧‍👦"));
   const rt = creer("div");
@@ -109,17 +107,33 @@ function dessinerTarifs() {
   rt.appendChild(creer("p", "", REDUCTION_FAMILLE.texte));
   rf.appendChild(rt);
   zone.appendChild(rf);
-  if (TARIFS.every(function (t) { return t.montant === null || t.montant === undefined; })) {
-    zone.appendChild(creer("p", "avertissement", "Les tarifs de la saison seront publiés prochainement par le club."));
-  }
 }
 
+// ---------- Onglet Documents d'inscription ----------
+function dessinerDocuments() {
+  const f = creer("a", "bouton", "Remplir le formulaire en ligne");
+  f.href = FORMULAIRE_INSCRIPTION; f.target = "_blank"; f.rel = "noopener";
+  zone.appendChild(f);
+  DOCUMENTS_INSCRIPTION.forEach(function (g) {
+    zone.appendChild(creer("h3", "titre-docs", g.groupe));
+    const liste = creer("div", "liste-docs");
+    g.liens.forEach(function (l) {
+      const a = creer("a", "ligne-doc", l.texte);
+      a.href = SITE_CLUB + l.chemin; a.target = "_blank"; a.rel = "noopener";
+      liste.appendChild(a);
+    });
+    zone.appendChild(liste);
+  });
+}
+
+const ONGLETS = [["planning", "Planning"], ["tarifs", "Tarifs"], ["documents", "Documents"]];
 function dessinerOnglets() {
   const z = document.getElementById("onglets");
   z.innerHTML = "";
-  [["horaires", "🕒 Horaires"], ["tarifs", "💶 Tarifs"]].forEach(function (o) {
+  ONGLETS.forEach(function (o) {
     const b = creer("button", "chip" + (o[0] === onglet ? " actif" : ""), o[1]);
     b.type = "button"; b.style.setProperty("--c", "var(--texte)");
+    b.setAttribute("role", "tab"); b.setAttribute("aria-selected", o[0] === onglet ? "true" : "false");
     b.addEventListener("click", function () { onglet = o[0]; afficher(); });
     z.appendChild(b);
   });
@@ -127,24 +141,6 @@ function dessinerOnglets() {
 function afficher() {
   zone.innerHTML = "";
   dessinerOnglets();
-  if (onglet === "horaires") { dessinerHoraires(); } else { dessinerTarifs(); }
+  if (onglet === "planning") { dessinerHoraires(); } else if (onglet === "tarifs") { dessinerTarifs(); } else { dessinerDocuments(); }
 }
-// ---------- Inscription : formulaire et documents ----------
-function dessinerInscription() {
-  const z = document.getElementById("inscription");
-  z.appendChild(creer("p", "", "Pour inscrire votre enfant (ou vous inscrire) : remplissez le formulaire en ligne, puis fournissez les documents ci-dessous."));
-  const f = creer("a", "bouton", "📋 Formulaire d'inscription en ligne");
-  f.href = FORMULAIRE_INSCRIPTION; f.target = "_blank"; f.rel = "noopener";
-  z.appendChild(f);
-  DOCUMENTS_INSCRIPTION.forEach(function (g) {
-    z.appendChild(creer("h3", "", g.groupe));
-    g.liens.forEach(function (l) {
-      const a = creer("a", "bouton secondaire lien-document", "📄 " + l.texte);
-      a.href = SITE_CLUB + l.chemin; a.target = "_blank"; a.rel = "noopener";
-      z.appendChild(a);
-    });
-  });
-  z.appendChild(creer("p", "petit", "Ces documents sont ceux du site du club ; ils s'ouvrent dans un nouvel onglet."));
-}
-dessinerInscription();
 afficher();

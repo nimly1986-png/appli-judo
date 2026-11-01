@@ -773,3 +773,86 @@ li.competition .competition-corps { padding-right: 40px; }
 .programme details { border: 2px solid var(--accent); border-radius: 12px; padding: 10px 12px; margin: 8px 0; }
 .programme summary { font-weight: 700; cursor: pointer; }
 .programme p { margin: 8px 0 0; font-size: .9rem; }
+
+/* ----- Cours : onglet Documents ----- */
+.titre-docs { margin: 20px 0 6px; font-size: 14px; font-weight: 700; color: var(--muet); }
+.liste-docs { border: 1px solid var(--trait); border-radius: 14px; overflow: hidden; background: var(--surface); }
+.ligne-doc { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 16px; color: var(--texte); text-decoration: none; font-weight: 600; }
+.ligne-doc + .ligne-doc { border-top: 1px solid var(--trait); }
+.ligne-doc::after { content: "›"; color: var(--muet); font-size: 22px; line-height: 1; }
+.ligne-doc:active { background: var(--calque); }
+
+/* ----- Admin : dossier d'inscription, règlement, relance ----- */
+.bloc-dossier { border: 1px solid var(--trait); border-radius: 14px; padding: 10px 14px 14px; margin: 14px 0; background: var(--surface); }
+.bloc-dossier legend { padding: 0 8px; font-weight: 700; }
+.bloc-dossier .case { display: flex; align-items: center; gap: 10px; margin: 8px 0; }
+.modes { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; margin-top: 6px; }
+.ligne-cheque { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; align-items: end; padding: 10px 0; border-top: 1px dashed var(--trait); }
+.ligne-cheque strong { grid-column: 1 / -1; }
+.alerte-reglement { margin: 12px 0; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--orange); background: color-mix(in srgb, var(--orange) 12%, transparent); }
+.actions-relance { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.ligne-alerte { display: block; width: 100%; margin: 6px 0 0; padding: 9px 12px; text-align: left; font: inherit; font-size: 14px; color: var(--texte); background: var(--surface); border: 1px solid var(--trait); border-radius: 10px; cursor: pointer; }
+.ligne-alerte.urgent { border-color: var(--rouge); font-weight: 700; }
+.badge { display: inline-block; margin: 1px 3px 1px 0; padding: 2px 8px; border-radius: 999px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.badge.ok { color: var(--vert); background: color-mix(in srgb, var(--vert) 14%, transparent); }
+.badge.alerte { color: var(--rouge); background: color-mix(in srgb, var(--rouge) 14%, transparent); }
+
+/* =====================================================================
+   BOUTONS RONDS : version 2 (médaillons en relief, teintes profondes, icônes fines).
+   Pour revenir aux anciennes tuiles carrées : supprimer tout ce bloc, jusqu'à la fin du fichier.
+   ===================================================================== */
+.entete-accueil .devise { margin: 4px 0 0; font-size: 15px; font-style: italic; letter-spacing: 0.04em; }
+
+.tuiles { --cols: 2; display: flex; flex-wrap: wrap; justify-content: center; gap: 26px 12px; padding: 6px 0 4px; }
+body.accueil .tuiles { --cols: 3; }
+@media (min-width: 560px) { .tuiles, body.accueil .tuiles { --cols: 4; } }
+.tuile { flex: 0 0 calc((100% - 12px * (var(--cols) - 1)) / var(--cols)); }
+
+.tuile, :root[data-theme="dark"] .tuile {
+  --base: color-mix(in srgb, var(--c) 70%, #161c38);
+  --clair: color-mix(in srgb, var(--base) 55%, white);
+  --sombre: color-mix(in srgb, var(--base) 55%, black);
+  aspect-ratio: auto; padding: 0; gap: 10px; border-radius: 0;
+  background: none; box-shadow: none; border: 0; text-shadow: none;
+  color: var(--texte); font-size: 13.5px; font-weight: 700; line-height: 1.2;
+  transition: transform 0.15s ease;
+}
+:root[data-theme="dark"] .tuile { --base: color-mix(in srgb, var(--c) 58%, #0d1226); }
+.tuile:active { transform: scale(0.95); box-shadow: none; }
+.tuile:focus-visible { outline: none; }
+.tuile:focus-visible .icone { outline: 3px solid var(--texte); outline-offset: 4px; }
+
+.tuile .icone {
+  position: relative; width: min(100%, 92px); aspect-ratio: 1; height: auto; margin: 0 auto;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 24%, var(--clair) 0%, transparent 46%),
+    radial-gradient(circle at 50% 60%, var(--base) 0%, var(--sombre) 100%);
+  box-shadow:
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.55),
+    inset 0 -9px 14px rgba(0, 0, 0, 0.30),
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 12px 18px -8px color-mix(in srgb, var(--sombre) 85%, black);
+  transition: box-shadow 0.15s ease;
+}
+.tuile .icone::before {                       /* anneau fin : l'effet médaillon */
+  content: ""; position: absolute; inset: 6px; border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.30);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.18);
+}
+.tuile:active .icone { box-shadow: inset 0 6px 12px rgba(0, 0, 0, 0.40), inset 0 -1px 1px rgba(255, 255, 255, 0.25), 0 1px 2px rgba(0, 0, 0, 0.4); }
+.tuile .icone svg { width: 38px; height: 38px; stroke-width: 1.6; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35)); }
+.tuile .libelle { color: var(--texte); font-size: 13.5px; font-weight: 700; }
+.tuile .detail { display: none; }
+body.accueil .tuile .libelle { color: #fff; text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9); }
+
+/* Passage de grade : noir et or */
+.tuile.tuile-grade, :root[data-theme="dark"] .tuile.tuile-grade { background: none; border: 0; box-shadow: none; }
+.tuile.tuile-grade .icone, :root[data-theme="dark"] .tuile.tuile-grade .icone {
+  background: radial-gradient(circle at 32% 24%, #4a4a58 0%, transparent 46%), radial-gradient(circle at 50% 60%, #26262f 0%, #0d0d12 100%);
+  border: 0;
+}
+.tuile.tuile-grade .icone::before { border-color: rgba(233, 196, 106, 0.75); }
+.tuile-grade .icone svg { stroke: #e9c46a; }
+body:not(.accueil) .tuile.tuile-grade .libelle, .tuile-grade .libelle { color: var(--texte); }
+body.accueil .tuile-grade .libelle { color: #fff; }

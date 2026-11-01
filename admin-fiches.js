@@ -5,6 +5,8 @@
 let fiches = lireFiches();
 let idEnModification = null;      // null = nouvelle fiche ; sinon l'identifiant de la fiche modifiée
 let photoCourante = "";           // la photo (réduite) de la fiche en cours de saisie
+let cheques = [];                 // chèques de la fiche en cours : { numero, date }
+const MODES = ["cheques", "virement", "especes", "passsport"];
 
 const champ = (id) => document.getElementById(id);
 const menuCeinture = champ("ceinture");
@@ -29,8 +31,78 @@ function ficheDuFormulaire() {
     entree: champ("entree").value.trim(),
     poids: champ("poids").value.trim(),
     contacts: champ("contacts").value.trim(),
+    email: champ("email").value.trim(),
+    telephone: champ("telephone").value.trim(),
+    certificat: champ("certificat").checked,
+    reglement: {
+      recu: champ("reglement-recu").checked,
+      modes: modesCoches(),
+      cheques: modesCoches().includes("cheques") ? cheques.slice(0, nombreCheques()) : [],
+      relance: champ("relance").value
+    },
     photo: photoCourante
   };
+}
+
+// ----- Règlement : modes, chèques, relance -----
+function modesCoches() {
+  return Array.from(document.querySelectorAll("#modes input:checked")).map(function (c) { return c.value; });
+}
+function nombreCheques() { return Math.max(0, Math.min(12, Number(champ("nb-cheques").value) || 0)); }
+function dessinerCheques() {
+  const bloc = champ("bloc-cheques");
+  bloc.hidden = !modesCoches().includes("cheques");
+  const zone = champ("liste-cheques");
+  zone.innerHTML = "";
+  const n = nombreCheques();
+  while (cheques.length < n) { cheques.push({ numero: "", date: "" }); }
+  for (let i = 0; i < n; i++) {
+    const ligne = creer("div", "ligne-cheque");
+    ligne.appendChild(creer("strong", "", "Chèque " + (i + 1)));
+    const numero = document.createElement("input");
+    numero.placeholder = "Numéro"; numero.value = cheques[i].numero; numero.autocomplete = "off";
+    numero.addEventListener("input", function () { cheques[i].numero = numero.value.trim(); });
+    const date = document.createElement("input");
+    date.type = "date"; date.value = cheques[i].date; date.title = "Date d'encaissement souhaitée";
+    date.addEventListener("input", function () { cheques[i].date = date.value; });
+    const l1 = creer("label", "", "N° du chèque"); l1.appendChild(numero);
+    const l2 = creer("label", "", "Encaissement souhaité le"); l2.appendChild(date);
+    ligne.appendChild(l1); ligne.appendChild(l2);
+    zone.appendChild(ligne);
+  }
+}
+function dateFr(iso) { return iso ? iso.split("-").reverse().join("/") : ""; }
+function aujourdhui() { return new Date().toISOString().slice(0, 10); }
+function majReglement() {
+  dessinerCheques();
+  const f = ficheDuFormulaire();
+  champ("alerte-reglement").hidden = f.reglement.recu;
+  champ("relance").min = aujourdhui();
+  const mail = champ("relance-mail"), tel = champ("relance-tel");
+  mail.hidden = !f.email; tel.hidden = !f.telephone;
+  if (f.email) {
+    const sujet = "JCO Chandieu : règlement de l'inscription" + (f.prenom ? " de " + f.prenom : "");
+    const corps = "Bonjour,\n\nSauf erreur de notre part, le règlement de l'inscription" + (f.prenom ? " de " + f.prenom : "") +
+      " n'a pas encore été reçu. Vous pouvez payer par chèque, virement, espèces ou Pass'Sport Région.\n\nMerci de nous tenir informés.\n\nSportivement,\nLe bureau du JCO Chandieu";
+    mail.href = "mailto:" + f.email + "?subject=" + encodeURIComponent(sujet) + "&body=" + encodeURIComponent(corps);
+  }
+  if (f.telephone) { tel.href = "tel:" + f.telephone.replace(/[^\d+]/g, ""); }
+}
+// Relance : un événement « journée entière » à importer dans l'agenda (fichier .ics)
+function ajouterRelanceAgenda() {
+  const f = ficheDuFormulaire();
+  if (!f.reglement.relance) { alert("Choisissez d'abord la date de relance."); return; }
+  const nom = ((f.prenom || "") + " " + (f.nom || "")).trim() || "judoka";
+  const evenement = {
+    debut: f.reglement.relance, fin: null, nom: "Relance règlement : " + nom, lieu: "",
+    infos: [f.telephone ? "Tél. " + f.telephone : "", f.email ? "E-mail " + f.email : ""].filter(Boolean).join(" · "),
+    serie: "", type: "relance", aConfirmer: false
+  };
+  const texte = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//JCO Chandieu//Relances//FR", icsEvenement(evenement).replace(/SUMMARY:[^\r\n]*/, "SUMMARY:" + icsTexte(evenement.nom)).replace(/\r\nBEGIN:VALARM[\s\S]*?END:VALARM/, ""), "END:VCALENDAR"].join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([texte], { type: "text/calendar;charset=utf-8" }));
+  a.download = "relance-" + f.reglement.relance + ".ics";
+  document.body.appendChild(a); a.click(); a.remove();
 }
 
 function majApercu() {
@@ -38,12 +110,18 @@ function majApercu() {
   zone.innerHTML = "";
   zone.appendChild(creerCarte(ficheDuFormulaire()));
   champ("retirer-photo").hidden = photoCourante === "";
+  majReglement();
 }
 
 function viderFormulaire() {
   for (const id of ["prenom", "nom", "naissance", "licence", "entree", "poids", "contacts", "photo"]) {
     champ(id).value = "";
   }
+  for (const id of ["email", "telephone", "relance", "nb-cheques"]) { champ(id).value = ""; }
+  champ("certificat").checked = false;
+  champ("reglement-recu").checked = false;
+  document.querySelectorAll("#modes input").forEach(function (c) { c.checked = false; });
+  cheques = [];
   menuCeinture.selectedIndex = 0;
   photoCourante = "";
   idEnModification = null;
@@ -65,7 +143,7 @@ function afficherTableau() {
   tableau.innerHTML = "";
 
   const entete = tableau.insertRow();
-  for (const titre of ["Judoka", "Catégorie", "Ceinture", "Licence", "Au club", ""]) {
+  for (const titre of ["Judoka", "Catégorie", "Ceinture", "Licence", "Au club", "Dossier", ""]) {
     const th = document.createElement("th");
     th.textContent = titre;
     entete.appendChild(th);
@@ -83,6 +161,9 @@ function afficherTableau() {
 
     cellule(ligne, f.licence || "—");
     cellule(ligne, f.entree ? "depuis " + f.entree : "—");
+    const dossier = cellule(ligne, "");
+    dossier.appendChild(creer("span", "badge " + (f.certificat ? "ok" : "alerte"), "Certificat " + (f.certificat ? "✓" : "✗")));
+    dossier.appendChild(creer("span", "badge " + (f.reglement && f.reglement.recu ? "ok" : "alerte"), "Règlement " + (f.reglement && f.reglement.recu ? "✓" : "✗")));
 
     const actions = cellule(ligne, "");
     const modifier = creer("button", "", "✏️");
@@ -96,11 +177,32 @@ function afficherTableau() {
         enregistrerFiches(fiches);
         if (idEnModification === f.id) { viderFormulaire(); }
         afficherTableau();
+        afficherAlertes();
       }
     });
     actions.appendChild(modifier);
     actions.appendChild(supprimer);
   });
+}
+
+// Dossiers à suivre : règlement non reçu, avec la relance prévue
+function afficherAlertes() {
+  const zone = champ("alertes");
+  zone.innerHTML = "";
+  const aSuivre = fiches.filter(function (f) { return !(f.reglement && f.reglement.recu); });
+  if (aSuivre.length === 0) { return; }
+  const boite = creer("div", "alerte-reglement");
+  boite.appendChild(creer("strong", "", "⚠ Règlements non reçus (" + aSuivre.length + ")"));
+  aSuivre.forEach(function (f) {
+    const relance = f.reglement && f.reglement.relance;
+    const urgent = relance && relance <= aujourdhui();
+    const b = creer("button", "ligne-alerte" + (urgent ? " urgent" : ""), f.prenom + " " + f.nom + " : " +
+      (relance ? (urgent ? "relance à faire (prévue le " : "relance prévue le ") + dateFr(relance) + (urgent ? ")" : "") : "aucune relance prévue"));
+    b.type = "button";
+    b.addEventListener("click", function () { commencerModification(f); });
+    boite.appendChild(b);
+  });
+  zone.appendChild(boite);
 }
 
 function commencerModification(f) {
@@ -113,6 +215,15 @@ function commencerModification(f) {
   champ("entree").value = f.entree || "";
   champ("poids").value = f.poids || "";
   champ("contacts").value = f.contacts || "";
+  champ("email").value = f.email || "";
+  champ("telephone").value = f.telephone || "";
+  champ("certificat").checked = !!f.certificat;
+  const r = f.reglement || {};
+  champ("reglement-recu").checked = !!r.recu;
+  document.querySelectorAll("#modes input").forEach(function (c) { c.checked = (r.modes || []).includes(c.value); });
+  cheques = (r.cheques || []).map(function (x) { return { numero: x.numero || "", date: x.date || "" }; });
+  champ("nb-cheques").value = cheques.length || "";
+  champ("relance").value = r.relance || "";
   champ("photo").value = "";
   photoCourante = f.photo || "";
   champ("titre-formulaire").textContent = "Modifier la fiche de " + f.prenom;
@@ -123,9 +234,12 @@ function commencerModification(f) {
 }
 
 // ----- Réactions de la page -----
-for (const id of ["prenom", "nom", "naissance", "ceinture", "licence", "entree", "poids", "contacts"]) {
+for (const id of ["prenom", "nom", "naissance", "ceinture", "licence", "entree", "poids", "contacts", "email", "telephone", "certificat", "reglement-recu", "relance"]) {
   champ(id).addEventListener("input", majApercu);
 }
+document.querySelectorAll("#modes input").forEach(function (c) { c.addEventListener("change", function () { if (c.value === "cheques" && c.checked && !nombreCheques()) { champ("nb-cheques").value = 1; } majReglement(); }); });
+champ("nb-cheques").addEventListener("input", majReglement);
+champ("relance-agenda").addEventListener("click", ajouterRelanceAgenda);
 
 champ("photo").addEventListener("change", function (evenement) {
   const fichier = evenement.target.files[0];
@@ -161,9 +275,11 @@ champ("enregistrer").addEventListener("click", function () {
   if (enregistrerFiches(fiches)) {
     viderFormulaire();
     afficherTableau();
+    afficherAlertes();
   }
 });
 
 // ----- Démarrage -----
 majApercu();
 afficherTableau();
+afficherAlertes();

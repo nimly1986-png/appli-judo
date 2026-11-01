@@ -15,6 +15,8 @@
     Cette page n'est pas encore protégée par un mot de passe.
   </p>
 
+  <div id="alertes"></div>
+
   <h2 id="titre-formulaire">Nouvelle fiche</h2>
   <div class="formulaire">
     <input id="prenom" placeholder="Prénom" autocomplete="off">
@@ -38,9 +40,48 @@
       <input id="photo" type="file" accept="image/*">
     </label>
     <button id="retirer-photo" class="bouton secondaire" type="button" hidden>Retirer la photo</button>
-    <label>Responsable légal / contacts
-      <textarea id="contacts" rows="3" placeholder="Nom et téléphone"></textarea>
+    <label>E-mail du responsable légal
+      <input id="email" type="email" inputmode="email" autocomplete="off" placeholder="prenom.nom@exemple.fr">
     </label>
+    <label>Téléphone du responsable légal
+      <input id="telephone" type="tel" inputmode="tel" autocomplete="off" placeholder="06 00 00 00 00">
+    </label>
+    <label>Responsable légal / autres contacts
+      <textarea id="contacts" rows="2" placeholder="Nom du responsable, autres personnes à joindre"></textarea>
+    </label>
+
+    <fieldset class="bloc-dossier">
+      <legend>Dossier</legend>
+      <label class="case"><input type="checkbox" id="certificat"> Certificat médical / attestation reçu</label>
+    </fieldset>
+
+    <fieldset class="bloc-dossier">
+      <legend>Règlement</legend>
+      <label class="case"><input type="checkbox" id="reglement-recu"> Règlement reçu</label>
+      <div class="modes" id="modes">
+        <label class="case"><input type="checkbox" value="cheques"> Chèques</label>
+        <label class="case"><input type="checkbox" value="virement"> Virement</label>
+        <label class="case"><input type="checkbox" value="especes"> Espèces</label>
+        <label class="case"><input type="checkbox" value="passsport"> Pass'Sport Région</label>
+      </div>
+      <div id="bloc-cheques" hidden>
+        <label>Nombre de chèques
+          <input id="nb-cheques" type="number" min="1" max="12" step="1" inputmode="numeric">
+        </label>
+        <div id="liste-cheques"></div>
+      </div>
+      <div id="alerte-reglement" class="alerte-reglement" hidden>
+        <strong>⚠ Règlement non reçu</strong>
+        <label>Relancer le
+          <input id="relance" type="date">
+        </label>
+        <div class="actions-relance">
+          <button id="relance-agenda" class="bouton secondaire" type="button">Ajouter la relance à mon agenda</button>
+          <a id="relance-mail" class="bouton secondaire" hidden>Écrire un rappel</a>
+          <a id="relance-tel" class="bouton secondaire" hidden>Appeler</a>
+        </div>
+      </div>
+    </fieldset>
     <button id="enregistrer" class="bouton" type="button">Enregistrer la fiche</button>
     <button id="annuler" class="bouton secondaire" type="button" hidden>Annuler la modification</button>
   </div>
