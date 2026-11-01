@@ -5,7 +5,9 @@
 let fiches = lireFiches();
 let idEnModification = null;      // null = nouvelle fiche ; sinon l'identifiant de la fiche modifiée
 let photoCourante = "";           // la photo (réduite) de la fiche en cours de saisie
-let cheques = [];                 // chèques de la fiche en cours : { numero, date }
+let cheques = [];                 // chèques de la fiche en cours : { numero, date, valide }
+let paiements = {};               // autres modes : { virement: { date, valide }, ... }
+const NOMS_MODES = { cheques: "Chèques", virement: "Virement", especes: "Espèces", passsport: "Pass'Sport Région" };
 const MODES = ["cheques", "virement", "especes", "passsport"];
 
 const champ = (id) => document.getElementById(id);
@@ -38,6 +40,7 @@ function ficheDuFormulaire() {
       recu: champ("reglement-recu").checked,
       modes: modesCoches(),
       cheques: modesCoches().includes("cheques") ? cheques.slice(0, nombreCheques()) : [],
+      paiements: Object.fromEntries(modesCoches().filter(function (m) { return m !== "cheques" && paiements[m]; }).map(function (m) { return [m, paiements[m]]; })),
       relance: champ("relance").value
     },
     photo: photoCourante
@@ -68,13 +71,53 @@ function dessinerCheques() {
     const l1 = creer("label", "", "N° du chèque"); l1.appendChild(numero);
     const l2 = creer("label", "", "Encaissement souhaité le"); l2.appendChild(date);
     ligne.appendChild(l1); ligne.appendChild(l2);
+    ligne.appendChild(boutonValider(cheques[i], "Encaissé", date));
     zone.appendChild(ligne);
   }
+}
+// Bouton « valider » : un clic note l'opération (avec la date saisie, ou celle du jour si elle est vide)
+function boutonValider(objet, mot, champDate) {
+  const b = creer("button", "bouton-valider" + (objet.valide ? " valide" : ""), objet.valide ? "✓ " + mot + (objet.date ? " le " + dateFr(objet.date) : "") : "Valider : " + mot.toLowerCase());
+  b.type = "button";
+  b.addEventListener("click", function () {
+    objet.valide = !objet.valide;
+    if (objet.valide && !objet.date) { objet.date = aujourdhui(); if (champDate) { champDate.value = objet.date; } }
+    if (objet.valide && toutEstValide()) { champ("reglement-recu").checked = true; }
+    majApercu();
+  });
+  return b;
+}
+function toutEstValide() {
+  const modes = modesCoches();
+  if (modes.length === 0) { return false; }
+  return modes.every(function (m) {
+    if (m === "cheques") { return nombreCheques() > 0 && cheques.slice(0, nombreCheques()).every(function (c) { return c.valide; }); }
+    return paiements[m] && paiements[m].valide;
+  });
+}
+// Une ligne par mode coché (hors chèques) : date du paiement + validation
+function dessinerPaiements() {
+  const zone = champ("paiements");
+  zone.innerHTML = "";
+  modesCoches().filter(function (m) { return m !== "cheques"; }).forEach(function (m) {
+    if (!paiements[m]) { paiements[m] = { date: "", valide: false }; }
+    const p = paiements[m];
+    const ligne = creer("div", "ligne-paiement");
+    ligne.appendChild(creer("strong", "", NOMS_MODES[m]));
+    const date = document.createElement("input");
+    date.type = "date"; date.value = p.date || ""; date.title = "Date du paiement";
+    date.addEventListener("input", function () { p.date = date.value; });
+    const l = creer("label", "", "Date du paiement"); l.appendChild(date);
+    ligne.appendChild(l);
+    ligne.appendChild(boutonValider(p, "Reçu", date));
+    zone.appendChild(ligne);
+  });
 }
 function dateFr(iso) { return iso ? iso.split("-").reverse().join("/") : ""; }
 function aujourdhui() { return new Date().toISOString().slice(0, 10); }
 function majReglement() {
   dessinerCheques();
+  dessinerPaiements();
   const f = ficheDuFormulaire();
   champ("alerte-reglement").hidden = f.reglement.recu;
   champ("relance").min = aujourdhui();
@@ -122,6 +165,7 @@ function viderFormulaire() {
   champ("reglement-recu").checked = false;
   document.querySelectorAll("#modes input").forEach(function (c) { c.checked = false; });
   cheques = [];
+  paiements = {};
   menuCeinture.selectedIndex = 0;
   photoCourante = "";
   idEnModification = null;
@@ -221,7 +265,8 @@ function commencerModification(f) {
   const r = f.reglement || {};
   champ("reglement-recu").checked = !!r.recu;
   document.querySelectorAll("#modes input").forEach(function (c) { c.checked = (r.modes || []).includes(c.value); });
-  cheques = (r.cheques || []).map(function (x) { return { numero: x.numero || "", date: x.date || "" }; });
+  cheques = (r.cheques || []).map(function (x) { return { numero: x.numero || "", date: x.date || "", valide: !!x.valide }; });
+  paiements = JSON.parse(JSON.stringify(r.paiements || {}));
   champ("nb-cheques").value = cheques.length || "";
   champ("relance").value = r.relance || "";
   champ("photo").value = "";

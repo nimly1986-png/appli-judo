@@ -132,7 +132,7 @@ function dessinerOnglets() {
   z.innerHTML = "";
   ONGLETS.forEach(function (o) {
     const b = creer("button", "chip" + (o[0] === onglet ? " actif" : ""), o[1]);
-    b.type = "button"; b.style.setProperty("--c", "var(--texte)");
+    b.type = "button"; b.style.setProperty("--c", "var(--accent)");
     b.setAttribute("role", "tab"); b.setAttribute("aria-selected", o[0] === onglet ? "true" : "false");
     b.addEventListener("click", function () { onglet = o[0]; afficher(); });
     z.appendChild(b);

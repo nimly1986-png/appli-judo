@@ -6,6 +6,7 @@
   <title>Espace administrateur</title>
   <link rel="stylesheet" href="style.css">
   <script src="theme.js"></script>
+  <script src="categorie.js"></script>
 </head>
 <body style="--accent: var(--violet)">
   <nav class="barre"><div class="barre-contenu"><a class="barre-accueil" href="admin.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Espace admin</a></div></nav>
@@ -64,6 +65,7 @@
         <label class="case"><input type="checkbox" value="especes"> Espèces</label>
         <label class="case"><input type="checkbox" value="passsport"> Pass'Sport Région</label>
       </div>
+      <div id="paiements"></div>
       <div id="bloc-cheques" hidden>
         <label>Nombre de chèques
           <input id="nb-cheques" type="number" min="1" max="12" step="1" inputmode="numeric">

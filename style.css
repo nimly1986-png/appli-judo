@@ -856,3 +856,66 @@ body.accueil .tuile .libelle { color: #fff; text-shadow: 0 1px 6px rgba(0, 0, 0,
 .tuile-grade .icone svg { stroke: #e9c46a; }
 body:not(.accueil) .tuile.tuile-grade .libelle, .tuile-grade .libelle { color: var(--texte); }
 body.accueil .tuile-grade .libelle { color: #fff; }
+
+/* =====================================================================
+   HARMONISATION : les pages de catégorie reprennent le style des boutons ronds
+   (même médaillon dans le titre, mêmes teintes et même relief sur les boutons et pastilles).
+   Fait partie de la version 2 : à supprimer avec le bloc précédent pour revenir en arrière.
+   ===================================================================== */
+:root { --mix-fonce: #161c38; --mix-part: 70%; }
+:root[data-theme="dark"] { --mix-fonce: #0d1226; --mix-part: 58%; }
+body { --base: color-mix(in srgb, var(--accent) var(--mix-part), var(--mix-fonce)); --clair: color-mix(in srgb, var(--base) 55%, white); --sombre: color-mix(in srgb, var(--base) 55%, black); }
+
+/* Titre : médaillon identique à celui du bouton */
+.titre-categorie { display: flex; align-items: center; gap: 12px; }
+.medaillon {
+  --base: color-mix(in srgb, var(--c) var(--mix-part), var(--mix-fonce));
+  --clair: color-mix(in srgb, var(--base) 55%, white);
+  --sombre: color-mix(in srgb, var(--base) 55%, black);
+  position: relative; flex: none; display: grid; place-items: center; width: 50px; height: 50px; border-radius: 50%;
+  background: radial-gradient(circle at 32% 24%, var(--clair) 0%, transparent 46%), radial-gradient(circle at 50% 60%, var(--base) 0%, var(--sombre) 100%);
+  box-shadow: inset 0 1.5px 1px rgba(255, 255, 255, 0.55), inset 0 -6px 9px rgba(0, 0, 0, 0.30), 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 12px -6px color-mix(in srgb, var(--sombre) 85%, black);
+}
+.medaillon::before { content: ""; position: absolute; inset: 4px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.30); }
+.medaillon svg { width: 26px; height: 26px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35)); }
+.medaillon.or { background: radial-gradient(circle at 32% 24%, #4a4a58 0%, transparent 46%), radial-gradient(circle at 50% 60%, #26262f 0%, #0d0d12 100%); }
+.medaillon.or::before { border-color: rgba(233, 196, 106, 0.75); }
+.medaillon.or svg { stroke: #e9c46a; }
+
+/* Boutons principaux : même matière que les médaillons (teinte profonde, lumière en haut, ombre douce) */
+.bouton, :root[data-theme="dark"] .bouton:not(.secondaire):not(.danger) {
+  border: 0; border-radius: 999px; padding: 14px 24px; font-size: 17px; font-weight: 700; letter-spacing: 0.01em;
+  color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  background: radial-gradient(120% 140% at 30% 0%, var(--clair) 0%, transparent 55%), linear-gradient(180deg, var(--base), var(--sombre));
+  box-shadow: inset 0 1.5px 1px rgba(255, 255, 255, 0.45), inset 0 -5px 8px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.35), 0 10px 16px -8px var(--sombre);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.bouton:active { transform: scale(0.98); box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.35), inset 0 -1px 1px rgba(255, 255, 255, 0.25), 0 1px 2px rgba(0, 0, 0, 0.3); }
+.bouton.secondaire, :root[data-theme="dark"] .bouton.secondaire {
+  background: var(--surface); color: var(--texte); text-shadow: none; border: 1px solid var(--trait);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 6px 10px -8px rgba(0, 0, 0, 0.45);
+}
+:root[data-theme="dark"] .bouton.secondaire { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 6px 10px -8px rgba(0, 0, 0, 0.8); }
+.bouton.secondaire:active { box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.18); }
+.bouton.danger { --base: var(--rouge); --clair: color-mix(in srgb, var(--rouge) 55%, white); --sombre: color-mix(in srgb, var(--rouge) 60%, black); }
+
+/* Pastilles de choix : l'actif prend la même matière que le médaillon */
+.chip { border-width: 1.5px; }
+.chip.actif {
+  --b: color-mix(in srgb, var(--c) var(--mix-part), var(--mix-fonce));
+  color: #fff; border-color: transparent; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  background: radial-gradient(120% 140% at 30% 0%, color-mix(in srgb, var(--b) 55%, white) 0%, transparent 55%), linear-gradient(180deg, var(--b), color-mix(in srgb, var(--b) 55%, black));
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.45), inset 0 -3px 6px rgba(0, 0, 0, 0.22), 0 6px 10px -6px color-mix(in srgb, var(--b) 60%, black);
+}
+.chip.lex.actif { color: #fff; }
+
+/* Règlement : date de chaque paiement + validation en un clic */
+.ligne-paiement { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; align-items: end; padding: 10px 0; border-top: 1px dashed var(--trait); }
+.ligne-paiement strong { grid-column: 1 / -1; }
+.bouton-valider { min-height: 44px; padding: 8px 12px; font: inherit; font-size: 14px; font-weight: 700; color: var(--texte); background: var(--surface); border: 1px solid var(--trait); border-radius: 999px; cursor: pointer; }
+.bouton-valider.valide { color: #fff; border-color: transparent; background: linear-gradient(180deg, color-mix(in srgb, var(--vert) 70%, #161c38), color-mix(in srgb, var(--vert) 70%, black)); box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4); }
+.bloc-dossier { min-width: 0; box-sizing: border-box; }
+.bloc-dossier input { min-width: 0; width: 100%; box-sizing: border-box; }
+.bloc-dossier input[type="checkbox"] { width: auto; }
+.ligne-cheque > *, .ligne-paiement > * { min-width: 0; }
+.ligne-cheque .bouton-valider { grid-column: 1 / -1; }
