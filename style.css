@@ -920,64 +920,9 @@ body { --base: color-mix(in srgb, var(--accent) var(--mix-part), var(--mix-fonce
 .ligne-cheque > *, .ligne-paiement > * { min-width: 0; }
 .ligne-cheque .bouton-valider { grid-column: 1 / -1; }
 
-/* ----- Accueil : bandeau d'info fixé en bas de l'écran ----- */
-body.accueil { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
-body.accueil .fil {
-  position: fixed; z-index: 50; left: 16px; right: 16px; margin: 0 auto; max-width: 608px;
-  bottom: calc(12px + env(safe-area-inset-bottom));
-  box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.45);
-}
-
 /* ----- Fiche du judoka : mot de bienvenue ----- */
 .bienvenue { margin: 0 0 18px; padding: 16px 18px; border-radius: 16px; background: color-mix(in srgb, var(--accent) 12%, var(--surface)); border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5); }
 .bienvenue p { margin: 0; }
 .bienvenue-titre { font-family: var(--police-titre); font-size: 22px; font-weight: 700; line-height: 1.2; color: var(--texte); }
 .bienvenue-judokas { margin-top: 4px; font-size: 14px; color: var(--muet); }
 .bienvenue-mot { margin-top: 10px; font-style: italic; }
-
-/* =====================================================================
-   VERSION 3 (essai) : bandeau d'infos vertical sur le côté droit + boutons ronds plus clairs.
-   Pour revenir à la version précédente : supprimer tout ce bloc, jusqu'à la fin du fichier.
-   ===================================================================== */
-body.accueil { padding-right: 58px; padding-bottom: calc(48px + env(safe-area-inset-bottom)); }
-body.accueil .fil {
-  position: fixed; z-index: 50; top: 70px; bottom: calc(12px + env(safe-area-inset-bottom)); right: 0; left: auto;
-  width: 40px; max-width: none; margin: 0; flex-direction: column;
-  border-radius: 14px 0 0 14px; border-right: 0;
-  box-shadow: -6px 6px 18px -8px rgba(0, 0, 0, 0.5);
-}
-@media (min-width: 700px) { body.accueil { padding-right: 16px; } body.accueil .fil { right: max(0px, calc((100vw - 640px)/2 - 48px)); } }
-body.accueil .fil-titre { writing-mode: vertical-rl; padding: 12px 0; gap: 8px; font-size: 13px; letter-spacing: 0.04em; justify-content: center; }
-body.accueil .fil-piste {
-  writing-mode: vertical-rl; padding: 0 9px;
-  -webkit-mask-image: linear-gradient(180deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(180deg, transparent, #000 8%, #000 92%, transparent);
-}
-body.accueil .fil-defile { animation-name: defile-vertical; }
-body.accueil .fil-item { padding-right: 0; padding-bottom: 34px; font-size: 14px; }
-@keyframes defile-vertical { to { transform: translateY(-50%); } }
-@media (prefers-reduced-motion: reduce) { body.accueil .fil-defile { animation: none; } body.accueil .fil-piste { overflow-y: auto; } }
-
-/* Boutons ronds : teintes satinées plus claires, reflet doux, anneau fin */
-.tuile, :root[data-theme="dark"] .tuile {
-  --base: color-mix(in srgb, var(--c) 84%, white);
-  --clair: color-mix(in srgb, var(--c) 50%, white);
-  --sombre: color-mix(in srgb, var(--c) 80%, #1a2040);
-}
-.tuile .icone {
-  background:
-    radial-gradient(ellipse 70% 42% at 50% 18%, rgba(255, 255, 255, 0.55) 0%, transparent 100%),
-    linear-gradient(160deg, var(--clair) 0%, var(--base) 45%, var(--sombre) 100%);
-  box-shadow:
-    inset 0 1.5px 1px rgba(255, 255, 255, 0.7),
-    inset 0 -8px 12px color-mix(in srgb, var(--sombre) 55%, transparent),
-    0 1px 2px rgba(0, 0, 0, 0.3),
-    0 10px 16px -8px color-mix(in srgb, var(--sombre) 80%, black);
-}
-.tuile .icone::before { border-color: rgba(255, 255, 255, 0.55); }
-.tuile .icone svg { stroke-width: 1.7; filter: drop-shadow(0 1px 1.5px rgba(20, 25, 60, 0.55)); }
-.tuile.tuile-grade .icone, :root[data-theme="dark"] .tuile.tuile-grade .icone {
-  background:
-    radial-gradient(ellipse 70% 42% at 50% 18%, rgba(255, 255, 255, 0.4) 0%, transparent 100%),
-    linear-gradient(160deg, #7a7d8e 0%, #50536a 50%, #343648 100%);
-}
-.tuile[href="code-moral.html"], :root[data-theme="dark"] .tuile[href="code-moral.html"] { --c: #7b86ad !important; }

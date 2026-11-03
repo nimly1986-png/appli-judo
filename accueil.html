@@ -24,6 +24,12 @@
     </div>
   </header>
 
+  <!-- Fil d'info : défile en boucle ; un toucher ouvre la liste complète. -->
+  <a id="fil" class="fil" href="infos.html" aria-label="Infos du club : voir toutes les infos">
+    <span class="fil-titre"><i></i>Infos</span>
+    <span class="fil-piste"></span>
+  </a>
+
   <!-- Chaque tuile est un lien : --c = sa couleur de ceinture, --i = son ordre d'apparition -->
   <nav class="tuiles">
     <a class="tuile" style="--c: var(--jaune); --i: 0" href="cours.html">
@@ -71,12 +77,6 @@
       <span class="libelle">Kimono<span class="detail">Pré-réservation pour la saison suivante</span></span>
     </a>
   </nav>
-
-  <!-- Fil d'info : défile en boucle ; un toucher ouvre la liste complète. Placé en bas de l'écran. -->
-  <a id="fil" class="fil" href="infos.html" aria-label="Infos du club : voir toutes les infos">
-    <span class="fil-titre"><i></i>Infos</span>
-    <span class="fil-piste"></span>
-  </a>
 
   <p class="pied"><button type="button" id="btn-fond" class="btn-fond">Changer le fond</button><br><a href="admin.html">Espace administrateur</a> · <a href="admin-infos.html">Gérer les infos</a></p>
 
