@@ -191,7 +191,7 @@ const competitions = [
     "debut": "2026-10-10",
     "fin": null,
     "lieu": "Espace Jean Monnet, route de Ternay, 69360 Sérézin-du-Rhône",
-    "infos": "Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h, 11h, 12h). Autres catégories : horaires à confirmer. Contact : Norbert Butin (coordonnées sur le flyer du comité). Buvette, buffet et tombola sur place.",
+    "infos": "Horaires : nés en 2021 à 9h00, 2020 à 10h00, 2019 à 11h00. Autres catégories : à confirmer.",
     "categories": [
       "Mini-Poussin",
       "Poussin",
@@ -210,7 +210,7 @@ const competitions = [
     "debut": "2026-10-10",
     "fin": null,
     "lieu": "Dojo Rhône Vivarais (adresse du gymnase à confirmer)",
-    "infos": "Combats debout pour tous · horaires et adresse du gymnase à confirmer",
+    "infos": "",
     "categories": [
       "Mini-Poussin",
       "Poussin",
@@ -453,7 +453,7 @@ const competitions = [
     "debut": "2026-11-07",
     "fin": null,
     "lieu": "JC Murois (adresse du gymnase à confirmer)",
-    "infos": "Combats debout pour tous · horaires et adresse du gymnase à confirmer",
+    "infos": "",
     "categories": [
       "Mini-Poussin",
       "Poussin",
@@ -577,17 +577,6 @@ const competitions = [
     "aConfirmer": true
   },
   {
-    "nom": "Stage jujitsu",
-    "debut": "2026-11-09",
-    "fin": null,
-    "lieu": "Maison du judo (Lyon)",
-    "infos": "Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
-    "categories": [],
-    "type": "stage",
-    "serie": "stage",
-    "aConfirmer": false
-  },
-  {
     "nom": "Stage kata (préparation aux grades)",
     "debut": "2026-11-10",
     "fin": null,
@@ -609,7 +598,7 @@ const competitions = [
     "debut": "2026-11-14",
     "fin": null,
     "lieu": "Gymnase des Taillis, avenue des Taillis, 69960 Corbas (UJ Rhône)",
-    "infos": "Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h, 11h, 12h). Autres catégories : horaires à confirmer. Contact : Alain L'Herbette (coordonnées sur le flyer du comité). Buvette, buffet et tombola sur place.",
+    "infos": "Horaires : nés en 2021 à 9h00, 2020 à 10h00, 2019 à 11h00. Autres catégories : à confirmer.",
     "categories": [
       "Mini-Poussin",
       "Poussin",
@@ -913,7 +902,7 @@ const competitions = [
     "debut": "2026-12-05",
     "fin": null,
     "lieu": "Gymnase Deslyres, rue du Stade, 69780 Saint-Pierre-de-Chandieu (notre club)",
-    "infos": "Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h, 11h, 12h). Autres catégories : horaires à confirmer. Contact : Fabien Camuzet (coordonnées sur le flyer du comité). Buvette, buffet et tombola sur place.",
+    "infos": "Horaires : nés en 2021 à 9h00, 2020 à 10h00, 2019 à 11h00. Autres catégories : à confirmer.",
     "categories": [
       "Baby judo",
       "Mini-Poussin",
@@ -1225,17 +1214,6 @@ const competitions = [
     "aConfirmer": false
   },
   {
-    "nom": "Stage jujitsu",
-    "debut": "2027-01-18",
-    "fin": null,
-    "lieu": "Maison du judo (Lyon)",
-    "infos": "Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
-    "categories": [],
-    "type": "stage",
-    "serie": "stage",
-    "aConfirmer": false
-  },
-  {
     "nom": "Benjamins (individuel) – District",
     "debut": "2027-01-23",
     "fin": null,
@@ -1343,7 +1321,7 @@ const competitions = [
     "debut": "2027-01-24",
     "fin": null,
     "lieu": "USOL Vaugneray (adresse du gymnase à confirmer)",
-    "infos": "Combats debout pour tous · horaires et adresse du gymnase à confirmer",
+    "infos": "",
     "categories": [
       "Mini-Poussin",
       "Poussin",
@@ -1413,7 +1391,7 @@ const competitions = [
     "debut": "2027-01-30",
     "fin": null,
     "lieu": "Delta Sport Brignais (adresse du gymnase à confirmer)",
-    "infos": "Combats debout pour tous · horaires et adresse du gymnase à confirmer",
+    "infos": "",
     "categories": [
       "Baby judo",
       "Mini-Poussin",
@@ -1442,7 +1420,7 @@ const competitions = [
     "debut": "2027-02-06",
     "fin": null,
     "lieu": "Complexe sportif, rue Jean Rigaud, 69130 Écully",
-    "infos": "Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h, 11h, 12h). Autres catégories : horaires à confirmer. Contact : Salvatore Amico (coordonnées sur le flyer du comité). Buvette, buffet et tombola sur place.",
+    "infos": "Horaires : nés en 2021 à 9h00, 2020 à 10h00, 2019 à 11h00. Autres catégories : à confirmer.",
     "categories": [
       "Mini-Poussin",
       "Poussin",
@@ -1461,7 +1439,7 @@ const competitions = [
     "debut": "2027-02-06",
     "fin": null,
     "lieu": "JC Feyzin (adresse du gymnase à confirmer)",
-    "infos": "Combats debout pour tous · horaires et adresse du gymnase à confirmer",
+    "infos": "",
     "categories": [
       "Baby judo",
       "Mini-Poussin",
@@ -1687,17 +1665,6 @@ const competitions = [
     "aConfirmer": false
   },
   {
-    "nom": "Stage jujitsu",
-    "debut": "2027-03-01",
-    "fin": null,
-    "lieu": "Maison du judo (Lyon)",
-    "infos": "Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
-    "categories": [],
-    "type": "stage",
-    "serie": "stage",
-    "aConfirmer": false
-  },
-  {
     "nom": "Tournoi Label A – Seniors équipes mixtes",
     "debut": "2027-03-03",
     "fin": null,
@@ -1812,7 +1779,7 @@ const competitions = [
     "debut": "2027-03-13",
     "fin": null,
     "lieu": "JC Saint-Priest (adresse du gymnase à confirmer)",
-    "infos": "Combats debout pour tous · horaires et adresse du gymnase à confirmer",
+    "infos": "",
     "categories": [
       "Mini-Poussin",
       "Poussin",
@@ -1887,7 +1854,7 @@ const competitions = [
     "debut": "2027-03-20",
     "fin": null,
     "lieu": "Salle polyvalente de la Plaine, route de Marennes, 69360 Communay",
-    "infos": "Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h, 11h, 12h). Autres catégories : horaires à confirmer. Contact : Fabien Camuzet (coordonnées sur le flyer du comité). Buvette, buffet et tombola sur place.",
+    "infos": "Horaires : nés en 2021 à 9h00, 2020 à 10h00, 2019 à 11h00. Autres catégories : à confirmer.",
     "categories": [
       "Baby judo",
       "Mini-Poussin",
@@ -1907,7 +1874,7 @@ const competitions = [
     "debut": "2027-03-20",
     "fin": null,
     "lieu": "AL Caluire (adresse du gymnase à confirmer)",
-    "infos": "Combats debout pour tous · horaires et adresse du gymnase à confirmer",
+    "infos": "",
     "categories": [
       "Mini-Poussin",
       "Poussin",
@@ -2049,7 +2016,7 @@ const competitions = [
     "debut": "2027-04-03",
     "fin": null,
     "lieu": "AL Vaulx-en-Velin (adresse du gymnase à confirmer)",
-    "infos": "Combats debout pour tous · horaires et adresse du gymnase à confirmer",
+    "infos": "",
     "categories": [
       "Mini-Poussin",
       "Poussin",
@@ -2065,7 +2032,7 @@ const competitions = [
     "debut": "2027-04-03",
     "fin": null,
     "lieu": "Salle polyvalente, boulevard des Allées, 69420 Ampuis",
-    "infos": "Horaires pour les judokas nés en 2021 : 9h00 · 2020 : 10h00 · 2019 : 11h00 (fin prévue 10h, 11h, 12h). Autres catégories : horaires à confirmer. Contact : Fabien Camuzet (coordonnées sur le flyer du comité). Buvette, buffet et tombola sur place.",
+    "infos": "Horaires : nés en 2021 à 9h00, 2020 à 10h00, 2019 à 11h00. Autres catégories : à confirmer.",
     "categories": [
       "Baby judo",
       "Mini-Poussin",
@@ -2125,7 +2092,7 @@ const competitions = [
     "debut": "2027-04-04",
     "fin": null,
     "lieu": "EJT Montagny (adresse du gymnase à confirmer)",
-    "infos": "Combats debout pour tous · horaires et adresse du gymnase à confirmer",
+    "infos": "",
     "categories": [
       "Baby judo",
       "Mini-Poussin"
@@ -2423,7 +2390,7 @@ const competitions = [
     "debut": "2027-05-15",
     "fin": null,
     "lieu": "AL Chaponost (adresse du gymnase à confirmer)",
-    "infos": "Combats debout pour tous · horaires et adresse du gymnase à confirmer",
+    "infos": "",
     "categories": [
       "Baby judo",
       "Mini-Poussin",
@@ -2569,17 +2536,6 @@ const competitions = [
     "serie": "championnat"
   },
   {
-    "nom": "Stage jujitsu",
-    "debut": "2027-05-31",
-    "fin": null,
-    "lieu": "Maison du judo (Lyon)",
-    "infos": "Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.",
-    "categories": [],
-    "type": "stage",
-    "serie": "stage",
-    "aConfirmer": false
-  },
-  {
     "nom": "Stage kata (préparation aux grades)",
     "debut": "2027-06-01",
     "fin": null,
@@ -2641,7 +2597,7 @@ const competitions = [
     "debut": "2027-06-12",
     "fin": null,
     "lieu": "ACLAM Mornant (adresse du gymnase à confirmer)",
-    "infos": "Combats debout pour tous · horaires et adresse du gymnase à confirmer",
+    "infos": "",
     "categories": [
       "Baby judo",
       "Mini-Poussin",

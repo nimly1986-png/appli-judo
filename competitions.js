@@ -3,7 +3,9 @@
 //  Le choix du type, du niveau et de la catégorie (ou d'une fiche judoka) est mémorisé sur cet appareil.
 //  Le bouton "Ajouter à mon agenda" d'une compétition n'apparaît que si une catégorie ou une fiche est choisie.
 // =====================================================================
-const fiches = lireFiches();
+const session = lireSession();                      // connecté : seulement les judokas de la famille
+const connecte = !!session;
+const fiches = fichesDeLaFamille(lireFiches(), session);
 const liste = document.getElementById("liste");
 const resume = document.getElementById("resume");
 
@@ -24,6 +26,7 @@ const TOUTES_CATEGORIES = categories.map(function (c) { return c.nom; }).concat(
 let qui = lireMemo("quiCompetitions", "tous");          // "tous", "f<id d'une fiche>" ou "c<catégorie>"
 if (qui.charAt(0) === "f" && !fiches.some(function (f) { return "f" + f.id === qui; })) { qui = "tous"; }
 if (qui.charAt(0) === "c" && !TOUTES_CATEGORIES.includes(qui.slice(1))) { qui = "tous"; }
+if (connecte) { serie = "tous"; niveau = "tous"; if (qui.charAt(0) !== "f" && fiches.length) { qui = "f" + fiches[0].id; } }
 let moisAffiche = aujourdhuiISO().slice(0, 7), jourChoisi = null;
 
 function ficheChoisie() { return qui.charAt(0) === "f" ? fiches.find(function (f) { return "f" + f.id === qui; }) || null : null; }
@@ -33,7 +36,9 @@ function categoriesChoisies() {
   return qui.charAt(0) === "c" ? [qui.slice(1)] : [];
 }
 
+function interditBaby(c, mes) { return mes.includes("Baby judo") && (c.serie !== "interclub" || !c.categories.includes("Baby judo")); }
 function visible(c, mes, ignorerNiveau) {
+  if (interditBaby(c, mes)) { return false; }
   if (serie !== "tous" && c.serie !== serie) { return false; }
   if (!ignorerNiveau && niveau !== "tous" && niveauCompetition(c) !== niveau) { return false; }
   if (!autorise(c, ficheChoisie())) { return false; }
@@ -58,11 +63,20 @@ function creerMenu(zone, titre, options, valeur, siChange) {
   zone.appendChild(label);
 }
 function visibleSansFiltres(c, mes) {
+  if (interditBaby(c, mes)) { return false; }
   if (!autorise(c, ficheChoisie())) { return false; }
   if (mes.length === 0 || c.serie === "interclub" || c.categories.length === 0) { return true; }
   return c.categories.some(function (x) { return mes.includes(x); });
 }
 function dessinerMenus(mes) {
+  if (connecte) {                                   // un seul menu : les judokas de la famille
+    document.getElementById("series").innerHTML = "";
+    document.getElementById("niveaux").innerHTML = "";
+    const quisF = fiches.map(function (f) { return { cle: "f" + f.id, texte: f.prenom + " (" + categoriesDuJudoka(f).join(" + ") + ")" }; });
+    if (quisF.length === 0) { document.getElementById("qui").innerHTML = ""; return; }
+    creerMenu(document.getElementById("qui"), "Judoka", quisF, qui, function (v) { qui = v; ecrireMemo("quiCompetitions", v); jourChoisi = null; afficher(); });
+    return;
+  }
   const types = [{ cle: "tous", nom: "Tous les types" }].concat(SERIES).map(function (s) {
     const n = toutesLesCompetitions().filter(function (c) {
       return !estPassee(c) && (s.cle === "tous" || c.serie === s.cle) && (niveau === "tous" || niveauCompetition(c) === niveau) && visibleSansFiltres(c, mes);
@@ -130,7 +144,8 @@ function afficher() {
   const info = SERIES.find(function (s) { return s.cle === serie; });
   const zoneNote = document.getElementById("note-serie");
   zoneNote.innerHTML = "";
-  if (info && info.note) { zoneNote.appendChild(creer("p", "avertissement", info.note)); }
+  if (info && info.note && !connecte) { zoneNote.appendChild(creer("p", "avertissement", info.note)); }
+  if (connecte && !fiche) { resume.textContent = "Famille " + session.famille + " : aucune fiche judoka enregistrée. Créez-la depuis « Inscription »."; liste.hidden = true; document.getElementById("mois").innerHTML = ""; return; }
   resume.textContent = fiche ? fiche.prenom + " · catégorie " + mes.join(" + ") + " · saison " + SAISON
     : mes.length ? "Catégorie " + mes[0] + " · saison " + SAISON : "Toutes catégories · saison " + SAISON;
   const concernees = toutesLesCompetitions().filter(function (c) { return visible(c, mes); })

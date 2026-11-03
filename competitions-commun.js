@@ -7,7 +7,7 @@ const MOIS = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août"
 // ----- Les séries de compétitions (un bouton chacune sur la page Compétitions) -----
 const SERIES = [
   { cle: "interclub", nom: "Interclubs", icone: "🤼", couleur: "var(--vert)",
-    note: "Rencontres amicales entre clubs du Rhône. Les horaires du flyer (9h, 10h, 11h) concernent les judokas nés en 2021, 2020 et 2019." },
+    note: "Rencontres amicales entre clubs du Rhône." },
   { cle: "championnat", nom: "Championnats", icone: "🏆", couleur: "var(--orange)",
     note: "Championnats et coupes du district, du Rhône, inter-départemental, de la ligue AURA et de France, plus les circuits. Lieux à confirmer par le comité." },
   { cle: "labelA", nom: "Label A", icone: "🥋", couleur: "var(--bleu)",
@@ -20,10 +20,8 @@ const SERIES = [
     note: "Ligue AURA, saison 2026-2027 (mise à jour du 15/09/2026). Shiai (UV3) le samedi, kata et technique (UV1 et UV2) le dimanche. Inscription sur l'extranet 1 mois avant (10 jours pour les candidats hors ligue), certaines UV à 5 €, judogi blanc sans dossard." },
   { cle: "officiels", nom: "Arbitrage", icone: "🟨", couleur: "var(--jaune)",
     note: "Coupes des jeunes arbitres et commissaires sportifs, formations d'arbitrage et de commissaire sportif. Public non précisé pour les formations : voir le comité." },
-  { cle: "stage", nom: "Stages", icone: "🎓", couleur: "var(--vert)",
-    note: "Stages sportifs départementaux du Rhône (Benjamins, Minimes, Cadets). Seuls ces stages figurent dans les documents reçus : les stages de ligue ou de club ne sont pas listés." },
-  { cle: "autres", nom: "Kata, jujitsu", icone: "📅", couleur: "var(--blanc)",
-    note: "Kata et jujitsu (district, Rhône, inter-départemental, ligue). Public non précisé : voir le comité du Rhône." }
+  { cle: "stage", nom: "Stages", icone: "🎓", couleur: "#1fa39a",
+    note: "Stages sportifs départementaux du Rhône (Benjamins, Minimes, Cadets). Seuls ces stages figurent dans les documents reçus : les stages de ligue ou de club ne sont pas listés." }
 ];
 // ----- Niveau géographique (calculé, rien à saisir) : du plus proche de Saint-Pierre-de-Chandieu au plus lointain -----
 const NIVEAUX = [
@@ -103,16 +101,11 @@ function categoriesDuJudoka(fiche) {
   return liste;
 }
 // Conditions d'accès propres à certains événements : ceinture minimale et année de naissance maximale
-// Liens officiels du comité du Rhône pour les interclubs (relevés le 30/10/2026 sur rhone-judo.ffjudo.com)
-const LIENS_INTERCLUB = [
-  { texte: "Page Compétitions du comité du Rhône (tous les documents)", url: "https://rhone-judo.ffjudo.com/competitions-et-stages" },
-  { texte: "Calendrier du comité du Rhône", url: "https://rhone-judo.ffjudo.com/calendrier-5" },
-  { texte: "Fiche bilan des tournois interclubs 2026-2027 (PDF)", url: "https://rhone-judo.ffjudo.com/uploads/sites/rhone-judo/userfiles/fichier/2026%202027/16%20%20Fiche%20bilan%20Tournois%20interclubs%202026%202027.pdf" },
-  { texte: "Répartition des districts A / B / C (PDF)", url: "https://rhone-judo.ffjudo.com/uploads/sites/rhone-judo/userfiles/fichier/2026%202027/33%20District%203%20Zones%202026%202027%281%29.pdf" },
-  { texte: "Catégories âge / poids / temps de combat (PDF)", url: "https://rhone-judo.ffjudo.com/uploads/sites/rhone-judo/userfiles/fichier/2026%202027/07%20%20Les%20cat%C3%A9gories%20age%20poids%20temps%202026%202027.pdf" }
-];
+// Baby judo : uniquement les interclubs (décision du professeur)
+function estBaby(fiche) { return !!fiche && !!fiche.naissance && calculerCategorie(fiche.naissance) === "Baby judo"; }
 function autorise(c, fiche) {
   if (!fiche) { return true; }
+  if (estBaby(fiche) && c.serie !== "interclub") { return false; }
   if (c.ceintureMin) {
     const noms = ceintures.map(function (x) { return x.nom; });
     const rang = noms.indexOf(fiche.ceinture);
@@ -131,6 +124,7 @@ function texteConditions(c) {
 }
 function concerne(c, fiche) {
   if (!autorise(c, fiche)) { return false; }
+  if (estBaby(fiche)) { return c.categories.includes("Baby judo"); }
   const mesCategories = categoriesDuJudoka(fiche);
   return c.categories.some(function (cat) { return mesCategories.includes(cat); });
 }
@@ -221,6 +215,8 @@ function enregistrerCases(fiche, cases) {
 // ----- Une carte de compétition -----
 function creerCarteCompetition(c, fiche, avecChecklist, avecAgenda) {
   const li = creer("li", "competition" + (estPassee(c) ? " passee" : ""));
+  const serieC = SERIES.find(function (x) { return x.cle === c.serie; });
+  li.style.setProperty("--serie", serieC ? serieC.couleur : "var(--orange)");
   const jours = enJours(c.debut);
   const badge = creer("div", "date-badge");
   badge.appendChild(creer("strong", "", c.debut.slice(8, 10).replace(/^0/, "")));
@@ -229,23 +225,16 @@ function creerCarteCompetition(c, fiche, avecChecklist, avecAgenda) {
 
   const corps = creer("div", "competition-corps");
   corps.appendChild(creer("h3", "", iconeSerie(c) + " " + c.nom));
+  if (serieC && serieC.nom !== c.nom) { corps.appendChild(creer("span", "etiquette-serie", serieC.nom)); }
   corps.appendChild(creer("p", "", texteDate(c)));
   corps.appendChild(creer("p", "", "📍 " + c.lieu));
   if (c.aConfirmer && !estPassee(c)) { corps.appendChild(creer("p", "petit", "⚠️ Lieu et horaires à confirmer")); }
   if (texteConditions(c)) { corps.appendChild(creer("p", "", "🥋 " + texteConditions(c))); }
   if (c.infos) { corps.appendChild(creer("p", "petit", c.infos)); }
-  if (c.serie === "interclub") {
-    const boite = creer("div", "liens-infos");
-    boite.appendChild(creer("p", "petit", "Toutes les infos sur les interclubs :"));
-    LIENS_INTERCLUB.forEach(function (l) {
-      const a = creer("a", "lien-info", "🔗 " + l.texte);
-      a.href = l.url; a.target = "_blank"; a.rel = "noopener";
-      boite.appendChild(a);
-    });
-    corps.appendChild(boite);
+  if (c.serie !== "interclub") {                       // interclub : visuel simple, sans niveau
+    const niv = NIVEAUX[rangNiveau(c)];
+    corps.appendChild(creer("p", "petit", "Niveau : " + niv.nom));
   }
-  const niv = NIVEAUX[rangNiveau(c)];
-  corps.appendChild(creer("p", "petit", "Niveau : " + niv.nom));
   if (estPassee(c)) {
     corps.appendChild(creer("p", "compte", "Terminée"));
     const lien = creer("a", "bouton-resultats", "🥇 Voir les résultats");

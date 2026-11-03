@@ -358,15 +358,6 @@ LOCATION:Dojo départemental de Forges-les-Eaux (Seine-Maritime)
 DESCRIPTION:Lieu et horaires à confirmer. Tournoi labellisé – pris en compte pour la qualification au championnat de France 1re division. Ligue : Normandie. Lieu d'après le calendrier du comité du Rhône (30/10/2026)\, qui indique le 7 novembre pour ce tournoi : date à confirmer.
 END:VEVENT
 BEGIN:VEVENT
-UID:20261109StagejujitsuMaisondujudoLyon@jco-chandieu
-DTSTAMP:20261030T080000Z
-DTSTART;VALUE=DATE:20261109
-DTEND;VALUE=DATE:20261110
-SUMMARY:🎓 Stage jujitsu
-LOCATION:Maison du judo (Lyon)
-DESCRIPTION:Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.
-END:VEVENT
-BEGIN:VEVENT
 UID:20261110StagekataprparationauxgradesMaisondujudoLyon@jco-chandieu
 DTSTAMP:20261030T080000Z
 DTSTART;VALUE=DATE:20261110
@@ -763,15 +754,6 @@ LOCATION:Amiens (Hauts-de-France)
 DESCRIPTION:Tournoi labellisé. Ligue : Hauts-de-France.
 END:VEVENT
 BEGIN:VEVENT
-UID:20270118StagejujitsuMaisondujudoLyon@jco-chandieu
-DTSTAMP:20261030T080000Z
-DTSTART;VALUE=DATE:20270118
-DTEND;VALUE=DATE:20270119
-SUMMARY:🎓 Stage jujitsu
-LOCATION:Maison du judo (Lyon)
-DESCRIPTION:Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.
-END:VEVENT
-BEGIN:VEVENT
 UID:20270123BenjaminsindividuelDistrictMaisondujudoLyon@jco-chandieu
 DTSTAMP:20261030T080000Z
 DTSTART;VALUE=DATE:20270123
@@ -1049,15 +1031,6 @@ DTEND;VALUE=DATE:20270228
 SUMMARY:🎖️ Tournoi vétérans d'Elven (Vannes) – Label A
 LOCATION:Elven\, Vannes (Bretagne)
 DESCRIPTION:Calendrier France Judo Vétérans 2026-2027\, communiqué à titre prévisionnel : les dates peuvent changer selon la validation des salles.
-END:VEVENT
-BEGIN:VEVENT
-UID:20270301StagejujitsuMaisondujudoLyon@jco-chandieu
-DTSTAMP:20261030T080000Z
-DTSTART;VALUE=DATE:20270301
-DTEND;VALUE=DATE:20270302
-SUMMARY:🎓 Stage jujitsu
-LOCATION:Maison du judo (Lyon)
-DESCRIPTION:Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270303TournoiLabelASeniorsquipesmixtesSainghinenMlantoisHa@jco-chandieu
@@ -1616,15 +1589,6 @@ DTEND;VALUE=DATE:20270531
 SUMMARY:🏆 Cadets Espoirs – France
 LOCATION:Lieu à confirmer
 DESCRIPTION:Lieu et horaires à confirmer. Source : récapitulatif sportif du comité du Rhône (au 22/09/2026)
-END:VEVENT
-BEGIN:VEVENT
-UID:20270531StagejujitsuMaisondujudoLyon@jco-chandieu
-DTSTAMP:20261030T080000Z
-DTSTART;VALUE=DATE:20270531
-DTEND;VALUE=DATE:20270601
-SUMMARY:🎓 Stage jujitsu
-LOCATION:Maison du judo (Lyon)
-DESCRIPTION:Public concerné non précisé : voir le comité. Lieu d'après le calendrier des événements du comité du Rhône (consulté le 30/10/2026). Horaires à confirmer auprès du comité.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270601StagekataprparationauxgradesMaisondujudoLyon@jco-chandieu
