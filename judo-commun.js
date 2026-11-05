@@ -5,7 +5,7 @@
 
 // ----- Données à vérifier et modifier selon la saison / la fédération -----
 const categories = [
-  { nom: "Baby judo", de: 2021, a: 2022 },
+  { nom: "Baby judo", de: 2021, a: 2023 },
   { nom: "Mini-Poussin", de: 2019, a: 2020 },
   { nom: "Poussin", de: 2017, a: 2018 },
   { nom: "Benjamin", de: 2015, a: 2016 },
