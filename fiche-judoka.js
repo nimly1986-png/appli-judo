@@ -31,11 +31,13 @@ function nomsDeFamille() {
   return noms;
 }
 function afficherBienvenue() {
-  const noms = nomsDeFamille();
+  let noms = nomsDeFamille();
+  if (noms.length > 3) { noms = []; }                 // appareil du club (toutes les fiches) : pas de liste de familles
   const zone = document.getElementById("bienvenue");
   const salut = new Date().getHours() < 18 ? "Bonjour" : "Bonsoir";
   document.getElementById("bienvenue-titre").textContent = noms.length ? salut + ", famille " + noms.join(" – ") + " !" : salut + " et bienvenue au JCO Chandieu !";
-  const prenoms = fiches.map(function (f) { return f.prenom; }).filter(Boolean);
+  let prenoms = fiches.map(function (f) { return f.prenom; }).filter(Boolean);
+  if (prenoms.length > 6) { prenoms = []; }
   document.getElementById("bienvenue-judokas").textContent = prenoms.length ? "Judokas de la maison : " + prenoms.join(", ") : "";
   document.getElementById("bienvenue-mot").textContent = MOTS_BIENVENUE[Math.floor(Math.random() * MOTS_BIENVENUE.length)];
   zone.hidden = false;

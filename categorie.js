@@ -78,7 +78,7 @@
   "or": false
  }
 };
-  var ALIAS = {"quiz": "techniques", "technique": "techniques", "participations": "evenements", "photos": "evenements", "resultats": "evenements", "bons-points": "code-moral", "agenda": "competitions", "reglements": "competitions", "admin-synthese": "admin-financier", "admin-resultats": "admin-sportif"};
+  var ALIAS = {"quiz": "techniques", "technique": "techniques", "participations": "evenements", "photos": "evenements", "resultats": "evenements", "vente-calendriers": "evenements", "vente-chocolats": "evenements", "bons-points": "code-moral", "agenda": "competitions", "reglements": "competitions", "admin-synthese": "admin-financier", "admin-resultats": "admin-sportif"};
   var page = (location.pathname.split("/").pop() || "").replace(".html", "");
   var cle = ALIAS[page] || page;
   var cat = CATEGORIES[cle];

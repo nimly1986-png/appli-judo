@@ -203,6 +203,7 @@ function afficherTableau() {
     colorer(pastille, f.ceinture);
     celluleCeinture.appendChild(pastille);
 
+    if (f.ceintureAVerifier) { celluleCeinture.appendChild(creer("span", "petit", " ⚠ à renseigner")); }
     cellule(ligne, f.licence || "—");
     cellule(ligne, f.entree ? "depuis " + f.entree : "—");
     const dossier = cellule(ligne, "");
@@ -322,6 +323,41 @@ champ("enregistrer").addEventListener("click", function () {
     afficherTableau();
     afficherAlertes();
   }
+});
+
+// ----- Import de la liste du club (fichier JSON local) -----
+function cleJudoka(f) { return sansAccentsMin(f.prenom) + "|" + sansAccentsMin(f.nom) + "|" + (f.naissance || ""); }
+function sansAccentsMin(t) { return String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim(); }
+champ("import-fichier").addEventListener("change", function (e) {
+  const fichier = e.target.files[0];
+  const sortie = champ("import-resultat");
+  if (!fichier) { return; }
+  const lecteur = new FileReader();
+  lecteur.onload = function () {
+    let liste;
+    try { liste = JSON.parse(lecteur.result); if (!Array.isArray(liste)) { throw new Error(); } }
+    catch (err) { sortie.textContent = "❌ Fichier illisible : choisissez licencies-club.json."; return; }
+    const existantes = new Set(fiches.map(cleJudoka));
+    let ajoutees = 0, doublons = 0, aVerifier = 0;
+    liste.forEach(function (x, i) {
+      if (!x || !x.prenom || !x.nom || !x.naissance) { return; }
+      if (existantes.has(cleJudoka(x))) { doublons++; return; }
+      const fiche = {
+        id: Date.now() + i, prenom: x.prenom, nom: x.nom, naissance: x.naissance,
+        ceinture: x.ceinture || ceintures[0].nom, licence: x.licence || "", entree: "", poids: "",
+        contacts: "", email: "", telephone: "", certificat: false, photo: "",
+        reglement: { recu: false, modes: [], cheques: [], paiements: {}, relance: "" }
+      };
+      if (!x.ceinture) { fiche.ceintureAVerifier = true; aVerifier++; }
+      fiches.push(fiche); existantes.add(cleJudoka(fiche)); ajoutees++;
+    });
+    if (enregistrerFiches(fiches)) {
+      sortie.textContent = "✅ " + ajoutees + " fiche(s) ajoutée(s), " + doublons + " déjà présente(s). Ceinture à renseigner pour " + aVerifier + " (cliquez ✏️ sur chaque fiche).";
+      afficherTableau(); afficherAlertes();
+    }
+  };
+  lecteur.readAsText(fichier);
+  e.target.value = "";
 });
 
 // ----- Démarrage -----
