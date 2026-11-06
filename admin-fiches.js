@@ -328,6 +328,9 @@ champ("enregistrer").addEventListener("click", function () {
 // ----- Import de la liste du club (fichier JSON local) -----
 function cleJudoka(f) { return sansAccentsMin(f.prenom) + "|" + sansAccentsMin(f.nom) + "|" + (f.naissance || ""); }
 function sansAccentsMin(t) { return String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim(); }
+// Version « codée » (3 premières lettres du nom + initiale du prénom) : remplace la fiche complète déjà importée
+function cleCode(f) { return sansAccentsMin(String(f.nom || "").replace(/\s/g, "")).slice(0, 3) + "|" + sansAccentsMin(f.prenom).charAt(0) + "|" + (f.naissance || ""); }
+function estCode(x) { return String(x.nom).length <= 3 && String(x.prenom).length <= 2; }
 champ("import-fichier").addEventListener("change", function (e) {
   const fichier = e.target.files[0];
   const sortie = champ("import-resultat");
@@ -338,10 +341,15 @@ champ("import-fichier").addEventListener("change", function (e) {
     try { liste = JSON.parse(lecteur.result); if (!Array.isArray(liste)) { throw new Error(); } }
     catch (err) { sortie.textContent = "❌ Fichier illisible : choisissez licencies-club.json."; return; }
     const existantes = new Set(fiches.map(cleJudoka));
-    let ajoutees = 0, doublons = 0, aVerifier = 0;
+    let ajoutees = 0, doublons = 0, aVerifier = 0, remplacees = 0;
     liste.forEach(function (x, i) {
       if (!x || !x.prenom || !x.nom || !x.naissance) { return; }
       if (existantes.has(cleJudoka(x))) { doublons++; return; }
+      const complete = estCode(x) ? fiches.find(function (e) { return !estCode(e) && cleCode(e) === cleCode(x); }) : null;
+      if (complete) {                                   // on garde ceinture, dossier, règlement : seule l'identité est codée
+        existantes.delete(cleJudoka(complete)); complete.prenom = x.prenom; complete.nom = x.nom;
+        existantes.add(cleJudoka(complete)); remplacees++; return;
+      }
       const fiche = {
         id: Date.now() + i, prenom: x.prenom, nom: x.nom, naissance: x.naissance,
         ceinture: x.ceinture || ceintures[0].nom, licence: x.licence || "", entree: "", poids: "",
@@ -352,7 +360,7 @@ champ("import-fichier").addEventListener("change", function (e) {
       fiches.push(fiche); existantes.add(cleJudoka(fiche)); ajoutees++;
     });
     if (enregistrerFiches(fiches)) {
-      sortie.textContent = "✅ " + ajoutees + " fiche(s) ajoutée(s), " + doublons + " déjà présente(s). Ceinture à renseigner pour " + aVerifier + " (cliquez ✏️ sur chaque fiche).";
+      sortie.textContent = "✅ " + ajoutees + " fiche(s) ajoutée(s), " + remplacees + " remplacée(s) par leur version codée, " + doublons + " déjà présente(s). Ceinture à renseigner pour " + aVerifier + " (cliquez ✏️ sur chaque fiche).";
       afficherTableau(); afficherAlertes();
     }
   };
