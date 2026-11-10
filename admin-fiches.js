@@ -231,64 +231,85 @@ function cellule(ligne, texte) {
 function afficherTableau() {
   const tableau = champ("tableau");
   tableau.innerHTML = "";
-
-  const entete = tableau.insertRow();
-  for (const titre of ["Judoka", "Catégorie", "Ceinture", "Licence", "Au club", "Dossier", ""]) {
-    const th = document.createElement("th");
-    th.textContent = titre;
-    entete.appendChild(th);
-  }
-
-  // « Fiches judoka complètes » en haut, puis les fiches à compléter
   const parNom = function (x, y) { return (x.nom + x.prenom).localeCompare(y.nom + y.prenom, "fr"); };
   const completes = fiches.filter(function (f) { return f.validee; }).sort(parNom);
   const aCompleter = fiches.filter(function (f) { return !f.validee; }).sort(parNom);
+  const sauver = function () { if (enregistrerFiches(fiches)) { afficherTableau(); majApercu(); } };
   const titreGroupe = function (texte) {
     const l = tableau.insertRow(); l.className = "groupe-titre";
-    const c = l.insertCell(); c.colSpan = 7; c.textContent = texte;
+    const c = l.insertCell(); c.colSpan = 3; c.textContent = texte;
   };
-  titreGroupe("✅ Fiches judoka complètes (" + completes.length + ")");
-  if (completes.length === 0) { const l = tableau.insertRow(); const c = l.insertCell(); c.colSpan = 7; c.className = "petit"; c.textContent = "Aucune fiche validée pour l'instant."; }
-  const lignes = completes.concat([null], aCompleter);
-  lignes.forEach(function (f) {
-    if (f === null) { titreGroupe("Fiches à compléter (" + aCompleter.length + ")"); return; }
-    const ligne = tableau.insertRow();
-    const cNom = cellule(ligne, f.prenom + " " + f.nom);
-    if (!reglementRecu(f)) {
-      const r = f.reglement && f.reglement.relance;
-      cNom.appendChild(creer("div", "alerte-fiche", "⚠ Règlement non reçu" + (r ? " · relance le " + dateFr(r) : "")));
-    }
-    cellule(ligne, calculerCategorie(f.naissance));
-
-    const celluleCeinture = cellule(ligne, "");
-    const pastille = creer("span", "pastille");
-    colorer(pastille, f.ceinture);
-    celluleCeinture.appendChild(pastille);
-
-    if (f.ceintureAVerifier) { celluleCeinture.appendChild(creer("span", "petit", " ⚠ à renseigner")); }
-    cellule(ligne, f.licence || "—");
-    cellule(ligne, f.entree ? "depuis " + f.entree : "—");
-    const dossier = cellule(ligne, "");
-    dossier.appendChild(creer("span", "badge " + (f.certificat ? "ok" : "alerte"), "Certificat " + (f.certificat ? "✓" : "✗")));
-    dossier.appendChild(creer("span", "badge " + (f.reglement && f.reglement.recu ? "ok" : "alerte"), "Règlement " + (f.reglement && f.reglement.recu ? "✓" : "✗")));
-
-    const actions = cellule(ligne, "");
-    const modifier = creer("button", "", "✏️");
-    modifier.title = "Modifier";
+  const caseACocher = function (texte, coche, action) {
+    const e = creer("label", "case-rapide");
+    const c = document.createElement("input"); c.type = "checkbox"; c.checked = coche;
+    c.addEventListener("change", function () { action(c.checked); });
+    e.appendChild(c); e.appendChild(document.createTextNode(" " + texte));
+    return e;
+  };
+  const boutons = function (cellule, f) {
+    const modifier = creer("button", "", "✏️"); modifier.title = "Modifier toute la fiche";
     modifier.addEventListener("click", function () { commencerModification(f); });
-    const supprimer = creer("button", "", "🗑️");
-    supprimer.title = "Supprimer";
+    const supprimer = creer("button", "", "🗑️"); supprimer.title = "Supprimer";
     supprimer.addEventListener("click", function () {
       if (confirm("Supprimer la fiche de " + f.prenom + " ?")) {
         fiches = fiches.filter(function (x) { return x.id !== f.id; });
         enregistrerFiches(fiches);
         if (idEnModification === f.id) { viderFormulaire(); }
         afficherTableau();
-        afficherAlertes();
       }
     });
-    actions.appendChild(modifier);
-    actions.appendChild(supprimer);
+    cellule.appendChild(modifier); cellule.appendChild(supprimer);
+  };
+  const identite = function (ligne, f) {
+    const c = ligne.insertCell();
+    c.appendChild(creer("strong", "", f.prenom + " " + f.nom));
+    const sous = creer("div", "petit");
+    const pastille = creer("span", "pastille"); colorer(pastille, f.ceinture);
+    sous.appendChild(pastille);
+    sous.appendChild(document.createTextNode(" " + calculerCategorie(f.naissance) + (f.ceintureAVerifier ? " · ⚠ ceinture à renseigner" : "")));
+    c.appendChild(sous);
+    return c;
+  };
+
+  // ----- Fiches judoka complètes : une ligne chacune -----
+  titreGroupe("✅ Fiches judoka complètes (" + completes.length + ")");
+  if (completes.length === 0) { const l = tableau.insertRow(); const c = l.insertCell(); c.colSpan = 3; c.className = "petit"; c.textContent = "Aucune fiche validée pour l'instant."; }
+  completes.forEach(function (f) {
+    const ligne = tableau.insertRow(); ligne.className = "ligne-complete";
+    identite(ligne, f);
+    const mid = ligne.insertCell();
+    mid.appendChild(creer("span", "badge ok", "Dossier complet" + (f.licence ? " · licence " + f.licence : "")));
+    const retirer = creer("button", "bouton-mini", "Annuler la validation");
+    retirer.addEventListener("click", function () { f.validee = false; sauver(); });
+    mid.appendChild(retirer);
+    boutons(ligne.insertCell(), f);
+  });
+
+  // ----- Fiches à compléter : ce qui manque, à cocher directement -----
+  titreGroupe("Fiches à compléter (" + aCompleter.length + ")");
+  aCompleter.forEach(function (f) {
+    const ligne = tableau.insertRow();
+    const cNom = identite(ligne, f);
+    if (!reglementRecu(f)) {
+      const r = f.reglement && f.reglement.relance;
+      cNom.appendChild(creer("div", "alerte-fiche", "⚠ Règlement non reçu" + (r ? " · relance le " + dateFr(r) : "")));
+    }
+    const mid = ligne.insertCell(); mid.className = "a-faire";
+    mid.appendChild(caseACocher("Certificat médical", !!f.certificat, function (v) { f.certificat = v; sauver(); }));
+    mid.appendChild(caseACocher("Règlement reçu", reglementRecu(f), function (v) {
+      f.reglement = f.reglement || { recu: false, modes: [], cheques: [], paiements: {}, relance: "" };
+      f.reglement.recu = v; sauver();
+    }));
+    const reste = [];
+    if (!f.licence) { reste.push("numéro de licence"); }
+    if (!f.email && !f.telephone) { reste.push("e-mail ou téléphone"); }
+    if (reste.length) { mid.appendChild(creer("span", "badge alerte", "À saisir (✏️) : " + reste.join(", "))); }
+    const valider = creer("button", "bouton-mini", "✅ Valider la fiche");
+    valider.disabled = manquePourValider(f).length > 0;
+    valider.title = valider.disabled ? "Il manque : " + manquePourValider(f).join(", ") : "Classer dans les fiches complètes";
+    valider.addEventListener("click", function () { f.validee = true; sauver(); });
+    mid.appendChild(valider);
+    boutons(ligne.insertCell(), f);
   });
 }
 
