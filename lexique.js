@@ -23,28 +23,30 @@ function el(tag, classe, texte) { const e = document.createElement(tag); if (cla
 const champ = document.getElementById("recherche");
 
 function afficher() {
+  // menu déroulant des catégories (avec le nombre de mots)
   const zoneCat = document.getElementById("categories");
   zoneCat.innerHTML = "";
-  [""].concat(LEXIQUE.map(function (c) { return c.cat; })).forEach(function (nom) {
-    const b = el("button", "chip lex" + (nom === categorie ? " actif" : ""), nom || "Tout");
-    b.type = "button"; b.style.setProperty("--c", nom ? couleurDe(nom) : "var(--muet)");
-    b.addEventListener("click", function () { categorie = nom; afficher(); });
-    zoneCat.appendChild(b);
-  });
+  const menu = document.createElement("select"); menu.setAttribute("aria-label", "Catégorie"); menu.className = "menu-cat";
+  const tous = document.createElement("option"); tous.value = ""; tous.textContent = "Toutes les catégories"; menu.appendChild(tous);
+  LEXIQUE.forEach(function (c) { const o = document.createElement("option"); o.value = c.cat; o.textContent = c.cat + " (" + c.mots.length + ")"; if (c.cat === categorie) { o.selected = true; } menu.appendChild(o); });
+  menu.addEventListener("change", function () { categorie = menu.value; afficher(); });
+  zoneCat.appendChild(menu);
   const q = normaliser(champ.value.trim());
   const zone = document.getElementById("liste-mots");
   zone.innerHTML = "";
   let total = 0;
+  const toutOuvert = !!q || !!categorie;       // recherche ou catégorie choisie : on déplie ; sinon tout est replié
   LEXIQUE.forEach(function (c) {
     if (categorie && c.cat !== categorie) { return; }
     const mots = c.mots.filter(function (m) { return !q || normaliser(m.join(" ")).indexOf(q) >= 0; });
     if (mots.length === 0) { return; }
     total += mots.length;
-    const titre = el("h2", "cat-titre");
-    titre.style.setProperty("--c", couleurDe(c.cat));
-    titre.appendChild(el("span", "", c.cat));
+    const bloc = document.createElement("details"); bloc.className = "cat-bloc"; bloc.open = toutOuvert;
+    bloc.style.setProperty("--c", couleurDe(c.cat));
+    const titre = document.createElement("summary"); titre.className = "cat-titre";
+    titre.appendChild(el("span", "", c.cat + " (" + mots.length + ")"));
     titre.appendChild(el("small", "", ceintureDe(c.cat)));
-    zone.appendChild(titre);
+    bloc.appendChild(titre);
     const grille = el("div", "mots");
     grille.style.setProperty("--c", couleurDe(c.cat));
     mots.forEach(function (m) {
@@ -54,7 +56,8 @@ function afficher() {
       if (m[2]) { carte.appendChild(el("small", "", m[2])); }
       grille.appendChild(carte);
     });
-    zone.appendChild(grille);
+    bloc.appendChild(grille);
+    zone.appendChild(bloc);
   });
   document.getElementById("compte-mots").textContent = total + " mot" + (total > 1 ? "s" : "");
   if (total === 0) { zone.appendChild(el("p", "message-vide", "Aucun mot ne correspond.")); }

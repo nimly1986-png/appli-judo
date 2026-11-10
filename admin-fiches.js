@@ -215,7 +215,7 @@ function viderFormulaire() {
   uvCourantes = {}; valideeCourante = false;
   photoCourante = "";
   idEnModification = null;
-  champ("titre-formulaire").textContent = "Nouvelle fiche";
+  champ("titre-formulaire").textContent = "➕ Nouvelle fiche";
   champ("enregistrer").textContent = "Enregistrer la fiche";
   champ("annuler").hidden = true;
   majApercu();
@@ -231,6 +231,7 @@ function cellule(ligne, texte) {
 // ----- Suivi des dossiers : tableau de bord de validation -----
 let filtreSuivi = "tous";       // tous | pretes | reglement | certificat | licence | contact | completes
 let rechercheSuivi = "";
+let ficheSuivie = null;         // fiche affichée dans le suivi
 let panneauOuvert = null;       // { id, quoi } : saisie rapide de la licence ou du contact
 const FILTRES_SUIVI = [
   ["tous", "Toutes"], ["pretes", "Prêtes à valider"], ["reglement", "Règlement"], ["certificat", "Certificat"],
@@ -282,6 +283,8 @@ function afficherTableau() {
     filtres.appendChild(b);
   });
   zone.appendChild(filtres);
+  const choixZone = creer("div", "sv-choix");
+  zone.appendChild(choixZone);
   const liste = creer("div", "sv-liste");
   zone.appendChild(liste);
 
@@ -297,7 +300,7 @@ function afficherTableau() {
   const bouton = function (parent, classe, texte, action) {
     const b = creer("button", classe, texte); b.type = "button"; b.addEventListener("click", action); parent.appendChild(b); return b;
   };
-  function carte(f) {
+  function carte(f, suivante) {
     const etapes = etapesDossier(f), n = etapes.filter(function (e) { return e.ok; }).length;
     const c = creer("article", "sv-carte" + (f.validee ? " complete" : n === 4 ? " prete" : ""));
     const tete = creer("div", "sv-tete");
@@ -352,16 +355,35 @@ function afficherTableau() {
       });
       c.appendChild(p);
     }
-    const v = bouton(c, "bouton-mini" + (n === 4 ? " vert" : ""), n === 4 ? "✅ Valider la fiche" : "Il manque : " + etapes.filter(function (e) { return !e.ok; }).map(function (e) { return e.nom.toLowerCase(); }).join(", "), function () { f.validee = true; sauver(); });
+    const v = bouton(c, "bouton-mini" + (n === 4 ? " vert" : ""), n === 4 ? (suivante && suivante.id !== f.id ? "✅ Valider et passer à la suivante" : "✅ Valider la fiche") : "Il manque : " + etapes.filter(function (e) { return !e.ok; }).map(function (e) { return e.nom.toLowerCase(); }).join(", "), function () { f.validee = true; if (suivante && suivante.id !== f.id && filtreSuivi !== "tous") { ficheSuivie = suivante.id; } sauver(); });
     v.disabled = n < 4;
     return c;
   }
   function dessinerListe() {
-    liste.innerHTML = "";
+    liste.innerHTML = ""; choixZone.innerHTML = "";
     const ordre = completes.concat(reste.sort(function (x, y) { return nbOk(y) - nbOk(x) || parNom(x, y); }));
     const vues = ordre.filter(garde);
-    if (!vues.length) { liste.appendChild(creer("p", "petit", "Aucune fiche ne correspond.")); return; }
-    vues.forEach(function (f) { liste.appendChild(carte(f)); });
+    if (!vues.length) { liste.appendChild(creer("p", "message-vide", "Aucune fiche ne correspond à ce filtre.")); return; }
+    let pos = vues.findIndex(function (f) { return f.id === ficheSuivie; });
+    if (pos < 0) { pos = 0; ficheSuivie = vues[0].id; }
+    // menu déroulant : toutes les fiches du filtre
+    const menu = document.createElement("select"); menu.className = "sv-menu"; menu.setAttribute("aria-label", "Choisir un judoka");
+    vues.forEach(function (f) {
+      const o = document.createElement("option"); o.value = f.id;
+      o.textContent = (f.validee ? "✅ " : nbOk(f) === 4 ? "🟢 " : "⏳ ") + f.prenom + " " + f.nom + " · " + (f.validee ? "complète" : nbOk(f) + "/4");
+      if (f.id === ficheSuivie) { o.selected = true; }
+      menu.appendChild(o);
+    });
+    menu.addEventListener("change", function () { ficheSuivie = Number(menu.value); panneauOuvert = null; dessinerListe(); });
+    choixZone.appendChild(menu);
+    const nav = creer("div", "sv-nav");
+    bouton(nav, "bouton secondaire", "‹ Précédent", function () { ficheSuivie = vues[(pos - 1 + vues.length) % vues.length].id; panneauOuvert = null; dessinerListe(); });
+    nav.appendChild(creer("span", "petit", (pos + 1) + " / " + vues.length));
+    bouton(nav, "bouton secondaire", "Suivant ›", function () { ficheSuivie = vues[(pos + 1) % vues.length].id; panneauOuvert = null; dessinerListe(); });
+    choixZone.appendChild(nav);
+    const f = vues[pos];
+    const suivante = vues[pos + 1] || vues[pos - 1] || f;
+    liste.appendChild(carte(f, suivante));
   }
   dessinerListe();
 }
@@ -393,11 +415,12 @@ function commencerModification(f) {
   champ("relance").value = r.relance || "";
   champ("photo").value = "";
   photoCourante = f.photo || "";
-  champ("titre-formulaire").textContent = "Modifier la fiche de " + f.prenom;
+  champ("titre-formulaire").textContent = "✏️ Modifier la fiche de " + f.prenom;
+  champ("bloc-formulaire").open = true;
   champ("enregistrer").textContent = "Enregistrer les modifications";
   champ("annuler").hidden = false;
   majApercu();
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  champ("bloc-formulaire").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 // ----- Réactions de la page -----

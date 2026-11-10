@@ -18,9 +18,15 @@
 
   <div id="alertes"></div>
 
-  <h2 id="titre-formulaire">Nouvelle fiche</h2>
-  <div class="formulaire">
-    <input id="prenom" placeholder="Prénom" autocomplete="off">
+  <h2>Suivi des dossiers</h2>
+  <div id="suivi"></div>
+
+  <details id="bloc-formulaire" class="repli">
+    <summary id="titre-formulaire">➕ Nouvelle fiche</summary>
+    <div class="formulaire">
+      <details class="repli-sec" open>
+        <summary>👤 Identité</summary>
+<input id="prenom" placeholder="Prénom" autocomplete="off">
     <input id="nom" placeholder="Nom" autocomplete="off">
     <label>Date de naissance
       <input id="naissance" type="date" min="1920-01-01">
@@ -41,6 +47,9 @@
       <input id="photo" type="file" accept="image/*">
     </label>
     <button id="retirer-photo" class="bouton secondaire" type="button" hidden>Retirer la photo</button>
+      </details>
+      <details class="repli-sec">
+        <summary>📞 Contact du responsable</summary>
     <label>E-mail du responsable légal
       <input id="email" type="email" inputmode="email" autocomplete="off" placeholder="prenom.nom@exemple.fr">
     </label>
@@ -51,6 +60,9 @@
       <textarea id="contacts" rows="2" placeholder="Nom du responsable, autres personnes à joindre"></textarea>
     </label>
 
+      </details>
+      <details class="repli-sec">
+        <summary>📄 Dossier et grade</summary>
     <fieldset class="bloc-dossier">
       <legend>Dossier</legend>
       <label class="case"><input type="checkbox" id="certificat"> Certificat médical / attestation reçu</label>
@@ -72,6 +84,9 @@
       <p class="petit">Les UV et les points viennent de l'extranet FFJudo : ils sont à reporter ici à la main (aucun lien automatique avec le numéro de licence).</p>
     </fieldset>
 
+      </details>
+      <details class="repli-sec">
+        <summary>💶 Règlement</summary>
     <fieldset class="bloc-dossier">
       <legend>Règlement</legend>
       <label class="case"><input type="checkbox" id="reglement-recu"> Règlement reçu</label>
@@ -100,26 +115,30 @@
         </div>
       </div>
     </fieldset>
+      </details>
+      <details class="repli-sec">
+        <summary>✅ Validation</summary>
     <fieldset class="bloc-dossier">
       <legend>Validation de la fiche</legend>
       <p id="validation-manque" class="petit"></p>
       <button id="valider-fiche" class="bouton secondaire" type="button">Valider la fiche</button>
     </fieldset>
 
-    <button id="enregistrer" class="bouton" type="button">Enregistrer la fiche</button>
-    <button id="annuler" class="bouton secondaire" type="button" hidden>Annuler la modification</button>
-  </div>
+      </details>
 
-  <h2>Aperçu de la fiche</h2>
-  <div id="apercu"></div>
+      <button id="enregistrer" class="bouton" type="button">Enregistrer la fiche</button>
+      <button id="annuler" class="bouton secondaire" type="button" hidden>Annuler la modification</button>
+    </div>
+    <h3>Aperçu de la fiche</h3>
+    <div id="apercu"></div>
+  </details>
 
-  <h2>Importer la liste du club</h2>
-  <p class="petit">Choisissez le fichier « licencies-club.json » (gardé sur votre ordinateur, jamais dans le dossier publié du site). Les judokas déjà présents ne sont pas dupliqués. Les ceintures non connues restent à renseigner.</p>
-  <input id="import-fichier" type="file" accept=".json,application/json">
-  <p id="import-resultat" class="petit" role="status"></p>
-
-  <h2>Suivi des dossiers</h2>
-  <div id="suivi"></div>
+  <details class="repli">
+    <summary>📥 Importer la liste du club</summary>
+    <p class="petit">Choisissez le fichier « licencies-codes.json » (gardé sur votre ordinateur, jamais dans le dossier publié du site). Les judokas déjà présents ne sont pas dupliqués. Les ceintures non connues restent à renseigner.</p>
+    <input id="import-fichier" type="file" accept=".json,application/json">
+    <p id="import-resultat" class="petit" role="status"></p>
+  </details>
 
   <a class="bouton secondaire" href="admin.html">⬅ Espace administrateur</a>
 

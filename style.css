@@ -1003,3 +1003,37 @@ tr.ligne-complete td { background: color-mix(in srgb, var(--vert) 6%, transparen
 .sv-panneau input { width: 100%; box-sizing: border-box; }
 .bouton-mini.vert { background: var(--vert); color: #fff; border-color: var(--vert); }
 .sv-carte .bouton-mini { width: 100%; margin-top: 10px; }
+
+/* ----- Sections repliables (admin) ----- */
+details.repli { margin: 14px 0; border: 1px solid var(--trait); border-radius: 16px; background: var(--surface); }
+details.repli > summary { padding: 14px 16px; font-weight: 800; font-size: 17px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+details.repli > summary::-webkit-details-marker, details.repli-sec > summary::-webkit-details-marker { display: none; }
+details.repli > summary::after, details.repli-sec > summary::after { content: "▾"; transition: transform .2s; color: var(--muet); }
+details[open] > summary::after { transform: rotate(180deg); }
+details.repli > *:not(summary) { margin-left: 14px; margin-right: 14px; }
+details.repli[open] > :last-child { margin-bottom: 14px; }
+details.repli-sec { margin: 0 0 10px; border: 1px solid var(--trait); border-radius: 12px; background: color-mix(in srgb, var(--surface) 70%, transparent); }
+details.repli-sec > summary { padding: 12px 14px; font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; }
+details.repli-sec > *:not(summary) { margin-left: 12px; margin-right: 12px; }
+details.repli-sec[open] { padding-bottom: 12px; }
+details.repli-sec .bloc-dossier { border: 0; padding: 0; margin: 8px 12px; }
+details.repli-sec .bloc-dossier legend { display: none; }
+.sv-menu { width: 100%; box-sizing: border-box; padding: 12px; font-size: 16px; font-weight: 700; border-radius: 12px; }
+.sv-nav { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 8px 0 12px; }
+.sv-nav .bouton { width: auto; flex: 1; margin: 0; padding: 10px; }
+
+/* ----- Lexique : catégories repliables ----- */
+.menu-cat { width: 100%; box-sizing: border-box; padding: 12px; font-size: 16px; font-weight: 700; border-radius: 12px; margin: 4px 0 10px; }
+details.cat-bloc { margin: 0 0 10px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--c) 45%, transparent); background: color-mix(in srgb, var(--c) 7%, var(--surface)); }
+details.cat-bloc > summary.cat-titre { margin: 0; padding: 12px 14px; display: flex; flex-direction: column; list-style: none; cursor: pointer; font-weight: 800; border-left: 6px solid var(--c); border-radius: 14px; }
+details.cat-bloc > summary.cat-titre small { font-weight: 500; color: var(--muet); }
+details.cat-bloc > summary::-webkit-details-marker { display: none; }
+details.cat-bloc[open] > summary.cat-titre { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+details.cat-bloc .mots { padding: 0 10px 10px; }
+.formulaire input:not([type="checkbox"]):not([type="radio"]):not([type="file"]), .formulaire textarea, .formulaire select { width: 100%; box-sizing: border-box; }
+
+/* ----- Compétitions : cartes repliées ----- */
+li.competition.pliable { cursor: pointer; }
+li.competition.pliable:not(.ouvert) .detail { display: none; }
+li.competition.pliable h3::after { content: " ▾"; color: var(--muet); font-size: 0.8em; }
+li.competition.pliable.ouvert h3::after { content: " ▴"; }

@@ -229,11 +229,11 @@ function creerCarteCompetition(c, fiche, avecChecklist, avecAgenda) {
   corps.appendChild(creer("p", "", texteDate(c)));
   corps.appendChild(creer("p", "", "📍 " + c.lieu));
   if (c.aConfirmer && !estPassee(c)) { corps.appendChild(creer("p", "petit", "⚠️ Lieu et horaires à confirmer")); }
-  if (texteConditions(c)) { corps.appendChild(creer("p", "", "🥋 " + texteConditions(c))); }
-  if (c.infos) { corps.appendChild(creer("p", "petit", c.infos)); }
+  if (texteConditions(c)) { corps.appendChild(creer("p", "detail", "🥋 " + texteConditions(c))); }
+  if (c.infos) { corps.appendChild(creer("p", "petit detail", c.infos)); }
   if (c.serie !== "interclub") {                       // interclub : visuel simple, sans niveau
     const niv = NIVEAUX[rangNiveau(c)];
-    corps.appendChild(creer("p", "petit", "Niveau : " + niv.nom));
+    corps.appendChild(creer("p", "petit detail", "Niveau : " + niv.nom));
   }
   if (estPassee(c)) {
     corps.appendChild(creer("p", "compte", "Terminée"));
@@ -246,13 +246,13 @@ function creerCarteCompetition(c, fiche, avecChecklist, avecAgenda) {
     corps.appendChild(creer("p", "compte" + (jours <= 14 ? " urgent" : ""), "Dans " + jours + (jours > 1 ? " jours" : " jour")));
   }
   if (!estPassee(c)) {      // compétition à venir : lien pour l'ajouter à son agenda (fichier .ics)
-    const bAgenda = creer("button", "bouton-resultats", "📆 Ajouter à mon agenda");
+    const bAgenda = creer("button", "bouton-resultats detail", "📆 Ajouter à mon agenda");
     bAgenda.type = "button";
     bAgenda.addEventListener("click", function () { telechargerICS([c], "competition-" + c.debut + ".ics"); });
     corps.appendChild(bAgenda);
   }
   if (fiche && !estPassee(c)) {
-    corps.appendChild(creer("p", "statut " + (estInscrit(fiche, c) ? "ok" : "attente"),
+    corps.appendChild(creer("p", "detail statut " + (estInscrit(fiche, c) ? "ok" : "attente"),
       estInscrit(fiche, c) ? "✅ Inscription validée par le club" : "⏳ Inscription non validée"));
   }
   if (avecChecklist && fiche && !estPassee(c)) {
@@ -280,6 +280,10 @@ function creerCarteCompetition(c, fiche, avecChecklist, avecAgenda) {
   }
   li.appendChild(corps);
   li.appendChild(boutonFavori(c));
+  if (!avecChecklist) {      // liste : carte repliée, un toucher affiche le détail
+    li.classList.add("pliable");
+    li.addEventListener("click", function (e) { if (e.target.closest("a, button, input, label")) { return; } li.classList.toggle("ouvert"); });
+  }
   return li;
 }
 
