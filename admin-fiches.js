@@ -228,89 +228,142 @@ function cellule(ligne, texte) {
   return c;
 }
 
+// ----- Suivi des dossiers : tableau de bord de validation -----
+let filtreSuivi = "tous";       // tous | pretes | reglement | certificat | licence | contact | completes
+let rechercheSuivi = "";
+let panneauOuvert = null;       // { id, quoi } : saisie rapide de la licence ou du contact
+const FILTRES_SUIVI = [
+  ["tous", "Toutes"], ["pretes", "Prêtes à valider"], ["reglement", "Règlement"], ["certificat", "Certificat"],
+  ["licence", "Licence"], ["contact", "Contact"], ["completes", "Complètes"]
+];
+function etapesDossier(f) {
+  return [
+    { cle: "certificat", icone: "📄", nom: "Certificat", ok: !!f.certificat },
+    { cle: "reglement", icone: "💶", nom: "Règlement", ok: reglementRecu(f) },
+    { cle: "licence", icone: "🪪", nom: "Licence", ok: !!f.licence },
+    { cle: "contact", icone: "📞", nom: "Contact", ok: !!(f.email || f.telephone) }
+  ];
+}
 function afficherTableau() {
-  const tableau = champ("tableau");
-  tableau.innerHTML = "";
-  const parNom = function (x, y) { return (x.nom + x.prenom).localeCompare(y.nom + y.prenom, "fr"); };
-  const completes = fiches.filter(function (f) { return f.validee; }).sort(parNom);
-  const aCompleter = fiches.filter(function (f) { return !f.validee; }).sort(parNom);
+  const zone = champ("suivi");
+  zone.innerHTML = "";
   const sauver = function () { if (enregistrerFiches(fiches)) { afficherTableau(); majApercu(); } };
-  const titreGroupe = function (texte) {
-    const l = tableau.insertRow(); l.className = "groupe-titre";
-    const c = l.insertCell(); c.colSpan = 3; c.textContent = texte;
-  };
-  const caseACocher = function (texte, coche, action) {
-    const e = creer("label", "case-rapide");
-    const c = document.createElement("input"); c.type = "checkbox"; c.checked = coche;
-    c.addEventListener("change", function () { action(c.checked); });
-    e.appendChild(c); e.appendChild(document.createTextNode(" " + texte));
-    return e;
-  };
-  const boutons = function (cellule, f) {
-    const modifier = creer("button", "", "✏️"); modifier.title = "Modifier toute la fiche";
-    modifier.addEventListener("click", function () { commencerModification(f); });
-    const supprimer = creer("button", "", "🗑️"); supprimer.title = "Supprimer";
-    supprimer.addEventListener("click", function () {
-      if (confirm("Supprimer la fiche de " + f.prenom + " ?")) {
-        fiches = fiches.filter(function (x) { return x.id !== f.id; });
-        enregistrerFiches(fiches);
-        if (idEnModification === f.id) { viderFormulaire(); }
-        afficherTableau();
-      }
-    });
-    cellule.appendChild(modifier); cellule.appendChild(supprimer);
-  };
-  const identite = function (ligne, f) {
-    const c = ligne.insertCell();
-    c.appendChild(creer("strong", "", f.prenom + " " + f.nom));
-    const sous = creer("div", "petit");
-    const pastille = creer("span", "pastille"); colorer(pastille, f.ceinture);
-    sous.appendChild(pastille);
-    sous.appendChild(document.createTextNode(" " + calculerCategorie(f.naissance) + (f.ceintureAVerifier ? " · ⚠ ceinture à renseigner" : "")));
-    c.appendChild(sous);
-    return c;
-  };
+  const parNom = function (x, y) { return (x.nom + x.prenom).localeCompare(y.nom + y.prenom, "fr"); };
+  const nbOk = function (f) { return etapesDossier(f).filter(function (e) { return e.ok; }).length; };
+  const completes = fiches.filter(function (f) { return f.validee; }).sort(parNom);
+  const reste = fiches.filter(function (f) { return !f.validee; });
+  const pretes = reste.filter(function (f) { return nbOk(f) === 4; });
 
-  // ----- Fiches judoka complètes : une ligne chacune -----
-  titreGroupe("✅ Fiches judoka complètes (" + completes.length + ")");
-  if (completes.length === 0) { const l = tableau.insertRow(); const c = l.insertCell(); c.colSpan = 3; c.className = "petit"; c.textContent = "Aucune fiche validée pour l'instant."; }
-  completes.forEach(function (f) {
-    const ligne = tableau.insertRow(); ligne.className = "ligne-complete";
-    identite(ligne, f);
-    const mid = ligne.insertCell();
-    mid.appendChild(creer("span", "badge ok", "Dossier complet" + (f.licence ? " · licence " + f.licence : "")));
-    const retirer = creer("button", "bouton-mini", "Annuler la validation");
-    retirer.addEventListener("click", function () { f.validee = false; sauver(); });
-    mid.appendChild(retirer);
-    boutons(ligne.insertCell(), f);
+  // --- bandeau de synthèse ---
+  const synthese = creer("div", "sv-synthese");
+  [["✅", completes.length, "complètes"], ["🟢", pretes.length, "prêtes à valider"], ["⏳", reste.length - pretes.length, "à compléter"]].forEach(function (s) {
+    const p = creer("div", "sv-stat"); p.appendChild(creer("strong", "", s[1])); p.appendChild(creer("span", "", s[0] + " " + s[2])); synthese.appendChild(p);
   });
+  zone.appendChild(synthese);
+  if (pretes.length) {
+    const tout = creer("button", "bouton", "✅ Valider les " + pretes.length + " dossier" + (pretes.length > 1 ? "s" : "") + " prêt" + (pretes.length > 1 ? "s" : ""));
+    tout.type = "button";
+    tout.addEventListener("click", function () {
+      if (confirm("Valider " + pretes.length + " fiche(s) dont le dossier est complet ?")) { pretes.forEach(function (f) { f.validee = true; }); sauver(); }
+    });
+    zone.appendChild(tout);
+  }
 
-  // ----- Fiches à compléter : ce qui manque, à cocher directement -----
-  titreGroupe("Fiches à compléter (" + aCompleter.length + ")");
-  aCompleter.forEach(function (f) {
-    const ligne = tableau.insertRow();
-    const cNom = identite(ligne, f);
+  // --- recherche et filtres ---
+  const recherche = document.createElement("input");
+  recherche.type = "search"; recherche.placeholder = "Chercher un judoka"; recherche.value = rechercheSuivi; recherche.className = "sv-recherche";
+  recherche.addEventListener("input", function () { rechercheSuivi = recherche.value; dessinerListe(); });
+  zone.appendChild(recherche);
+  const filtres = creer("div", "sv-filtres");
+  FILTRES_SUIVI.forEach(function (fl) {
+    const b = creer("button", "sv-filtre" + (filtreSuivi === fl[0] ? " actif" : ""), fl[1]);
+    b.type = "button";
+    b.addEventListener("click", function () { filtreSuivi = fl[0]; afficherTableau(); });
+    filtres.appendChild(b);
+  });
+  zone.appendChild(filtres);
+  const liste = creer("div", "sv-liste");
+  zone.appendChild(liste);
+
+  function garde(f) {
+    const q = sansAccentsMin(rechercheSuivi);
+    if (q && sansAccentsMin(f.prenom + " " + f.nom).indexOf(q) === -1) { return false; }
+    const e = etapesDossier(f), manque = function (c) { return !e.find(function (x) { return x.cle === c; }).ok; };
+    if (filtreSuivi === "completes") { return !!f.validee; }
+    if (filtreSuivi === "pretes") { return !f.validee && nbOk(f) === 4; }
+    if (["reglement", "certificat", "licence", "contact"].includes(filtreSuivi)) { return !f.validee && manque(filtreSuivi); }
+    return true;
+  }
+  const bouton = function (parent, classe, texte, action) {
+    const b = creer("button", classe, texte); b.type = "button"; b.addEventListener("click", action); parent.appendChild(b); return b;
+  };
+  function carte(f) {
+    const etapes = etapesDossier(f), n = etapes.filter(function (e) { return e.ok; }).length;
+    const c = creer("article", "sv-carte" + (f.validee ? " complete" : n === 4 ? " prete" : ""));
+    const tete = creer("div", "sv-tete");
+    const pastille = creer("span", "pastille"); colorer(pastille, f.ceinture); tete.appendChild(pastille);
+    const qui = creer("div", "sv-qui");
+    qui.appendChild(creer("strong", "", f.prenom + " " + f.nom));
+    qui.appendChild(creer("span", "petit", calculerCategorie(f.naissance) + (f.ceintureAVerifier ? " · ⚠ ceinture à renseigner" : "")));
+    tete.appendChild(qui);
+    if (f.validee) { tete.appendChild(creer("span", "badge ok", "✅ Complète")); }
+    else { const anneau = creer("span", "sv-anneau", n + "/4"); anneau.style.setProperty("--p", (n * 25) + "%"); tete.appendChild(anneau); }
+    const outils = creer("div", "sv-outils");
+    bouton(outils, "", "✏️", function () { commencerModification(f); }).title = "Ouvrir la fiche complète";
+    bouton(outils, "", "🗑️", function () {
+      if (confirm("Supprimer la fiche de " + f.prenom + " ?")) { fiches = fiches.filter(function (x) { return x.id !== f.id; }); enregistrerFiches(fiches); if (idEnModification === f.id) { viderFormulaire(); } afficherTableau(); }
+    }).title = "Supprimer";
+    tete.appendChild(outils);
+    c.appendChild(tete);
+
+    if (f.validee) {
+      c.appendChild(creer("p", "petit", "Licence " + f.licence));
+      bouton(c, "bouton-mini", "Annuler la validation", function () { f.validee = false; sauver(); });
+      return c;
+    }
+    // quatre pastilles à toucher
+    const grille = creer("div", "sv-etapes");
+    etapes.forEach(function (e) {
+      const b = bouton(grille, "sv-etape" + (e.ok ? " ok" : ""), "", function () {
+        if (e.cle === "certificat") { f.certificat = !f.certificat; sauver(); }
+        else if (e.cle === "reglement") { f.reglement = f.reglement || { recu: false, modes: [], cheques: [], paiements: {}, relance: "" }; f.reglement.recu = !f.reglement.recu; sauver(); }
+        else { panneauOuvert = (panneauOuvert && panneauOuvert.id === f.id && panneauOuvert.quoi === e.cle) ? null : { id: f.id, quoi: e.cle }; afficherTableau(); }
+      });
+      b.appendChild(creer("span", "sv-ico", e.ok ? "✔" : e.icone));
+      b.appendChild(creer("span", "", e.nom));
+    });
+    c.appendChild(grille);
     if (!reglementRecu(f)) {
       const r = f.reglement && f.reglement.relance;
-      cNom.appendChild(creer("div", "alerte-fiche", "⚠ Règlement non reçu" + (r ? " · relance le " + dateFr(r) : "")));
+      c.appendChild(creer("p", "alerte-fiche", "⚠ Règlement non reçu" + (r ? " · relance le " + dateFr(r) : "")));
     }
-    const mid = ligne.insertCell(); mid.className = "a-faire";
-    mid.appendChild(caseACocher("Certificat médical", !!f.certificat, function (v) { f.certificat = v; sauver(); }));
-    mid.appendChild(caseACocher("Règlement reçu", reglementRecu(f), function (v) {
-      f.reglement = f.reglement || { recu: false, modes: [], cheques: [], paiements: {}, relance: "" };
-      f.reglement.recu = v; sauver();
-    }));
-    const reste = [];
-    if (!f.licence) { reste.push("numéro de licence"); }
-    if (!f.email && !f.telephone) { reste.push("e-mail ou téléphone"); }
-    if (reste.length) { mid.appendChild(creer("span", "badge alerte", "À saisir (✏️) : " + reste.join(", "))); }
-    const valider = creer("button", "bouton-mini", "✅ Valider la fiche");
-    valider.disabled = manquePourValider(f).length > 0;
-    valider.title = valider.disabled ? "Il manque : " + manquePourValider(f).join(", ") : "Classer dans les fiches complètes";
-    valider.addEventListener("click", function () { f.validee = true; sauver(); });
-    mid.appendChild(valider);
-    boutons(ligne.insertCell(), f);
-  });
+    // saisie rapide de la licence ou du contact, sans ouvrir la fiche
+    if (panneauOuvert && panneauOuvert.id === f.id) {
+      const p = creer("div", "sv-panneau");
+      const champs = [];
+      const ajouter = function (etiquette, valeur, type, ph) {
+        const l = creer("label", "", etiquette); const i = document.createElement("input"); i.type = type; i.value = valeur || ""; i.placeholder = ph || ""; l.appendChild(i); p.appendChild(l); champs.push(i); return i;
+      };
+      if (panneauOuvert.quoi === "licence") { ajouter("Numéro de licence", f.licence, "text"); }
+      else { ajouter("E-mail du responsable", f.email, "email", "prenom.nom@exemple.fr"); ajouter("Téléphone du responsable", f.telephone, "tel", "06 00 00 00 00"); }
+      bouton(p, "bouton", "Enregistrer", function () {
+        if (panneauOuvert.quoi === "licence") { f.licence = champs[0].value.trim(); } else { f.email = champs[0].value.trim(); f.telephone = champs[1].value.trim(); }
+        panneauOuvert = null; sauver();
+      });
+      c.appendChild(p);
+    }
+    const v = bouton(c, "bouton-mini" + (n === 4 ? " vert" : ""), n === 4 ? "✅ Valider la fiche" : "Il manque : " + etapes.filter(function (e) { return !e.ok; }).map(function (e) { return e.nom.toLowerCase(); }).join(", "), function () { f.validee = true; sauver(); });
+    v.disabled = n < 4;
+    return c;
+  }
+  function dessinerListe() {
+    liste.innerHTML = "";
+    const ordre = completes.concat(reste.sort(function (x, y) { return nbOk(y) - nbOk(x) || parNom(x, y); }));
+    const vues = ordre.filter(garde);
+    if (!vues.length) { liste.appendChild(creer("p", "petit", "Aucune fiche ne correspond.")); return; }
+    vues.forEach(function (f) { liste.appendChild(carte(f)); });
+  }
+  dessinerListe();
 }
 
 // La grande liste des règlements non reçus a été retirée : l'alerte est directement sur chaque fiche.

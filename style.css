@@ -972,3 +972,34 @@ tr.ligne-complete td { background: color-mix(in srgb, var(--vert) 6%, transparen
 #tableau td .pastille { display: inline-block; vertical-align: middle; width: 34px; }
 #tableau td .badge { white-space: normal; }
 #tableau td.a-faire { min-width: 0; }
+
+/* ----- Suivi des dossiers : tableau de bord ----- */
+.sv-synthese { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 8px 0 12px; }
+.sv-stat { padding: 10px 8px; border-radius: 14px; text-align: center; background: color-mix(in srgb, var(--accent) 10%, var(--surface)); border: 1px solid var(--trait); }
+.sv-stat strong { display: block; font-size: 26px; line-height: 1.1; }
+.sv-stat span { font-size: 12.5px; color: var(--muet); }
+.sv-recherche { width: 100%; box-sizing: border-box; margin: 8px 0; }
+.sv-filtres { display: flex; gap: 6px; overflow-x: auto; padding: 2px 0 10px; }
+.sv-filtre { flex: none; padding: 7px 12px; border-radius: 999px; border: 1px solid var(--trait); background: var(--surface); color: var(--texte); font-weight: 600; font-size: 13.5px; }
+.sv-filtre.actif { background: var(--accent); border-color: var(--accent); color: #fff; }
+.sv-liste { display: grid; gap: 10px; }
+.sv-carte { padding: 12px; border-radius: 16px; border: 1px solid var(--trait); background: var(--surface); }
+.sv-carte.prete { border-color: var(--vert); box-shadow: 0 0 0 2px color-mix(in srgb, var(--vert) 22%, transparent); }
+.sv-carte.complete { background: color-mix(in srgb, var(--vert) 7%, var(--surface)); }
+.sv-tete { display: flex; align-items: center; gap: 10px; }
+.sv-qui { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.sv-qui strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sv-tete .pastille { flex: none; width: 34px; }
+.sv-anneau { flex: none; width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 13px; background: conic-gradient(var(--vert) var(--p), color-mix(in srgb, var(--trait) 80%, transparent) 0); position: relative; }
+.sv-anneau::before { content: ""; position: absolute; inset: 5px; border-radius: 50%; background: var(--surface); z-index: -1; }
+.sv-anneau { isolation: isolate; }
+.sv-anneau { color: var(--texte); }
+.sv-outils { flex: none; display: flex; gap: 4px; }
+.sv-etapes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; }
+.sv-etape { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 2px; border-radius: 12px; border: 1px solid var(--trait); background: color-mix(in srgb, var(--rouge) 8%, var(--surface)); color: var(--texte); font-size: 12px; font-weight: 700; }
+.sv-etape .sv-ico { font-size: 20px; line-height: 1.2; }
+.sv-etape.ok { background: color-mix(in srgb, var(--vert) 16%, var(--surface)); border-color: color-mix(in srgb, var(--vert) 50%, transparent); color: var(--vert); }
+.sv-panneau { margin-top: 10px; display: grid; gap: 8px; padding: 10px; border-radius: 12px; background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
+.sv-panneau input { width: 100%; box-sizing: border-box; }
+.bouton-mini.vert { background: var(--vert); color: #fff; border-color: var(--vert); }
+.sv-carte .bouton-mini { width: 100%; margin-top: 10px; }
