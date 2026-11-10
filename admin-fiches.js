@@ -6,7 +6,9 @@ let fiches = lireFiches();
 let idEnModification = null;      // null = nouvelle fiche ; sinon l'identifiant de la fiche modifiée
 let photoCourante = "";           // la photo (réduite) de la fiche en cours de saisie
 let cheques = [];                 // chèques de la fiche en cours : { numero, date, valide }
-let paiements = {};               // autres modes : { virement: { date, valide }, ... }
+let paiements = {};
+let uvCourantes = {};             // UV validées de la fiche en cours : { UV1: true, ... }
+let valideeCourante = false;      // fiche validée (apparaît dans « complètes »)               // autres modes : { virement: { date, valide }, ... }
 const NOMS_MODES = { cheques: "Chèques", virement: "Virement", especes: "Espèces", passsport: "Pass'Sport Région" };
 const MODES = ["cheques", "virement", "especes", "passsport"];
 
@@ -43,8 +45,47 @@ function ficheDuFormulaire() {
       paiements: Object.fromEntries(modesCoches().filter(function (m) { return m !== "cheques" && paiements[m]; }).map(function (m) { return [m, paiements[m]]; })),
       relance: champ("relance").value
     },
-    photo: photoCourante
+    photo: photoCourante,
+    dan: menuCeinture.value === "Noire" ? Number(champ("dan").value) || 1 : undefined,
+    danDate: menuCeinture.value === "Noire" ? champ("dan-date").value : "",
+    uv: Object.assign({}, uvCourantes),
+    pointsUV3: champ("points-uv3").value.trim(),
+    validee: valideeCourante
   };
+}
+
+// ----- Grade (ceinture marron ou noire) : dan, UV validées, points -----
+function majBlocGrade() {
+  const bloc = champ("bloc-grade");
+  const f = { ceinture: menuCeinture.value, dan: champ("dan").value };
+  const vise = gradeVise(f);
+  bloc.hidden = !(f.ceinture === "Noire" || vise);
+  champ("label-dan").hidden = f.ceinture !== "Noire";
+  champ("label-dan-date").hidden = f.ceinture !== "Noire";
+  const zone = champ("uv-liste");
+  zone.innerHTML = "";
+  champ("titre-uv").textContent = vise ? "UV validées pour le " + NOMS_DAN[vise] : "";
+  champ("label-points").hidden = !vise || vise > 4;
+  if (!vise) { return; }
+  uvDuGrade(vise).forEach(function (u) {
+    const etiquette = creer("label", "case");
+    const c = document.createElement("input");
+    c.type = "checkbox"; c.checked = !!uvCourantes[u];
+    c.addEventListener("change", function () { uvCourantes[u] = c.checked; majApercu(); });
+    etiquette.appendChild(c);
+    etiquette.appendChild(document.createTextNode(" " + u + " " + UV_LIBELLES[u]));
+    zone.appendChild(etiquette);
+  });
+}
+
+// ----- Validation de la fiche -----
+function majValidation() {
+  const manque = manquePourValider(ficheDuFormulaire());
+  const bouton = champ("valider-fiche");
+  if (manque.length) { valideeCourante = false; }
+  champ("validation-manque").textContent = manque.length ? "Pour valider, il manque : " + manque.join(", ") + "." : (valideeCourante ? "✅ Fiche validée : elle sera classée dans « Fiches judoka complètes »." : "Le dossier est complet : vous pouvez valider la fiche.");
+  bouton.disabled = manque.length > 0;
+  bouton.textContent = valideeCourante ? "✓ Fiche validée (cliquer pour annuler)" : "Valider la fiche";
 }
 
 // ----- Règlement : modes, chèques, relance -----
@@ -151,9 +192,12 @@ function ajouterRelanceAgenda() {
 function majApercu() {
   const zone = champ("apercu");
   zone.innerHTML = "";
+  if (manquePourValider(ficheDuFormulaire()).length) { valideeCourante = false; }
   zone.appendChild(creerCarte(ficheDuFormulaire()));
   champ("retirer-photo").hidden = photoCourante === "";
   majReglement();
+  majBlocGrade();
+  majValidation();
 }
 
 function viderFormulaire() {
@@ -167,6 +211,8 @@ function viderFormulaire() {
   cheques = [];
   paiements = {};
   menuCeinture.selectedIndex = 0;
+  champ("dan").value = "1"; champ("dan-date").value = ""; champ("points-uv3").value = "";
+  uvCourantes = {}; valideeCourante = false;
   photoCourante = "";
   idEnModification = null;
   champ("titre-formulaire").textContent = "Nouvelle fiche";
@@ -193,9 +239,25 @@ function afficherTableau() {
     entete.appendChild(th);
   }
 
-  fiches.forEach(function (f) {
+  // « Fiches judoka complètes » en haut, puis les fiches à compléter
+  const parNom = function (x, y) { return (x.nom + x.prenom).localeCompare(y.nom + y.prenom, "fr"); };
+  const completes = fiches.filter(function (f) { return f.validee; }).sort(parNom);
+  const aCompleter = fiches.filter(function (f) { return !f.validee; }).sort(parNom);
+  const titreGroupe = function (texte) {
+    const l = tableau.insertRow(); l.className = "groupe-titre";
+    const c = l.insertCell(); c.colSpan = 7; c.textContent = texte;
+  };
+  titreGroupe("✅ Fiches judoka complètes (" + completes.length + ")");
+  if (completes.length === 0) { const l = tableau.insertRow(); const c = l.insertCell(); c.colSpan = 7; c.className = "petit"; c.textContent = "Aucune fiche validée pour l'instant."; }
+  const lignes = completes.concat([null], aCompleter);
+  lignes.forEach(function (f) {
+    if (f === null) { titreGroupe("Fiches à compléter (" + aCompleter.length + ")"); return; }
     const ligne = tableau.insertRow();
-    cellule(ligne, f.prenom + " " + f.nom);
+    const cNom = cellule(ligne, f.prenom + " " + f.nom);
+    if (!reglementRecu(f)) {
+      const r = f.reglement && f.reglement.relance;
+      cNom.appendChild(creer("div", "alerte-fiche", "⚠ Règlement non reçu" + (r ? " · relance le " + dateFr(r) : "")));
+    }
     cellule(ligne, calculerCategorie(f.naissance));
 
     const celluleCeinture = cellule(ligne, "");
@@ -230,25 +292,8 @@ function afficherTableau() {
   });
 }
 
-// Dossiers à suivre : règlement non reçu, avec la relance prévue
-function afficherAlertes() {
-  const zone = champ("alertes");
-  zone.innerHTML = "";
-  const aSuivre = fiches.filter(function (f) { return !(f.reglement && f.reglement.recu); });
-  if (aSuivre.length === 0) { return; }
-  const boite = creer("div", "alerte-reglement");
-  boite.appendChild(creer("strong", "", "⚠ Règlements non reçus (" + aSuivre.length + ")"));
-  aSuivre.forEach(function (f) {
-    const relance = f.reglement && f.reglement.relance;
-    const urgent = relance && relance <= aujourdhui();
-    const b = creer("button", "ligne-alerte" + (urgent ? " urgent" : ""), f.prenom + " " + f.nom + " : " +
-      (relance ? (urgent ? "relance à faire (prévue le " : "relance prévue le ") + dateFr(relance) + (urgent ? ")" : "") : "aucune relance prévue"));
-    b.type = "button";
-    b.addEventListener("click", function () { commencerModification(f); });
-    boite.appendChild(b);
-  });
-  zone.appendChild(boite);
-}
+// La grande liste des règlements non reçus a été retirée : l'alerte est directement sur chaque fiche.
+function afficherAlertes() { champ("alertes").innerHTML = ""; }
 
 function commencerModification(f) {
   idEnModification = f.id;
@@ -259,6 +304,8 @@ function commencerModification(f) {
   champ("licence").value = f.licence || "";
   champ("entree").value = f.entree || "";
   champ("poids").value = f.poids || "";
+  champ("dan").value = String(f.dan || 1); champ("dan-date").value = f.danDate || ""; champ("points-uv3").value = f.pointsUV3 || "";
+  uvCourantes = Object.assign({}, f.uv || {}); valideeCourante = !!f.validee;
   champ("contacts").value = f.contacts || "";
   champ("email").value = f.email || "";
   champ("telephone").value = f.telephone || "";
@@ -280,7 +327,7 @@ function commencerModification(f) {
 }
 
 // ----- Réactions de la page -----
-for (const id of ["prenom", "nom", "naissance", "ceinture", "licence", "entree", "poids", "contacts", "email", "telephone", "certificat", "reglement-recu", "relance"]) {
+for (const id of ["dan", "dan-date", "points-uv3", "prenom", "nom", "naissance", "ceinture", "licence", "entree", "poids", "contacts", "email", "telephone", "certificat", "reglement-recu", "relance"]) {
   champ(id).addEventListener("input", majApercu);
 }
 document.querySelectorAll("#modes input").forEach(function (c) { c.addEventListener("change", function () { if (c.value === "cheques" && c.checked && !nombreCheques()) { champ("nb-cheques").value = 1; } majReglement(); }); });
@@ -305,6 +352,7 @@ champ("retirer-photo").addEventListener("click", function () {
 });
 
 champ("annuler").addEventListener("click", viderFormulaire);
+champ("valider-fiche").addEventListener("click", function () { valideeCourante = !valideeCourante; majApercu(); });
 
 champ("enregistrer").addEventListener("click", function () {
   const f = ficheDuFormulaire();
@@ -312,6 +360,7 @@ champ("enregistrer").addEventListener("click", function () {
     alert("Renseignez le prénom, le nom et la date de naissance");
     return;
   }
+  if (f.validee && manquePourValider(f).length) { f.validee = false; }
   if (idEnModification === null) {
     f.id = Date.now();
     fiches.push(f);

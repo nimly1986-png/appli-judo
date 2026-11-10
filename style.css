@@ -940,3 +940,14 @@ li.competition.passee .etiquette-serie { color: var(--muet); background: transpa
 .carte-info h2 { margin: 0 0 8px; font-size: 20px; }
 .carte-info ul { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 8px; }
 .carte-info p { margin: 0; }
+
+/* ----- Alerte règlement, fiche complète, grade ----- */
+.alerte-fiche { margin: 8px 0; padding: 8px 12px; border-radius: 10px; font-weight: 700; color: var(--rouge); background: color-mix(in srgb, var(--rouge) 12%, transparent); border: 1px solid color-mix(in srgb, var(--rouge) 40%, transparent); }
+td .alerte-fiche { margin: 4px 0 0; padding: 2px 8px; font-size: 12px; display: inline-block; }
+.badge-complete { margin: 8px 0; padding: 8px 12px; border-radius: 10px; font-weight: 700; color: var(--vert); background: color-mix(in srgb, var(--vert) 14%, transparent); border: 1px solid color-mix(in srgb, var(--vert) 40%, transparent); }
+tr.groupe-titre td { padding: 10px 12px; font-weight: 800; background: color-mix(in srgb, var(--accent) 14%, var(--surface)); }
+.carte-grade { margin: 10px 0; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--trait); background: color-mix(in srgb, var(--surface) 92%, transparent); }
+.carte-grade p { margin: 3px 0; font-weight: 700; }
+.carte-grade p.petit { font-weight: 500; }
+#uv-liste .case { display: flex; align-items: center; gap: 10px; margin: 6px 0; }
+.bloc-dossier select { width: 100%; min-width: 0; box-sizing: border-box; }

@@ -28,6 +28,29 @@ const ceintures = [
   { nom: "Noire", couleurs: ["#111111"] }
 ];
 
+// ----- Grades : dan, UV (unités de valeur) -----
+const NOMS_DAN = ["", "1er dan", "2e dan", "3e dan", "4e dan", "5e dan", "6e dan", "7e dan"];
+const UV_LIBELLES = { UV1: "Kata", UV2: "Technique", UV3: "Efficacité", UV4: "Engagement" };
+// UV à valider pour passer le grade visé : 4 UV jusqu'au 4e dan, 2 UV du 5e au 7e dan
+function uvDuGrade(danVise) { return danVise <= 4 ? ["UV1", "UV2", "UV3", "UV4"] : ["UV1", "UV2"]; }
+// Grade que prépare le judoka : 1er dan pour une ceinture marron, dan suivant pour une ceinture noire (null sinon)
+function gradeVise(fiche) {
+  if (fiche.ceinture === "Marron") { return 1; }
+  if (fiche.ceinture === "Noire") { const d = Math.max(1, Number(fiche.dan) || 1); return d < 7 ? d + 1 : null; }
+  return null;
+}
+function dateEnFrancais(iso) { return iso ? String(iso).split("-").reverse().join("/") : ""; }
+// Ce qui manque pour qu'une fiche soit « complète » (liste vide = la fiche peut être validée)
+function manquePourValider(f) {
+  const m = [];
+  if (!f.licence) { m.push("numéro de licence"); }
+  if (!f.certificat) { m.push("certificat médical / attestation"); }
+  if (!(f.reglement && f.reglement.recu)) { m.push("règlement reçu"); }
+  if (!f.email && !f.telephone) { m.push("e-mail ou téléphone du responsable"); }
+  return m;
+}
+function reglementRecu(f) { return !!(f.reglement && f.reglement.recu); }
+
 // ----- Lire et enregistrer les fiches (dans le navigateur de l'appareil) -----
 function lireFiches() {
   try {
@@ -135,6 +158,9 @@ function creerCarte(fiche) {
   const nomComplet = ((fiche.prenom || "") + " " + (fiche.nom || "")).trim();
   carte.appendChild(creer("h2", "carte-nom", nomComplet || "—"));
 
+  if (fiche.validee) { carte.appendChild(creer("p", "badge-complete", "✅ Fiche judoka complète")); }
+  if (!reglementRecu(fiche)) { carte.appendChild(creer("p", "alerte-fiche", "⚠ Règlement non reçu")); }
+
   const puces = creer("div", "puces");
   puces.appendChild(creer("span", "puce", "🏷️ " + calculerCategorie(fiche.naissance)));
   const age = calculerAge(fiche.naissance);
@@ -156,6 +182,33 @@ function creerCarte(fiche) {
     if (fiche.licence) { infos.appendChild(creer("p", "", "🪪 Licence n° " + fiche.licence)); }
     if (anciennete) { infos.appendChild(creer("p", "", "🏠 " + anciennete)); }
     carte.appendChild(infos);
+  }
+
+  // grade : dan obtenu et UV validées pour le grade suivant
+  const vise = gradeVise(fiche);
+  if (fiche.ceinture === "Noire" || vise) {
+    const bloc = creer("div", "carte-grade");
+    if (fiche.ceinture === "Noire") {
+      const d = Math.max(1, Number(fiche.dan) || 1);
+      let t = "🥋 " + NOMS_DAN[d];
+      if (fiche.danDate) {
+        const ans = new Date().getFullYear() - Number(String(fiche.danDate).slice(0, 4));
+        t += " depuis le " + dateEnFrancais(fiche.danDate) + (ans > 0 ? " (" + ans + (ans > 1 ? " ans" : " an") + " de grade)" : "");
+      }
+      bloc.appendChild(creer("p", "", t));
+    }
+    if (vise) {
+      bloc.appendChild(creer("p", "petit", "Vers le " + NOMS_DAN[vise] + " : unités de valeur"));
+      const uvs = creer("div", "puces");
+      const acquises = fiche.uv || {};
+      uvDuGrade(vise).forEach(function (u) {
+        let t = (acquises[u] ? "✅ " : "⬜ ") + u + " " + UV_LIBELLES[u];
+        if (u === "UV3" && !acquises[u] && fiche.pointsUV3) { t += " (" + fiche.pointsUV3 + "/100 pts)"; }
+        uvs.appendChild(creer("span", "puce", t));
+      });
+      bloc.appendChild(uvs);
+    }
+    carte.appendChild(bloc);
   }
 
   if (fiche.contacts || fiche.email || fiche.telephone) {

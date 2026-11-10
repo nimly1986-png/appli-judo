@@ -49,6 +49,8 @@ function afficher(index) {
   zoneCarte.appendChild(creerCarte(fiches[index]));
 }
 
+fiches.sort(function (x, y) { return (y.validee ? 1 : 0) - (x.validee ? 1 : 0); });   // fiches complètes en haut
+
 if (fiches.length === 0) {
   document.getElementById("vide").hidden = false;
 } else {
@@ -56,7 +58,7 @@ if (fiches.length === 0) {
   fiches.forEach(function (f, index) {
     const option = document.createElement("option");
     option.value = index;
-    option.textContent = f.prenom + " " + f.nom;
+    option.textContent = (f.validee ? "✅ " : "") + f.prenom + " " + f.nom;
     menuChoix.appendChild(option);
   });
   zoneChoix.hidden = fiches.length < 2;

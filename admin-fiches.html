@@ -56,6 +56,22 @@
       <label class="case"><input type="checkbox" id="certificat"> Certificat médical / attestation reçu</label>
     </fieldset>
 
+    <fieldset class="bloc-dossier" id="bloc-grade" hidden>
+      <legend>Grade</legend>
+      <label id="label-dan">Dan obtenu
+        <select id="dan"><option value="1">1er dan</option><option value="2">2e dan</option><option value="3">3e dan</option><option value="4">4e dan</option><option value="5">5e dan</option><option value="6">6e dan</option><option value="7">7e dan</option></select>
+      </label>
+      <label id="label-dan-date">Date d'obtention du grade
+        <input id="dan-date" type="date">
+      </label>
+      <p id="titre-uv" class="petit"></p>
+      <div id="uv-liste"></div>
+      <label id="label-points">Points d'efficacité (UV3, sur 100)
+        <input id="points-uv3" type="number" min="0" max="100" step="1" inputmode="numeric">
+      </label>
+      <p class="petit">Les UV et les points viennent de l'extranet FFJudo : ils sont à reporter ici à la main (aucun lien automatique avec le numéro de licence).</p>
+    </fieldset>
+
     <fieldset class="bloc-dossier">
       <legend>Règlement</legend>
       <label class="case"><input type="checkbox" id="reglement-recu"> Règlement reçu</label>
@@ -84,6 +100,12 @@
         </div>
       </div>
     </fieldset>
+    <fieldset class="bloc-dossier">
+      <legend>Validation de la fiche</legend>
+      <p id="validation-manque" class="petit"></p>
+      <button id="valider-fiche" class="bouton secondaire" type="button">Valider la fiche</button>
+    </fieldset>
+
     <button id="enregistrer" class="bouton" type="button">Enregistrer la fiche</button>
     <button id="annuler" class="bouton secondaire" type="button" hidden>Annuler la modification</button>
   </div>
