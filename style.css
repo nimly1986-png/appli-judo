@@ -1037,3 +1037,44 @@ li.competition.pliable { cursor: pointer; }
 li.competition.pliable:not(.ouvert) .detail { display: none; }
 li.competition.pliable h3::after { content: " ▾"; color: var(--muet); font-size: 0.8em; }
 li.competition.pliable.ouvert h3::after { content: " ▴"; }
+
+/* ===== Compétitions : puces de type, vue Prochaines / Calendrier, plus de filtres ===== */
+.puces-filtre { display: flex; gap: 8px; overflow-x: auto; padding: 4px 2px 8px; scrollbar-width: thin; }
+.puce-filtre { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 4px; padding: 8px 12px; border-radius: 999px; border: 2px solid color-mix(in srgb, var(--c) 55%, var(--trait)); background: var(--surface); color: var(--texte); font: inherit; font-weight: 700; font-size: 14.5px; cursor: pointer; }
+.puce-filtre small { font-weight: 700; opacity: .7; }
+.puce-filtre.actif { background: var(--c); border-color: var(--c); color: #fff; }
+.puce-filtre.actif small { opacity: .9; }
+.repli-filtre { margin: 4px 0 8px; border: 1px dashed var(--trait); border-radius: 12px; padding: 0 12px; }
+.repli-filtre > summary { padding: 10px 0; font-weight: 700; cursor: pointer; color: var(--muet); }
+.repli-filtre[open] { padding-bottom: 12px; }
+.repli-filtre label { display: grid; gap: 4px; font-weight: 600; margin-top: 8px; }
+.vue-choix { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 4px; border-radius: 14px; background: var(--surface-2); margin: 10px 0; }
+.vue-bouton { padding: 10px; border: 0; border-radius: 10px; background: transparent; color: var(--texte); font: inherit; font-weight: 700; cursor: pointer; }
+.vue-bouton.actif { background: var(--accent); color: #fff; }
+li.titre-mois { list-style: none; margin: 14px 0 4px; font-weight: 800; text-transform: capitalize; color: var(--muet); }
+.cat-direct { margin: -2px 0 8px; font-weight: 800; font-size: 17px; }
+
+/* ===== Fiche judoka : assistant en étapes ===== */
+.etapes-barre { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin: 0 0 12px; padding: 0; list-style: none; }
+.etapes-barre li { text-align: center; padding: 6px 2px; border-radius: 10px; border-bottom: 4px solid var(--trait); cursor: pointer; display: grid; gap: 0; }
+.etapes-barre b { font-size: 20px; }
+.etapes-barre small { font-size: 11px; color: var(--muet); line-height: 1.1; }
+.etapes-barre li.fait { border-bottom-color: var(--vert); }
+.etapes-barre li.actif { border-bottom-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.formulaire.assistant details.repli-sec { border: 0; background: transparent; padding: 0; }
+.formulaire.assistant details.repli-sec > summary { font-size: 20px; padding: 4px 0 10px; pointer-events: none; }
+.formulaire.assistant details.repli-sec > summary::after { content: none; }
+.formulaire.assistant details.repli-sec > *:not(summary) { margin-left: 0; margin-right: 0; }
+.formulaire.assistant details.repli-sec .bloc-dossier { margin: 8px 0; }
+.etapes-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+.etapes-nav .bouton { margin: 0; }
+.formulaire.assistant:not(.derniere) #enregistrer { display: none; }
+.erreur-etape { color: var(--rouge, #c0392b); font-weight: 700; }
+.ceintures-choix { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 4px 0 12px; }
+.ceintures-choix button { display: grid; justify-items: center; gap: 4px; padding: 8px 2px; border-radius: 12px; border: 2px solid var(--trait); background: var(--surface); color: var(--texte); font: inherit; cursor: pointer; }
+.ceintures-choix i { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--trait); }
+.ceintures-choix span { font-size: 11px; line-height: 1.1; text-align: center; }
+.ceintures-choix button.actif { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, var(--surface)); font-weight: 800; }
+.formulaire label.cache { display: none; }
+.filtres > div { min-width: 0; }
+.filtres select { box-sizing: border-box; max-width: 100%; }

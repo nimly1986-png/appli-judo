@@ -27,6 +27,7 @@ let qui = lireMemo("quiCompetitions", "tous");          // "tous", "f<id d'une f
 if (qui.charAt(0) === "f" && !fiches.some(function (f) { return "f" + f.id === qui; })) { qui = "tous"; }
 if (qui.charAt(0) === "c" && !TOUTES_CATEGORIES.includes(qui.slice(1))) { qui = "tous"; }
 if (connecte) { serie = "tous"; niveau = "tous"; if (qui.charAt(0) !== "f" && fiches.length) { qui = "f" + fiches[0].id; } }
+let vue = lireMemo("vueCompetitions", "prochaines"), nbVisibles = 10;
 let moisAffiche = aujourdhuiISO().slice(0, 7), jourChoisi = null;
 
 function ficheChoisie() { return qui.charAt(0) === "f" ? fiches.find(function (f) { return "f" + f.id === qui; }) || null : null; }
@@ -53,10 +54,13 @@ function creerMenu(zone, titre, options, valeur, siChange) {
   const label = creer("label", "");
   label.appendChild(document.createTextNode(titre));
   const sel = document.createElement("select");
+  let groupe = null, groupeNom = null;
   options.forEach(function (o) {
     const opt = document.createElement("option");
     opt.value = o.cle; opt.textContent = o.texte; opt.selected = o.cle === valeur;
-    sel.appendChild(opt);
+    if (o.groupe && o.groupe !== groupeNom) { groupe = document.createElement("optgroup"); groupe.label = o.groupe; groupeNom = o.groupe; sel.appendChild(groupe); }
+    if (!o.groupe) { groupe = null; groupeNom = null; }
+    (groupe || sel).appendChild(opt);
   });
   sel.addEventListener("change", function () { siChange(sel.value); });
   label.appendChild(sel);
@@ -72,29 +76,49 @@ function dessinerMenus(mes) {
   if (connecte) {                                   // un seul menu : les judokas de la famille
     document.getElementById("series").innerHTML = "";
     document.getElementById("niveaux").innerHTML = "";
-    const quisF = fiches.map(function (f) { return { cle: "f" + f.id, texte: f.prenom + " (" + categoriesDuJudoka(f).join(" + ") + ")" }; });
+    const quisF = fiches.map(function (f) { return { cle: "f" + f.id, texte: "🥋 " + f.prenom + " · " + categoriesDuJudoka(f).join(" + ") }; });
     if (quisF.length === 0) { document.getElementById("qui").innerHTML = ""; return; }
-    creerMenu(document.getElementById("qui"), "Judoka", quisF, qui, function (v) { qui = v; ecrireMemo("quiCompetitions", v); jourChoisi = null; afficher(); });
+    creerMenu(document.getElementById("qui"), "Pour qui ?", quisF, qui, function (v) { qui = v; ecrireMemo("quiCompetitions", v); jourChoisi = null; afficher(); });
     return;
   }
-  const types = [{ cle: "tous", nom: "Tous les types" }].concat(SERIES).map(function (s) {
+  // 1) Pour qui ?  (un seul menu, rangé par groupes)
+  const quis = [{ cle: "tous", texte: "👥 Tout le monde" }];
+  fiches.forEach(function (f) { quis.push({ cle: "f" + f.id, texte: "🥋 " + f.prenom + " · " + categoriesDuJudoka(f).join(" + "), groupe: "Mes judokas" }); });
+  TOUTES_CATEGORIES.forEach(function (n) { quis.push({ cle: "c" + n, texte: libelleCategorie(n), groupe: "Par catégorie d'âge" }); });
+  creerMenu(document.getElementById("qui"), "Pour qui ?", quis, qui, function (v) { qui = v; ecrireMemo("quiCompetitions", v); jourChoisi = null; afficher(); });
+  // 2) Type de compétition en puces colorées
+  const zoneT = document.getElementById("series");
+  zoneT.innerHTML = "";
+  const rang = creer("div", "puces-filtre");
+  [{ cle: "tous", nom: "Tout", icone: "✨", couleur: "var(--accent)" }].concat(SERIES).forEach(function (s) {
     const n = toutesLesCompetitions().filter(function (c) {
       return !estPassee(c) && (s.cle === "tous" || c.serie === s.cle) && (niveau === "tous" || niveauCompetition(c) === niveau) && visibleSansFiltres(c, mes);
     }).length;
-    return { cle: s.cle, texte: (s.icone ? s.icone + " " : "") + s.nom + " (" + n + ")" };
+    if (s.cle !== "tous" && n === 0 && serie !== s.cle) { return; }
+    const b = creer("button", "puce-filtre" + (serie === s.cle ? " actif" : ""));
+    b.type = "button"; b.style.setProperty("--c", s.couleur);
+    b.appendChild(creer("span", "", s.icone)); b.appendChild(document.createTextNode(" " + s.nom + " "));
+    b.appendChild(creer("small", "", String(n)));
+    b.setAttribute("aria-pressed", serie === s.cle ? "true" : "false");
+    b.addEventListener("click", function () { serie = s.cle; ecrireMemo("serieCompetitions", s.cle); nbVisibles = 10; afficher(); });
+    rang.appendChild(b);
   });
-  creerMenu(document.getElementById("series"), "Type de compétition", types, serie, function (v) { serie = v; ecrireMemo("serieCompetitions", v); afficher(); });
+  zoneT.appendChild(rang);
+  // 3) Niveau : rangé sous « Plus de filtres »
+  const zoneN = document.getElementById("niveaux");
+  zoneN.innerHTML = "";
+  const det = creer("details", "repli-filtre");
+  if (niveau !== "tous") { det.open = true; }
+  det.appendChild(creer("summary", "", "⚙️ Plus de filtres" + (niveau !== "tous" ? " (1)" : "")));
+  const inner = creer("div");
   const niveaux = [{ cle: "tous", nom: "Tous niveaux" }].concat(NIVEAUX).map(function (n) {
     const nb = toutesLesCompetitions().filter(function (c) {
       return !estPassee(c) && (serie === "tous" || c.serie === serie) && (n.cle === "tous" || niveauCompetition(c) === n.cle) && visibleSansFiltres(c, mes);
     }).length;
     return { cle: n.cle, texte: n.nom + " (" + nb + ")" };
   });
-  creerMenu(document.getElementById("niveaux"), "Niveau", niveaux, niveau, function (v) { niveau = v; ecrireMemo("niveauCompetitions", v); afficher(); });
-  const quis = [{ cle: "tous", texte: "Toutes les catégories" }];
-  fiches.forEach(function (f) { quis.push({ cle: "f" + f.id, texte: "Judoka : " + f.prenom + " (" + categoriesDuJudoka(f).join(" + ") + ")" }); });
-  TOUTES_CATEGORIES.forEach(function (n) { quis.push({ cle: "c" + n, texte: "Catégorie : " + n }); });
-  creerMenu(document.getElementById("qui"), "Catégorie ou judoka", quis, qui, function (v) { qui = v; ecrireMemo("quiCompetitions", v); jourChoisi = null; afficher(); });
+  creerMenu(inner, "Niveau", niveaux, niveau, function (v) { niveau = v; ecrireMemo("niveauCompetitions", v); nbVisibles = 10; afficher(); });
+  det.appendChild(inner); zoneN.appendChild(det);
 }
 
 function jouerDansEvenement(c, iso) { return c.debut <= iso && iso <= (c.fin || c.debut); }
@@ -137,6 +161,34 @@ function dessinerMois(liste, fiche, avecAgenda) {
   else { const ul = creer("ul"); du.forEach(function (c) { ul.appendChild(creerCarteCompetition(c, fiche, false, avecAgenda)); }); zone.appendChild(ul); }
 }
 
+function dessinerProchaines(liste, fiche, avecAgenda) {
+  const zone = document.getElementById("mois");
+  zone.innerHTML = "";
+  const aVenir = liste.filter(function (c) { return !estPassee(c); });
+  if (aVenir.length === 0) { zone.appendChild(creer("p", "message-vide", "Rien à venir avec ces filtres. Essayez « Tout » ou un autre type.")); return; }
+  const ul = creer("ul"); let moisCourant = "";
+  aVenir.slice(0, nbVisibles).forEach(function (c) {
+    const m = c.debut.slice(0, 7);
+    if (m !== moisCourant) { moisCourant = m; ul.appendChild(creer("li", "titre-mois", MOIS_LONGS[Number(m.slice(5, 7)) - 1] + " " + m.slice(0, 4))); }
+    ul.appendChild(creerCarteCompetition(c, fiche, false, avecAgenda));
+  });
+  zone.appendChild(ul);
+  if (aVenir.length > nbVisibles) {
+    const b = creer("button", "bouton secondaire", "Voir 10 de plus (" + (aVenir.length - nbVisibles) + " restantes)");
+    b.type = "button"; b.addEventListener("click", function () { nbVisibles += 10; afficher(); });
+    zone.appendChild(b);
+  }
+}
+function dessinerVue() {
+  const z = document.getElementById("vue"); z.innerHTML = "";
+  [["prochaines", "📋 Prochaines"], ["calendrier", "📅 Calendrier"]].forEach(function (v) {
+    const b = creer("button", "vue-bouton" + (vue === v[0] ? " actif" : ""), v[1]);
+    b.type = "button"; b.setAttribute("aria-pressed", vue === v[0] ? "true" : "false");
+    b.addEventListener("click", function () { vue = v[0]; ecrireMemo("vueCompetitions", vue); afficher(); });
+    z.appendChild(b);
+  });
+}
+
 function afficher() {
   const fiche = ficheChoisie();
   const mes = categoriesChoisies();
@@ -146,12 +198,14 @@ function afficher() {
   zoneNote.innerHTML = "";
   if (info && info.note && !connecte) { zoneNote.appendChild(creer("p", "avertissement", info.note)); }
   if (connecte && !fiche) { resume.textContent = "Famille " + session.famille + " : aucune fiche judoka enregistrée. Créez-la depuis « Inscription »."; liste.hidden = true; document.getElementById("mois").innerHTML = ""; return; }
-  resume.textContent = fiche ? fiche.prenom + " · catégorie " + mes.join(" + ") + " · saison " + SAISON
-    : mes.length ? "Catégorie " + mes[0] + " · saison " + SAISON : "Toutes catégories · saison " + SAISON;
+  resume.textContent = fiche ? fiche.prenom + " · " + mes.map(function (n) { return libelleCategorie(n, false); }).join(" + ") + " · saison " + SAISON
+    : mes.length ? libelleCategorie(mes[0]) + " · saison " + SAISON : "Toutes catégories · saison " + SAISON;
   const concernees = toutesLesCompetitions().filter(function (c) { return visible(c, mes); })
     .sort(function (a, b) { return a.debut < b.debut ? -1 : a.debut > b.debut ? 1 : 0; });
   liste.hidden = true;
-  dessinerMois(concernees, fiche, mes.length > 0);
+  dessinerVue();
+  if (vue === "calendrier") { dessinerMois(concernees, fiche, mes.length > 0); }
+  else { dessinerProchaines(concernees, fiche, mes.length > 0); }
 }
 
 afficher();

@@ -15,6 +15,19 @@ const categories = [
   { nom: "Senior", de: 1900, a: 2006 }
 ];
 
+// Un emoji par catégorie d'âge, pour que les menus et les puces se lisent d'un coup d'œil
+const ICONES_CATEGORIES = {
+  "Baby judo": "🐣", "Mini-Poussin": "🐥", "Poussin": "🐤", "Benjamin": "🦊",
+  "Minime": "🐯", "Cadet": "🦅", "Junior": "🔥", "Senior": "🥋", "Vétéran": "🎖️"
+};
+// "🦊 Benjamin (2015–2016)" ; avecAnnees=false donne "🦊 Benjamin"
+function libelleCategorie(nom, avecAnnees) {
+  const ic = (ICONES_CATEGORIES[nom] || "🥋") + " " + nom;
+  const c = categories.find(function (x) { return x.nom === nom; });
+  if (avecAnnees === false || !c || nom === "Senior") { return ic; }
+  return ic + " (" + c.de + (c.a !== c.de ? "–" + c.a : "") + ")";
+}
+
 const ceintures = [
   { nom: "Blanche", couleurs: ["#ffffff"] },
   { nom: "Blanche-jaune", couleurs: ["#ffffff", "#f1c40f"] },
