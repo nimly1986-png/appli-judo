@@ -243,7 +243,8 @@ let rechercheSuivi = "";
 let ficheSuivie = null;         // fiche affichée dans le suivi
 let panneauOuvert = null;       // { id, quoi } : saisie rapide de la licence ou du contact
 const FILTRES_SUIVI = [
-  ["tous", "Toutes"], ["pretes", "Prêtes à valider"], ["reglement", "Règlement"], ["certificat", "Certificat"],
+  ["tous", "Toutes"], ["pretes", "Prêtes à valider"], ["ontregle", "💶 Ont réglé"], ["reglement", "À régler"],
+  ["certmed", "📄 Certificat médical"], ["certificat", "Certificat manquant"],
   ["licence", "Licence"], ["contact", "Contact"], ["completes", "Complètes"]
 ];
 function etapesDossier(f) {
@@ -286,7 +287,8 @@ function afficherTableau() {
   zone.appendChild(recherche);
   const filtres = creer("div", "sv-filtres");
   FILTRES_SUIVI.forEach(function (fl) {
-    const b = creer("button", "sv-filtre" + (filtreSuivi === fl[0] ? " actif" : ""), fl[1]);
+    const nbF = { ontregle: fiches.filter(reglementRecu).length, certmed: fiches.filter(function (f) { return f.certificatMedical; }).length }[fl[0]];
+    const b = creer("button", "sv-filtre" + (filtreSuivi === fl[0] ? " actif" : ""), fl[1] + (nbF !== undefined ? " (" + nbF + ")" : ""));
     b.type = "button";
     b.addEventListener("click", function () { filtreSuivi = fl[0]; afficherTableau(); });
     filtres.appendChild(b);
@@ -302,6 +304,8 @@ function afficherTableau() {
     if (q && sansAccentsMin(f.prenom + " " + f.nom).indexOf(q) === -1) { return false; }
     const e = etapesDossier(f), manque = function (c) { return !e.find(function (x) { return x.cle === c; }).ok; };
     if (filtreSuivi === "completes") { return !!f.validee; }
+    if (filtreSuivi === "ontregle") { return reglementRecu(f); }
+    if (filtreSuivi === "certmed") { return !!f.certificatMedical; }
     if (filtreSuivi === "pretes") { return !f.validee && nbOk(f) === 4; }
     if (["reglement", "certificat", "licence", "contact"].includes(filtreSuivi)) { return !f.validee && manque(filtreSuivi); }
     return true;

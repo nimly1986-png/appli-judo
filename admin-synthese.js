@@ -5,11 +5,17 @@
 // =====================================================================
 const fiches = lireFiches();
 const LICENCE = 46;            // part de la licence fédérale dans chaque cotisation (formulaire d'inscription)
-const REDUC_FAMILLE = 40;      // réduction par adhérent à partir du 2ème d'une même famille
 
+// Version 2 (nov. 2026) : le bilan repart de zéro. Les lignes et financements saisis avant sont effacés une seule fois.
+const VERSION_SYNTHESE = 2;
 function lireSynthese() {
-  try { const s = JSON.parse(localStorage.getItem("synthese")); if (s) { return { reductions: s.reductions || 0, lignes: s.lignes || [], financements: s.financements || [] }; } } catch (e) {}
-  return { reductions: 0, lignes: [], financements: [] };
+  try {
+    const s = JSON.parse(localStorage.getItem("synthese"));
+    if (s && s.version === VERSION_SYNTHESE) { return { version: VERSION_SYNTHESE, lignes: s.lignes || [], financements: s.financements || [] }; }
+  } catch (e) {}
+  const vide = { version: VERSION_SYNTHESE, lignes: [], financements: [] };
+  try { localStorage.setItem("synthese", JSON.stringify(vide)); } catch (e) {}
+  return vide;
 }
 function ecrireSynthese() { try { localStorage.setItem("synthese", JSON.stringify(synthese)); } catch (e) {} }
 let synthese = lireSynthese();
@@ -38,56 +44,69 @@ function coursDe(f) {
 }
 
 // ---------- 1. Inscrits ----------
-let totalCotisations = 0, nbInscrits = 0;
+// Chaque judoka compte pour la cotisation réellement fixée sur sa fiche (famille, réduction bureau, Pass'Sport...) ;
+// à défaut, pour le tarif de son cours.
+const NOM_COURS_TARIF = { "Baby Judo": "Baby judo", "Mini-Poussins": "Mini-Poussins", "Poussins Benjamins": "Poussins / Benjamins", "Ados Adultes": "Ados / Adultes" };
+function coursReel(f) { return NOM_COURS_TARIF[f.cours] || coursDe(f); }
+function tarifDe(f) { const t = TARIFS.find(function (x) { return x.nom === coursReel(f); }); return t ? t.montant : 0; }
+function dueDe(f) { return typeof f.cotisation === "number" ? f.cotisation : tarifDe(f); }
+let totalCotisations = 0, totalEncaisse = 0, nbInscrits = 0;
 function dessinerInscrits() {
   const zone = document.getElementById("inscrits");
   const parCours = {};
-  TARIFS.forEach(function (t) { parCours[t.nom] = { tarif: t, n: 0, cats: {} }; });
-  let sansDate = 0, an2021 = 0;
+  TARIFS.forEach(function (t) { parCours[t.nom] = { tarif: t, n: 0, du: 0, recu: 0, brut: 0 }; });
+  let sansDate = 0;
   fiches.forEach(function (f) {
-    const c = coursDe(f);
+    const c = coursReel(f);
     if (!c) { sansDate++; return; }
-    parCours[c].n++;
-    const cat = calculerCategorie(f.naissance);
-    parCours[c].cats[cat] = (parCours[c].cats[cat] || 0) + 1;
-    if (f.naissance.slice(0, 4) === "2021") { an2021++; }
+    const p = parCours[c]; p.n++;
+    p.du += dueDe(f); p.brut += tarifDe(f);
+    if (reglementRecu(f)) { p.recu += dueDe(f); }
   });
-  const t = tableau(["Cours", "Inscrits", "Tarif", "Cotisations"]);
-  totalCotisations = 0; nbInscrits = 0;
+  const t = tableau(["Cours", "Inscrits", "Tarif plein", "Dû", "Encaissé"]);
+  totalCotisations = 0; totalEncaisse = 0; nbInscrits = 0;
+  let brutTotal = 0;
   TARIFS.forEach(function (tarif) {
     const p = parCours[tarif.nom];
-    const montant = p.n * tarif.montant;
-    totalCotisations += montant; nbInscrits += p.n;
-    ligneTable(t, [tarif.nom, p.n, euros(tarif.montant), euros(montant)]);
+    totalCotisations += p.du; totalEncaisse += p.recu; nbInscrits += p.n; brutTotal += p.brut;
+    ligneTable(t, [tarif.nom, p.n, euros(tarif.montant), euros(p.du), euros(p.recu)]);
   });
-  ligneTable(t, [{ t: "Total brut" }, { t: String(nbInscrits) }, { t: "" }, { t: euros(totalCotisations) }]);
+  ligneTable(t, [{ t: "Total" }, { t: String(nbInscrits) }, { t: "" }, { t: euros(totalCotisations) }, { t: euros(totalEncaisse) }]);
   dans(zone, t);
 
-  // par tranche d'âge
-  zone.appendChild(creer("h3", "", "Par tranche d'âge"));
-  const t2 = tableau(["Catégorie", "Années", "Inscrits"]);
-  categories.forEach(function (c) {
-    const n = fiches.filter(function (f) { return f.naissance && calculerCategorie(f.naissance) === c.nom; }).length;
-    ligneTable(t2, [c.nom, c.de <= 1900 ? c.a + " et avant" : (c.de === c.a ? c.a : c.de + "-" + c.a), n]);
-  });
-  const horsGrille = fiches.filter(function (f) { return f.naissance && calculerCategorie(f.naissance) === "Hors grille"; }).length;
-  if (horsGrille) { ligneTable(t2, ["Hors grille", "—", horsGrille]); }
-  const c2 = creer("div", "tableau-conteneur"); c2.appendChild(t2); zone.appendChild(c2);
+  // règlement et pièces du dossier
+  zone.appendChild(creer("h3", "", "Règlement et pièces"));
+  const reglesN = fiches.filter(reglementRecu).length;
+  const certMed = fiches.filter(function (f) { return f.certificatMedical; }).length;
+  const attest = fiches.filter(function (f) { return f.certificat && !f.certificatMedical; }).length;
+  const sans = fiches.filter(function (f) { return !f.certificat; }).length;
+  const t3 = tableau(["", "Judokas"]);
+  ligneTable(t3, ["Ont réglé leur cotisation", reglesN + " sur " + fiches.length]);
+  ligneTable(t3, ["Règlement à recevoir", fiches.length - reglesN + " (" + euros(totalCotisations - totalEncaisse) + ")"]);
+  ligneTable(t3, ["Certificat médical fourni", certMed]);
+  ligneTable(t3, ["Attestation sur l'honneur (sans certificat)", attest]);
+  ligneTable(t3, ["Ni certificat ni attestation", sans]);
+  dans_ajout(zone, t3);
 
-  // réduction famille
-  const lab = creer("label", "reduction");
-  lab.appendChild(creer("span", "", "Réductions famille accordées (−" + REDUC_FAMILLE + " € par adhérent à partir du 2ème d'une famille)"));
-  const inp = document.createElement("input");
-  inp.type = "number"; inp.min = "0"; inp.step = "1"; inp.inputMode = "numeric"; inp.value = synthese.reductions;
-  inp.addEventListener("input", function () { synthese.reductions = Math.max(0, Number(inp.value) || 0); ecrireSynthese(); dessinerBilan(); });
-  lab.appendChild(inp);
-  zone.appendChild(lab);
+  // réductions : calculées d'après le prix réellement fixé sur chaque fiche
+  zone.appendChild(creer("h3", "", "Réductions (famille, bureau…)"));
+  const reduits = fiches.filter(function (f) { return dueDe(f) < tarifDe(f); });
+  const montantReduc = brutTotal - totalCotisations;
+  const t4 = tableau(["", "Valeur"]);
+  ligneTable(t4, ["Judokas qui paient moins que le tarif plein", reduits.length]);
+  ligneTable(t4, ["Total des réductions", euros(Math.max(0, montantReduc))]);
+  const familles = {}; fiches.forEach(function (f) { const k = sansAccentsDe(f.nom); familles[k] = (familles[k] || 0) + 1; });
+  ligneTable(t4, ["Familles avec plusieurs judokas", Object.keys(familles).filter(function (k) { return familles[k] > 1; }).length]);
+  dans_ajout(zone, t4);
   const notes = [];
   if (sansDate) { notes.push(sansDate + " fiche(s) sans date de naissance non comptée(s)."); }
-  if (an2021) { notes.push(an2021 + " enfant(s) né(s) en 2021 comptés en Baby judo ; les non-débutants relèvent des Mini-Poussins (le tarif est le même : 200 €)."); }
-  notes.push("Les frères et sœurs ne sont pas repérés automatiquement : saisissez le nombre de réductions ci-dessus.");
+  const sansPrix = fiches.filter(function (f) { return typeof f.cotisation !== "number"; }).length;
+  if (sansPrix) { notes.push(sansPrix + " fiche(s) sans cotisation saisie : comptées au tarif plein de leur cours."); }
+  notes.push("Le prix de chaque judoka est celui de sa fiche (champ « Cotisation »), donc une famille avec réduction paie moins que le tarif plein. « Encaissé » = fiches dont le règlement est marqué reçu.");
   notes.forEach(function (n) { zone.appendChild(creer("p", "petit", n)); });
 }
+function sansAccentsDe(t) { return String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim(); }
+function dans_ajout(zone, table) { const c = creer("div", "tableau-conteneur"); c.appendChild(table); zone.appendChild(c); }
 
 // ---------- 2. Commandes ----------
 let coutCommandes = { min: 0, max: 0 };
@@ -123,13 +142,11 @@ function dessinerBilan() {
   const somme = function (type) { return synthese.lignes.filter(function (l) { return l.type === type; }).reduce(function (s, l) { return s + l.montant; }, 0); };
   const benef = somme("benefice"), dons = somme("don"), dep = somme("depense");
   const recuFin = synthese.financements.filter(function (f) { return f.statut === "recu"; }).reduce(function (s, f) { return s + f.montant; }, 0);
-  const reduc = synthese.reductions * REDUC_FAMILLE;
-  const cotisNettes = totalCotisations - reduc;
   const licences = nbInscrits * LICENCE;
-  const entrees = cotisNettes + benef + dons + recuFin;
+  const entrees = totalEncaisse + benef + dons + recuFin;
   const sorties = licences + dep;
   const t = tableau(["Poste", "Montant"]);
-  ligneTable(t, ["Cotisations (après réductions famille)", euros(cotisNettes)]);
+  ligneTable(t, ["Cotisations encaissées (prix réel de chaque fiche)", euros(totalEncaisse)]);
   ligneTable(t, ["Bénéfices", euros(benef)]);
   ligneTable(t, ["Dons", euros(dons)]);
   ligneTable(t, ["Financements reçus", euros(recuFin)]);
@@ -139,9 +156,10 @@ function dessinerBilan() {
   ligneTable(t, [{ t: "Total des sorties" }, { t: "− " + euros(sorties) }]);
   const solde = entrees - sorties;
   ligneTable(t, [{ t: "Solde" }, { t: euros(solde) }], solde < 0 ? "negatif" : "positif");
+  ligneTable(t, ["Solde si toutes les cotisations dues sont encaissées (+ " + euros(totalCotisations - totalEncaisse) + ")", euros(solde + totalCotisations - totalEncaisse)]);
   dans(zone, t);
   const futur = synthese.financements.filter(function (f) { return f.statut !== "recu"; }).reduce(function (s, f) { return s + f.montant; }, 0);
-  zone.appendChild(creer("p", "petit", "Non inclus : commandes d'équipement (neutres, refacturées aux familles)" + (futur ? " et " + euros(futur) + " de financements demandés ou accordés, pas encore reçus" : "") + ". Les cotisations sont comptées comme dues, pas comme encaissées."));
+  zone.appendChild(creer("p", "petit", "Non inclus : commandes d'équipement (neutres, refacturées aux familles)" + (futur ? " et " + euros(futur) + " de financements demandés ou accordés, pas encore reçus" : "") + ". Seules les cotisations dont le règlement est marqué reçu sont comptées en entrées."));
   // lignes saisies
   const liste = document.getElementById("l-liste"); liste.innerHTML = "";
   synthese.lignes.forEach(function (l, i) {
