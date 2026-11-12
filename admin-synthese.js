@@ -63,16 +63,29 @@ function dessinerInscrits() {
     p.du += dueDe(f); p.brut += tarifDe(f);
     if (reglementRecu(f)) { p.recu += dueDe(f); }
   });
-  const t = tableau(["Cours", "Inscrits", "Tarif plein", "Dû", "Encaissé"]);
+  const t = tableau(["Cours", "Inscrits", "Dû", "Encaissé", "Réduc."]);
   totalCotisations = 0; totalEncaisse = 0; nbInscrits = 0;
   let brutTotal = 0;
   TARIFS.forEach(function (tarif) {
     const p = parCours[tarif.nom];
     totalCotisations += p.du; totalEncaisse += p.recu; nbInscrits += p.n; brutTotal += p.brut;
-    ligneTable(t, [tarif.nom, p.n, euros(tarif.montant), euros(p.du), euros(p.recu)]);
+    ligneTable(t, [tarif.nom, p.n, euros(p.du), euros(p.recu), p.brut > p.du ? "− " + euros(p.brut - p.du) : "—"]);
   });
-  ligneTable(t, [{ t: "Total" }, { t: String(nbInscrits) }, { t: "" }, { t: euros(totalCotisations) }, { t: euros(totalEncaisse) }]);
+  ligneTable(t, [{ t: "Total" }, { t: String(nbInscrits) }, { t: euros(totalCotisations) }, { t: euros(totalEncaisse) }, { t: "− " + euros(Math.max(0, brutTotal - totalCotisations)) }]);
   dans(zone, t);
+
+  // détail : combien de judokas paient chaque montant, dans chaque cours
+  zone.appendChild(creer("h3", "", "Prix réellement payés, cours par cours"));
+  const tp = tableau(["Cours", "Prix payé", "Judokas", "Total"]);
+  TARIFS.forEach(function (tarif) {
+    const groupe = {};
+    fiches.filter(function (f) { return coursReel(f) === tarif.nom; }).forEach(function (f) { const m = dueDe(f); groupe[m] = (groupe[m] || 0) + 1; });
+    Object.keys(groupe).map(Number).sort(function (a, b) { return b - a; }).forEach(function (m, i) {
+      const note = m === tarif.montant ? " (tarif plein)" : m < tarif.montant ? " (− " + (tarif.montant - m) + " €)" : " (+ " + (m - tarif.montant) + " €)";
+      ligneTable(tp, [i === 0 ? tarif.nom : "", euros(m) + note, groupe[m], euros(m * groupe[m])]);
+    });
+  });
+  dans_ajout(zone, tp);
 
   // règlement et pièces du dossier
   zone.appendChild(creer("h3", "", "Règlement et pièces"));
