@@ -66,6 +66,28 @@
     <fieldset class="bloc-dossier">
       <legend>Dossier</legend>
       <label class="case"><input type="checkbox" id="certificat"> Certificat médical / attestation reçu</label>
+      <label class="case"><input type="checkbox" id="certificat-medical"> dont certificat médical (sinon attestation sur l'honneur)</label>
+      <label class="case"><input type="checkbox" id="attestation-entreprise"> Attestation employeur demandée</label>
+      <label>Cours
+        <select id="cours"><option value="">—</option><option>Baby Judo</option><option>Mini-Poussins</option><option>Poussins Benjamins</option><option>Ados Adultes</option></select>
+      </label>
+      <label>Sexe
+        <select id="sexe"><option value="">—</option><option value="F">F</option><option value="M">M</option></select>
+      </label>
+      <label>Adresse
+        <input id="adresse" autocomplete="off" placeholder="Rue">
+      </label>
+      <label>Ville
+        <input id="ville" autocomplete="off">
+      </label>
+      <label>Autre personne à prévenir
+        <input id="contact2-nom" autocomplete="off" placeholder="Nom et prénom">
+      </label>
+      <input id="contact2-tel" type="tel" inputmode="tel" autocomplete="off" placeholder="Téléphone de cette personne">
+      <input id="contact2-email" type="email" inputmode="email" autocomplete="off" placeholder="E-mail de cette personne">
+      <label>Commentaires du dossier
+        <textarea id="commentaires" rows="2" placeholder="Réductions, numéro de dossier Pass'Sport, remarques"></textarea>
+      </label>
     </fieldset>
 
     <fieldset class="bloc-dossier" id="bloc-grade" hidden>
@@ -89,11 +111,15 @@
         <summary>💶 Règlement</summary>
     <fieldset class="bloc-dossier">
       <legend>Règlement</legend>
+      <label>Cotisation (€)
+        <input id="cotisation" type="number" min="0" step="1" inputmode="decimal" placeholder="ex : 200">
+      </label>
       <label class="case"><input type="checkbox" id="reglement-recu"> Règlement reçu</label>
       <div class="modes" id="modes">
         <label class="case"><input type="checkbox" value="cheques"> Chèques</label>
         <label class="case"><input type="checkbox" value="virement"> Virement</label>
         <label class="case"><input type="checkbox" value="especes"> Espèces</label>
+        <label class="case"><input type="checkbox" value="chequesvacances"> Chèques-vacances</label>
         <label class="case"><input type="checkbox" value="passsport"> Pass'Sport Région</label>
       </div>
       <div id="paiements"></div>

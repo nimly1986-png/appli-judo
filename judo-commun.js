@@ -36,6 +36,7 @@ const ceintures = [
   { nom: "Orange", couleurs: ["#e67e22"] },
   { nom: "Orange-verte", couleurs: ["#e67e22", "#27ae60"] },
   { nom: "Verte", couleurs: ["#27ae60"] },
+  { nom: "Verte-bleue", couleurs: ["#27ae60", "#2980b9"] },
   { nom: "Bleue", couleurs: ["#2980b9"] },
   { nom: "Marron", couleurs: ["#7b4a2a"] },
   { nom: "Noire", couleurs: ["#111111"] }

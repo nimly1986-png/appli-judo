@@ -9,8 +9,8 @@ let cheques = [];                 // chèques de la fiche en cours : { numero, d
 let paiements = {};
 let uvCourantes = {};             // UV validées de la fiche en cours : { UV1: true, ... }
 let valideeCourante = false;      // fiche validée (apparaît dans « complètes »)               // autres modes : { virement: { date, valide }, ... }
-const NOMS_MODES = { cheques: "Chèques", virement: "Virement", especes: "Espèces", passsport: "Pass'Sport Région" };
-const MODES = ["cheques", "virement", "especes", "passsport"];
+const NOMS_MODES = { cheques: "Chèques", virement: "Virement", especes: "Espèces", chequesvacances: "Chèques-vacances", passsport: "Pass'Sport Région" };
+const MODES = ["cheques", "virement", "especes", "chequesvacances", "passsport"];
 
 const champ = (id) => document.getElementById(id);
 const menuCeinture = champ("ceinture");
@@ -50,7 +50,14 @@ function ficheDuFormulaire() {
     danDate: menuCeinture.value === "Noire" ? champ("dan-date").value : "",
     uv: Object.assign({}, uvCourantes),
     pointsUV3: champ("points-uv3").value.trim(),
-    validee: valideeCourante
+    validee: valideeCourante,
+    cotisation: champ("cotisation").value === "" ? null : Number(champ("cotisation").value),
+    certificatMedical: champ("certificat-medical").checked,
+    attestationEntreprise: champ("attestation-entreprise").checked,
+    cours: champ("cours").value, sexe: champ("sexe").value,
+    adresse: champ("adresse").value.trim(), ville: champ("ville").value.trim(),
+    contact2: { nom: champ("contact2-nom").value.trim(), telephone: champ("contact2-tel").value.trim(), email: champ("contact2-email").value.trim() },
+    commentaires: champ("commentaires").value.trim()
   };
 }
 
@@ -204,7 +211,9 @@ function viderFormulaire() {
   for (const id of ["prenom", "nom", "naissance", "licence", "entree", "poids", "contacts", "photo"]) {
     champ(id).value = "";
   }
-  for (const id of ["email", "telephone", "relance", "nb-cheques"]) { champ(id).value = ""; }
+  for (const id of ["email", "telephone", "relance", "nb-cheques", "cotisation", "adresse", "ville", "contact2-nom", "contact2-tel", "contact2-email", "commentaires"]) { champ(id).value = ""; }
+  champ("cours").value = ""; champ("sexe").value = "";
+  champ("certificat-medical").checked = false; champ("attestation-entreprise").checked = false;
   champ("certificat").checked = false;
   champ("reglement-recu").checked = false;
   document.querySelectorAll("#modes input").forEach(function (c) { c.checked = false; });
@@ -318,6 +327,9 @@ function afficherTableau() {
     }).title = "Supprimer";
     tete.appendChild(outils);
     c.appendChild(tete);
+    const infos = [f.cours, f.ville, f.cotisation != null ? "💶 " + f.cotisation + " €" : ""].filter(Boolean);
+    if (infos.length) { c.appendChild(creer("p", "petit", infos.join(" · "))); }
+    if (f.commentaires) { c.appendChild(creer("p", "petit", "📝 " + f.commentaires.slice(0, 160))); }
 
     if (f.validee) {
       c.appendChild(creer("p", "petit", "Licence " + f.licence));
@@ -402,6 +414,14 @@ function commencerModification(f) {
   champ("poids").value = f.poids || "";
   champ("dan").value = String(f.dan || 1); champ("dan-date").value = f.danDate || ""; champ("points-uv3").value = f.pointsUV3 || "";
   uvCourantes = Object.assign({}, f.uv || {}); valideeCourante = !!f.validee;
+  champ("cotisation").value = f.cotisation == null ? "" : f.cotisation;
+  champ("certificat-medical").checked = !!f.certificatMedical;
+  champ("attestation-entreprise").checked = !!f.attestationEntreprise;
+  champ("cours").value = f.cours || ""; champ("sexe").value = f.sexe || "";
+  champ("adresse").value = f.adresse || ""; champ("ville").value = f.ville || "";
+  const c2 = f.contact2 || {};
+  champ("contact2-nom").value = c2.nom || ""; champ("contact2-tel").value = c2.telephone || ""; champ("contact2-email").value = c2.email || "";
+  champ("commentaires").value = f.commentaires || "";
   champ("contacts").value = f.contacts || "";
   champ("email").value = f.email || "";
   champ("telephone").value = f.telephone || "";
@@ -462,7 +482,7 @@ champ("enregistrer").addEventListener("click", function () {
     f.id = Date.now();
     fiches.push(f);
   } else {
-    fiches = fiches.map(function (x) { return x.id === idEnModification ? f : x; });
+    fiches = fiches.map(function (x) { return x.id === idEnModification ? Object.assign({}, x, f) : x; });   // garde les champs venus de l'import (dates de ceinture...)
   }
   if (enregistrerFiches(fiches)) {
     viderFormulaire();
@@ -486,27 +506,46 @@ champ("import-fichier").addEventListener("change", function (e) {
     let liste;
     try { liste = JSON.parse(lecteur.result); if (!Array.isArray(liste)) { throw new Error(); } }
     catch (err) { sortie.textContent = "❌ Fichier illisible : choisissez licencies-club.json."; return; }
-    const existantes = new Set(fiches.map(cleJudoka));
-    let ajoutees = 0, doublons = 0, aVerifier = 0, remplacees = 0;
+    let ajoutees = 0, doublons = 0, aVerifier = 0, remplacees = 0, misesAJour = 0;
+    const complet = function (x) { return !!x.reglement || x.cotisation !== undefined || !!x.cours; };   // fichier du tableur (dossier complet)
+    const nomComplet = function (f) { return sansAccentsMin(f.prenom) + "|" + sansAccentsMin(f.nom); };
+    // retrouve la fiche déjà présente : même identité, même nom (date différente), ou version codée
+    const trouver = function (x) {
+      return fiches.find(function (e) { return cleJudoka(e) === cleJudoka(x); })
+        || fiches.find(function (e) { return nomComplet(e) === nomComplet(x); })
+        || (!estCode(x) ? fiches.find(function (e) { return estCode(e) && cleCode(e) === cleCode(x); }) : null)
+        || (!estCode(x) ? fiches.find(function (e) { return estCode(e) && cleCode(e).split("|").slice(0, 2).join("|") === cleCode(x).split("|").slice(0, 2).join("|"); }) : null)
+        || null;
+    };
     liste.forEach(function (x, i) {
       if (!x || !x.prenom || !x.nom || !x.naissance) { return; }
-      if (existantes.has(cleJudoka(x))) { doublons++; return; }
-      const complete = estCode(x) ? fiches.find(function (e) { return !estCode(e) && cleCode(e) === cleCode(x); }) : null;
-      if (complete) {                                   // on garde ceinture, dossier, règlement : seule l'identité est codée
-        existantes.delete(cleJudoka(complete)); complete.prenom = x.prenom; complete.nom = x.nom;
-        existantes.add(cleJudoka(complete)); remplacees++; return;
+      const dejaLa = trouver(x);
+      if (dejaLa && complet(x)) {                      // le tableur complète la fiche sans écraser ce qui a été saisi à la main
+        const garde = { id: dejaLa.id, photo: dejaLa.photo, poids: dejaLa.poids, licence: dejaLa.licence, entree: dejaLa.entree, uv: dejaLa.uv, pointsUV3: dejaLa.pointsUV3, validee: dejaLa.validee };
+        const ceintureAvant = dejaLa.ceintureAVerifier ? null : dejaLa.ceinture;
+        Object.assign(dejaLa, x, garde);
+        if (ceintureAvant) { dejaLa.ceinture = ceintureAvant; }
+        if (!dejaLa.ceinture) { dejaLa.ceinture = ceintures[0].nom; }
+        if (!x.ceintureAVerifier) { delete dejaLa.ceintureAVerifier; }
+        if (dejaLa.validee && manquePourValider(dejaLa).length) { dejaLa.validee = false; }
+        misesAJour++; return;
       }
-      const fiche = {
+      if (dejaLa) { 
+        if (estCode(x) && !estCode(dejaLa) && cleCode(dejaLa) === cleCode(x)) { dejaLa.prenom = x.prenom; dejaLa.nom = x.nom; remplacees++; } else { doublons++; }
+        return;
+      }
+      const fiche = Object.assign({
         id: Date.now() + i, prenom: x.prenom, nom: x.nom, naissance: x.naissance,
         ceinture: x.ceinture || ceintures[0].nom, licence: x.licence || "", entree: "", poids: "",
         contacts: "", email: "", telephone: "", certificat: false, photo: "",
         reglement: { recu: false, modes: [], cheques: [], paiements: {}, relance: "" }
-      };
-      if (!x.ceinture) { fiche.ceintureAVerifier = true; aVerifier++; }
-      fiches.push(fiche); existantes.add(cleJudoka(fiche)); ajoutees++;
+      }, complet(x) ? x : {});
+      fiche.id = Date.now() + i;
+      if (!x.ceinture || x.ceintureAVerifier) { fiche.ceintureAVerifier = true; aVerifier++; }
+      fiches.push(fiche); ajoutees++;
     });
     if (enregistrerFiches(fiches)) {
-      sortie.textContent = "✅ " + ajoutees + " fiche(s) ajoutée(s), " + remplacees + " remplacée(s) par leur version codée, " + doublons + " déjà présente(s). Ceinture à renseigner pour " + aVerifier + " (cliquez ✏️ sur chaque fiche).";
+      sortie.textContent = "✅ " + ajoutees + " fiche(s) ajoutée(s), " + misesAJour + " complétée(s) avec le dossier, " + remplacees + " remplacée(s) par leur version codée, " + doublons + " déjà présente(s). Ceinture à renseigner pour " + aVerifier + " (cliquez ✏️ sur chaque fiche).";
       afficherTableau(); afficherAlertes();
     }
   };
