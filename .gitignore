@@ -1,2 +1,6 @@
 licencies*.json
 prive/
+fiches-adherents*.json
+contacts-google/
+local/
+*.xlsx
